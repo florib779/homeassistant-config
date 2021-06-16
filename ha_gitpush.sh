@@ -1,3 +1,5 @@
+# This is a script from https://peyanski.com/automatic-home-assistant-backup-to-github/
+
 # Go to /config folder or 
 # Change this to your Home Assistant config folder if it is different
 cd /config

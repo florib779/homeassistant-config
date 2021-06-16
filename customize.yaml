@@ -83,3 +83,5 @@ switch.sonos_livingroom_sub:
   icon: mdi:music-clef-bass
 switch.livingroom_tv_power:
   icon: mdi:power
+switch.sonos_livingroom_sub_polarity:
+  icon: mdi:sine-wave

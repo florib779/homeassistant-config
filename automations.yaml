@@ -29,3 +29,13 @@
           {% else %}
             Phone with {{ state_attr('sensor.phone', 'with_name') }} ({{ state_attr('sensor.phone', 'with') }})
           {% endif %}
+- id: l1k3
+  alias: Push HASS configuration to GitHub
+  trigger:
+  - at: '02:00:00'
+    platform: time
+  action:
+  - data:
+      addon: a0d7b954_ssh
+      input: /config/ha_gitpush.sh
+    service: hassio.addon_stdin

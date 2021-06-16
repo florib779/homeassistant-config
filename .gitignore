@@ -8,6 +8,7 @@
 !*.md
 !*.sh
 !*.js*
+!.HA_VERSION
 
 # Comment these 2 lines if you don't want to include your SSH keys
 #!.ssh/
