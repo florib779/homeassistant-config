@@ -1,0 +1,85 @@
+automation.timer_done:
+  friendly_name: Notification
+  icon: mdi:bell
+script.timer_cancel:
+  friendly_name: Stop
+  icon: mdi:timer-off
+script.timer_start:
+  friendly_name: Start
+  icon: mdi:timer-sand
+timer.cooking_timer:
+  friendly_name: Remaining time
+sensor.bad_battery_level_sensor:
+  icon: mdi:battery
+sensor.buro_battery_level_sensor:
+  icon: mdi:battery
+sensor.fritz_netmonitor:
+  friendly_name: Router
+  icon: mdi:router-wireless
+sensor.phone:
+  friendly_name: Phone
+  icon: mdi:cellphone-wireless
+sensor.schlafzimmer_battery_level_sensor:
+  icon: mdi:battery
+sensor.wohnzimmer_battery_level_sensor:
+  icon: mdi:battery
+switch.night_sound:
+  icon: mdi:weather-night
+  friendly_name: Night Sound
+switch.speech_enhance:
+  icon: mdi:ear-hearing
+  friendly_name: Speech Enhance
+switch.sonos_sub_state:
+  icon: mdi:volume-vibrate
+switch.sonos_sub_phase:
+  friendly_name: Sub-Phase
+switch.sonos_sub_volume_minus:
+  icon: mdi:volume-minus
+switch.sonos_sub_volume_plus:
+  icon: mdi:volume-plus
+sensor.rock_current_power:
+  icon: mdi:flash
+sensor.rock_total_consumption:
+  icon: mdi:flash
+switch.hdmi_0:
+  friendly_name: TV Livingroom
+sensor.time:
+  friendly_name: Time
+sun.sun:
+  friendly_name: Sun
+sensor.date:
+  friendly_name: Date
+sensor.heizraum_temperature_sensor:
+  friendly_name: Heating Room Temperature
+sensor.kuchenlicht_temperature_sensor:
+  friendly_name: Kitchen Light Temperature
+sensor.kuche_temperature_sensor:
+  friendly_name: Kitchen Temperature
+sensor.bad_temperature_sensor:
+  friendly_name: Bathroom Temperature
+automation.telefonstatus:
+  friendly_name: Phone Status
+sensor.wohnzimmer_temperature_sensor:
+  friendly_name: Livingroom Temperature
+switch.livingroom_night_sound:
+  icon: mdi:weather-night
+switch.livingroom_speech_enhance:
+  icon: mdi:account-voice
+switch.livingroom_buttons_enabled:
+  icon: mdi:gesture-tap-button
+switch.livingroom_status_light:
+  icon: mdi:led-on
+automation.phone_status:
+  icon: mdi:phone
+switch.sonos_livingroom_buttons_enabled:
+  icon: mdi:gesture-tap-button
+switch.sonos_livingroom_status_light:
+  icon: mdi:led-outline
+switch.sonos_livingroom_night_sound:
+  icon: mdi:weather-night
+switch.sonos_livingroom_speech_enhance:
+  icon: mdi:account-voice
+switch.sonos_livingroom_sub:
+  icon: mdi:music-clef-bass
+switch.livingroom_tv_power:
+  icon: mdi:power

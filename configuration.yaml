@@ -1,0 +1,265 @@
+homeassistant:
+  customize: !include customize.yaml
+
+  allowlist_external_dirs:
+    - "/mnt"
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    language: 'en'
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+folder_watcher:
+  - folder: /mnt
+
+media_player:
+  # Use the Python ADB implementation
+  - platform: androidtv
+    # TV livingroom
+    host: 192.168.178.28
+    device_class: androidtv
+
+wake_on_lan: # Further configuration in switch section
+
+ecovacs:
+  username: !secret ecovacs_username
+  password: !secret ecovacs_password
+  country: !secret ecovacs_country
+  continent: !secret ecovacs_continent
+
+# Timer #######################################################################
+# It's not possible to configure the names through the gui
+timer:
+  cooking_timer:
+    name: Timer
+
+input_number:
+  timer_seconds:
+    name: Seconds
+    initial: 0
+    max: 60
+    min: 0
+    step: 1
+  timer_minutes:
+    name: Minutes
+    initial: 0
+    max: 60
+    min: 0
+    step: 1
+  timer_hours:
+    name: Hours
+    initial: 0
+    max: 60
+    min: 0
+    step: 1
+###############################################################################
+
+panel_iframe:
+  roon_display:
+    title: 'Roon Web Display'
+    icon: 'mdi:waveform'
+    url: 'http://rock:9100/display/'
+
+sensor:
+  - platform: command_line
+    # It's not possible to configure the name through the UI
+    name: NUC CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    # If errors occur, make sure configuration file is encoded as UTF-8
+    unit_of_measurement: "°C"
+    value_template: "{{ value | multiply(0.001) | round(1) }}"
+  - platform: fritzbox_netmonitor # Monitors the network statistics exposed by AVM FRITZ!Box routers.
+  - platform: lastfm
+    api_key: !secret lastfm_api_key
+    users:
+      - !secret lastfm_user
+  - platform: time_date # Nescessary for the timer
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+  - platform: uptime #The uptime sensor stores the timestamp (date and time) when Home Assistant was last started.
+  - platform: template
+    sensors:
+      time_formatted:
+        friendly_name: "Date and time"
+        value_template: "{{ as_timestamp(states('sensor.date_time_utc')) | timestamp_custom('%A %B %-m, %I:%M %p') }}"
+      bathroom_current_power: 
+        value_template: "{{ state_attr('switch.bathroom', 'current_power_w') | float | default(0) }}"
+        unit_of_measurement: Watt
+      bathroom_temperature:
+        value_template: "{{ state_attr('switch.bathroom', 'temperature') | float | default(0) }}"
+        unit_of_measurement: °C
+      cookerhood_current_power: 
+        value_template: "{{ state_attr('switch.cookerhood', 'current_power_w') | float | default(0) }}"
+        unit_of_measurement: Watt
+      cookerhood_temperature: 
+        value_template: "{{ state_attr('switch.cookerhood', 'temperature') | float | default(0) }}"
+        unit_of_measurement: °C
+      heatingroom_power: 
+        value_template: "{{ state_attr('switch.heatingroom', 'current_power_w') | float | default(0) }}"
+        unit_of_measurement: Watt
+      heatingroom_temperature: 
+        value_template: "{{ state_attr('switch.heatingroom', 'temperature') | float | default(0) }}"
+        unit_of_measurement: °C
+      kitchen_temperature: 
+        value_template: "{{ state_attr('switch.kitchenlight', 'temperature') | float | default(0) }}"
+        unit_of_measurement: °C
+      livingroom_current_power: 
+        value_template: "{{ state_attr('switch.livingroom', 'current_power_w') | float | default(0) }}"
+        unit_of_measurement: Watt
+      rock_current_power: 
+        value_template: "{{ state_attr('switch.rock', 'current_power_w') | float | default(0) }}"
+        unit_of_measurement: Watt
+      rock_temperature: 
+        value_template: "{{ state_attr('switch.rock', 'temperature') | float | default(0) }}"
+        unit_of_measurement: °C
+      rock_total_consumption: 
+        value_template: "{{ state_attr('switch.rock', 'total_consumption') | float | default(0) }}"
+        unit_of_measurement: kWh
+      date:
+        entity_id: sensor.time
+        value_template: "{{ as_timestamp(now()) | timestamp_custom('%A, %d.%m.%Y') }}"
+
+switch:
+  - platform: template
+    switches:
+      livingroom_tv_power:
+        turn_on:
+          service: wake_on_lan.send_magic_packet
+          data:
+            mac: !secret tv_livingroom_mac
+        turn_off:
+          service: androidtv.adb_command
+          target:
+            entity_id: media_player.android_tv_livingroom
+          data:
+            command: "POWER"
+##### Sonos
+      sonos_livingroom_night_sound:
+        value_template: "{{ state_attr('media_player.sonos_livingroom', 'night_sound') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            night_sound: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            night_sound: false
+      sonos_livingroom_speech_enhance:
+        value_template: "{{ state_attr('media_player.sonos_livingroom', 'speech_enhance') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            speech_enhance: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            speech_enhance: false
+      sonos_livingroom_status_light:
+        value_template: "{{ state_attr('media_player.sonos_livingroom' , 'status_light') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            status_light: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            status_light: false
+      sonos_livingroom_buttons_enabled:
+        value_template: "{{ state_attr('media_player.sonos_livingroom', 'buttons_enabled') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            buttons_enabled: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            buttons_enabled: false
+  - platform: wake_on_lan
+    mac: !secret rock_mac
+
+#### Sonos Sub per https://github.com/jishi/node-sonos-http-api
+# Choose the devices names from your sonos configuration
+# Host names doesn't seem to work - use the IP instead
+  - platform: command_line
+    switches:
+##### Livingroom #####
+      # Bass/treble (use -10 thru 10 as value. 0 is neutral)
+      sonos_livingroom_bass_minus_5:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-5"
+      sonos_livingroom_bass_minus_4:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-4"
+      sonos_livingroom_bass_minus_3:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-3"
+      sonos_livingroom_bass_minus_2:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-2"
+      sonos_livingroom_bass_minus_1:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-1"
+      sonos_livingroom_bass_0:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/0"
+      sonos_livingroom_bass_1:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/1"
+      sonos_livingroom_bass_2:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/2"
+      sonos_livingroom_bass_3:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/3"
+      sonos_livingroom_bass_4:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/4"
+      sonos_livingroom_bass_5:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/5"
+      ##### Subwoofer 
+      # Sub on/off
+      sonos_livingroom_sub:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/on"
+        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/off"
+      # Adjust bass gain, -15 to 15.
+      sonos_livingroom_sub_gain_minus_1:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/gain/-1"
+      sonos_livingroom_sub_gain_0:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/gain/0"
+      sonos_livingroom_sub_gain_1:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/gain/1"
+      sonos_livingroom_sub_polarity:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0"
+        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1" # 180°
+      ### Crossover
+      ### Official values are 50 through 110 in increments of 10
+      sonos_livingroom_sub_crossover_50:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/50"
+      sonos_livingroom_sub_crossover_60:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/60"
+      sonos_livingroom_sub_crossover_70:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/70"
+      sonos_livingroom_sub_crossover_80:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/80"
+      sonos_livingroom_sub_crossover_90:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/90"
+      sonos_livingroom_sub_crossover_100:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/100"
+      sonos_livingroom_sub_crossover_110:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/110"

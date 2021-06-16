@@ -1,0 +1,124 @@
+sonos_say:
+    alias: "Sonos TTS script"
+    sequence:
+     - service: sonos.snapshot
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+     - service: sonos.unjoin
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+     - service: media_player.volume_set
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+         volume_level: "{{ volume }}"
+     - service: tts.google_translate_say
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+         message: "{{ message }}"
+     - delay: "{{ delay }}"
+     - service: sonos.restore
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+
+##########################
+#    COOKING TIMER
+##########################
+
+timer_start:
+  sequence:
+    - service: timer.start
+      data_template:
+        entity_id: timer.cooking_timer
+        #duration: '00:{{ states.input_number.timer_minutes.state | int }}:{{ states.input_number.timer_seconds.state | int }}'
+        duration: '{{ states.input_number.timer_hours.state | int }}:{{ states.input_number.timer_minutes.state | int }}:{{ states.input_number.timer_seconds.state | int }}'
+
+timer_cancel:
+  sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.cooking_timer
+###########################################################
+'tv_livingroom_home':
+  alias: TV Livingroom Home
+  sequence:
+    - service: androidtv.adb_command
+      data:
+        entity_id: media_player.android_tv_livingroom
+        command: "HOME"
+'tv_livingroom_up':
+  alias: TV Livingroom Up
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "UP"
+'tv_livingroom_down':
+  alias: TV Livingroom Down
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "DOWN"
+'tv_livingroom_left':
+  alias: TV Livingroom Left
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "LEFT"
+'tv_livingroom_right':
+  alias: TV Livingroom Right
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "RIGHT"
+'tv_livingroom_center':
+  alias: TV Livingroom Center
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "CENTER"
+'tv_livingroom_exit':
+  alias: TV Livingroom Exit
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "EXIT"
+'tv_livingroom_back':
+  alias: TV Livingroom Back
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "BACK"
+'tv_livingroom_menu':
+  alias: TV Livingroom Menu
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "MENU"
+'tv_livingroom_volup':
+  alias: TV Livingroom Volume Up
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "VOLUME_UP"
+'tv_livingroom_voldown':
+  alias: TV Livingroom Volume Down
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "VOLUME_DOWN"
+'tv_livingroom_reboot':
+  alias: TV Livingroom Reboot
+  sequence:
+    - service: androidtv.adb_command
+      data:
+         entity_id: media_player.android_tv_livingroom
+         command: "reboot"
