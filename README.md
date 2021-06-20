@@ -7,8 +7,7 @@ My Home Assistant config files including products of:
 
 ## Features
 
-Includes:
-* A script (`ha_gitpush.sh`) which automatically pushes to GitHub ([see](https://peyanski.com/automatic-home-assistant-backup-to-github/))
+* A [script](https://github.com/florib779/homeassistant-config/blob/master/ha_gitpush.sh) which automatically pushes to GitHub ([source](https://peyanski.com/automatic-home-assistant-backup-to-github/))
 * A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html)
 * A [ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html)
 * Sonos
@@ -17,7 +16,7 @@ Includes:
   - [x] Speaker group management - [Mini Media Player](https://github.com/kalkih/mini-media-player) (Customizable media player card for Home Assistant Lovelace UI)
   - [ ] Bass/Treble (looking for a nice solution like [lovelace-slider-entity-row](https://github.com/thomasloven/lovelace-slider-entity-row))
   - [ ] Loudness (seems to be not possible yet)
-  - [ ] Control subwoofer [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
+  - [ ] Control subwoofer - [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
     - [x] On/Off
     - [ ] Volume level (looking for a nice solution like [lovelace-slider-entity-row](https://github.com/thomasloven/lovelace-slider-entity-row))
     - [ ] Crossover frequency (looking for a nice solution like [lovelace-slider-entity-row](https://github.com/thomasloven/lovelace-slider-entity-row))
@@ -62,7 +61,7 @@ Includes:
     - [x] FRITZ!DECT 200 (smart plug)
     - [x] FRITZ!DECT 210 (smart plug)
     - [x] FRITZ!DECT 300 (radiator control)
-    - [x] FRITZ!DECT 440 (push button switch with temperature sensor)
+    - [x] FRITZ!DECT 440 (push button switch)
       - [x] Temperature
       - [ ] Humidity (actually not implemented in Home Assistant)
     - [x] Rademacher RolloTron DECT 1213 (shutter)
