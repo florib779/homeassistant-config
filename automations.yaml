@@ -35,6 +35,8 @@
   - at: '02:00:00'
     platform: time
   action:
+  # It's important to install the community addon “SSH & Web Terminal”, not the “official” one “Web Terminal & SSH”.
+  # I had to disable SSH in the configuration of this addon.
   - data:
       addon: a0d7b954_ssh
       input: /config/ha_gitpush.sh
