@@ -227,61 +227,62 @@ switch:
  ## Sonos commands per https://github.com/jishi/node-sonos-http-api
  ## Choose the devices names from your sonos configuration
  ## Host names doesn't seem to work - use the IP instead
+ ## "!secret" doesn't seem to work
   - platform: command_line
     switches:
    ### Livingroom ##############################################################
       # Bass/treble (use -10 thru 10 as value. 0 is neutral)
       sonos_livingroom_bass_minus_5:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/-5"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-5"
       sonos_livingroom_bass_minus_4:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/-4"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-4"
       sonos_livingroom_bass_minus_3:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/-3"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-3"
       sonos_livingroom_bass_minus_2:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/-2"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-2"
       sonos_livingroom_bass_minus_1:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/-1"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/-1"
       sonos_livingroom_bass_0:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/0"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/0"
       sonos_livingroom_bass_1:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/1"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/1"
       sonos_livingroom_bass_2:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/2"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/2"
       sonos_livingroom_bass_3:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/3"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/3"
       sonos_livingroom_bass_4:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/4"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/4"
       sonos_livingroom_bass_5:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/bass/5"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/bass/5"
    #############################################################################
 
     #### Subwoofer #############################################################
       # Sub on/off
       sonos_livingroom_sub:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/on"
-        command_off: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/off"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/on"
+        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/off"
       # Adjust bass gain, -15 to 15.
       sonos_livingroom_sub_gain_minus_1:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/gain/-1"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/gain/-1"
       sonos_livingroom_sub_gain_0:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/gain/0"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/gain/0"
       sonos_livingroom_sub_gain_1:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/gain/1"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/gain/1"
       sonos_livingroom_sub_polarity:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/polarity/0"
-        command_off: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/polarity/1" # 180°
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0"
+        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1" # 180°
       ### Crossover - official values are 50 through 110 in increments of 10
       sonos_livingroom_sub_crossover_50:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/50"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/50"
       sonos_livingroom_sub_crossover_60:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/60"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/60"
       sonos_livingroom_sub_crossover_70:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/70"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/70"
       sonos_livingroom_sub_crossover_80:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/80"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/80"
       sonos_livingroom_sub_crossover_90:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/90"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/90"
       sonos_livingroom_sub_crossover_100:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/100"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/100"
       sonos_livingroom_sub_crossover_110:
-        command_on: "curl http://!secret rock_ip:5005/Wohnzimmer/sub/crossover/110"
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/crossover/110"
