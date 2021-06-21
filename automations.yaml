@@ -1,3 +1,23 @@
+- id: sonos_livingroom_bass
+  alias: Sonos Livingroom Bass
+  trigger:
+    - platform: state
+      entity_id: input_slider.sonos_livingroom_bass
+  action:
+    - service: shell_command.sonos_bass
+      data_template:
+        speaker: 'Wohnzimmer' # Use the names from the Sonos app
+        sonos_bass: '{{ trigger.to_state.state | int }}'
+- id: sonos_livingroom_treble
+  alias: Sonos Livingroom Treble
+  trigger:
+    - platform: state
+      entity_id: input_slider.sonos_livingroom_treble
+  action:
+    - service: shell_command.sonos_treble
+      data_template:
+        speaker: 'Wohnzimmer' # Use the names from the Sonos app
+        sonos_treble: '{{ trigger.to_state.state | int }}'
 - alias: 'Timer done'
   trigger:
     - platform: event
@@ -29,7 +49,7 @@
           {% else %}
             Phone with {{ state_attr('sensor.phone', 'with_name') }} ({{ state_attr('sensor.phone', 'with') }})
           {% endif %}
-- id: l1k3
+- id: gitpush
   alias: Push HASS configuration to GitHub
   trigger:
   - at: '02:00:00'
