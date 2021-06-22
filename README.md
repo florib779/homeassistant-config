@@ -1,8 +1,9 @@
 My Home Assistant config files including products of:
 
 * [AVM](https://avm.de)
-* [Ecovacs](https://www.ecovacs.com)
+* [Ecovacs](https://ecovacs.com)
 * [Eurotronic](https://eurotronic.org)
+* [Rademacher](https://rademacher.de/)
 * [Roon](https://roonlabs.com/)
 * [Sonos](https://sonos.com)
 
@@ -36,36 +37,36 @@ My Home Assistant config files including products of:
       - [x] Rewind
       - [ ] ~Volume~ (my remote control does not send a command for this)
 * TV
-  - [x] Turn TV on [Wake on LAN](https://www.home-assistant.io/integrations/wake_on_lan/)
-  - [x] Turn TV off [Android TV](https://www.home-assistant.io/integrations/androidtv/)
+  - [x] Turn TV on via [Wake on LAN integration](https://www.home-assistant.io/integrations/wake_on_lan/)
+  - [x] Turn TV off via [Android TV integration](https://www.home-assistant.io/integrations/androidtv/)
   - [x] Control TV
-    - [Android TV](https://www.home-assistant.io/integrations/androidtv/)
+    - [Android TV integration](https://www.home-assistant.io/integrations/androidtv/)
   - [ ] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/androidtv/)
 * AVM FRITZ!Box
-  - [x] Sensor for internet connectivity (with external IP and uptime attributes) [AVM FRITZ!Box Tools](https://www.home-assistant.io/integrations/fritz/)
-  - [x] Turn on/off wifi and guest wifi [FRITZ!Box Tools](https://github.com/mammuth/ha-fritzbox-tools)
+  - [x] Sensor for internet connectivity (with external IP and uptime attributes) via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/)
+  - [x] Turn wifi and guest wifi on/off [FRITZ!Box Tools](https://github.com/mammuth/ha-fritzbox-tools)
 * AVM FRITZ!DECT devices
   * Control
-    - [x] Comet DECT (radiator control - similar to FRITZ!DECT 300)
-    - [x] FRITZ!DECT 200 (smart plug)
-    - [x] FRITZ!DECT 210 (smart plug)
-    - [x] FRITZ!DECT 300 (radiator control)
-    - [ ] FRITZ!DECT 440 (push button switch)
-    - [ ] FRITZ!DECT 500 (LED light) (actually not implemented in Home Assistant)
-    - [ ] Rademacher RolloTron DECT 1213 (shutter)
-      - Actually not implemented in Home Assistant
-      - [ ] Close shutter when TV is turned on.
+    - [x] Eurotronic Comet DECT (radiator control - similar to FRITZ!DECT 300)
+    - [x] AVM FRITZ!DECT 200 (smart plug)
+    - [x] AVM FRITZ!DECT 210 (smart plug)
+    - [x] AVM FRITZ!DECT 300 (radiator control)
+    - [ ] AVM FRITZ!DECT 440 (push button switch)
+    - [ ] AVM FRITZ!DECT 500 (LED light) - actually not implemented in Home Assistant
+    - [ ] Rademacher RolloTron DECT 1213 (shutter) - controlling is actually not implemented in Home Assistant
+      - [ ] Close shutter when TV is turned on
       - [ ] Go to favorite position at a given time
   * Show info
-    - [x] Comet DECT (radiator control)
+    - [x] Eurotronic Comet DECT (radiator control)
     - [x] Deutsche Telekom/Eurotronic 40318684 (door/window contact)
-    - [x] FRITZ!DECT 200 (smart plug)
-    - [x] FRITZ!DECT 210 (smart plug)
-    - [x] FRITZ!DECT 300 (radiator control)
-    - [x] FRITZ!DECT 440 (push button switch)
+    - [x] AVM FRITZ!DECT 200 (smart plug)
+    - [x] AVM FRITZ!DECT 210 (smart plug)
+    - [x] AVM FRITZ!DECT 300 (radiator control)
+    - [x] AVM FRITZ!DECT 440 (push button switch)
       - [x] Temperature
       - [ ] Humidity (actually not implemented in Home Assistant)
     - [x] Rademacher RolloTron DECT 1213 (shutter)
+      - Indicates whether it is open or closed
 * Ecovacs Deebot ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card))
   - [x] Control
   - [x] Show info

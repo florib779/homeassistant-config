@@ -4,14 +4,15 @@
 *
 
 # You can whitelist files/folders with !, these will not be ignored.
-!*.yaml
 !.gitignore
+!.HA_VERSION
+!*.js*
 !*.md
 !*.sh
-!*.js*
-!.HA_VERSION
-!packages
+
+!*.yaml
 !gitpush
+!packages
 
 # Comment these 2 lines if you don't want to include your SSH keys
 #!.ssh/
