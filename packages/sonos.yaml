@@ -1,8 +1,101 @@
 switch:
+# "status_light" doesn't work with "value_template"
+# value_template: "{{ state_attr('media_player.sonos_livingroom', 'status_light') }}"
   - platform: template
     switches:
+      # Play:3 bathroom ########################################################
+      sonos_bathroom_status_light:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bathroom
+            status_light: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bathroom
+            status_light: false
+      sonos_bathroom_buttons_enabled:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bathroom
+            buttons_enabled: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bathroom
+            buttons_enabled: false
+      # Playbar bedroom ########################################################
+      sonos_bedroom_night_sound:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            night_sound: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            night_sound: false
+      sonos_bedroom_speech_enhance:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            speech_enhance: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            speech_enhance: false
+      sonos_bedroom_status_light:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            status_light: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            status_light: false
+      sonos_bedroom_buttons_enabled:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            buttons_enabled: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_bedroom
+            buttons_enabled: false
+      # Play:1 kitchen #########################################################
+      sonos_kitchen_status_light:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_kitchen
+            status_light: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_kitchen
+            status_light: false
+      sonos_kitchen_buttons_enabled:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_kitchen
+            buttons_enabled: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_kitchen
+            buttons_enabled: false
+      # Playbase livingroom ####################################################
       sonos_livingroom_night_sound:
-        value_template: "{{ state_attr('media_player.sonos_livingroom', 'night_sound') }}"
         turn_on:
           service: sonos.set_option
           data:
@@ -14,7 +107,6 @@ switch:
             entity_id: media_player.sonos_livingroom
             night_sound: false
       sonos_livingroom_speech_enhance:
-        value_template: "{{ state_attr('media_player.sonos_livingroom', 'speech_enhance') }}"
         turn_on:
           service: sonos.set_option
           data:
@@ -25,8 +117,7 @@ switch:
           data:
             entity_id: media_player.sonos_livingroom
             speech_enhance: false
-      sonos_livingroom_status_light: # Not working
-        value_template: "{{ state_attr('media_player.sonos_livingroom' , 'status_light') }}"
+      sonos_livingroom_status_light:
         turn_on:
           service: sonos.set_option
           data:
@@ -37,8 +128,7 @@ switch:
           data:
             entity_id: media_player.sonos_livingroom
             status_light: false
-      sonos_livingroom_buttons_enabled: # Not working
-        value_template: "{{ state_attr('media_player.sonos_livingroom', 'buttons_enabled') }}"
+      sonos_livingroom_buttons_enabled:
         turn_on:
           service: sonos.set_option
           data:
@@ -48,6 +138,29 @@ switch:
           service: sonos.set_option
           data:
             entity_id: media_player.sonos_livingroom
+            buttons_enabled: false
+      # One Office #############################################################
+      sonos_office_status_light:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_office
+            status_light: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_office
+            status_light: false
+      sonos_office_buttons_enabled:
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_office
+            buttons_enabled: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_office
             buttons_enabled: false
 
 # Sonos commands per https://github.com/jishi/node-sonos-http-api
@@ -81,7 +194,6 @@ input_number:
     max: 10
     step: 1
     unit_of_measurement: dB
-    #mode: box
   sonos_livingroom_treble:
     name: Sonos Livingroom Treble
     initial: 0
@@ -89,7 +201,6 @@ input_number:
     max: 10
     step: 1
     unit_of_measurement: dB
-    #mode: box
   sonos_livingroom_sub_gain:
     name: Sonos Livingroom Sub Gain
     initial: 0
@@ -97,7 +208,6 @@ input_number:
     max: 15
     step: 1
     unit_of_measurement: dB
-    #mode: box
   sonos_livingroom_sub_crossover:
     name: Sonos Livingroom Sub Crossover
     initial: 80
@@ -105,7 +215,6 @@ input_number:
     max: 110
     step: 10
     unit_of_measurement: Hz
-    #mode: box
 
 ################################################################################
 

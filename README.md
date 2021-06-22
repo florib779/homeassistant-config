@@ -23,8 +23,8 @@ My Home Assistant config files including products of:
     - [x] Volume level
     - [x] Crossover frequency
     - [x] Polarity
-  - [ ] Control status lights via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
-  - [ ] Control buttons via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
+  - [x] Control status lights via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
+  - [x] Control buttons via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
 * Roon
   - [x] Control/Show info
     - [x] [RoonLabs music player integration](https://www.home-assistant.io/integrations/roon/)
@@ -41,7 +41,7 @@ My Home Assistant config files including products of:
   - [x] Turn TV off via [Android TV integration](https://www.home-assistant.io/integrations/androidtv/)
   - [x] Control TV
     - [Android TV integration](https://www.home-assistant.io/integrations/androidtv/)
-  - [ ] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/androidtv/)
+  - [x] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/nfandroidtv/)
 * AVM FRITZ!Box
   - [x] Sensor for internet connectivity (with external IP and uptime attributes) via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/)
   - [x] Turn wifi and guest wifi on/off [FRITZ!Box Tools](https://github.com/mammuth/ha-fritzbox-tools)

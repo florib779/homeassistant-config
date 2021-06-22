@@ -107,3 +107,7 @@ switch:
             entity_id: media_player.android_tv_livingroom
           data:
             command: "POWER"
+
+notify:
+  - platform: nfandroidtv
+    host: !secret androidtv_ip
