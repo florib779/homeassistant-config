@@ -1,24 +1,27 @@
 homeassistant:
   customize: !include customize.yaml
- 
+  packages: !include_dir_named packages
+
  # Experiment
   allowlist_external_dirs:
     - "/mnt"
+################################################################################
 
-#frontend:
-#  themes: !include_dir_merge_named themes
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Includes ###################################################################
+automation: !include automations.yaml
+group: !include groups.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+##############################################################################
 
 default_config: # Configure a default setup of Home Assistant (frontend, api, etc)
 
 tts: # Text to speech
   - platform: google_translate
     language: 'en'
-
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
-scene: !include scenes.yaml
-shell_command: !include_dir_merge_named includes/shell_commands
 
 # Experiment
 folder_watcher:
@@ -66,41 +69,6 @@ input_number:
     step: 1
 ################################################################################
 
-# Sonos ########################################################################
-  sonos_livingroom_bass:
-    name: Sonos Livingroom Bass
-    initial: 0
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-    #mode: box
-  sonos_livingroom_treble:
-    name: Sonos Livingroom Treble
-    initial: 0
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-    #mode: box
-  sonos_livingroom_sub_gain:
-    name: Sonos Livingroom Sub Gain
-    initial: 0
-    min: -15
-    max: 15
-    step: 1
-    unit_of_measurement: dB
-    #mode: box
-  sonos_livingroom_sub_crossover:
-    name: Sonos Livingroom Sub Crossover
-    initial: 80
-    min: 50
-    max: 110
-    step: 10
-    unit_of_measurement: Hz
-    #mode: box
-################################################################################
-
 panel_iframe:
   roon_display:
     title: 'Roon Web Display'
@@ -138,7 +106,7 @@ sensor:
       time_formatted:
         friendly_name: "Date and time"
         value_template: "{{ as_timestamp(states('sensor.date_time_utc')) | timestamp_custom('%A %B %-m, %I:%M %p') }}"
-# Additional informations for Fritz!Dect devices ###############################
+      # Additional informations for Fritz!Dect devices ###############################
       bathroom_current_power: 
         value_template: "{{ state_attr('switch.bathroom', 'current_power_w') | float | default(0) }}"
         unit_of_measurement: Watt
@@ -192,56 +160,6 @@ switch:
             command: "POWER"
 ################################################################################
 
-# Sonos ########################################################################
-      sonos_livingroom_night_sound:
-        value_template: "{{ state_attr('media_player.sonos_livingroom', 'night_sound') }}"
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            night_sound: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            night_sound: false
-      sonos_livingroom_speech_enhance:
-        value_template: "{{ state_attr('media_player.sonos_livingroom', 'speech_enhance') }}"
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            speech_enhance: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            speech_enhance: false
-      sonos_livingroom_status_light: # Not working
-        value_template: "{{ state_attr('media_player.sonos_livingroom' , 'status_light') }}"
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            status_light: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            status_light: false
-      sonos_livingroom_buttons_enabled: # Not working
-        value_template: "{{ state_attr('media_player.sonos_livingroom', 'buttons_enabled') }}"
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            buttons_enabled: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            buttons_enabled: false
-################################################################################
   - platform: wake_on_lan
     mac: !secret rock_mac
 

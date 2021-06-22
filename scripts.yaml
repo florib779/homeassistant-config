@@ -1,29 +1,4 @@
-sonos_say:
-    alias: "Sonos TTS script"
-    sequence:
-     - service: sonos.snapshot
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-     - service: sonos.unjoin
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-     - service: media_player.volume_set
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-         volume_level: "{{ volume }}"
-     - service: tts.google_translate_say
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-         message: "{{ message }}"
-     - delay: "{{ delay }}"
-     - service: sonos.restore
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-
-##########################
-#    COOKING TIMER
-##########################
-
+# Cooking Timer ################################################################
 timer_start:
   sequence:
     - service: timer.start
@@ -37,7 +12,9 @@ timer_cancel:
     - service: timer.cancel
       data:
         entity_id: timer.cooking_timer
-###########################################################
+################################################################################
+
+# TV Remote Control ############################################################
 'tv_livingroom_home':
   alias: TV Livingroom Home
   sequence:
@@ -122,3 +99,4 @@ timer_cancel:
       data:
          entity_id: media_player.android_tv_livingroom
          command: "reboot"
+################################################################################
