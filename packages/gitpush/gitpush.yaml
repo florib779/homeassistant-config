@@ -1,0 +1,13 @@
+automation:
+- id: gitpush
+  alias: Push HASS configuration to GitHub
+  trigger:
+  - at: '02:00:00'
+    platform: time
+  action:
+  # It's important to install the community addon “SSH & Web Terminal”, not the “official” one “Web Terminal & SSH”.
+  # I had to disable SSH in the configuration and Protection Mode of this addon.
+  - data:
+      addon: 'a0d7b954_ssh'
+      input: '/config/packages/gitpush/gitpush.sh'
+    service: hassio.addon_stdin
