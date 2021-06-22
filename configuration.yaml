@@ -18,6 +18,7 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+shell_command: !include_dir_merge_named includes/shell_commands
 
 # Experiment
 folder_watcher:
@@ -63,23 +64,41 @@ input_number:
     max: 60
     min: 0
     step: 1
-# Experiment ###################################################################
-  sonos_bass:
+################################################################################
+
+# Sonos ########################################################################
+  sonos_livingroom_bass:
     name: Sonos Livingroom Bass
     initial: 0
     min: -10
     max: 10
     step: 1
-  sonos_treble:
+    unit_of_measurement: dB
+    #mode: box
+  sonos_livingroom_treble:
     name: Sonos Livingroom Treble
     initial: 0
     min: -10
     max: 10
     step: 1
-
-shell_command:
-  sonos_bass: 'curl -X GET http://192.168.178.88:5005/{{speaker}}/bass/{{sonos_bass}}'
-  sonos_treble: 'curl -X GET http://192.168.178.88:5005/{{speaker}}/treble/{{sonos_treble}}'
+    unit_of_measurement: dB
+    #mode: box
+  sonos_livingroom_sub_gain:
+    name: Sonos Livingroom Sub Gain
+    initial: 0
+    min: -15
+    max: 15
+    step: 1
+    unit_of_measurement: dB
+    #mode: box
+  sonos_livingroom_sub_crossover:
+    name: Sonos Livingroom Sub Crossover
+    initial: 80
+    min: 50
+    max: 110
+    step: 10
+    unit_of_measurement: Hz
+    #mode: box
 ################################################################################
 
 panel_iframe:
@@ -110,7 +129,7 @@ sensor:
       - 'time_date'
       - 'time_utc'
       - 'beat'
-  - platform: uptime #The uptime sensor stores the timestamp (date and time) when Home Assistant was last started.
+  - platform: uptime # The uptime sensor stores the timestamp (date and time) when Home Assistant was last started.
   - platform: template
     sensors:
       date:
@@ -227,15 +246,11 @@ switch:
     mac: !secret rock_mac
 
  ## Sonos commands per https://github.com/jishi/node-sonos-http-api
- ## Choose the devices names from your sonos configuration
+ ## Choose the devices room from your sonos configuration
  ## Host names doesn't seem to work - use the IP instead
  ## "!secret" doesn't seem to work
   - platform: command_line
     switches:
-      # Bass/treble (use -10 thru 10 as value. 0 is neutral)
-      #sonos_bass:
-        #command_on: "curl http://192.168.178.88:5005/{{speaker}}/bass/{{bass}}"
-
     #### Subwoofer #############################################################
     
       # Sub on/off #############################################################

@@ -81,7 +81,10 @@ switch.sonos_livingroom_speech_enhance:
   icon: mdi:account-voice
 switch.sonos_livingroom_sub:
   icon: mdi:music-clef-bass
+  friendly_name: Sonos Livingroom Sub
+  Area: Livingroom
 switch.livingroom_tv_power:
   icon: mdi:power
 switch.sonos_livingroom_sub_polarity:
   icon: mdi:sine-wave
+  friendly_name: Sonos Livingroom Sub Polarity

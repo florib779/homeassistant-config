@@ -14,12 +14,12 @@ My Home Assistant config files including products of:
   - [x] Night mode (does not work when playing music via roon)
   - [x] Speech enhancement (does not work when playing music via roon)
   - [x] Speaker group management - [Mini Media Player](https://github.com/kalkih/mini-media-player) (Customizable media player card for Home Assistant Lovelace UI)
-  - [ ] Bass/Treble (looking for a nice solution like [lovelace-slider-entity-row](https://github.com/thomasloven/lovelace-slider-entity-row))
+  - [x] Bass/Treble
   - [ ] Loudness (seems to be not possible yet)
-  - [ ] Control subwoofer - [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
+  - [x] Control subwoofer - [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
     - [x] On/Off
-    - [ ] Volume level (looking for a nice solution like [lovelace-slider-entity-row](https://github.com/thomasloven/lovelace-slider-entity-row))
-    - [ ] Crossover frequency (looking for a nice solution like [lovelace-slider-entity-row](https://github.com/thomasloven/lovelace-slider-entity-row))
+    - [x] Volume level (looking for a nice solution like
+    - [x] Crossover frequency (looking for a nice solution like
     - [x] Polarity
       - ToDo: only show when Sub is on
 * Roon
@@ -72,3 +72,7 @@ My Home Assistant config files including products of:
 - [ ] Alarm Clock
   * [Hass-Custom-Alarm](https://github.com/akasma74/hass-custom-alarm)
 - [ ] Report the amount of unread emails - [IMAP](https://www.home-assistant.io/integrations/imap/)
+
+## Links
+
+* https://github.com/christian-ek/home-assistant-config - a lot of inspiration, especially for Sonos.
