@@ -10,12 +10,12 @@ homeassistant:
 frontend:
   themes: !include_dir_merge_named themes
 
-# Includes ###################################################################
+# Includes #####################################################################
 automation: !include automations.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-##############################################################################
+################################################################################
 
 default_config: # Configure a default setup of Home Assistant (frontend, api, etc)
 
@@ -27,53 +27,7 @@ tts: # Text to speech
 folder_watcher:
   - folder: /mnt
 
-media_player:
-  # Use the Python ADB implementation
-  - platform: androidtv
-    # TV livingroom
-    host: !secret androidtv_ip
-    device_class: androidtv
-
-wake_on_lan: # Further configuration in switch section
-
-ecovacs:
-  username: !secret ecovacs_username
-  password: !secret ecovacs_password
-  country: !secret ecovacs_country
-  continent: !secret ecovacs_continent
-
-# Timer ########################################################################
-# It's not possible to configure the names through the gui
-timer:
-  cooking_timer:
-    name: Timer
-
-input_number:
-  timer_seconds:
-    name: Seconds
-    initial: 0
-    max: 60
-    min: 0
-    step: 1
-  timer_minutes:
-    name: Minutes
-    initial: 0
-    max: 60
-    min: 0
-    step: 1
-  timer_hours:
-    name: Hours
-    initial: 0
-    max: 60
-    min: 0
-    step: 1
-################################################################################
-
-panel_iframe:
-  roon_display:
-    title: 'Roon Web Display'
-    icon: 'mdi:waveform'
-    url: 'http://rock:9100/display/'
+wake_on_lan: # Further configuration in the corresponding package yaml files
 
 sensor:
   - platform: command_line
@@ -82,11 +36,6 @@ sensor:
     # If errors occur, make sure configuration file is encoded as UTF-8
     unit_of_measurement: "°C"
     value_template: "{{ value | multiply(0.001) | round(1) }}"
-  - platform: fritzbox_netmonitor # Monitors the network statistics exposed by AVM FRITZ!Box routers.
-  - platform: lastfm
-    api_key: !secret lastfm_api_key
-    users:
-      - !secret lastfm_user
   - platform: time_date # Nescessary for the timer
     display_options:
       - 'time'
@@ -106,77 +55,7 @@ sensor:
       time_formatted:
         friendly_name: "Date and time"
         value_template: "{{ as_timestamp(states('sensor.date_time_utc')) | timestamp_custom('%A %B %-m, %I:%M %p') }}"
-      # Additional informations for Fritz!Dect devices ###############################
-      bathroom_current_power: 
-        value_template: "{{ state_attr('switch.bathroom', 'current_power_w') | float | default(0) }}"
-        unit_of_measurement: Watt
-      bathroom_temperature:
-        value_template: "{{ state_attr('switch.bathroom', 'temperature') | float | default(0) }}"
-        unit_of_measurement: °C
-      cookerhood_current_power: 
-        value_template: "{{ state_attr('switch.cookerhood', 'current_power_w') | float | default(0) }}"
-        unit_of_measurement: Watt
-      cookerhood_temperature: 
-        value_template: "{{ state_attr('switch.cookerhood', 'temperature') | float | default(0) }}"
-        unit_of_measurement: °C
-      heatingroom_power: 
-        value_template: "{{ state_attr('switch.heatingroom', 'current_power_w') | float | default(0) }}"
-        unit_of_measurement: Watt
-      heatingroom_temperature: 
-        value_template: "{{ state_attr('switch.heatingroom', 'temperature') | float | default(0) }}"
-        unit_of_measurement: °C
-      kitchen_temperature: 
-        value_template: "{{ state_attr('switch.kitchenlight', 'temperature') | float | default(0) }}"
-        unit_of_measurement: °C
-      livingroom_current_power: 
-        value_template: "{{ state_attr('switch.livingroom', 'current_power_w') | float | default(0) }}"
-        unit_of_measurement: Watt
-      rock_current_power: 
-        value_template: "{{ state_attr('switch.rock', 'current_power_w') | float | default(0) }}"
-        unit_of_measurement: Watt
-      rock_temperature: 
-        value_template: "{{ state_attr('switch.rock', 'temperature') | float | default(0) }}"
-        unit_of_measurement: °C
-      rock_total_consumption: 
-        value_template: "{{ state_attr('switch.rock', 'total_consumption') | float | default(0) }}"
-        unit_of_measurement: kWh
-################################################################################
 
-switch:
-  - platform: template
-    switches:
-# Turn TV on/off ###############################################################
-## ToDO: read correct state
-      livingroom_tv_power:
-        turn_on:
-          service: wake_on_lan.send_magic_packet
-          data:
-            mac: !secret tv_livingroom_mac
-        turn_off:
-          service: androidtv.adb_command
-          target:
-            entity_id: media_player.android_tv_livingroom
-          data:
-            command: "POWER"
-################################################################################
-
-  - platform: wake_on_lan
-    mac: !secret rock_mac
-
- ## Sonos commands per https://github.com/jishi/node-sonos-http-api
- ## Choose the devices room from your sonos configuration
- ## Host names doesn't seem to work - use the IP instead
- ## "!secret" doesn't seem to work
-  - platform: command_line
-    switches:
-    #### Subwoofer #############################################################
-    
-      # Sub on/off #############################################################
-      sonos_livingroom_sub:
-        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/on"
-        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/off"
-      # Sub polarity
-      sonos_livingroom_sub_polarity:
-        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0"
-        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1" # 180°
-      ##########################################################################
+# ToDo
+  #- platform: wake_on_lan
+    #mac: !secret rock_mac

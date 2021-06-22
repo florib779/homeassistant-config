@@ -1,0 +1,41 @@
+# It's not possible to configure the names through the gui
+timer:
+  cooking_timer:
+    name: Timer
+
+input_number:
+  timer_seconds:
+    name: Seconds
+    initial: 0
+    max: 60
+    min: 0
+    step: 1
+  timer_minutes:
+    name: Minutes
+    initial: 0
+    max: 60
+    min: 0
+    step: 1
+  timer_hours:
+    name: Hours
+    initial: 0
+    max: 60
+    min: 0
+    step: 1
+
+script:
+# Cooking Timer ################################################################
+  timer_start:
+    sequence:
+    - service: timer.start
+      data_template:
+        entity_id: timer.cooking_timer
+        #duration: '00:{{ states.input_number.timer_minutes.state | int }}:{{ states.input_number.timer_seconds.state | int }}'
+        duration: '{{ states.input_number.timer_hours.state | int }}:{{ states.input_number.timer_minutes.state | int }}:{{ states.input_number.timer_seconds.state | int }}'
+
+  timer_cancel:
+    sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.cooking_timer
+################################################################################
