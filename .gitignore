@@ -10,6 +10,7 @@
 !*.sh
 !*.js*
 !.HA_VERSION
+!packages
 
 # Comment these 2 lines if you don't want to include your SSH keys
 #!.ssh/

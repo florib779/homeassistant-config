@@ -1,0 +1,178 @@
+switch:
+  - platform: template
+    switches:
+      sonos_livingroom_night_sound:
+        value_template: "{{ state_attr('media_player.sonos_livingroom', 'night_sound') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            night_sound: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            night_sound: false
+      sonos_livingroom_speech_enhance:
+        value_template: "{{ state_attr('media_player.sonos_livingroom', 'speech_enhance') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            speech_enhance: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            speech_enhance: false
+      sonos_livingroom_status_light: # Not working
+        value_template: "{{ state_attr('media_player.sonos_livingroom' , 'status_light') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            status_light: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            status_light: false
+      sonos_livingroom_buttons_enabled: # Not working
+        value_template: "{{ state_attr('media_player.sonos_livingroom', 'buttons_enabled') }}"
+        turn_on:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            buttons_enabled: true
+        turn_off:
+          service: sonos.set_option
+          data:
+            entity_id: media_player.sonos_livingroom
+            buttons_enabled: false
+# Sonos commands per https://github.com/jishi/node-sonos-http-api ##############
+ ## Choose the devices room from your sonos configuration
+ ## Host names doesn't seem to work - use the IP instead
+ ## "!secret" doesn't seem to work
+  - platform: command_line
+    switches:
+      # Sub on/off
+      sonos_livingroom_sub:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/on"
+        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/off"
+      # Sub polarity
+      sonos_livingroom_sub_polarity:
+        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0"
+        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1" # 180°
+
+################################################################################
+
+shell_command:
+  sonos_bass: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/bass/{{bass}}'
+  sonos_treble: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/treble/{{treble}}'
+  sonos_sub_gain: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/gain/{{sub_gain}}'
+  sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/crossover/{{sub_crossover}}'
+
+################################################################################
+
+input_number:
+  sonos_livingroom_bass:
+    name: Sonos Livingroom Bass
+    initial: 0
+    min: -10
+    max: 10
+    step: 1
+    unit_of_measurement: dB
+    #mode: box
+  sonos_livingroom_treble:
+    name: Sonos Livingroom Treble
+    initial: 0
+    min: -10
+    max: 10
+    step: 1
+    unit_of_measurement: dB
+    #mode: box
+  sonos_livingroom_sub_gain:
+    name: Sonos Livingroom Sub Gain
+    initial: 0
+    min: -15
+    max: 15
+    step: 1
+    unit_of_measurement: dB
+    #mode: box
+  sonos_livingroom_sub_crossover:
+    name: Sonos Livingroom Sub Crossover
+    initial: 80
+    min: 50
+    max: 110
+    step: 10
+    unit_of_measurement: Hz
+    #mode: box
+
+################################################################################
+
+automation:
+- id: sonos_livingroom_bass
+  alias: Sonos Livingroom Bass
+  trigger:
+    - platform: state
+      entity_id: input_number.sonos_livingroom_bass
+  action:
+    - service: shell_command.sonos_bass
+      data_template:
+        room: 'Wohnzimmer' # Use the name from the Sonos app
+        bass: '{{ trigger.to_state.state | int }}'
+- id: sonos_livingroom_treble
+  alias: Sonos Livingroom Treble
+  trigger:
+    - platform: state
+      entity_id: input_number.sonos_livingroom_treble
+  action:
+    - service: shell_command.sonos_treble
+      data_template:
+        room: 'Wohnzimmer' # Use the name from the Sonos app
+        treble: '{{ trigger.to_state.state | int }}'
+- id: sonos_livingroom_sub_gain
+  alias: Sonos Livingroom Sub Gain
+  trigger:
+    - platform: state
+      entity_id: input_number.sonos_livingroom_sub_gain
+  action:
+    - service: shell_command.sonos_sub_gain
+      data_template:
+        room: 'Wohnzimmer' # Use the name from the Sonos app
+        sub_gain: '{{ trigger.to_state.state | int }}'
+- id: sonos_livingroom_sub_crossover
+  alias: Sonos Livingroom Sub Crossover
+  trigger:
+    - platform: state
+      entity_id: input_number.sonos_livingroom_sub_crossover
+  action:
+    - service: shell_command.sonos_sub_crossover
+      data_template:
+        room: 'Wohnzimmer' # Use the name from the Sonos app
+        sub_crossover: '{{ trigger.to_state.state | int }}'
+
+################################################################################
+
+script:
+  sonos_say:
+    alias: "Sonos TTS script"
+    sequence:
+     - service: sonos.snapshot
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+     - service: sonos.unjoin
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+     - service: media_player.volume_set
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+         volume_level: "{{ volume }}"
+     - service: tts.google_say
+       data_template:
+         entity_id: "{{ sonos_entity }}"
+         message: "{{ message }}"
+     - delay: "{{ delay }}"
+     - service: sonos.restore
+       data_template:
+         entity_id: "{{ sonos_entity }}"
