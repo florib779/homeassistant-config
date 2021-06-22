@@ -98,3 +98,5 @@ automation.push_hass_configuration_to_github:
   icon: si:github
 input_number.sonos_livingroom_sub_crossover:
   icon: mdi:wave
+binary_sensor.livingroom_small_window:
+  icon: mdi:window-shutter

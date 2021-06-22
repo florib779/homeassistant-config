@@ -163,58 +163,32 @@ switch:
             entity_id: media_player.sonos_office
             buttons_enabled: false
 
-# Sonos commands per https://github.com/jishi/node-sonos-http-api
+# Sonos commands per https://github.com/jishi/node-sonos-http-api ##############
  ## Choose the devices room from your sonos configuration
- ## Host names doesn't seem to work - use the IP instead
- ## "!secret" doesn't seem to work
+ ## Host names doesn't work - use the IP instead
+ ## The IP refers to the computer where node-sonos-http-api is installed on
+ ## "!secret" doesn't work
   - platform: command_line
     switches:
       # Sub on/off
       sonos_livingroom_sub:
-        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/on"
-        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/off"
+        command_on: curl http://192.168.178.88:5005/Wohnzimmer/sub/on
+        command_off: curl http://192.168.178.88:5005/Wohnzimmer/sub/off
+        command_state: curl -X GET http://192.168.178.88:5005/Wohnzimmer/state | grep -o -P '(?<="enabled":).*(?=})' | sed s'/.$//'
+        value_template: '{{ value == "true" }}'
       # Sub polarity
       sonos_livingroom_sub_polarity:
-        command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0"
-        command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1" # 180°
+        command_on: curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0
+        command_off: curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1
+        # ToDo
+        #command_state: curl -X GET http://192.168.178.88:5005/Wohnzimmer/state | grep -o -P '(?<="polarity":).*(?=})' | sed s'/.$//'
+        #value_template: '{{ value == "1" }}'
 
 shell_command:
   sonos_bass: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/bass/{{bass}}'
   sonos_treble: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/treble/{{treble}}'
   sonos_sub_gain: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/gain/{{sub_gain}}'
   sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/crossover/{{sub_crossover}}'
-
-################################################################################
-
-input_number:
-  sonos_livingroom_bass:
-    name: Sonos Livingroom Bass
-    initial: 0
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_livingroom_treble:
-    name: Sonos Livingroom Treble
-    initial: 0
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_livingroom_sub_gain:
-    name: Sonos Livingroom Sub Gain
-    initial: 0
-    min: -15
-    max: 15
-    step: 1
-    unit_of_measurement: dB
-  sonos_livingroom_sub_crossover:
-    name: Sonos Livingroom Sub Crossover
-    initial: 80
-    min: 50
-    max: 110
-    step: 10
-    unit_of_measurement: Hz
 
 ################################################################################
 
@@ -259,6 +233,38 @@ automation:
       data_template:
         room: 'Wohnzimmer' # Use the name from the Sonos app
         sub_crossover: '{{ trigger.to_state.state | int }}'
+
+################################################################################
+
+input_number:
+  sonos_livingroom_bass:
+    name: Sonos Livingroom Bass
+    initial: 0
+    min: -10
+    max: 10
+    step: 1
+    unit_of_measurement: dB
+  sonos_livingroom_treble:
+    name: Sonos Livingroom Treble
+    initial: 0
+    min: -10
+    max: 10
+    step: 1
+    unit_of_measurement: dB
+  sonos_livingroom_sub_gain:
+    name: Sonos Livingroom Sub Gain
+    initial: 0
+    min: -15
+    max: 15
+    step: 1
+    unit_of_measurement: dB
+  sonos_livingroom_sub_crossover:
+    name: Sonos Livingroom Sub Crossover
+    initial: 80
+    min: 50
+    max: 110
+    step: 10
+    unit_of_measurement: Hz
 
 ################################################################################
 
