@@ -1,32 +1,33 @@
 My Home Assistant config files including products of:
 
-* AVM
-* Ecovacs
-* Roon
-* Sonos
+* [AVM](https://avm.de)
+* [Ecovacs](https://www.ecovacs.com)
+* [Eurotronic](https://eurotronic.org)
+* [Roon](https://roonlabs.com/)
+* [Sonos](https://sonos.com)
 
 ## Features
 
-* A [script](https://github.com/florib779/homeassistant-config/blob/master/ha_gitpush.sh) which automatically pushes to GitHub ([source](https://peyanski.com/automatic-home-assistant-backup-to-github/))
+* A [script](https://github.com/florib779/homeassistant-config/blob/master/packages/gitpush/gitpush.sh) which automatically pushes to GitHub
 * A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html)
 * A [ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html)
 * Sonos
-  - [x] Night mode (does not work when playing music via roon)
-  - [x] Speech enhancement (does not work when playing music via roon)
-  - [x] Speaker group management - [Mini Media Player](https://github.com/kalkih/mini-media-player) (Customizable media player card for Home Assistant Lovelace UI)
-  - [x] Bass/Treble
+  - [x] Night mode (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
+  - [x] Speech enhancement (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
+  - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player)
+  - [x] Bass/Treble via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
   - [ ] Loudness (seems to be not possible yet)
-  - [x] Control subwoofer - [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
+  - [x] Control subwoofer via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
     - [x] On/Off
-    - [x] Volume level (looking for a nice solution like
-    - [x] Crossover frequency (looking for a nice solution like
+    - [x] Volume level
+    - [x] Crossover frequency
     - [x] Polarity
-      - ToDo: only show when Sub is on
+  - [ ] Control status lights via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
+  - [ ] Control buttons via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
 * Roon
   - [x] Control/Show info
-    - [x] [RoonLabs music player](https://www.home-assistant.io/integrations/roon/)
+    - [x] [RoonLabs music player integration](https://www.home-assistant.io/integrations/roon/)
       - [ ] Transfer zones
-    - [x] [Mini Media Player](https://github.com/kalkih/mini-media-player) (Customizable media player card for Home Assistant Lovelace UI)
     - [ ] Remote control with [roon-cec-controller-extension](https://github.com/benjaminbellamy/roon-cec-controller-extension)
       - [x] Start/pause
       - [ ] ~Forward~ (my remote control does not send a cec command for this)
@@ -37,7 +38,7 @@ My Home Assistant config files including products of:
 * TV
   - [x] Turn TV on [Wake on LAN](https://www.home-assistant.io/integrations/wake_on_lan/)
   - [x] Turn TV off [Android TV](https://www.home-assistant.io/integrations/androidtv/)
-  - [ ] Control TV
+  - [x] Control TV
     - [Android TV](https://www.home-assistant.io/integrations/androidtv/)
   - [ ] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/androidtv/)
 * AVM FRITZ!Box
@@ -65,13 +66,10 @@ My Home Assistant config files including products of:
       - [x] Temperature
       - [ ] Humidity (actually not implemented in Home Assistant)
     - [x] Rademacher RolloTron DECT 1213 (shutter)
-* Ecovacs Deebot [lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card)
+* Ecovacs Deebot ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card))
   - [x] Control
   - [x] Show info
 - [x] Cooking Timer
-- [ ] Alarm Clock
-  * [Hass-Custom-Alarm](https://github.com/akasma74/hass-custom-alarm)
-- [ ] Report the amount of unread emails - [IMAP](https://www.home-assistant.io/integrations/imap/)
 
 ## Links
 
