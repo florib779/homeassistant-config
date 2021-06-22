@@ -11,6 +11,7 @@
 !*.js*
 !.HA_VERSION
 !packages
+!gitpush
 
 # Comment these 2 lines if you don't want to include your SSH keys
 #!.ssh/

@@ -80,7 +80,7 @@ switch.sonos_livingroom_night_sound:
 switch.sonos_livingroom_speech_enhance:
   icon: mdi:account-voice
 switch.sonos_livingroom_sub:
-  icon: mdi:music-clef-bass
+  icon: mdi:smoke-detector
   friendly_name: Sonos Livingroom Sub
   Area: Livingroom
 switch.livingroom_tv_power:
@@ -88,3 +88,13 @@ switch.livingroom_tv_power:
 switch.sonos_livingroom_sub_polarity:
   icon: mdi:sine-wave
   friendly_name: Sonos Livingroom Sub Polarity
+input_number.sonos_livingroom_bass:
+  icon: mdi:music-clef-bass
+input_number.sonos_livingroom_treble:
+  icon: mdi:music-clef-treble
+input_number.sonos_livingroom_sub_gain:
+  icon: mdi:volume-vibrate
+automation.push_hass_configuration_to_github:
+  icon: si:github
+input_number.sonos_livingroom_sub_crossover:
+  icon: mdi:wave

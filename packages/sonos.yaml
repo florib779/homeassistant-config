@@ -49,7 +49,8 @@ switch:
           data:
             entity_id: media_player.sonos_livingroom
             buttons_enabled: false
-# Sonos commands per https://github.com/jishi/node-sonos-http-api ##############
+
+# Sonos commands per https://github.com/jishi/node-sonos-http-api
  ## Choose the devices room from your sonos configuration
  ## Host names doesn't seem to work - use the IP instead
  ## "!secret" doesn't seem to work
@@ -63,8 +64,6 @@ switch:
       sonos_livingroom_sub_polarity:
         command_on: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/0"
         command_off: "curl http://192.168.178.88:5005/Wohnzimmer/sub/polarity/1" # 180°
-
-################################################################################
 
 shell_command:
   sonos_bass: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/bass/{{bass}}'

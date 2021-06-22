@@ -1,4 +1,5 @@
 # TV Remote Control ############################################################
+# ToDo: Move to /packages/android_tv.yaml
 'tv_livingroom_home':
   alias: TV Livingroom Home
   sequence:

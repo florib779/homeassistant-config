@@ -2,7 +2,7 @@
 
 # Go to /config folder or 
 # Change this to your Home Assistant config folder if it is different
-cd /config/gitpush
+cd /config
 
 # Add all files to the repository with respect to .gitignore rules
 git add .

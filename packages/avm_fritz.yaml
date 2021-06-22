@@ -27,12 +27,3 @@ sensor:
       livingroom_current_power: 
         value_template: "{{ state_attr('switch.livingroom', 'current_power_w') | float | default(0) }}"
         unit_of_measurement: Watt
-      rock_current_power: 
-        value_template: "{{ state_attr('switch.rock', 'current_power_w') | float | default(0) }}"
-        unit_of_measurement: Watt
-      rock_temperature: 
-        value_template: "{{ state_attr('switch.rock', 'temperature') | float | default(0) }}"
-        unit_of_measurement: °C
-      rock_total_consumption: 
-        value_template: "{{ state_attr('switch.rock', 'total_consumption') | float | default(0) }}"
-        unit_of_measurement: kWh

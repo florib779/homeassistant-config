@@ -3,6 +3,39 @@ timer:
   cooking_timer:
     name: Timer
 
+automation:
+- alias: 'Timer done'
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.cooking_timer
+  action:
+    - service: script.sonos_say
+      data:
+        sonos_entity: media_player.sonos_livingroom
+        volume: 0.3
+        message: 'Your time is over.'
+        delay: '00:00:03'
+- alias: 'Phone Status'
+  trigger:
+    - platform: state
+      entity_id: sensor.phone
+  action:
+    - service: notify.notify
+      data:
+        title: 'Phone'
+        message: >-
+          {% if is_state("sensor.phone", "idle") %}
+            Phone in standby
+          {% elif is_state("sensor.phone", "dialing") %}
+            Calling {{ state_attr('sensor.phone', 'to_name') }} ({{ state_attr('sensor.phone', 'to') }})
+          {% elif is_state("sensor.phone", "ringing") %}
+            Incoming call from {{ state_attr('sensor.phone', 'from_name') }} ({{ state_attr('sensor.phone', 'from') }})
+          {% else %}
+            Phone with {{ state_attr('sensor.phone', 'with_name') }} ({{ state_attr('sensor.phone', 'with') }})
+          {% endif %}
+
 input_number:
   timer_seconds:
     name: Seconds
@@ -24,7 +57,6 @@ input_number:
     step: 1
 
 script:
-# Cooking Timer ################################################################
   timer_start:
     sequence:
     - service: timer.start
@@ -38,4 +70,3 @@ script:
     - service: timer.cancel
       data:
         entity_id: timer.cooking_timer
-################################################################################
