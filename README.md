@@ -18,6 +18,7 @@ My Home Assistant config files including products of:
   - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player)
   - [x] Bass/Treble via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
   - [ ] Loudness (seems to be not possible yet)
+  - [ ] Balance (seems to be not possible yet)
   - [x] Control subwoofer via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
     - [x] On/Off
     - [x] Volume level

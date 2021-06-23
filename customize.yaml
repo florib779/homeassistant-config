@@ -100,3 +100,41 @@ input_number.sonos_livingroom_sub_crossover:
   icon: mdi:wave
 binary_sensor.livingroom_small_window:
   icon: mdi:window-shutter
+switch.sonos_bathroom_status_light:
+  icon: mdi:led-outline
+switch.sonos_bedroom_status_light:
+  icon: mdi:led-outline
+switch.sonos_kitchen_status_light:
+  icon: mdi:led-outline
+switch.sonos_office_status_light:
+  icon: mdi:led-outline
+switch.sonos_bathroom_buttons_enabled:
+  icon: mdi:gesture-tap-button
+switch.sonos_bedroom_buttons_enabled:
+  icon: mdi:gesture-tap-button
+switch.sonos_kitchen_buttons_enabled:
+  icon: mdi:gesture-tap-button
+switch.sonos_office_buttons_enabled:
+  icon: mdi:gesture-tap-button
+switch.sonos_bedroom_night_sound:
+  icon: mdi:weather-night
+switch.sonos_bedroom_speech_enhance:
+  icon: mdi:account-voice
+input_number.sonos_bathroom_bass:
+  icon: mdi:music-clef-bass
+input_number.sonos_bedroom_bass:
+  icon: mdi:music-clef-bass
+input_number.sonos_kitchen_bass:
+  icon: mdi:music-clef-bass
+input_number.sonos_office_bass:
+  icon: mdi:music-clef-bass
+input_number.sonos_treble:
+  friendly_name: Sonos Treble
+input_number.sonos_bathroom_treble:
+  icon: mdi:music-clef-treble
+input_number.sonos_bedroom_treble:
+  icon: mdi:music-clef-treble
+input_number.sonos_kitchen_treble:
+  icon: mdi:music-clef-treble
+input_number.sonos_office_treble:
+  icon: mdi:music-clef-treble

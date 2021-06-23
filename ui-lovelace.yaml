@@ -1,0 +1,1133 @@
+title: Home
+views:
+  - path: default_view
+    title: Home
+    panel: false
+    type: custom:masonry-layout
+    layout:
+      max_cols: 4
+    icon: si:Home Assistant
+    badges: []
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entities
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_livingroom
+                group: true
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+                speaker_group:
+                  platform: sonos
+                  show_group_count: true
+                  entities:
+                    - entity_id: media_player.sonos_livingroom
+                      name: Livingroom
+                    - entity_id: media_player.sonos_kitchen
+                      name: Kitchen
+                    - entity_id: media_player.sonos_office
+                      name: Office
+                    - entity_id: media_player.sonos_bathroom
+                      name: Bathroom
+                    - entity_id: media_player.sonos_bedroom
+                      name: Bedroom
+              - type: custom:fold-entity-row
+                head:
+                  type: section
+                padding: 0
+                entities:
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_bass
+                    name: Bass
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_treble
+                    name: Treble
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_sub_gain
+                    name: Sub Gain
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_sub_crossover
+                    name: Sub Crossover
+                  - type: buttons
+                    entities:
+                      - entity: switch.sonos_livingroom_night_sound
+                      - entity: switch.sonos_livingroom_speech_enhance
+                      - entity: switch.sonos_livingroom_sub
+                      - entity: switch.sonos_livingroom_sub_polarity
+                      - entity: switch.sonos_livingroom_buttons_enabled
+                      - entity: switch.sonos_livingroom_status_light
+            show_header_toggle: false
+            state_color: true
+            header:
+              type: buttons
+              entities:
+                - entity: switch.livingroom
+                - entity: switch.tvlight
+                - entity: switch.livingroom_tv_power
+                - entity: switch.kitchenlight
+                - entity: switch.cookerhood
+                - entity: binary_sensor.livingroom_small_window
+                  tap_action:
+                    action: more-info
+                - entity: binary_sensor.livingroom_balcony_door
+                  tap_action:
+                    action: more-info
+          - type: custom:auto-entities
+            filter:
+              include:
+                - entity_id: media_player.roon_*
+                  state: playing
+                  options:
+                    type: custom:mini-media-player
+                    artwork: full-cover-fit
+                    group: true
+                    volume_stateless: true
+                    volume_step: 1
+                    hide:
+                      controls: true
+                      icon: true
+                      info: true
+                      mute: true
+                      name: true
+                      power: true
+                      progress: true
+                      volume: true
+                      volume_level: true
+                    idle_view:
+                      when_idle: true
+                      when_paused: true
+                      when_standby: true
+            card:
+              type: entities
+            sort:
+              method: state
+              reverse: true
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Headphones
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_headphones
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume: true
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Kitchen
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_kitchen
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_kitchen_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_kitchen_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_kitchen_buttons_enabled
+                  - entity: switch.sonos_kitchen_status_light
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Office
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_office
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Bathroom
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_bathroom
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bathroom_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bathroom_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_bathroom_buttons_enabled
+                  - entity: switch.sonos_bathroom_status_light
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_office_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_office_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_office_buttons_enabled
+                  - entity: switch.sonos_office_status_light
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Bedrom
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_bedroom
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bedroom_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bedroom_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_bedroom_night_sound
+                  - entity: switch.sonos_bedroom_speech_enhance
+                  - entity: switch.sonos_bedroom_buttons_enabled
+                  - entity: switch.sonos_bedroom_status_light
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.home
+            secondary_info_attribute: humidity
+            show_forecast: false
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: climate.livingroom
+            control: false
+            layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+            sensors:
+              - entity: sensor.livingroom_battery
+                name: Battery
+              - entity: binary_sensor.livingroom_balcony_door
+              - entity: binary_sensor.livingroom_small_window
+                name: Shutter
+            header:
+              toggle:
+                entity: switch.livingroom
+                name: Fan
+            decimals: '1'
+            view_layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: sensor.kitchen_temperature
+            sensors:
+              - entity: sensor.kitchen_temperature
+                name: Currently
+              - entity: switch.kitchenlight
+                name: Light
+            control: false
+            layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+            hide:
+              temperature: true
+              controls: true
+              state: true
+            label:
+              state: Currently
+            header:
+              name: Kitchen
+              toggle:
+                entity: switch.cookerhood
+                name: Cookerhood
+              icon: mdi:power-socket-de
+            fallback: ' '
+            view_layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: climate.office
+            control: false
+            layout:
+              step: row
+            sensors:
+              - entity: sensor.office_battery
+                name: Battery
+            view_layout:
+              step: row
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: climate.bathroom
+            control: false
+            layout:
+              step: row
+            header:
+              toggle:
+                entity: switch.bathroom
+                name: Switch
+            sensors:
+              - entity: sensor.bathroom_battery
+                name: Battery
+            view_layout:
+              step: row
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: climate.bedroom
+            control: false
+            layout:
+              step: row
+            sensors:
+              - entity: sensor.bedroom_battery
+                name: Battery
+            header: null
+            view_layout:
+              step: row
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: sensor.heatingroom_temperature
+            sensors:
+              - entity: sensor.heatingroom_temperature
+                name: Currently
+            control: false
+            layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+            hide:
+              state: true
+              temperature: true
+            label:
+              state: Currently
+            header:
+              name: Heatingroom
+              toggle:
+                entity: switch.heatingroom
+                name: Pump
+              icon: mdi:power-socket-de
+            fallback: ' '
+            view_layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.zuk_z1_letzte_benachrichtigung
+                name: Nachricht
+            show_header_toggle: false
+            footer:
+              type: buttons
+              entities:
+                - entity: sensor.zuk_z1_akkufullstand
+                  tap_action:
+                    action: more-info
+                - entity: binary_sensor.zuk_z1_ladt_derzeit
+                  tap_action:
+                    action: more-info
+                - entity: binary_sensor.zuk_z1_bluetooth_status
+                  tap_action:
+                    action: more-info
+                - entity: binary_sensor.zuk_z1_wlan_status
+                  tap_action:
+                    action: more-info
+                - entity: binary_sensor.zuk_z1_inaktiv
+                  tap_action:
+                    action: more-info
+                - entity: sensor.zuk_z1_sim_1
+                  tap_action:
+                    action: more-info
+            state_color: true
+            title: Handy
+          - type: glance
+            entities:
+              - entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
+              - entity: binary_sensor.lenovo_tab_2_a10_70f_ladt_derzeit
+              - entity: binary_sensor.lenovo_tab_2_a10_70f_bluetooth_status
+              - entity: binary_sensor.lenovo_tab_2_a10_70f_wlan_status
+              - entity: binary_sensor.lenovo_tab_2_a10_70f_inaktiv
+            state_color: true
+            show_state: false
+            show_name: false
+            columns: 6
+            title: Tablet
+          - type: custom:xiaomi-vacuum-card
+            entity: vacuum.e0001103417610630506
+            name: Deebot
+            vendor: deebot_slim
+            state:
+              status:
+                key: state
+              mode: false
+            buttons:
+              locate: false
+              spot:
+                show: true
+          - type: entities
+            entities:
+              - entity: sensor.time
+              - entity: timer.cooking_timer
+                type: custom:timer-bar-card
+              - entity: input_number.timer_minutes
+              - entity: script.timer_start
+              - entity: script.timer_cancel
+            title: Timer
+  - title: Remote
+    path: remote
+    type: custom:vertical-layout
+    icon: mdi:remote
+    panel: false
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - type: button
+            tap_action:
+              action: more-info
+            entity: sensor.zuk_z1_akkufullstand
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_speech_enhance
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_night_sound
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_home
+            show_state: false
+            icon: mdi:home
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_up
+            icon: mdi:arrow-up-thick
+            show_name: false
+            show_icon: true
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_sub
+            show_name: false
+            show_icon: true
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_left
+            icon: mdi:arrow-left-thick
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_center
+            show_name: false
+            icon: mdi:bullseye-arrow
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_right
+            icon: mdi:arrow-right-thick
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_back
+            icon: mdi:backspace
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_down
+            icon: mdi:arrow-down-thick
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.livingroom_tv_power
+            show_state: false
+            show_name: false
+        columns: 3
+        square: false
+      - type: custom:mini-media-player
+        entity: media_player.android_tv_livingroom
+        hide:
+          power: true
+          volume: true
+        source: full
+        artwork: cover
+      - type: entities
+        entities:
+          - type: custom:mini-media-player
+            entity: media_player.roon_livingroom
+            group: true
+            artwork: full-cover-fit
+            info: short
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              icon: true
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume_level: false
+  - title: Maintenance
+    path: fritzbox
+    icon: mdi:tools
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.fritz_box_7490_uptime
+            name: Uptime
+          - entity: binary_sensor.fritzbox_7490_connectivity
+          - entity: sensor.fritz_box_7490_external_ip
+            name: External IP
+          - entity: switch.fritzbox_7490_wifi
+            name: Wifi (2,4GHz)
+          - entity: switch.fritzbox_7490_wifi_5ghz
+            name: Wifi (5GHz)
+          - entity: switch.fritzbox_7490_guest_wifi
+            name: Guest Wifi
+        state_color: true
+        show_header_toggle: false
+        title: Fritz!Box
+      - type: picture
+        image: /local/img/fritz_guest_wifi.png
+        hold_action:
+          action: none
+        tap_action:
+          action: url
+          url_path: https://fritz.box/
+      - type: entities
+        entities:
+          - entity: sensor.nuc_cpu_temperature
+          - entity: automation.push_hass_configuration_to_github
+            name: Push config to GitHub
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+            name: Version
+          - entity: binary_sensor.updater
+          - entity: sensor.hacs
+          - entity: sensor.uptime
+            name: Last Reboot
+          - entity: binary_sensor.check_home_assistant_configuration_update_available
+          - entity: sensor.check_home_assistant_configuration_newest_version
+          - entity: sensor.check_home_assistant_configuration_version
+        title: Home Assistant
+      - type: entities
+        entities:
+          - entity: sensor.adguard_average_processing_speed
+            name: Avg. Processing Speed
+          - entity: sensor.adguard_dns_queries
+            name: DNS Queries
+          - entity: sensor.adguard_dns_queries_blocked
+            name: DNS Queries Blocked
+          - entity: sensor.adguard_dns_queries_blocked_ratio
+            name: DNS Queries Blocked Ratio
+          - entity: sensor.adguard_parental_control_blocked
+          - entity: sensor.adguard_rules_count
+          - entity: sensor.adguard_safe_browsing_blocked
+          - entity: sensor.adguard_safe_searches_enforced
+          - entity: switch.adguard_filtering
+          - entity: switch.adguard_parental_control
+          - entity: switch.adguard_protection
+          - entity: switch.adguard_query_log
+          - entity: switch.adguard_safe_browsing
+          - entity: switch.adguard_safe_search
+        title: AdGuard
+        show_header_toggle: false
+  - title: ROCK
+    type: custom:masonry-layout
+    layout:
+      width: 300
+      max_cols: 3
+    theme: Caule Light Blue
+    icon: mdi:server
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: iframe
+            url: http://rock
+            aspect_ratio: 520%
+      - type: vertical-stack
+        cards:
+          - type: picture-elements
+            elements:
+              - type: image
+                image: /local/img/roon-moon-white.png
+                style:
+                  top: 49%
+                  left: 28%
+                  color: white
+              - type: icon
+                tap_action:
+                  action: toggle
+                entity: switch.wol_rock
+                name: WOL
+                icon: mdi:power
+                icon_height: 10px
+                show_name: true
+                show_state: true
+                show_icon: true
+                hold_action:
+                  action: none
+                style:
+                  top: 50%
+                  left: 70%
+                  color: '#3073ad'
+            image: /local/img/rock_akasa_case_front.jpg
+          - type: markdown
+            style:
+              ha-markdown:
+                $: |
+                  ha-markdown-element { /* body */
+                    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    color: #333;
+                  }
+                  h1, h2, h3, h4, h5, h6 {
+                    font-family: inherit;
+                    line-height: 1.1;
+                    color: inherit;
+                  }
+                  h4, h5, h6 {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                  }
+                  h1 { /* h3 */
+                    font-size: 24px;
+                    font-weight: 400;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    padding-top: 20px; /* modification */
+                  }
+                  h2, ha-markdown-element h2 { /* h6 */
+                    font-size: 12px;
+                    font-weight: normal;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                  }
+                  h3 { /* .statusheader */
+                    font-size: 1.2em;
+                    font-weight: 700;
+                    margin-top: 40px;
+                    margin-bottom: 0;
+                  }
+                  p {
+                    margin-top: 0;
+                  }
+                  img { /* Pseudo image to create spaces */
+                    height: 1.5em;
+                  }
+            content: >-
+              # Hardware
+
+              ## Intel NUC-Kit NUC8i3BEH
+
+              ### Stats
+
+              Case temperature {{states('sensor.rock_temperature') }} °C.
+
+              Current power consumption {{ states('sensor.rock_current_power')
+              }} Watt.
+
+              {{ states('sensor.rock_total_consumption') }} kWh total power
+              consumption since May 10, 2021.
+
+              ### RAM
+
+              ![]() 
+
+              Crucial CT8G4SFS8266 8GB, DDR4, 2666 MT/s, PC4-21300, Single Rank
+              x8, SODIMM, 260-Pin.
+
+              ### CD Drive
+
+              ![]()
+
+              LG Slim Portable DVD Writer, GP50NW40
+
+              ### System SSD
+
+              ![]() 
+
+              Transcend 128GB PCIe Gen3 x4 M.2 SSD 2280<br><br>
+
+
+              ### Internal Music SSD
+
+              ![]() 
+
+              Samsung MZ-76E1T0B/EU 860 EVO 1TB SATA 2,5"<br><br>
+
+              # Network Zones
+
+              ### Headphones
+
+              **Model:** {{ state_attr('device_tracker.raspberrypi_3',
+              'friendly_name') }}
+
+              **Connection:** CAT 7
+
+              **Host Name:** {{ state_attr('device_tracker.raspberrypi_3',
+              'host_name') }}
+
+              **IP Address:** {{ state_attr('device_tracker.raspberrypi_3',
+              'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.raspberrypi_3', 'mac') }}
+
+              ### Livingroom
+
+              **Model:** {{
+              state_attr('device_tracker.livingroom_sonos_playbase',
+              'friendly_name') }}
+
+              **Connection:** 1 GB digital
+
+              **Host Name:** {{
+              state_attr('device_tracker.livingroom_sonos_playbase',
+              'host_name') }}
+
+              **IP Address:** {{
+              state_attr('device_tracker.livingroom_sonos_playbase', 'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.livingroom_sonos_playbase',
+              'mac') }}
+
+              + **Model:** {{
+              state_attr('device_tracker.livingroom_sonos_play1_rl',
+              'friendly_name') }}
+                **Host Name:** {{ state_attr('device_tracker.livingroom_sonos_play1_rl',
+              'host_name') }}
+                **IP Address:** {{
+              state_attr('device_tracker.livingroom_sonos_play1_rl', 'ip') }}
+                **MAC:** {{ state_attr('device_tracker.livingroom_sonos_play1_rl',
+              'mac') }}
+
+              + **Model:** {{
+              state_attr('device_tracker.livingroom_sonos_play1_rr',
+              'friendly_name') }}
+                **Host Name:** {{ state_attr('device_tracker.livingroom_sonos_play1_rr',
+              'host_name') }}
+                **IP Address:** {{
+              state_attr('device_tracker.livingroom_sonos_play1_rr', 'ip') }}
+                **MAC:** {{ state_attr('device_tracker.livingroom_sonos_play1_rr',
+              'mac') }}
+
+              + **Model:** {{ state_attr('device_tracker.livingroom_sonos_sub',
+              'friendly_name') }}
+                **Host Name:** {{ state_attr('device_tracker.livingroom_sonos_sub',
+              'host_name') }}
+                **IP Address:** {{
+              state_attr('device_tracker.livingroom_sonos_sub', 'ip') }}
+                **MAC:** {{ state_attr('device_tracker.livingroom_sonos_sub',
+              'mac') }}
+
+
+              ### Bedroom
+
+              **Model:** {{ state_attr('device_tracker.bedroom_sonos_playbar',
+              'friendly_name') }}
+
+              **Connection:** SonosNet
+
+              **Host Name:** {{
+              state_attr('device_tracker.bedroom_sonos_playbar', 'host_name') }}
+
+              **IP Address:** {{
+              state_attr('device_tracker.bedroom_sonos_playbar', 'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.bedroom_sonos_playbar',
+              'mac') }}
+
+              ### Kitchen
+
+              **Connection:** SonosNet
+
+              1. **Model:** {{
+              state_attr('device_tracker.kitchen_sonos_play1_left',
+              'friendly_name') }}
+                 **Host Name:** {{ state_attr('device_tracker.kitchen_sonos_play1_left',
+              'host_name') }}
+                 **IP Address:** {{ state_attr('device_tracker.kitchen_sonos_play1_left', 'ip')
+              }}
+                 **MAC:** {{ state_attr('device_tracker.kitchen_sonos_play1_left', 'mac') }}
+              2. **Model:** {{
+              state_attr('device_tracker.kitchen_sonos_play1_right',
+              'friendly_name') }}
+                 **Host Name:** {{ state_attr('device_tracker.kitchen_sonos_play1_right',
+              'host_name') }}
+                 **IP Address:** {{ state_attr('device_tracker.kitchen_sonos_play1_right',
+              'ip') }}
+                 **MAC:** {{ state_attr('device_tracker.kitchen_sonos_play1_right', 'mac') }}
+
+              ### Office
+
+              **Connection:** SonosNet
+
+              1. **Model:** {{
+              state_attr('device_tracker.office_sonos_one_left',
+              'friendly_name') }}
+                 **Host Name:** {{ state_attr('device_tracker.office_sonos_one_left',
+              'host_name') }}
+                 **IP Address:** {{ state_attr('device_tracker.office_sonos_one_left', 'ip') }}
+                 **MAC:** {{ state_attr('device_tracker.office_sonos_one_left', 'mac') }}
+              2. **Model:** {{
+              state_attr('device_tracker.office_sonos_one_right',
+              'friendly_name') }}
+                 **Host Name:** {{ state_attr('device_tracker.office_sonos_one_right',
+              'host_name') }}
+                 **IP Address:** {{ state_attr('device_tracker.office_sonos_one_right', 'ip')
+              }}
+                 **MAC:** {{ state_attr('device_tracker.office_sonos_one_right', 'mac') }}
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            style:
+              ha-markdown:
+                $: |
+                  ha-markdown-element { /* body */
+                    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    color: #333;
+                    padding-bottom: 40px;
+                  }
+                  p {
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                  }
+            content: >-
+              <a href="https://community.roonlabs.com"
+              target="_blank">Community</a> - <a
+              href="https://help.roonlabs.com" target="_blank">Help Center</a>
+          - type: logbook
+            style: |
+              ha-card {
+                    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    color: #333;
+                    padding-bottom: 40px;
+              }
+              h1, h2, h3, h4, h5, h6 {
+                    font-family: inherit;
+                    line-height: 1.1;
+                    color: inherit;
+              }
+              h1 {
+                    font-size: 24px;
+                    font-weight: 400;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    padding-top: 20px; /* modification */
+              }
+            entities:
+              - binary_sensor.fritzbox_7490_connectivity
+              - media_player.roon_bathroom
+              - media_player.roon_bedroom
+              - media_player.roon_headphones
+              - media_player.roon_kitchen
+              - media_player.roon_livingroom
+              - media_player.roon_office
+              - sensor.rock_total_consumption
+              - sensor.rock_current_power
+              - switch.fritzbox_7490_wifi
+              - switch.fritzbox_7490_wifi_5ghz
+              - switch.rock
+            hours_to_show: 24
+            title: System Logbook
+          - type: markdown
+            style:
+              ha-markdown:
+                $: |
+                  ha-markdown-element { /* body */
+                    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    color: #333;
+                  }
+                  h1, h2, h3, h4, h5, h6 {
+                    font-family: inherit;
+                    line-height: 1.1;
+                    color: inherit;
+                  }
+                  h4, h5, h6 {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                  }
+                  h1 { /* h3 */
+                    font-size: 24px;
+                    font-weight: 400;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    padding-top: 20px; /* modification */
+                  }
+                  h2, ha-markdown-element h2 { /* h6 */
+                    font-size: 12px;
+                    font-weight: normal;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                  }
+                  h3 { /* .statusheader */
+                    font-size: 1.2em;
+                    font-weight: 700;
+                    margin-top: 40px;
+                    margin-bottom: 0;
+                  }
+                  p {
+                    margin-top: 0;
+                  }
+                  img { /* Pseudo image to create spaces */
+                    height: 2px;
+                  }
+            content: >-
+              ![]()
+
+              ### Last.fm
+
+              Playing {{ states('sensor.lastfm') }}.
+
+              Last played {{ state_attr('sensor.lastfm', 'last_played') }}.
+
+              {{ state_attr('sensor.lastfm', 'play_count') }} scrobbles since
+              May 6, 2008.
+
+              # Other Network Devices
+
+              ### Router
+
+              **Model:** {{ state_attr('device_tracker.fritz_box',
+              'friendly_name') }}
+
+              **Internet:** {{ states('sensor.fritz_netmonitor') }}
+
+              **Downstream:** {{ state_attr('sensor.fritz_netmonitor',
+              'max_byte_rate_down') }}
+
+              **Upstream:** {{ state_attr('sensor.fritz_netmonitor',
+              'max_byte_rate_up') }}
+
+              **IP Address:** {{ state_attr('device_tracker.fritz_box', 'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.fritz_box', 'mac') }}
+
+              ### Tablet
+
+              **Model:** {{
+              state_attr('device_tracker.mobile_lenovo_tab_2_a10_70f',
+              'friendly_name') }}
+              ([Info](https://pcsupport.lenovo.com/de/en/products/tablets/a-series/a10-70-2/solutions/pd104137))
+
+              **OS:** Android 6
+
+              **Akku:** {{ states('sensor.lenovo_tab_2_a10_70f_akkufullstand')
+              }}%
+
+              **Free Internal Storage:** {{
+              states('sensor.lenovo_tab_2_a10_70f_interner_speicher') }} {{
+              state_attr('sensor.lenovo_tab_2_a10_70f_interner_speicher',
+              'unit_of_measurement') }}
+
+              **Connection:** {{
+              states('sensor.lenovo_tab_2_a10_70f_wlan_frequenz') }} {{
+              state_attr('sensor.lenovo_tab_2_a10_70f_wlan_frequenz',
+              'unit_of_measurement') }}, {{
+              states('sensor.lenovo_tab_2_a10_70f_wlan_geschwindigkeit') }} {{
+              state_attr('sensor.lenovo_tab_2_a10_70f_wlan_geschwindigkeit',
+              'unit_of_measurement') }}
+
+              **Host Name:** {{
+              state_attr('device_tracker.mobile_lenovo_tab_2_a10_70f',
+              'host_name') }}
+
+              **IP Address:** {{
+              state_attr('device_tracker.mobile_lenovo_tab_2_a10_70f', 'ip') }}
+
+              **MAC:** {{
+              state_attr('device_tracker.mobile_lenovo_tab_2_a10_70f', 'mac') }}
+
+              ### Phone
+
+              **Model:** {{ state_attr('device_tracker.mobile_zuk_z1',
+              'friendly_name') }}
+              ([Info](https://support.lenovo.com/pl/en/solutions/pd104309))
+
+              **OS:** LineageOS 17.0 (Android 10)
+
+              **Akku:** {{ states('sensor.zuk_z1_akkufullstand') }} %
+
+              **Free Internal Storage:** {{
+              states('sensor.zuk_z1_interner_speicher') }} {{
+              state_attr('sensor.zuk_z1_interner_speicher',
+              'unit_of_measurement') }}
+
+              **Connection:** {{ states('sensor.zuk_z1_wlan_frequenz') }} {{
+              state_attr('sensor.zuk_z1_wlan_frequenz', 'unit_of_measurement')
+              }}, {{ states('sensor.zuk_z1_wlan_geschwindigkeit') }} {{
+              state_attr('sensor.zuk_z1_wlan_geschwindigkeit',
+              'unit_of_measurement') }}
+
+              **Host Name:** {{ state_attr('device_tracker.mobile_zuk_z1',
+              'host_name') }}
+
+              **IP Address:** {{ state_attr('device_tracker.mobile_zuk_z1',
+              'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.mobile_zuk_z1', 'mac') }}
+
+              ### Laptop
+
+              **Model:** HP 350 G1
+
+              **OS:** Manjaro Linux with Roon Desktop Version
+
+              **Connection:** WLAN 2,4
+
+              **Host Name:** {{ state_attr('device_tracker.mobile_laptop',
+              'host_name') }}
+
+              **IP Address:** {{ state_attr('device_tracker.mobile_laptop',
+              'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.mobile_laptop', 'mac') }}
+
+              ### TV
+
+              **Model:** TCL
+
+              **OS:** Android
+
+              **Connection:** 1GB digital
+
+              **Host Name:** {{ state_attr('device_tracker.livingroom_tv',
+              'host_name') }}
+
+              **IP Address:** {{ state_attr('device_tracker.livingroom_tv',
+              'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.livingroom_tv', 'mac') }}
+
+              #### Connected Computer
+
+              **Model:** Intel NUC i5
+
+              **OS:** Manjaro Linux with Roon Desktop Version
+
+              **Connection:** 1GB digital
+
+              **Host Name:** {{ state_attr('device_tracker.nuc', 'host_name') }}
+
+              **IP Address:** {{ state_attr('device_tracker.nuc', 'ip') }}
+
+              **MAC:** {{ state_attr('device_tracker.nuc', 'mac') }}
