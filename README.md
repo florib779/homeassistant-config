@@ -7,7 +7,7 @@ My Home Assistant config files including products of:
 * [Roon](https://roonlabs.com/)
 * [Sonos](https://sonos.com)
 
-## Features
+## Features and goals
 
 * A [script](https://github.com/florib779/homeassistant-config/blob/master/packages/gitpush/gitpush.sh) which automatically pushes to GitHub
 * A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html)
@@ -42,7 +42,7 @@ My Home Assistant config files including products of:
   - [x] Turn TV off via [Android TV integration](https://www.home-assistant.io/integrations/androidtv/)
   - [x] Control TV
     - [Android TV integration](https://www.home-assistant.io/integrations/androidtv/)
-  - [x] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/nfandroidtv/)
+  - [x] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/nfandroidtv/) - not tested yet
 * AVM FRITZ!Box
   - [x] Sensor for internet connectivity (with external IP and uptime attributes) via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/)
   - [x] Turn wifi and guest wifi on/off [FRITZ!Box Tools](https://github.com/mammuth/ha-fritzbox-tools)
@@ -67,11 +67,16 @@ My Home Assistant config files including products of:
       - [x] Temperature
       - [ ] Humidity (actually not implemented in Home Assistant)
     - [x] Rademacher RolloTron DECT 1213 (shutter)
-      - Indicates whether it is open or closed
+      - Indicates whether it is open or closed (testing)
 * Ecovacs Deebot ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card))
   - [x] Control
   - [x] Show info
 - [x] Cooking Timer
+
+## ToDo
+* Screenshots
+* Make timer card more compact
+  * Show date
 
 ## Links
 

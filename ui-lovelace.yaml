@@ -23,6 +23,21 @@ views:
                   name: true
                   power: true
                   progress: true
+                  volume: true
+              - type: custom:mini-media-player
+                entity: media_player.sonos_livingroom
+                group: true
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
                   volume_level: false
                 speaker_group:
                   platform: sonos
@@ -68,9 +83,9 @@ views:
             header:
               type: buttons
               entities:
-                - entity: switch.livingroom
-                - entity: switch.tvlight
                 - entity: switch.livingroom_tv_power
+                - entity: switch.tvlight
+                - entity: switch.livingroom
                 - entity: switch.kitchenlight
                 - entity: switch.cookerhood
                 - entity: binary_sensor.livingroom_small_window
@@ -164,6 +179,16 @@ views:
                   power: true
                   progress: true
                   volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_office_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_office_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_office_buttons_enabled
+                  - entity: switch.sonos_office_status_light
           - type: custom:fold-entity-row
             head:
               type: section
@@ -202,7 +227,7 @@ views:
           - type: custom:fold-entity-row
             head:
               type: section
-              label: Bedrom
+              label: Bedroom
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_bedroom
@@ -414,6 +439,15 @@ views:
         cards:
           - type: entities
             entities:
+              - entity: sensor.time
+              - entity: timer.cooking_timer
+                type: custom:timer-bar-card
+              - entity: input_number.timer_minutes
+              - entity: script.timer_start
+              - entity: script.timer_cancel
+            title: Timer
+          - type: entities
+            entities:
               - entity: sensor.zuk_z1_letzte_benachrichtigung
                 name: Nachricht
             show_header_toggle: false
@@ -464,15 +498,6 @@ views:
               locate: false
               spot:
                 show: true
-          - type: entities
-            entities:
-              - entity: sensor.time
-              - entity: timer.cooking_timer
-                type: custom:timer-bar-card
-              - entity: input_number.timer_minutes
-              - entity: script.timer_start
-              - entity: script.timer_cancel
-            title: Timer
   - title: Remote
     path: remote
     type: custom:vertical-layout
@@ -583,44 +608,31 @@ views:
     icon: mdi:tools
     badges: []
     cards:
-      - type: entities
-        entities:
-          - entity: sensor.fritz_box_7490_uptime
-            name: Uptime
-          - entity: binary_sensor.fritzbox_7490_connectivity
-          - entity: sensor.fritz_box_7490_external_ip
-            name: External IP
-          - entity: switch.fritzbox_7490_wifi
-            name: Wifi (2,4GHz)
-          - entity: switch.fritzbox_7490_wifi_5ghz
-            name: Wifi (5GHz)
-          - entity: switch.fritzbox_7490_guest_wifi
-            name: Guest Wifi
-        state_color: true
-        show_header_toggle: false
-        title: Fritz!Box
-      - type: picture
-        image: /local/img/fritz_guest_wifi.png
-        hold_action:
-          action: none
-        tap_action:
-          action: url
-          url_path: https://fritz.box/
-      - type: entities
-        entities:
-          - entity: sensor.nuc_cpu_temperature
-          - entity: automation.push_hass_configuration_to_github
-            name: Push config to GitHub
-          - entity: binary_sensor.home_assistant_operating_system_update_available
-            name: Version
-          - entity: binary_sensor.updater
-          - entity: sensor.hacs
-          - entity: sensor.uptime
-            name: Last Reboot
-          - entity: binary_sensor.check_home_assistant_configuration_update_available
-          - entity: sensor.check_home_assistant_configuration_newest_version
-          - entity: sensor.check_home_assistant_configuration_version
-        title: Home Assistant
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.fritz_box_7490_uptime
+                name: Uptime
+              - entity: binary_sensor.fritzbox_7490_connectivity
+              - entity: sensor.fritz_box_7490_external_ip
+                name: External IP
+              - entity: switch.fritzbox_7490_wifi
+                name: Wifi (2,4GHz)
+              - entity: switch.fritzbox_7490_wifi_5ghz
+                name: Wifi (5GHz)
+              - entity: switch.fritzbox_7490_guest_wifi
+                name: Guest Wifi
+            state_color: true
+            show_header_toggle: false
+            title: Fritz!Box
+          - type: picture
+            image: /local/img/fritz_guest_wifi.png
+            hold_action:
+              action: none
+            tap_action:
+              action: url
+              url_path: https://fritz.box/
       - type: entities
         entities:
           - entity: sensor.adguard_average_processing_speed
@@ -643,6 +655,21 @@ views:
           - entity: switch.adguard_safe_search
         title: AdGuard
         show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: sensor.nuc_cpu_temperature
+          - entity: automation.push_hass_configuration_to_github
+            name: Push config to GitHub
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+            name: Version
+          - entity: binary_sensor.updater
+          - entity: sensor.hacs
+          - entity: sensor.uptime
+            name: Last Reboot
+          - entity: binary_sensor.check_home_assistant_configuration_update_available
+          - entity: sensor.check_home_assistant_configuration_newest_version
+          - entity: sensor.check_home_assistant_configuration_version
+        title: Home Assistant
   - title: ROCK
     type: custom:masonry-layout
     layout:

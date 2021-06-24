@@ -73,68 +73,157 @@ automation.phone_status:
   icon: mdi:phone
 switch.sonos_livingroom_buttons_enabled:
   icon: mdi:gesture-tap-button
+  friendly_name: Sonos Livingroom Buttons
 switch.sonos_livingroom_status_light:
   icon: mdi:led-outline
+  friendly_name: Sonos Livingroom Status Light
 switch.sonos_livingroom_night_sound:
   icon: mdi:weather-night
+  friendly_name: Sonos Livingroom Night Sound
 switch.sonos_livingroom_speech_enhance:
   icon: mdi:account-voice
+  friendly_name: Sonos Livingroom Speech Enhance
 switch.sonos_livingroom_sub:
   icon: mdi:smoke-detector
   friendly_name: Sonos Livingroom Sub
   Area: Livingroom
 switch.livingroom_tv_power:
-  icon: mdi:power
+  icon: mdi:television
+  friendly_name: Livingroom TV Power
 switch.sonos_livingroom_sub_polarity:
   icon: mdi:sine-wave
   friendly_name: Sonos Livingroom Sub Polarity
 input_number.sonos_livingroom_bass:
   icon: mdi:music-clef-bass
+  friendly_name: Sonos Livingroom Bass
 input_number.sonos_livingroom_treble:
   icon: mdi:music-clef-treble
+  friendly_name: Sonos Livingroom Treble
 input_number.sonos_livingroom_sub_gain:
   icon: mdi:volume-vibrate
+  friendly_name: Sonos Livingroom Sub Gain
 automation.push_hass_configuration_to_github:
   icon: si:github
 input_number.sonos_livingroom_sub_crossover:
   icon: mdi:wave
+  friendly_name: Sonos Livingroom Sub Crossover
 binary_sensor.livingroom_small_window:
   icon: mdi:window-shutter
+  friendly_name: Livingroom Balcony Door
 switch.sonos_bathroom_status_light:
   icon: mdi:led-outline
+  friendly_name: Sonos Bathroom Status Light
 switch.sonos_bedroom_status_light:
   icon: mdi:led-outline
+  friendly_name: Sonos Bedroom Status Light
 switch.sonos_kitchen_status_light:
   icon: mdi:led-outline
+  friendly_name: Sonos Kitchen Status Light
 switch.sonos_office_status_light:
   icon: mdi:led-outline
+  friendly_name: Sonos Office Status Light
 switch.sonos_bathroom_buttons_enabled:
   icon: mdi:gesture-tap-button
+  friendly_name: Sonos Bathroom Buttons
 switch.sonos_bedroom_buttons_enabled:
   icon: mdi:gesture-tap-button
+  friendly_name: Sonos Bedroom Buttons
 switch.sonos_kitchen_buttons_enabled:
   icon: mdi:gesture-tap-button
+  friendly_name: Sonos Kitchen Buttons
 switch.sonos_office_buttons_enabled:
   icon: mdi:gesture-tap-button
+  friendly_name: Sonos Office Buttons
 switch.sonos_bedroom_night_sound:
   icon: mdi:weather-night
+  friendly_name: Sonos Bedroom Night Sound
 switch.sonos_bedroom_speech_enhance:
   icon: mdi:account-voice
+  friendly_name: Sonos Bedroom Speech Enhance
 input_number.sonos_bathroom_bass:
   icon: mdi:music-clef-bass
+  friendly_name: Sonos Bathroom Bass
 input_number.sonos_bedroom_bass:
   icon: mdi:music-clef-bass
+  friendly_name: Sonos Bedroom Bass
 input_number.sonos_kitchen_bass:
   icon: mdi:music-clef-bass
+  friendly_name: Sonos Kitchen Bass
 input_number.sonos_office_bass:
   icon: mdi:music-clef-bass
+  friendly_name: Sonos Office Bass
 input_number.sonos_treble:
   friendly_name: Sonos Treble
 input_number.sonos_bathroom_treble:
   icon: mdi:music-clef-treble
+  friendly_name: Sonos Bathroom Treble
 input_number.sonos_bedroom_treble:
   icon: mdi:music-clef-treble
+  friendly_name: Sonos Bedroom Treble
 input_number.sonos_kitchen_treble:
   icon: mdi:music-clef-treble
+  friendly_name: Sonos Kitchen Treble
 input_number.sonos_office_treble:
   icon: mdi:music-clef-treble
+  friendly_name: Sonos Office Treble
+switch.livingroom:
+  icon: mdi:fan
+switch.bathroom:
+  friendly_name: Bathroom Switch
+  icon: mdi:power-socket-de
+switch.cookerhood:
+  friendly_name: Cooker Hood
+  icon: mdi:stove
+switch.kitchenlight:
+  friendly_name: Kitchen light
+  icon: mdi:lightbulb
+switch.tvlight:
+  friendly_name: TV Ambient Light
+  icon: mdi:television-ambient-light
+climate.bathroom: {}
+climate.bedroom:
+  friendly_name: Bedroom Thermostat
+binary_sensor.fritzbox_7490_connectivity:
+  friendly_name: Internet Connectivity
+binary_sensor.livingroom_balcony_door:
+  friendly_name: Livingroom Balcony Door
+climate.livingroom:
+  friendly_name: Livingroom Thermostat
+device_tracker.fritz_repeater:
+  friendly_name: Fritz!Repeater 2
+device_tracker.fritz_repeater_2:
+  friendly_name: Fritz!Repeater 1
+govee.state:
+  friendly_name: Govee State
+switch.wol_rock:
+  icon: mdi:power
+sensor.nuc_cpu_temperature:
+  friendly_name: NUC CPU Temperature
+sensor.time_formatted:
+  friendly_name: Date and time
+script.tv_livingroom_home:
+  friendly_name: TV Livingroom Home
+automation.sonos_office_treble:
+  friendly_name: Sonos Office Treble
+automation.sonos_office_bass:
+  friendly_name: Sonos Office Bass
+automation.sonos_livingroom_treble:
+  friendly_name: Sonos Livingroom Treble
+automation.sonos_livingroom_bass:
+  friendly_name: Sonos Livingroom Bass
+automation.sonos_kitchen_treble:
+  friendly_name: Sonos Kitchen Treble
+automation.sonos_kitchen_bass:
+  friendly_name: Sonos Kitchen Bass
+automation.sonos_bedroom_bass:
+  friendly_name: Sonos Bedroom Bass
+automation.sonos_bedroom_treble:
+  friendly_name: Sonos Bedroom Treble
+automation.sonos_bathroom_bass:
+  friendly_name: Sonos Bathroom Bass
+automation.sonos_bathroom_treble:
+  friendly_name: Sonos Bathroom Treble
+automation.sonos_livingroom_sub_crossover:
+  friendly_name: Sonos Livingroom Sub Crossover
+automation.sonos_livingroom_sub_gain:
+  friendly_name: Sonos Livingroom Sub Gain
