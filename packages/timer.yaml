@@ -38,19 +38,16 @@ automation:
 
 input_number:
   timer_seconds:
-    name: Seconds
     initial: 0
     max: 60
     min: 0
     step: 1
   timer_minutes:
-    name: Minutes
     initial: 0
     max: 60
     min: 0
     step: 1
   timer_hours:
-    name: Hours
     initial: 0
     max: 60
     min: 0

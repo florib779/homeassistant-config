@@ -1,76 +1,65 @@
 script:
   tv_livingroom_home:
-    alias: TV Livingroom Home
     sequence:
     - service: androidtv.adb_command
       data:
         entity_id: media_player.android_tv_livingroom
         command: "HOME"
   tv_livingroom_up:
-    alias: TV Livingroom Up
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "UP"
   tv_livingroom_down:
-    alias: TV Livingroom Down
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "DOWN"
   tv_livingroom_left:
-    alias: TV Livingroom Left
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "LEFT"
   tv_livingroom_right:
-    alias: TV Livingroom Right
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "RIGHT"
   tv_livingroom_center:
-    alias: TV Livingroom Center
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "CENTER"
   tv_livingroom_exit:
-    alias: TV Livingroom Exit
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "EXIT"
   tv_livingroom_back:
-    alias: TV Livingroom Back
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "BACK"
   tv_livingroom_menu:
-    alias: TV Livingroom Menu
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "MENU"
   tv_livingroom_volup:
-    alias: TV Livingroom Volume Up
     sequence:
     - service: androidtv.adb_command
       data:
          entity_id: media_player.android_tv_livingroom
          command: "VOLUME_UP"
   tv_livingroom_voldown:
-    alias: TV Livingroom Volume Down
     sequence:
     - service: androidtv.adb_command
       data:
@@ -94,8 +83,8 @@ media_player:
 switch:
   - platform: template
     switches:
-# Turn TV on/off
-## ToDO: read correct state
+      # Turn TV on/off
+      # ToDo: read correct state
       livingroom_tv_power:
         turn_on:
           service: wake_on_lan.send_magic_packet

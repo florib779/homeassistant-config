@@ -203,6 +203,7 @@ sensor.time_formatted:
   friendly_name: Date and time
 script.tv_livingroom_home:
   friendly_name: TV Livingroom Home
+  icon: mdi:home
 automation.sonos_office_treble:
   friendly_name: Sonos Office Treble
 automation.sonos_office_bass:
@@ -227,3 +228,35 @@ automation.sonos_livingroom_sub_crossover:
   friendly_name: Sonos Livingroom Sub Crossover
 automation.sonos_livingroom_sub_gain:
   friendly_name: Sonos Livingroom Sub Gain
+input_number.timer_hours:
+  friendly_name: Hours
+input_number.timer_minutes:
+  friendly_name: Minutes
+input_number.timer_seconds:
+  friendly_name: Seconds
+script.tv_livingroom_up:
+  friendly_name: TV Livingroom Up
+  icon: mdi:arrow-up-thick
+script.tv_livingroom_down:
+  friendly_name: TV Livingroom Down
+  icon: mdi:arrow-down-thick
+script.tv_livingroom_left:
+  friendly_name: TV Livingroom Left
+  icon: mdi:arrow-left-thick
+script.tv_livingroom_right:
+  friendly_name: TV Livingroom Right
+  icon: mdi:arrow-right-thick
+script.tv_livingroom_center:
+  friendly_name: TV Livingroom Center
+  icon: mdi:bullseye-arrow
+script.tv_livingroom_exit:
+  friendly_name: TV Livingroom Exit
+script.tv_livingroom_back:
+  friendly_name: TV Livingroom Back
+  icon: mdi:backspace
+script.tv_livingroom_menu:
+  friendly_name: TV Livingroom Menu
+script.tv_livingroom_voldown:
+  friendly_name: TV Livingroom Volume Down
+script.tv_livingroom_volup:
+  friendly_name: TV Livingroom Volume Up
