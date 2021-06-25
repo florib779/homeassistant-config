@@ -194,14 +194,17 @@ switch:
 shell_command:
   sonos_bass: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/bass/{{bass}}'
   sonos_treble: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/treble/{{treble}}'
-  sonos_sub_gain: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/gain/{{sub_gain}}'
-  sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/crossover/{{sub_crossover}}'
+  
+  # This is only for TV remote control
+  # All other volume adjustments are made with the Sonos integration.
+  sonos_livingroom_volume_plus: '/usr/bin/curl -X GET http://192.168.178.88:5005/Livingroom/volume/+1'
+  sonos_livingroom_volume_minus: '/usr/bin/curl -X GET http://192.168.178.88:5005/Livingroom/volume/-1'
 
 ################################################################################
 
 automation:
 
-# Play:3 Bathroom ##############################################################
+# Play:3 bathroom ##############################################################
 - id: sonos_bathroom_bass
   trigger:
     - platform: state
@@ -221,7 +224,7 @@ automation:
         room: 'Bathroom' # Use the name from the Sonos app
         treble: '{{ trigger.to_state.state | int }}'
 
-# Playbar Bedroom ##############################################################
+# Playbar bedroom ##############################################################
 - id: sonos_bedroom_bass
   trigger:
     - platform: state
@@ -241,7 +244,7 @@ automation:
         room: 'Bedroom' # Use the name from the Sonos app
         treble: '{{ trigger.to_state.state | int }}'
 
-# Play:1 Kitchen ###############################################################
+# Play:1 kitchen ###############################################################
 - id: sonos_kitchen_bass
   trigger:
     - platform: state
@@ -299,7 +302,7 @@ automation:
         room: 'Livingroom' # Use the name from the Sonos app
         sub_crossover: '{{ trigger.to_state.state | int }}'
 
-# One Office ###################################################################
+# One office ###################################################################
 - id: sonos_office_bass
   trigger:
     - platform: state
@@ -319,6 +322,27 @@ automation:
         room: 'Office' # Use the name from the Sonos app
         treble: '{{ trigger.to_state.state | int }}'
 
+################################################################################
+
+# TV remote livingroom #########################################################
+- id: sonos_livingroom_volume_plus
+  trigger:
+    - platform: state
+      entity_id: input_number.sonos_livingroom_volume_plus
+  action:
+    - service: shell_command.sonos_volume_plus
+      data_template:
+        room: 'Livingroom' # Use the name from the Sonos app
+        bass: '{{ trigger.to_state.state | int }}'
+- id: sonos_livingroom_volume_minus
+  trigger:
+    - platform: state
+      entity_id: input_number.sonos_livingroom_volume_minus
+  action:
+    - service: shell_command.sonos_volume_minus
+      data_template:
+        room: 'Livingroom' # Use the name from the Sonos app
+        treble: '{{ trigger.to_state.state | int }}'
 ################################################################################
 
 input_number:

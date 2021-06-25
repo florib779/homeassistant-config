@@ -260,3 +260,5 @@ script.tv_livingroom_voldown:
   friendly_name: TV Livingroom Volume Down
 script.tv_livingroom_volup:
   friendly_name: TV Livingroom Volume Up
+input_number.sonos_livingroom_volume_up:
+  icon: mdi:volume-plus
