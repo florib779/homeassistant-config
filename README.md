@@ -74,7 +74,6 @@ My Home Assistant config files including products of:
 - [x] Cooking Timer
 
 ## ToDo/Ideas
-* Screenshots
 * Make timer card more compact
   * Show date
 * Child lock automation

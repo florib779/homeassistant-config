@@ -527,13 +527,11 @@ views:
               action: toggle
             entity: script.tv_livingroom_home
             show_state: false
-            icon: mdi:home
             show_name: false
           - type: button
             tap_action:
               action: toggle
             entity: script.tv_livingroom_up
-            icon: mdi:arrow-up-thick
             show_name: false
             show_icon: true
           - type: button
@@ -546,31 +544,26 @@ views:
             tap_action:
               action: toggle
             entity: script.tv_livingroom_left
-            icon: mdi:arrow-left-thick
             show_name: false
           - type: button
             tap_action:
               action: toggle
             entity: script.tv_livingroom_center
             show_name: false
-            icon: mdi:bullseye-arrow
           - type: button
             tap_action:
               action: toggle
             entity: script.tv_livingroom_right
-            icon: mdi:arrow-right-thick
             show_name: false
           - type: button
             tap_action:
               action: toggle
             entity: script.tv_livingroom_back
-            icon: mdi:backspace
             show_name: false
           - type: button
             tap_action:
               action: toggle
             entity: script.tv_livingroom_down
-            icon: mdi:arrow-down-thick
             show_name: false
           - type: button
             tap_action:
@@ -603,73 +596,6 @@ views:
               power: true
               progress: true
               volume_level: false
-  - title: Maintenance
-    path: fritzbox
-    icon: mdi:tools
-    badges: []
-    cards:
-      - type: vertical-stack
-        cards:
-          - type: entities
-            entities:
-              - entity: sensor.fritz_box_7490_uptime
-                name: Uptime
-              - entity: binary_sensor.fritzbox_7490_connectivity
-              - entity: sensor.fritz_box_7490_external_ip
-                name: External IP
-              - entity: switch.fritzbox_7490_wifi
-                name: Wifi (2,4GHz)
-              - entity: switch.fritzbox_7490_wifi_5ghz
-                name: Wifi (5GHz)
-              - entity: switch.fritzbox_7490_guest_wifi
-                name: Guest Wifi
-            state_color: true
-            show_header_toggle: false
-            title: Fritz!Box
-          - type: picture
-            image: /local/img/fritz_guest_wifi.png
-            hold_action:
-              action: none
-            tap_action:
-              action: url
-              url_path: https://fritz.box/
-      - type: entities
-        entities:
-          - entity: sensor.adguard_average_processing_speed
-            name: Avg. Processing Speed
-          - entity: sensor.adguard_dns_queries
-            name: DNS Queries
-          - entity: sensor.adguard_dns_queries_blocked
-            name: DNS Queries Blocked
-          - entity: sensor.adguard_dns_queries_blocked_ratio
-            name: DNS Queries Blocked Ratio
-          - entity: sensor.adguard_parental_control_blocked
-          - entity: sensor.adguard_rules_count
-          - entity: sensor.adguard_safe_browsing_blocked
-          - entity: sensor.adguard_safe_searches_enforced
-          - entity: switch.adguard_filtering
-          - entity: switch.adguard_parental_control
-          - entity: switch.adguard_protection
-          - entity: switch.adguard_query_log
-          - entity: switch.adguard_safe_browsing
-          - entity: switch.adguard_safe_search
-        title: AdGuard
-        show_header_toggle: false
-      - type: entities
-        entities:
-          - entity: sensor.nuc_cpu_temperature
-          - entity: automation.push_hass_configuration_to_github
-            name: Push config to GitHub
-          - entity: binary_sensor.home_assistant_operating_system_update_available
-            name: Version
-          - entity: binary_sensor.updater
-          - entity: sensor.hacs
-          - entity: sensor.uptime
-            name: Last Reboot
-          - entity: binary_sensor.check_home_assistant_configuration_update_available
-          - entity: sensor.check_home_assistant_configuration_newest_version
-          - entity: sensor.check_home_assistant_configuration_version
-        title: Home Assistant
   - title: ROCK
     type: custom:masonry-layout
     layout:
@@ -1158,3 +1084,155 @@ views:
               **IP Address:** {{ state_attr('device_tracker.nuc', 'ip') }}
 
               **MAC:** {{ state_attr('device_tracker.nuc', 'mac') }}
+  - title: Maintenance
+    path: fritzbox
+    icon: mdi:tools
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.fritz_box_7490_uptime
+                name: Uptime
+              - entity: binary_sensor.fritzbox_7490_connectivity
+              - entity: sensor.fritz_box_7490_external_ip
+                name: External IP
+              - entity: switch.fritzbox_7490_wifi
+                name: Wifi (2,4GHz)
+              - entity: switch.fritzbox_7490_wifi_5ghz
+                name: Wifi (5GHz)
+              - entity: switch.fritzbox_7490_guest_wifi
+                name: Guest Wifi
+            state_color: true
+            show_header_toggle: false
+            title: Fritz!Box
+          - type: picture
+            image: /local/img/fritz_guest_wifi.png
+            hold_action:
+              action: none
+            tap_action:
+              action: url
+              url_path: https://fritz.box/
+      - type: entities
+        entities:
+          - entity: sensor.adguard_average_processing_speed
+            name: Avg. Processing Speed
+          - entity: sensor.adguard_dns_queries
+            name: DNS Queries
+          - entity: sensor.adguard_dns_queries_blocked
+            name: DNS Queries Blocked
+          - entity: sensor.adguard_dns_queries_blocked_ratio
+            name: DNS Queries Blocked Ratio
+          - entity: sensor.adguard_parental_control_blocked
+          - entity: sensor.adguard_rules_count
+          - entity: sensor.adguard_safe_browsing_blocked
+          - entity: sensor.adguard_safe_searches_enforced
+          - entity: switch.adguard_filtering
+          - entity: switch.adguard_parental_control
+          - entity: switch.adguard_protection
+          - entity: switch.adguard_query_log
+          - entity: switch.adguard_safe_browsing
+          - entity: switch.adguard_safe_search
+        title: AdGuard
+        show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: sensor.nuc_cpu_temperature
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+            name: Version
+          - entity: binary_sensor.updater
+          - entity: sensor.hacs
+          - entity: sensor.uptime
+            name: Last Reboot
+          - entity: binary_sensor.check_home_assistant_configuration_update_available
+          - entity: sensor.check_home_assistant_configuration_newest_version
+          - entity: sensor.check_home_assistant_configuration_version
+        title: Home Assistant
+  - title: Devel
+    path: devel
+    icon: mdi:developer-board
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: grid
+            cards:
+              - type: button
+                tap_action:
+                  action: url
+                  url_path: https://www.deepl.com
+                name: Deepl
+                icon: mdi:translate
+              - type: button
+                tap_action:
+                  action: url
+                  url_path: https://github.com
+                name: GitHub
+                icon: si:github
+              - type: button
+                tap_action:
+                  action: url
+                  url_path: https://community.home-assistant.io/
+                name: Forum
+                icon: si:homeassistant
+            square: false
+            columns: 3
+          - type: markdown
+            content: >-
+              ## [Integrations](https://www.home-assistant.io/integrations)
+
+
+              *
+              [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
+
+              *
+              [lovelace-fold-entity-row](https://github.com/thomasloven/lovelace-fold-entity-row)
+
+              *
+              [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
+
+              * [Markdown
+              Card](https://www.home-assistant.io/lovelace/markdown/)
+
+              * [mini-media-player](https://github.com/kalkih/mini-media-player)
+
+              *
+              [simple-thermostat](https://github.com/nervetattoo/simple-thermostat)
+
+
+              ## External
+
+
+              *
+              [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
+
+
+              ## Other
+
+
+              * [MD Icons](https://materialdesignicons.com/)
+
+              * [Simple Icons](https://simpleicons.org/)
+
+              * [Font Awesome](https://fontawesome.com/)
+                * [hass-fontawesome](https://github.com/thomasloven/hass-fontawesome)
+      - type: markdown
+        content: >-
+          ## CSS
+          [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
+
+
+          ```
+
+          card_mod:
+            style: |
+              ha-card {
+                color: red;
+              }
+          ```
+        title: Code Samples
+      - type: entities
+        entities:
+          - entity: automation.push_hass_configuration_to_github
+        title: Controls
