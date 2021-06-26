@@ -195,6 +195,7 @@ shell_command:
   sonos_bass: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/bass/{{bass}}'
   sonos_treble: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/treble/{{treble}}'
   
+  # ToDo (create an automation)
   # This is only for TV remote control
   # All other volume adjustments are made with the Sonos integration.
   sonos_livingroom_volume_plus: '/usr/bin/curl -X GET http://192.168.178.88:5005/Livingroom/volume/+1'

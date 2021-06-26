@@ -73,10 +73,16 @@ My Home Assistant config files including products of:
   - [x] Show info
 - [x] Cooking Timer
 
-## ToDo
+## ToDo/Ideas
 * Screenshots
 * Make timer card more compact
   * Show date
+* Child lock automation
+  * All buttons of Fritz!Dect devices off
+  * All buttons of Sonos devices off
+* Presence detection
+  * Music off
+  * All devices off
 
 ## Links
 
