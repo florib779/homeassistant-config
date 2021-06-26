@@ -8,6 +8,7 @@
 !.HA_VERSION
 !*.js*
 !*.md
+!*.png
 !*.sh
 !*.yaml
 !gitpush
