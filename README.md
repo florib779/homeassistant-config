@@ -11,7 +11,7 @@ My Home Assistant config files including products of:
 
 * A [script](https://github.com/florib779/homeassistant-config/blob/master/packages/gitpush/gitpush.sh) which automatically pushes to GitHub
 * A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html)
-* A [ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html)
+* A [Roon ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html)
 * Sonos
   - [x] Night mode (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
   - [x] Speech enhancement (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos)
