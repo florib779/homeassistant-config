@@ -124,21 +124,19 @@ views:
             sort:
               method: state
               reverse: true
-          - type: custom:fold-entity-row
-            head:
-              type: section
-              label: Headphones
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_headphones
-                volume_stateless: true
-                volume_step: 1
-                hide:
-                  mute: true
-                  name: true
-                  power: true
-                  progress: true
-                  volume: true
+          - type: custom:mini-media-player
+            entity: media_player.roon_headphones
+            hide:
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume: true
+              volume_level: true
+            idle_view:
+              when_idle: true
+              when_paused: true
+              when_standby: true
           - type: custom:fold-entity-row
             head:
               type: section
