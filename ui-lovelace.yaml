@@ -124,21 +124,19 @@ views:
             sort:
               method: state
               reverse: true
-          - type: custom:fold-entity-row
-            head:
-              type: section
-              label: Headphones
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_headphones
-                volume_stateless: true
-                volume_step: 1
-                hide:
-                  mute: true
-                  name: true
-                  power: true
-                  progress: true
-                  volume: true
+          - type: custom:mini-media-player
+            entity: media_player.roon_headphones
+            hide:
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume: true
+              volume_level: true
+            idle_view:
+              when_idle: true
+              when_paused: true
+              when_standby: true
           - type: custom:fold-entity-row
             head:
               type: section
@@ -285,6 +283,7 @@ views:
               toggle:
                 entity: switch.livingroom
                 name: Fan
+              name: Livingroom
             decimals: '1'
             view_layout:
               step: row
@@ -351,6 +350,9 @@ views:
             sensors:
               - entity: sensor.office_battery
                 name: Battery
+            header:
+              toggle: {}
+              name: Office
             view_layout:
               step: row
           - type: custom:simple-thermostat
@@ -371,6 +373,7 @@ views:
               toggle:
                 entity: switch.bathroom
                 name: Switch
+              name: Bathroom
             sensors:
               - entity: sensor.bathroom_battery
                 name: Battery
@@ -393,7 +396,8 @@ views:
             sensors:
               - entity: sensor.bedroom_battery
                 name: Battery
-            header: null
+            header:
+              name: Bedroom
             view_layout:
               step: row
           - type: custom:simple-thermostat
