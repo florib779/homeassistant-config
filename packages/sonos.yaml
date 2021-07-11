@@ -194,6 +194,8 @@ switch:
 shell_command:
   sonos_bass: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/bass/{{bass}}'
   sonos_treble: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/treble/{{treble}}'
+  sonos_sub_gain: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/gain/{{sub_gain}}'
+  sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.88:5005/{{room}}/sub/crossover/{{sub_crossover}}'
   
   # ToDo (create an automation)
   # This is only for TV remote control
