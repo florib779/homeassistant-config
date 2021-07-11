@@ -128,7 +128,6 @@ views:
             entity: media_player.roon_headphones
             hide:
               mute: true
-              name: true
               power: true
               progress: true
               volume: true
@@ -1099,15 +1098,15 @@ views:
             entities:
               - entity: sensor.fritz_box_7490_uptime
                 name: Uptime
-              - entity: binary_sensor.fritzbox_7490_connectivity
+              - entity: binary_sensor.fritz_box_7490_connectivity
               - entity: sensor.fritz_box_7490_external_ip
                 name: External IP
-              - entity: switch.fritzbox_7490_wifi
-                name: Wifi (2,4GHz)
-              - entity: switch.fritzbox_7490_wifi_5ghz
-                name: Wifi (5GHz)
-              - entity: switch.fritzbox_7490_guest_wifi
-                name: Guest Wifi
+              - entity: switch.fritz_box_7490_wi_fi_fritz_nomap
+                name: WiFi (2,4GHz)
+              - entity: switch.fritz_box_7490_wi_fi_fritz_nomap_5ghz
+                name: WiFi (5GHz)
+              - entity: switch.fritz_box_7490_wi_fi_fnet
+                name: Guest WiFI
             state_color: true
             show_header_toggle: false
             title: Fritz!Box
@@ -1149,9 +1148,6 @@ views:
           - entity: sensor.hacs
           - entity: sensor.uptime
             name: Last Reboot
-          - entity: binary_sensor.check_home_assistant_configuration_update_available
-          - entity: sensor.check_home_assistant_configuration_newest_version
-          - entity: sensor.check_home_assistant_configuration_version
         title: Home Assistant
   - title: Devel
     path: devel
