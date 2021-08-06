@@ -1,6 +1,6 @@
 homeassistant:
   customize: !include customize.yaml # Customizations from Configuration > Customizations will be stored here
-  packages: !include_dir_named packages
+  packages: !include_dir_named integrations
 
  # Experiment
   allowlist_external_dirs:

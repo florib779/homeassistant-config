@@ -84,11 +84,11 @@ views:
               type: buttons
               entities:
                 - entity: switch.livingroom_tv_power
-                - entity: switch.tvlight
-                - entity: switch.livingroom
-                - entity: switch.kitchenlight
-                - entity: switch.cookerhood
-                - entity: binary_sensor.livingroom_small_window
+                - entity: switch.livingroom_tv_light
+                - entity: switch.livingroom_fan
+                - entity: switch.kitchen_light
+                - entity: switch.kitchen_cookerhood
+                - entity: binary_sensor.livingroom_shutter_small
                   tap_action:
                     action: more-info
                 - entity: binary_sensor.livingroom_balcony_door
@@ -264,7 +264,7 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: climate.livingroom
+            entity: climate.livingroom_thermostat
             control: false
             layout:
               step: row
@@ -273,14 +273,17 @@ views:
                 icons: true
                 headings: true
             sensors:
-              - entity: sensor.livingroom_battery
+              - entity: sensor.livingroom_thermostat_battery
                 name: Battery
-              - entity: binary_sensor.livingroom_balcony_door
-              - entity: binary_sensor.livingroom_small_window
+              - entity: sensor.livingroom_pushbutton_battery
+                name: Pushbutton
+              - entity: binary_sensor.livingroom_shutter_small
                 name: Shutter
+              - entity: binary_sensor.livingroom_balcony_door
+                name: Balcony Door
             header:
               toggle:
-                entity: switch.livingroom
+                entity: switch.livingroom_fan
                 name: Fan
               name: Livingroom
             decimals: '1'
@@ -300,12 +303,14 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: sensor.kitchen_temperature
+            entity: sensor.kitchen_cookerhood_temperature
             sensors:
-              - entity: sensor.kitchen_temperature
+              - entity: sensor.kitchen_cookerhood_temperature
                 name: Currently
-              - entity: switch.kitchenlight
+              - entity: switch.kitchen_light
                 name: Light
+              - entity: sensor.kitchen_pushbutton_battery
+                name: Pushbutton
             control: false
             layout:
               step: row
@@ -322,7 +327,7 @@ views:
             header:
               name: Kitchen
               toggle:
-                entity: switch.cookerhood
+                entity: sensor.kitchen_cookerhood_temperature
                 name: Cookerhood
               icon: mdi:power-socket-de
             fallback: ' '
@@ -342,12 +347,12 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: climate.office
+            entity: climate.bathroom_thermostat
             control: false
             layout:
               step: row
             sensors:
-              - entity: sensor.office_battery
+              - entity: sensor.office_thermostat_battery
                 name: Battery
             header:
               toggle: {}
@@ -364,17 +369,17 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: climate.bathroom
+            entity: climate.bathroom_thermostat
             control: false
             layout:
               step: row
             header:
               toggle:
-                entity: switch.bathroom
+                entity: switch.bathroom_switch
                 name: Switch
               name: Bathroom
             sensors:
-              - entity: sensor.bathroom_battery
+              - entity: sensor.bathroom_thermostat_battery
                 name: Battery
             view_layout:
               step: row
@@ -388,15 +393,18 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: climate.bedroom
+            entity: climate.bedroom_thermostat
             control: false
             layout:
               step: row
             sensors:
-              - entity: sensor.bedroom_battery
+              - entity: sensor.bedroom_thermostat_battery
                 name: Battery
+              - entity: sensor.bedroom_pushbutton_battery
+                name: Pushbutton
             header:
               name: Bedroom
+              toggle: {}
             view_layout:
               step: row
           - type: custom:simple-thermostat
@@ -409,9 +417,9 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: sensor.heatingroom_temperature
+            entity: sensor.heatingroom_pump_temperature
             sensors:
-              - entity: sensor.heatingroom_temperature
+              - entity: sensor.heatingroom_pump_temperature
                 name: Currently
             control: false
             layout:
@@ -428,7 +436,7 @@ views:
             header:
               name: Heatingroom
               toggle:
-                entity: switch.heatingroom
+                entity: switch.heatingroom_switch
                 name: Pump
               icon: mdi:power-socket-de
             fallback: ' '
@@ -611,7 +619,7 @@ views:
       - type: vertical-stack
         cards:
           - type: iframe
-            url: http://rock
+            url: https://rock:10000
             aspect_ratio: 520%
       - type: vertical-stack
         cards:
@@ -691,12 +699,13 @@ views:
 
               ### Stats
 
-              Case temperature {{states('sensor.rock_temperature') }} °C.
+              Case temperature {{states('sensor.corridor_rock_temperature') }}
+              °C.
 
-              Current power consumption {{ states('sensor.rock_current_power')
-              }} Watt.
+              Current power consumption {{
+              states('sensor.corridor_rock_power_consumption') }} Watt.
 
-              {{ states('sensor.rock_total_consumption') }} kWh total power
+              {{ states('sensor.corridor_rock_total_energy') }} kWh total power
               consumption since May 10, 2021.
 
               ### RAM
@@ -1096,15 +1105,14 @@ views:
         cards:
           - type: entities
             entities:
-              - entity: sensor.fritz_box_7490_uptime
-                name: Uptime
+              - entity: sensor.fritz_box_7490_connection_uptime
+                name: Connection Uptime
               - entity: binary_sensor.fritz_box_7490_connectivity
+                name: Connectivity
               - entity: sensor.fritz_box_7490_external_ip
                 name: External IP
               - entity: switch.fritz_box_7490_wi_fi_fritz_nomap
-                name: WiFi (2,4GHz)
-              - entity: switch.fritz_box_7490_wi_fi_fritz_nomap_5ghz
-                name: WiFi (5GHz)
+                name: WiFi
               - entity: switch.fritz_box_7490_wi_fi_fnet
                 name: Guest WiFI
             state_color: true

@@ -12,7 +12,7 @@
 !*.sh
 !*.yaml
 !gitpush
-!packages
+!integrations
 !screenshots
 
 # Comment these 2 lines if you don't want to include your SSH keys
