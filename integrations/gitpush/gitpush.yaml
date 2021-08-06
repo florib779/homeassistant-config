@@ -9,5 +9,5 @@ automation:
   # I had to disable SSH in the configuration and Protection Mode of this addon.
   - data:
       addon: 'a0d7b954_ssh'
-      input: '/config/packages/gitpush/gitpush.sh'
+      input: '/config/integrations/gitpush/gitpush.sh'
     service: hassio.addon_stdin
