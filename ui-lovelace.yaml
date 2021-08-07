@@ -6,7 +6,7 @@ views:
     type: custom:masonry-layout
     layout:
       max_cols: 4
-    icon: si:Home Assistant
+    icon: si:homeassistant
     badges: []
     cards:
       - type: custom:vertical-stack-in-card
@@ -438,6 +438,47 @@ views:
               toggle:
                 entity: switch.heatingroom_switch
                 name: Pump
+              icon: mdi:power-socket-de
+            fallback: ' '
+            view_layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+          - type: custom:simple-thermostat
+            style: |
+              ha-card {
+                --st-font-size-xl: 30px;
+                --st-font-size-m: 30px;
+                --st-font-size-title: 26px;
+                --st-font-size-sensors: 1em;
+                --st-spacing: 2px;
+                --st-font-size-toggle-label: 1em;
+              }
+            entity: sensor.basement_washer_temperature
+            sensors:
+              - entity: sensor.basement_washer_temperature
+                name: Currently
+              - entity: sensor.basement_washer_power_consumption
+                name: Power
+            control: false
+            layout:
+              step: row
+              mode:
+                names: true
+                icons: true
+                headings: true
+            hide:
+              state: true
+              temperature: true
+            label:
+              state: Currently
+            header:
+              name: Basement
+              toggle:
+                entity: switch.basement_washer
+                name: Washer
               icon: mdi:power-socket-de
             fallback: ' '
             view_layout:
@@ -1113,6 +1154,8 @@ views:
                 name: External IP
               - entity: switch.fritz_box_7490_wi_fi_fritz_nomap
                 name: WiFi
+              - entity: switch.fritz_box_7490_wi_fi_fritz_nomap_5ghz
+                name: WiFi 5GHz
               - entity: switch.fritz_box_7490_wi_fi_fnet
                 name: Guest WiFI
             state_color: true
