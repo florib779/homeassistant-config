@@ -1,5 +1,6 @@
 My Home Assistant config files including products of:
 
+* [Android](https://www.android.com/)
 * [AVM](https://avm.de)
 * [Ecovacs](https://ecovacs.com)
 * [Eurotronic](https://eurotronic.org)
@@ -9,10 +10,11 @@ My Home Assistant config files including products of:
 
 ## Features and goals
 
-* A [script](https://github.com/florib779/homeassistant-config/blob/master/packages/gitpush/gitpush.sh) which automatically pushes to GitHub.
-* A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html).
-* A [Roon ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html).
-* Sonos
+- [x] A [script](https://github.com/florib779/homeassistant-config/blob/master/packages/gitpush/gitpush.sh) which automatically pushes to GitHub.
+- [x] A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html).
+- [x] A [Roon ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html).
+
+* **Sonos**
   - [x] Night mode (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speech enhancement (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player).
@@ -30,7 +32,7 @@ My Home Assistant config files including products of:
     - [x] Polarity.
   - [x] Control status lights via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Control buttons via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
-* Roon
+* **Roon**
   - [x] Control/Show info.
     - [x] [RoonLabs music player integration](https://www.home-assistant.io/integrations/roon/).
       - [ ] Transfer zones.
@@ -47,17 +49,17 @@ My Home Assistant config files including products of:
         * Possible, but currently not enabled.
       - [ ] ~Volume.~
         * My remote control does not send a command for this.
-* TV
+* **Android TV**
   - [x] Turn TV on via [Wake on LAN integration](https://www.home-assistant.io/integrations/wake_on_lan/).
   - [x] Turn TV off via [Android TV integration](https://www.home-assistant.io/integrations/androidtv/).
   - [x] Control TV.
     - [Android TV integration](https://www.home-assistant.io/integrations/androidtv/).
   - [x] [Notifications for Android TV / FireTV ](https://www.home-assistant.io/integrations/nfandroidtv/).
     - [ ] Not tested yet.
-* AVM FRITZ!Box
-  - [x] Sensor for internet connectivity (with external IP and uptime attributes) via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/).
+* **AVM FRITZ!Box**
+  - [x] Show internet connectivity (with external IP and uptime attributes) via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/).
   - [x] Turn wifi and guest wifi on/off ([AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/).
-* AVM FRITZ!DECT devices
+* **AVM FRITZ!DECT devices**
   * Control.
     - [x] AVM FRITZ!DECT 200 (smart plug).
     - [x] AVM FRITZ!DECT 210 (smart plug).
@@ -69,7 +71,7 @@ My Home Assistant config files including products of:
     - [ ] AVM FRITZ!DECT 500 (LED light).
       * Currently not implemented in Home Assistant.
     - [ ] Rademacher RolloTron DECT 1213 (shutter).
-      * Controlling is actually not implemented in Home Assistant.
+      * Currently not implemented in Home Assistant.
       - [ ] Close shutter when TV is turned on.
         * To avoid light glare.
       - [ ] Go to favorite position at a given time.
@@ -89,13 +91,21 @@ My Home Assistant config files including products of:
       - [x] Temperature.
       - [x] Battery Level.
       - [ ] Humidity.
-        * Actually not implemented in Home Assistant.
+        * Currently not implemented in Home Assistant.
     - [x] Rademacher RolloTron DECT 1213 (shutter).
       * Shows only whether open or closed (even if only half open) - no intermediate levels.
-* Ecovacs Deebot ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card)).
+* **Ecovacs Deebot** ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card)).
   - [x] Control.
   - [x] Show info.
 - [x] Cooking Timer.
+* **Android** (Mobile/TV)
+  - [x] Show info.
+    - [x] Akku.
+    - [x] Connectivity.
+    - [x] Notifications/Messages.
+    - [ ] Show Home Assistant notifications ([Notifications for Android TV / Fire TV ](https://www.home-assistant.io/integrations/nfandroidtv/)).
+      * Not tested yet.
+    - [x] State.
 
 ## ToDo/Ideas
 - [ ] Make timer card more compact.
