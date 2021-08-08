@@ -10,7 +10,7 @@ My Home Assistant config files including products of:
 
 ## Features and goals
 
-- [x] A [script](https://github.com/florib779/homeassistant-config/blob/master/integrations/gitpush/gitpush.sh) which automatically pushes to GitHub.
+- [x] A [script](https://github.com/florib779/homeassistant-config/blob/master/integrations/gitpush/gitpush.sh) which automatically pushes Home Assistant config files to GitHub.
 - [x] A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html).
 - [x] A [Roon ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html).
   * Is no longer current. I have decided to use a Debian based Roon server. More shortly...
