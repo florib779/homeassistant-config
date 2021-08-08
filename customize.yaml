@@ -262,3 +262,16 @@ script.tv_livingroom_volup:
   friendly_name: TV Livingroom Volume Up
 input_number.sonos_livingroom_volume_up:
   icon: mdi:volume-plus
+sensor.basement_washer_finished:
+  icon: mdi:washing-machine
+sensor.basement_dishwasher_finished:
+  icon: mdi:dishwasher
+sensor.basement_dishwasher_on:
+  icon: mdi:dishwasher
+sensor.basement_washer_on:
+  friendly_name: Basement Washer on
+  icon: mdi:washing-machine
+sensor.basement_washer_total_energy_cost:
+  friendly_name: Basement Washer Total Energy Cost
+sensor.kitchen_dishwasher_total_energy_cost:
+  friendly_name: Kitchen Dishwasher Total Energy Cost

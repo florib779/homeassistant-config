@@ -106,6 +106,12 @@ sensor:
         value_template: "{{ as_timestamp(now()) | timestamp_custom('%A, %d.%m.%Y') }}"
       time_formatted:
         value_template: "{{ as_timestamp(states('sensor.date_time_utc')) | timestamp_custom('%A %B %-m, %I:%M %p') }}"
+      basement_washer_on:
+        friendly_name: 'Washer on'
+        value_template: "{{ states('sensor.basement_washer_power_consumption') | float > 5 }}"
+      basement_dishwasher_on:
+        friendly_name: 'Dishwasher on'
+        value_template: "{{ states('sensor.basement_dishwasher_power_consumption') | float > 5 }}"
 
 # ToDo
   #- platform: wake_on_lan

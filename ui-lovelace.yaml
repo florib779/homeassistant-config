@@ -94,6 +94,12 @@ views:
                 - entity: binary_sensor.livingroom_balcony_door
                   tap_action:
                     action: more-info
+                - entity: sensor.basement_washer_on
+                  tap_action:
+                    action: more-info
+                - entity: sensor.basement_dishwasher_on
+                  tap_action:
+                    action: more-info
           - type: custom:auto-entities
             filter:
               include:
@@ -311,6 +317,7 @@ views:
                 name: Light
               - entity: sensor.kitchen_pushbutton_battery
                 name: Pushbutton
+              - entity: sensor.basement_dishwasher_on
             control: false
             layout:
               step: row
@@ -460,8 +467,7 @@ views:
             sensors:
               - entity: sensor.basement_washer_temperature
                 name: Currently
-              - entity: sensor.basement_washer_power_consumption
-                name: Power
+              - entity: sensor.basement_washer_on
             control: false
             layout:
               step: row
@@ -478,7 +484,7 @@ views:
               name: Basement
               toggle:
                 entity: switch.basement_washer
-                name: Washer
+                name: Switch
               icon: mdi:power-socket-de
             fallback: ' '
             view_layout:
