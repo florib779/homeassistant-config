@@ -28,4 +28,5 @@
 .cloud
 .google.token 
 home-assistant.log
+integrations/beets.yaml
 secrets.yaml

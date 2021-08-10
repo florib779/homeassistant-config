@@ -4,7 +4,8 @@ homeassistant:
 
  # Experiment
   allowlist_external_dirs:
-    - "/"
+    - "/mnt"
+    #- "/mnt/Music"
 ################################################################################
 
 # Got the following error message, but it has since disappeared:
@@ -77,7 +78,7 @@ tts: # Text to speech
 
 # Experiment
 folder_watcher:
-  - folder: /
+  - folder: /mnt
 
 wake_on_lan: # Further configuration in the corresponding package yaml files
 

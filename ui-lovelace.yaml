@@ -557,104 +557,127 @@ views:
               locate: false
               spot:
                 show: true
-  - title: Remote
-    path: remote
-    type: custom:vertical-layout
-    icon: mdi:remote
-    panel: false
+  - title: System
+    path: system
+    type: sidebar
+    icon: mdi:server
     badges: []
     cards:
+      - type: picture-elements
+        elements:
+          - type: image
+            image: /local/img/roon-moon-white.png
+            style:
+              top: 49%
+              left: 25%
+              color: white
+          - type: icon
+            icon: si:homeassistant
+            style:
+              top: 49%
+              left: 30%
+              color: white
+          - type: icon
+            tap_action:
+              action: toggle
+            entity: switch.wol_rock
+            name: WOL
+            icon: mdi:power
+            icon_height: 10px
+            show_name: true
+            show_state: true
+            show_icon: true
+            hold_action:
+              action: none
+            style:
+              top: 50%
+              left: 70%
+              color: '#3073ad'
+        image: /local/img/rock_akasa_case_front.jpg
       - type: grid
         cards:
-          - type: button
-            tap_action:
-              action: more-info
-            entity: sensor.zuk_z1_akkufullstand
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_speech_enhance
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_night_sound
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_home
-            show_state: false
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_up
-            show_name: false
-            show_icon: true
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_sub
-            show_name: false
-            show_icon: true
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_left
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_center
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_right
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_back
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_down
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.livingroom_tv_power
-            show_state: false
-            show_name: false
-        columns: 3
+          - type: gauge
+            entity: sensor.processor_use_percent
+            min: 0
+            max: 100
+            name: CPU
+            severity:
+              green: 0
+              yellow: 50
+              red: 80
+          - type: gauge
+            entity: sensor.corridor_rock_power_consumption
+            min: 0
+            max: 100
+            name: Power
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+          - type: gauge
+            entity: sensor.processor_temperature
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 80
+              red: 90
+            name: CPU
+          - type: gauge
+            entity: sensor.corridor_rock_temperature
+            min: 0
+            max: 100
+            name: Environment
+        columns: 4
         square: false
-      - type: custom:mini-media-player
-        entity: media_player.android_tv_livingroom
-        hide:
-          power: true
-          volume: true
-        source: full
-        artwork: cover
+      - type: grid
+        cards:
+          - type: gauge
+            entity: sensor.memory_use_percent
+            min: 0
+            max: 100
+            name: Memory
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+          - type: gauge
+            entity: sensor.disk_use_percent
+            min: 0
+            max: 100
+            name: Disc
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+          - type: gauge
+            entity: sensor.swap_use_percent
+            min: 0
+            max: 100
+            name: Swap
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+        square: false
+        columns: 3
+      - type: sensor
+        entity: sensor.load_15m
+        graph: line
+        detail: 2
+        hours_to_show: 1
+        view_layout:
+          position: sidebar
       - type: entities
         entities:
-          - type: custom:mini-media-player
-            entity: media_player.roon_livingroom
-            group: true
-            artwork: full-cover-fit
-            info: short
-            volume_stateless: true
-            volume_step: 1
-            hide:
-              icon: true
-              mute: true
-              name: true
-              power: true
-              progress: true
-              volume_level: false
+          - entity: sensor.last_boot
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+            name: HASS Version
+          - entity: binary_sensor.updater
+            name: HASS Updater
+          - entity: sensor.hacs
+        view_layout:
+          position: sidebar
   - title: ROCK
     type: custom:masonry-layout
     layout:
@@ -1139,6 +1162,104 @@ views:
               **IP Address:** {{ state_attr('device_tracker.nuc', 'ip') }}
 
               **MAC:** {{ state_attr('device_tracker.nuc', 'mac') }}
+  - title: Remote
+    path: remote
+    type: custom:vertical-layout
+    icon: mdi:remote
+    panel: false
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - type: button
+            tap_action:
+              action: more-info
+            entity: sensor.zuk_z1_akkufullstand
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_speech_enhance
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_night_sound
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_home
+            show_state: false
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_up
+            show_name: false
+            show_icon: true
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_sub
+            show_name: false
+            show_icon: true
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_left
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_center
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_right
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_back
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_down
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.livingroom_tv_power
+            show_state: false
+            show_name: false
+        columns: 3
+        square: false
+      - type: custom:mini-media-player
+        entity: media_player.android_tv_livingroom
+        hide:
+          power: true
+          volume: true
+        source: full
+        artwork: cover
+      - type: entities
+        entities:
+          - type: custom:mini-media-player
+            entity: media_player.roon_livingroom
+            group: true
+            artwork: full-cover-fit
+            info: short
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              icon: true
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume_level: false
   - title: Network
     path: network
     icon: mdi:network
@@ -1192,116 +1313,6 @@ views:
           - entity: switch.adguard_safe_search
         title: AdGuard
         show_header_toggle: false
-  - title: System
-    path: system
-    type: sidebar
-    icon: mdi:server
-    badges: []
-    cards:
-      - type: picture-elements
-        elements:
-          - type: image
-            image: /local/img/roon-moon-white.png
-            style:
-              top: 49%
-              left: 28%
-              color: white
-          - type: icon
-            tap_action:
-              action: toggle
-            entity: switch.wol_rock
-            name: WOL
-            icon: mdi:power
-            icon_height: 10px
-            show_name: true
-            show_state: true
-            show_icon: true
-            hold_action:
-              action: none
-            style:
-              top: 50%
-              left: 70%
-              color: '#3073ad'
-        image: /local/img/rock_akasa_case_front.jpg
-      - type: grid
-        cards:
-          - type: gauge
-            entity: sensor.processor_temperature
-            min: 0
-            max: 100
-            severity:
-              green: 0
-              yellow: 80
-              red: 90
-            name: CPU
-          - type: gauge
-            entity: sensor.processor_use_percent
-            min: 0
-            max: 100
-            name: CPU
-            severity:
-              green: 0
-              yellow: 50
-              red: 80
-          - type: gauge
-            entity: sensor.corridor_rock_power_consumption
-            min: 0
-            max: 100
-            name: Consumption
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-        columns: 3
-        square: false
-      - type: grid
-        cards:
-          - type: gauge
-            entity: sensor.memory_use_percent
-            min: 0
-            max: 100
-            name: Memory
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-          - type: gauge
-            entity: sensor.disk_use_percent
-            min: 0
-            max: 100
-            name: /
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-          - type: gauge
-            entity: sensor.swap_use_percent
-            min: 0
-            max: 100
-            name: Swap
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-        square: false
-        columns: 3
-      - type: sensor
-        entity: sensor.load_15m
-        graph: line
-        detail: 2
-        hours_to_show: 1
-        view_layout:
-          position: sidebar
-      - type: entities
-        entities:
-          - entity: sensor.last_boot
-          - entity: binary_sensor.home_assistant_operating_system_update_available
-            name: HASS Version
-          - entity: binary_sensor.updater
-            name: HASS Updater
-          - entity: sensor.hacs
-        view_layout:
-          position: sidebar
   - title: Devel
     path: devel
     icon: mdi:developer-board
@@ -1389,3 +1400,8 @@ views:
         entities:
           - entity: automation.push_hass_configuration_to_github
         title: Controls
+  - title: Beets
+    path: beets
+    icon: ''
+    badges: []
+    cards: []
