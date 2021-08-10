@@ -4,7 +4,7 @@ homeassistant:
 
  # Experiment
   allowlist_external_dirs:
-    - "/mnt"
+    - "/"
 ################################################################################
 
 # Got the following error message, but it has since disappeared:
@@ -77,17 +77,11 @@ tts: # Text to speech
 
 # Experiment
 folder_watcher:
-  - folder: /mnt
+  - folder: /
 
 wake_on_lan: # Further configuration in the corresponding package yaml files
 
 sensor:
-  - platform: command_line
-    name: NUC CPU Temperature # Entity is not recognized without this line.
-    command: "cat /sys/class/thermal/thermal_zone0/temp"
-    # If errors occur, make sure configuration file is encoded as UTF-8
-    unit_of_measurement: "°C"
-    value_template: "{{ value | multiply(0.001) | round(1) }}"
   - platform: time_date # Nescessary for the timer
     display_options:
       - 'time'
@@ -112,6 +106,36 @@ sensor:
       basement_dishwasher_on:
         friendly_name: 'Dishwasher on'
         value_template: "{{ states('sensor.basement_dishwasher_power_consumption') | float > 5 }}"
+  - platform: systemmonitor
+    resources:
+    - type: disk_use_percent
+      arg: "/"
+    # ToDo ##########################
+    - type: disk_use_percent
+      arg: "/dev/sda" # /mnt/Music
+    - type: disk_use_percent
+      arg: "/dev/sdc1" # /mnt/Backups
+    - type: disk_use_percent
+      arg: "/dev/sdb1" # /mnt/External
+    ##################################
+    - type: last_boot
+    - type: load_1m
+    - type: load_5m
+    - type: load_15m
+    - type: memory_use_percent
+    # ToDo ###########################
+    - type: network_in
+      arg: eth0
+    - type: throughput_network_in
+      arg: eth0
+    - type: network_out
+      arg: eth0
+    - type: throughput_network_out
+      arg: eth0
+    # ToDo
+    - type: processor_temperature
+    - type: processor_use
+    - type: swap_use_percent
 
 # ToDo
   #- platform: wake_on_lan

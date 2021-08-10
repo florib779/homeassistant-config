@@ -7,6 +7,7 @@ views:
     layout:
       max_cols: 4
     icon: si:homeassistant
+    theme: ''
     badges: []
     cards:
       - type: custom:vertical-stack-in-card
@@ -665,11 +666,6 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - type: iframe
-            url: https://rock:10000
-            aspect_ratio: 520%
-      - type: vertical-stack
-        cards:
           - type: picture-elements
             elements:
               - type: image
@@ -1143,9 +1139,9 @@ views:
               **IP Address:** {{ state_attr('device_tracker.nuc', 'ip') }}
 
               **MAC:** {{ state_attr('device_tracker.nuc', 'mac') }}
-  - title: Maintenance
-    path: fritzbox
-    icon: mdi:tools
+  - title: Network
+    path: network
+    icon: mdi:network
     badges: []
     cards:
       - type: vertical-stack
@@ -1196,16 +1192,116 @@ views:
           - entity: switch.adguard_safe_search
         title: AdGuard
         show_header_toggle: false
+  - title: System
+    path: system
+    type: sidebar
+    icon: mdi:server
+    badges: []
+    cards:
+      - type: picture-elements
+        elements:
+          - type: image
+            image: /local/img/roon-moon-white.png
+            style:
+              top: 49%
+              left: 28%
+              color: white
+          - type: icon
+            tap_action:
+              action: toggle
+            entity: switch.wol_rock
+            name: WOL
+            icon: mdi:power
+            icon_height: 10px
+            show_name: true
+            show_state: true
+            show_icon: true
+            hold_action:
+              action: none
+            style:
+              top: 50%
+              left: 70%
+              color: '#3073ad'
+        image: /local/img/rock_akasa_case_front.jpg
+      - type: grid
+        cards:
+          - type: gauge
+            entity: sensor.processor_temperature
+            min: 0
+            max: 100
+            severity:
+              green: 0
+              yellow: 80
+              red: 90
+            name: CPU
+          - type: gauge
+            entity: sensor.processor_use_percent
+            min: 0
+            max: 100
+            name: CPU
+            severity:
+              green: 0
+              yellow: 50
+              red: 80
+          - type: gauge
+            entity: sensor.corridor_rock_power_consumption
+            min: 0
+            max: 100
+            name: Consumption
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+        columns: 3
+        square: false
+      - type: grid
+        cards:
+          - type: gauge
+            entity: sensor.memory_use_percent
+            min: 0
+            max: 100
+            name: Memory
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+          - type: gauge
+            entity: sensor.disk_use_percent
+            min: 0
+            max: 100
+            name: /
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+          - type: gauge
+            entity: sensor.swap_use_percent
+            min: 0
+            max: 100
+            name: Swap
+            severity:
+              green: 0
+              yellow: 50
+              red: 90
+        square: false
+        columns: 3
+      - type: sensor
+        entity: sensor.load_15m
+        graph: line
+        detail: 2
+        hours_to_show: 1
+        view_layout:
+          position: sidebar
       - type: entities
         entities:
-          - entity: sensor.nuc_cpu_temperature
+          - entity: sensor.last_boot
           - entity: binary_sensor.home_assistant_operating_system_update_available
-            name: Version
+            name: HASS Version
           - entity: binary_sensor.updater
+            name: HASS Updater
           - entity: sensor.hacs
-          - entity: sensor.uptime
-            name: Last Reboot
-        title: Home Assistant
+        view_layout:
+          position: sidebar
   - title: Devel
     path: devel
     icon: mdi:developer-board

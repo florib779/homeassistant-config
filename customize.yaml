@@ -275,3 +275,5 @@ sensor.basement_washer_total_energy_cost:
   friendly_name: Basement Washer Total Energy Cost
 sensor.kitchen_dishwasher_total_energy_cost:
   friendly_name: Kitchen Dishwasher Total Energy Cost
+sensor.corridor_rock_total_energy_cost:
+  friendly_name: Corridor ROCK Total Energy Cost
