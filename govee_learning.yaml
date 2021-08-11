@@ -1,0 +1,5 @@
+58:8B:A4:C1:38:6C:7C:5A:
+  set_brightness_max: 100
+  get_brightness_max: 100
+  before_set_brightness_turn_on: false
+  config_offline_is_off: false

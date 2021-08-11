@@ -85,7 +85,7 @@ views:
               type: buttons
               entities:
                 - entity: switch.livingroom_tv_power
-                - entity: switch.livingroom_tv_light
+                - entity: light.h6159_7c5a
                 - entity: switch.livingroom_fan
                 - entity: switch.kitchen_light
                 - entity: switch.kitchen_cookerhood
