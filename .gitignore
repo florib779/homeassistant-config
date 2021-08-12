@@ -26,7 +26,8 @@
 # Ignore these files/folders
 .storage
 .cloud
-.google.token 
+.google.token
+govee_learning.yaml
 home-assistant.log
 integrations/beets.yaml
 secrets.yaml
