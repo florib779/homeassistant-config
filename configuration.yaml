@@ -107,6 +107,9 @@ sensor:
       basement_dishwasher_on:
         friendly_name: 'Dishwasher on'
         value_template: "{{ states('sensor.basement_dishwasher_power_consumption') | float > 5 }}"
+      office_laptop_charged:
+        friendly_name: 'Laptop charged'
+        value_template: "{{ states('sensor.office_laptop_power_consumption') | float < 1 }}"
   - platform: systemmonitor
     resources:
     - type: disk_use_percent

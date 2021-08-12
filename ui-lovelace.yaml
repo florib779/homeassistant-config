@@ -85,7 +85,7 @@ views:
               type: buttons
               entities:
                 - entity: switch.livingroom_tv_power
-                - entity: light.h6159_7c5a
+                - entity: light.livingroom_tv_light
                 - entity: switch.livingroom_fan
                 - entity: switch.kitchen_light
                 - entity: switch.kitchen_cookerhood
@@ -355,13 +355,14 @@ views:
                 --st-spacing: 2px;
                 --st-font-size-toggle-label: 1em;
               }
-            entity: climate.bathroom_thermostat
+            entity: climate.office_thermostat
             control: false
             layout:
               step: row
             sensors:
               - entity: sensor.office_thermostat_battery
                 name: Battery
+              - entity: sensor.office_laptop_charged
             header:
               toggle: {}
               name: Office
