@@ -4,6 +4,7 @@ My Home Assistant config files including products of:
 * [AVM](https://avm.de)
 * [Ecovacs](https://ecovacs.com)
 * [Eurotronic](https://eurotronic.org)
+* [Govee](https://govee.com)
 * [Rademacher](https://rademacher.de/)
 * [Roon](https://roonlabs.com/)
 * [Sonos](https://sonos.com)
