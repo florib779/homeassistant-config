@@ -98,7 +98,7 @@ views:
                 - entity: sensor.basement_washer_on
                   tap_action:
                     action: more-info
-                - entity: sensor.basement_dishwasher_on
+                - entity: sensor.kitchen_dishwasher_on
                   tap_action:
                     action: more-info
           - type: custom:auto-entities
@@ -318,7 +318,7 @@ views:
                 name: Light
               - entity: sensor.kitchen_pushbutton_battery
                 name: Pushbutton
-              - entity: sensor.basement_dishwasher_on
+              - entity: sensor.kitchen_dishwasher_on
             control: false
             layout:
               step: row
@@ -627,8 +627,12 @@ views:
           - type: gauge
             entity: sensor.corridor_rock_temperature
             min: 0
-            max: 100
+            max: 60
             name: Environment
+            severity:
+              green: 0
+              yellow: 35
+              red: 40
         columns: 4
         square: false
       - type: grid
@@ -662,6 +666,26 @@ views:
               red: 90
         square: false
         columns: 3
+      - type: custom:auto-entities
+        filter:
+          include:
+            - entity_id: media_player.roon_*
+              state: playing
+              options:
+                type: custom:mini-media-player
+                group: true
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  power: true
+                  progress: true
+        card:
+          type: entities
+        sort:
+          method: state
+          reverse: true
+        view_layout:
+          position: sidebar
       - type: sensor
         entity: sensor.load_15m
         graph: line
@@ -1383,6 +1407,27 @@ views:
               * [Font Awesome](https://fontawesome.com/)
                 * [hass-fontawesome](https://github.com/thomasloven/hass-fontawesome)
       - type: markdown
+        content: |-
+          # ToDo
+
+          ## Code
+
+          * Change icon coler of Dishwasher/Washer/Laptop.
+          * Get state of TV.
+          * Get Phone Notification.
+          * Nextcloud integration.
+
+          ## Hardware
+
+          * Lightbulbs
+      - type: entities
+        entities:
+          - entity: automation.push_hass_configuration_to_github
+        title: Controls
+      - type: entity
+        entity: sensor.homeassistant_config
+        attribute: latest_commit_message
+      - type: markdown
         content: >-
           ## CSS
           [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
@@ -1397,10 +1442,6 @@ views:
               }
           ```
         title: Code Samples
-      - type: entities
-        entities:
-          - entity: automation.push_hass_configuration_to_github
-        title: Controls
   - title: Beets
     path: beets
     icon: ''

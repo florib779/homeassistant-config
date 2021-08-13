@@ -1,0 +1,10 @@
+- id: light.livingroom_tv_light_turn_off
+  alias: Turn TV-Light off
+  trigger:
+  - platform: time
+    at: 01:00:00
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.livingroom_tv_light
+  mode: single

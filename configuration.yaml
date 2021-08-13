@@ -94,6 +94,10 @@ sensor:
       - 'time_utc'
       - 'beat'
   - platform: uptime # The uptime sensor stores the timestamp (date and time) when Home Assistant was last started.
+  - platform: github
+    access_token: !secret github_access_token
+    repositories:
+      - path: 'florib779/homeassistant-config'
   - platform: template
     sensors:
       date:
@@ -104,12 +108,15 @@ sensor:
       basement_washer_on:
         friendly_name: 'Washer on'
         value_template: "{{ states('sensor.basement_washer_power_consumption') | float > 5 }}"
-      basement_dishwasher_on:
+      kitchen_dishwasher_on:
         friendly_name: 'Dishwasher on'
-        value_template: "{{ states('sensor.basement_dishwasher_power_consumption') | float > 5 }}"
+        value_template: "{{ states('sensor.kitchen_dishwasher_power_consumption') | float > 5 }}"
       office_laptop_charged:
         friendly_name: 'Laptop charged'
-        value_template: "{{ states('sensor.office_laptop_power_consumption') | float < 1 }}"
+        value_template: "{{ states('sensor.office_laptop_power_consumption') | float < 2 }}"
+      electricity_price:
+        friendly_name: 'Electricity Price'
+        value_template: "0.298"
   - platform: systemmonitor
     resources:
     - type: disk_use_percent
@@ -136,11 +143,7 @@ sensor:
       arg: eth0
     - type: throughput_network_out
       arg: eth0
-    # ToDo
+    #################################
     - type: processor_temperature
     - type: processor_use
     - type: swap_use_percent
-
-# ToDo
-  #- platform: wake_on_lan
-    #mac: !secret rock_mac
