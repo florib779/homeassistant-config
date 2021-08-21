@@ -147,5 +147,3 @@ sensor:
     - type: processor_temperature
     - type: processor_use
     - type: swap_use_percent
-  - platform: powercalc
-    entity_id: light.livingroom_tv_light
