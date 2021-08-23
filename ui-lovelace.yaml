@@ -281,9 +281,9 @@ views:
                 headings: true
             sensors:
               - entity: sensor.livingroom_thermostat_battery
-                name: Battery
+                name: T-Battery
               - entity: sensor.livingroom_pushbutton_battery
-                name: Pushbutton
+                name: P-Battery
               - entity: binary_sensor.livingroom_shutter_small
                 name: Shutter
               - entity: binary_sensor.livingroom_balcony_door
@@ -294,6 +294,9 @@ views:
                 name: Fan
               name: Livingroom
             decimals: '1'
+            label:
+              state: Thermostat
+              temperature: Temperature
             view_layout:
               step: row
               mode:
@@ -320,8 +323,12 @@ views:
               - entity: sensor.office_laptop_charged
             header:
               name: Office
+              toggle: {}
             view_layout:
               step: row
+            label:
+              state: Thermostat
+              temperature: Temperature
           - type: custom:simple-thermostat
             style: |
               ha-card {
@@ -335,7 +342,7 @@ views:
             entity: sensor.storeroom_switch_temperature
             sensors:
               - entity: sensor.storeroom_switch_temperature
-                name: Currently
+                name: Temperature
               - entity: sensor.storeroom_akku_charged
             control: false
             layout:
@@ -347,14 +354,9 @@ views:
             hide:
               state: true
               temperature: true
-            label:
-              state: Currently
             header:
               name: Storeroom
               icon: mdi:power-socket-de
-              toggle:
-                entity: switch.storeroom_switch
-                name: Switch
             fallback: ' '
             view_layout:
               step: row
@@ -375,7 +377,7 @@ views:
             entity: sensor.kitchen_cookerhood_temperature
             sensors:
               - entity: sensor.kitchen_cookerhood_temperature
-                name: Currently
+                name: Temperature
               - entity: switch.kitchen_light
                 name: Light
               - entity: sensor.kitchen_pushbutton_battery
@@ -392,8 +394,6 @@ views:
               temperature: true
               controls: true
               state: true
-            label:
-              state: Currently
             header:
               name: Kitchen
               toggle:
@@ -431,6 +431,9 @@ views:
                 name: P-Battery
             view_layout:
               step: row
+            label:
+              state: Thermostat
+              temperature: Temperature
           - type: custom:simple-thermostat
             style: |
               ha-card {
@@ -447,13 +450,16 @@ views:
               step: row
             sensors:
               - entity: sensor.bedroom_thermostat_battery
-                name: Battery
+                name: T-Battery
               - entity: sensor.bedroom_pushbutton_battery
                 name: Pushbutton
             header:
               name: Bedroom
             view_layout:
               step: row
+            label:
+              state: Thermostat
+              temperature: Temperature
           - type: custom:simple-thermostat
             style: |
               ha-card {
@@ -467,7 +473,7 @@ views:
             entity: sensor.heatingroom_pump_temperature
             sensors:
               - entity: sensor.heatingroom_pump_temperature
-                name: Currently
+                name: Temperature
             control: false
             layout:
               step: row
@@ -506,8 +512,9 @@ views:
             entity: sensor.basement_washer_temperature
             sensors:
               - entity: sensor.basement_washer_temperature
-                name: Currently
+                name: Temperature
               - entity: sensor.basement_washer_on
+                name: Washer
             control: false
             layout:
               step: row
