@@ -114,6 +114,9 @@ sensor:
       office_laptop_charged:
         friendly_name: 'Laptop charged'
         value_template: "{{ states('sensor.office_laptop_power_consumption') | float < 2 }}"
+      storeroom_akku_charged:
+        friendly_name: 'Akku charged'
+        value_template: "{{ states('sensor.storeroom_switch_power_consumption') | float < 2 }}"
       electricity_price:
         friendly_name: 'Electricity Price'
         value_template: "0.298"
