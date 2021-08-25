@@ -133,9 +133,9 @@ sensor:
         friendly_name: 'Akku'
         value_template:  >
           {% if states.sensor.storeroom_switch_power_consumption.state | float > 1 %}
-            Loading
+            Charging
           {% else %}
-            Loaded
+            Charged
           {% endif %}
       electricity_price:
         friendly_name: 'Electricity Price'
