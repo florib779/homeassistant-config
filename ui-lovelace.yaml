@@ -614,6 +614,19 @@ views:
               color: white
           - type: icon
             tap_action:
+              action: url
+              url_path: http://rock:9100/display/
+            name: WOL
+            icon: mdi:web
+            icon_height: 10px
+            hold_action:
+              action: none
+            style:
+              top: 50%
+              left: 64%
+              color: '#3073ad'
+          - type: icon
+            tap_action:
               action: toggle
             entity: switch.wol_rock
             name: WOL
@@ -737,6 +750,10 @@ views:
           - entity: sensor.hacs
         view_layout:
           position: sidebar
+      - type: markdown
+        content: '* `sudo systemctl restart roonserver`'
+        view_layout:
+          position: sidebar
   - title: Remote
     path: remote
     type: custom:vertical-layout
@@ -848,6 +865,10 @@ views:
                 name: Connection Uptime
               - entity: binary_sensor.fritz_box_7490_connectivity
                 name: Connectivity
+              - entity: sensor.fritz_box_7490_max_kbit_s_received
+                name: Download Speed
+              - entity: sensor.fritz_box_7490_max_kbit_s_sent
+                name: Upload Speed
               - entity: sensor.fritz_box_7490_external_ip
                 name: External IP
               - entity: switch.fritz_box_7490_wi_fi_fritz_nomap
@@ -859,35 +880,41 @@ views:
             state_color: true
             show_header_toggle: false
             title: Fritz!Box
-          - type: picture
-            image: /local/img/fritz_guest_wifi.png
-            hold_action:
-              action: none
-            tap_action:
-              action: url
-              url_path: https://fritz.box/
-      - type: entities
-        entities:
-          - entity: sensor.adguard_average_processing_speed
-            name: Avg. Processing Speed
-          - entity: sensor.adguard_dns_queries
-            name: DNS Queries
-          - entity: sensor.adguard_dns_queries_blocked
-            name: DNS Queries Blocked
-          - entity: sensor.adguard_dns_queries_blocked_ratio
-            name: DNS Queries Blocked Ratio
-          - entity: sensor.adguard_parental_control_blocked
-          - entity: sensor.adguard_rules_count
-          - entity: sensor.adguard_safe_browsing_blocked
-          - entity: sensor.adguard_safe_searches_enforced
-          - entity: switch.adguard_filtering
-          - entity: switch.adguard_parental_control
-          - entity: switch.adguard_protection
-          - entity: switch.adguard_query_log
-          - entity: switch.adguard_safe_browsing
-          - entity: switch.adguard_safe_search
-        title: AdGuard
-        show_header_toggle: false
+          - type: grid
+            cards:
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: fritz.reboot
+                  service_data: {}
+                  target: {}
+                icon: mdi:restart
+                name: Reboot
+                show_state: false
+                show_icon: true
+                icon_height: 20px
+                show_name: false
+                entity: sensor.fritz_box_7490_device_uptime
+              - type: button
+                tap_action:
+                  action: call-service
+                  service: fritz.reconnect
+                  service_data: {}
+                  target: {}
+                icon: mdi:lan-connect
+                name: Reconnect
+                show_name: false
+                icon_height: 20px
+                entity: binary_sensor.fritz_box_7490_connectivity
+            square: false
+            columns: 2
+      - type: picture
+        image: /local/img/fritz_guest_wifi.png
+        tap_action:
+          action: url
+          url_path: https://fritz.box
+        hold_action:
+          action: none
   - title: Devel
     path: devel
     icon: mdi:developer-board
@@ -962,7 +989,7 @@ views:
 
           ## Code
 
-          * Change icon coler of Dishwasher/Washer/Laptop.
+          * Change icon color of Dishwasher/Washer/Laptop.
           * Get state of TV.
           * Get Phone Notification.
           * Nextcloud integration.
@@ -1083,3 +1110,108 @@ views:
 
 
           `beet rm -a <part of name>` # Remove album(s) of the library
+      - type: markdown
+        content: |-
+          Usage: 
+          ```
+            beet COMMAND [ARGS...]
+            beet help COMMAND
+
+          Options:
+            --format-item=FORMAT_ITEM
+                                  print with custom format
+            --format-album=FORMAT_ALBUM
+                                  print with custom format
+            -l LIBRARY, --library=LIBRARY
+                                  library database file to use
+            -d DIRECTORY, --directory=DIRECTORY
+                                  destination music directory
+            -v, --verbose         log more details (use twice for even more)
+            -c CONFIG, --config=CONFIG
+                                  path to configuration file
+            -p PLUGINS, --plugins=PLUGINS
+                                  a comma-separated list of plugins to load
+            -h, --help            show this help message and exit
+
+          Commands:
+            acousticbrainz    fetch metadata from AcousticBrainz
+            bad               check for corrupt or missing files
+            check             compute and verify checksums
+            clearart          remove images from file metadata
+            config            show or edit the user configuration
+            convert           convert to external location
+            duplicates (dup)  List duplicate tracks or albums.
+            edit              interactively edit metadata
+            embedart          embed image files into file metadata
+            export            export data from beets
+            extractart        extract an image from file metadata
+            fetchart          download album art
+            fields            show fields available for queries and format strings
+            fingerprint       generate fingerprints for items without them
+            follow            Follow album artist of each item in query
+            help (?)          give detailed help on a specific sub-command
+            import (imp, im)  import new music
+            info              show file metadata
+            lastimport        import last.fm play-count
+            list (ls)         query the library
+            lyrics            fetch song lyrics
+            mbsync            update metadata from musicbrainz
+            mbupdate          Update MusicBrainz collection
+            missing (miss)    List missing tracks.
+            modify (mod)      change metadata fields
+            move (mv)         move or copy items
+            parentwork        fetch parent works, composers and dates
+            remove (rm)       remove matching items from the library
+            replaygain        analyze for ReplayGain
+            stats             show statistics about the library or a query
+            submit            submit Acoustid fingerprints
+            unfollow          Unfollow album artist of each item in query
+            unimported        list all files in the library folder which are not listed
+                              in the beets library database
+            update (upd, up)  update the library
+            version           output version information
+            write             write tag information to files
+          ```
+  - type: panel
+    badges: []
+    cards:
+      - type: picture-elements
+        elements:
+          - type: state-icon
+            entity: switch.livingroom_fan
+            style:
+              top: 65%
+              left: 15%
+            tap_action:
+              action: toggle
+            state_color: true
+          - type: state-icon
+            entity: light.livingroom_tv_light
+            style:
+              top: 41%
+              left: 19%
+            tap_action:
+              action: toggle
+            state_color: true
+          - type: state-label
+            entity: climate.livingroom_thermostat
+            attribute: current_temperature
+            style:
+              top: 86%
+              left: 16%
+              color: black
+          - type: state-label
+            entity: climate.bedroom_thermostat
+            attribute: current_temperature
+            style:
+              top: 86%
+              left: 55%
+              color: black
+          - type: state-label
+            entity: climate.bathroom_thermostat
+            attribute: current_temperature
+            style:
+              top: 86%
+              left: 75%
+              color: black
+        image: /local/img/flat.png
