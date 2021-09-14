@@ -218,16 +218,6 @@ views:
                 entities:
                   - entity: switch.sonos_bathroom_buttons_enabled
                   - entity: switch.sonos_bathroom_status_light
-              - type: custom:slider-entity-row
-                entity: input_number.sonos_office_bass
-                name: Bass
-              - type: custom:slider-entity-row
-                entity: input_number.sonos_office_treble
-                name: Treble
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_office_buttons_enabled
-                  - entity: switch.sonos_office_status_light
           - type: custom:fold-entity-row
             head:
               type: section
@@ -509,6 +499,7 @@ views:
               - entity: sensor.basement_washer_temperature
                 name: Temperature
               - entity: sensor.basement_washer_on
+                name: Washer
             control: false
             layout:
               step: row
@@ -1173,6 +1164,7 @@ views:
             write             write tag information to files
           ```
   - type: panel
+    title: Flat
     badges: []
     cards:
       - type: picture-elements
