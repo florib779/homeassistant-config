@@ -113,15 +113,12 @@ views:
                     volume_stateless: true
                     volume_step: 1
                     hide:
-                      controls: true
                       icon: true
                       info: true
                       mute: true
                       name: true
                       power: true
                       progress: true
-                      volume: true
-                      volume_level: true
                     idle_view:
                       when_idle: true
                       when_paused: true
@@ -593,12 +590,18 @@ views:
         elements:
           - type: image
             image: /local/img/roon-moon-white.png
+            tap_action:
+              action: url
+              url_path: https://community.roonlabs.com
             style:
               top: 49%
               left: 25%
               color: white
           - type: icon
             icon: si:homeassistant
+            tap_action:
+              action: url
+              url_path: https://community.home-assistant.io
             style:
               top: 49%
               left: 30%
@@ -615,22 +618,6 @@ views:
             style:
               top: 50%
               left: 64%
-              color: '#3073ad'
-          - type: icon
-            tap_action:
-              action: toggle
-            entity: switch.wol_rock
-            name: WOL
-            icon: mdi:power
-            icon_height: 10px
-            show_name: true
-            show_state: true
-            show_icon: true
-            hold_action:
-              action: none
-            style:
-              top: 50%
-              left: 70%
               color: '#3073ad'
         image: /local/img/rock_akasa_case_front.jpg
       - type: grid
@@ -671,10 +658,6 @@ views:
               green: 0
               yellow: 35
               red: 40
-        columns: 4
-        square: false
-      - type: grid
-        cards:
           - type: gauge
             entity: sensor.memory_use_percent
             min: 0
@@ -688,7 +671,7 @@ views:
             entity: sensor.disk_use_percent
             min: 0
             max: 100
-            name: Disc
+            name: Disk
             severity:
               green: 0
               yellow: 50
@@ -702,8 +685,8 @@ views:
               green: 0
               yellow: 50
               red: 90
+        columns: 4
         square: false
-        columns: 3
       - type: custom:auto-entities
         filter:
           include:
@@ -745,104 +728,6 @@ views:
         content: '* `sudo systemctl restart roonserver`'
         view_layout:
           position: sidebar
-  - title: Remote
-    path: remote
-    type: custom:vertical-layout
-    icon: mdi:remote
-    panel: false
-    badges: []
-    cards:
-      - type: grid
-        cards:
-          - type: button
-            tap_action:
-              action: more-info
-            entity: sensor.zuk_z1_akkufullstand
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_speech_enhance
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_night_sound
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_home
-            show_state: false
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_up
-            show_name: false
-            show_icon: true
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_sub
-            show_name: false
-            show_icon: true
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_left
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_center
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_right
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_back
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: script.tv_livingroom_down
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.livingroom_tv_power
-            show_state: false
-            show_name: false
-        columns: 3
-        square: false
-      - type: custom:mini-media-player
-        entity: media_player.android_tv_livingroom
-        hide:
-          power: true
-          volume: true
-        source: full
-        artwork: cover
-      - type: entities
-        entities:
-          - type: custom:mini-media-player
-            entity: media_player.roon_livingroom
-            group: true
-            artwork: full-cover-fit
-            info: short
-            volume_stateless: true
-            volume_step: 1
-            hide:
-              icon: true
-              mute: true
-              name: true
-              power: true
-              progress: true
-              volume_level: false
   - title: Network
     path: network
     icon: mdi:network
@@ -1010,161 +895,9 @@ views:
               }
           ```
         title: Code Samples
-  - title: Beets
-    path: beets
-    icon: mdi:file-music
-    layout:
-      max_cols: 3
-      width: 500
-    type: custom:masonry-layout
-    badges: []
-    cards:
-      - type: markdown
-        content: >-
-          # Beets commands
-
-
-          `beet import /mnt/External/Incoming/` # Import and change tags.
-
-
-          `beet import -A /mnt/External/Incoming/` # Import but don't change any
-          tags.
-
-
-          `beet import -W /mnt/External/Incoming/` # When autotagging, don’t
-          write new tags to the files themselves (just keep the new metadata in
-          beets’ database.)
-
-
-          `beet import -C /mnt/External/Incoming/` # Don’t copy imported files
-          to your music directory; leave them where they are.
-
-
-          `beet import -m /mnt/External/Incoming/` # Move imported files to your
-          music directory (overrides the -c option).
-
-
-          `beet import -l LOGFILE /mnt/External/Incoming/` # Write a message to
-          `LOGFILE` every time you skip an album or choose to take its tags
-          “as-is” (see below) or the album is skipped as a duplicate; this lets
-          you come back later and reexamine albums that weren’t tagged
-          successfully.
-
-
-          `beet import -q /mnt/External/Incoming/` # Quiet mode. Never prompt
-          for input and, instead, conservatively skip any albums that need your
-          opinion. The `-ql` combination is recommended.
-
-
-          `beet import -t /mnt/External/Incoming/` # Timid mode, which is sort
-          of the opposite of “quiet.” The importer will ask your permission for
-          everything it does, confirming even very good matches with a prompt.
-
-
-          `beet import -p /mnt/External/Incoming/` # Automatically resume an
-          interrupted import. The importer keeps track of imports that don’t
-          finish completely (either due to a crash or because you stop them
-          halfway through) and, by default, prompts you to decide whether to
-          resume them. The `-p` flag automatically says “yes” to this question.
-          Relatedly, `-P` flag automatically says “no.”
-
-
-          `beet import -s /mnt/External/Incoming/` # Run in singleton mode,
-          tagging individual tracks instead of whole albums at a time. See the
-          “as Tracks” choice below. This means you can use beet import `-AC` to
-          quickly add a bunch of files to your library without doing anything to
-          them.
-
-
-          `beet import -g /mnt/External/Incoming/` # Assume there are multiple
-          albums contained in each directory. The tracks contained a directory
-          are grouped by album artist and album name and you will be asked to
-          import each of these groups separately. See the “Group albums” choice
-          below.
-
-
-
-
-          `beet update`
-
-
-          `beet stats`
-
-
-          `beet ls` # List all music of the library
-
-
-          `beet ls -a` # List all albums of the library
-
-
-          `beet rm <part of name>` # Remove track(s) of the library
-
-
-          `beet rm -a <part of name>` # Remove album(s) of the library
-      - type: markdown
-        content: |-
-          Usage: 
-          ```
-            beet COMMAND [ARGS...]
-            beet help COMMAND
-
-          Options:
-            --format-item=FORMAT_ITEM
-                                  print with custom format
-            --format-album=FORMAT_ALBUM
-                                  print with custom format
-            -l LIBRARY, --library=LIBRARY
-                                  library database file to use
-            -d DIRECTORY, --directory=DIRECTORY
-                                  destination music directory
-            -v, --verbose         log more details (use twice for even more)
-            -c CONFIG, --config=CONFIG
-                                  path to configuration file
-            -p PLUGINS, --plugins=PLUGINS
-                                  a comma-separated list of plugins to load
-            -h, --help            show this help message and exit
-
-          Commands:
-            acousticbrainz    fetch metadata from AcousticBrainz
-            bad               check for corrupt or missing files
-            check             compute and verify checksums
-            clearart          remove images from file metadata
-            config            show or edit the user configuration
-            convert           convert to external location
-            duplicates (dup)  List duplicate tracks or albums.
-            edit              interactively edit metadata
-            embedart          embed image files into file metadata
-            export            export data from beets
-            extractart        extract an image from file metadata
-            fetchart          download album art
-            fields            show fields available for queries and format strings
-            fingerprint       generate fingerprints for items without them
-            follow            Follow album artist of each item in query
-            help (?)          give detailed help on a specific sub-command
-            import (imp, im)  import new music
-            info              show file metadata
-            lastimport        import last.fm play-count
-            list (ls)         query the library
-            lyrics            fetch song lyrics
-            mbsync            update metadata from musicbrainz
-            mbupdate          Update MusicBrainz collection
-            missing (miss)    List missing tracks.
-            modify (mod)      change metadata fields
-            move (mv)         move or copy items
-            parentwork        fetch parent works, composers and dates
-            remove (rm)       remove matching items from the library
-            replaygain        analyze for ReplayGain
-            stats             show statistics about the library or a query
-            submit            submit Acoustid fingerprints
-            unfollow          Unfollow album artist of each item in query
-            unimported        list all files in the library folder which are not listed
-                              in the beets library database
-            update (upd, up)  update the library
-            version           output version information
-            write             write tag information to files
-          ```
   - type: panel
     title: Flat
+    icon: mdi:home
     badges: []
     cards:
       - type: picture-elements
@@ -1173,15 +906,43 @@ views:
             entity: switch.livingroom_fan
             style:
               top: 65%
-              left: 15%
+              left: 20%
+            tap_action:
+              action: toggle
+            state_color: true
+          - type: state-icon
+            entity: binary_sensor.livingroom_shutter_small
+            style:
+              top: 90%
+              left: 17%
+              color: black
+          - type: state-icon
+            entity: binary_sensor.livingroom_balcony_door
+            style:
+              top: 65%
+              left: 10%
+              color: black
+          - type: state-icon
+            entity: switch.kitchen_light
+            style:
+              top: 10%
+              left: 21%
+            tap_action:
+              action: toggle
+            state_color: true
+          - type: state-icon
+            entity: switch.kitchen_cookerhood
+            style:
+              top: 10%
+              left: 16%
             tap_action:
               action: toggle
             state_color: true
           - type: state-icon
             entity: light.livingroom_tv_light
             style:
-              top: 41%
-              left: 19%
+              top: 42%
+              left: 26%
             tap_action:
               action: toggle
             state_color: true
@@ -1189,21 +950,169 @@ views:
             entity: climate.livingroom_thermostat
             attribute: current_temperature
             style:
-              top: 86%
-              left: 16%
+              top: 50%
+              left: 20%
               color: black
           - type: state-label
             entity: climate.bedroom_thermostat
             attribute: current_temperature
             style:
-              top: 86%
-              left: 55%
+              top: 50%
+              left: 54%
               color: black
           - type: state-label
             entity: climate.bathroom_thermostat
             attribute: current_temperature
             style:
-              top: 86%
-              left: 75%
+              top: 50%
+              left: 72%
+              color: black
+          - type: state-label
+            entity: sensor.kitchen_cookerhood_temperature
+            style:
+              top: 21%
+              left: 20%
+              color: black
+          - type: state-label
+            entity: sensor.heatingroom_pump_temperature
+            style:
+              top: 12%
+              left: 46%
+              color: black
+          - type: state-label
+            entity: sensor.storeroom_switch_temperature
+            style:
+              top: 12%
+              left: 35%
+              color: black
+          - type: state-label
+            entity: climate.office_thermostat
+            attribute: current_temperature
+            style:
+              top: 50%
+              left: 90%
               color: black
         image: /local/img/flat.png
+  - icon: mdi:clock
+    title: Scheduler
+    badges: []
+    cards:
+      - type: custom:scheduler-card
+        title: true
+        include:
+          - light
+          - media_player.roon_bathroom
+          - media_player.roon_bedroom
+          - media_player.roon_headphones
+          - media_player.roon_kitchen
+          - media_player.roon_livingroom
+          - media_player.roon_office
+          - switch.livingroom_fan
+        discover_existing: false
+      - type: custom:scheduler-card
+        discover_existing: false
+        include:
+          - climate.bathroom_thermostat
+          - climate.bedroom_thermostat
+          - climate.office_thermostat
+          - switch
+          - switch.heatingroom_switch
+        title: Seasonal
+  - title: Remote
+    path: remote
+    type: custom:vertical-layout
+    icon: mdi:remote
+    panel: false
+    badges: []
+    cards:
+      - type: grid
+        cards:
+          - type: button
+            tap_action:
+              action: more-info
+            entity: sensor.zuk_z1_akkufullstand
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_speech_enhance
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_night_sound
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_home
+            show_state: false
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_up
+            show_name: false
+            show_icon: true
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.sonos_livingroom_sub
+            show_name: false
+            show_icon: true
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_left
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_center
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_right
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_back
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: script.tv_livingroom_down
+            show_name: false
+          - type: button
+            tap_action:
+              action: toggle
+            entity: switch.livingroom_tv_power
+            show_state: false
+            show_name: false
+        columns: 3
+        square: false
+      - type: custom:mini-media-player
+        entity: media_player.android_tv_livingroom
+        hide:
+          power: true
+          volume: true
+        source: full
+        artwork: cover
+      - type: entities
+        entities:
+          - type: custom:mini-media-player
+            entity: media_player.roon_livingroom
+            group: true
+            artwork: full-cover-fit
+            info: short
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              icon: true
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume_level: false
