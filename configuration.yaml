@@ -2,66 +2,10 @@ homeassistant:
   customize: !include customize.yaml # Customizations from Configuration > Customizations will be stored here
   packages: !include_dir_named integrations
 
- # Experiment
-  allowlist_external_dirs:
-    - "/mnt"
-    #- "/mnt/Music"
 ################################################################################
-
-# Got the following error message, but it has since disappeared:
-# Config entry 'FRITZ!Box 7490' for fritzbox integration not ready yet: invalid literal for int() with base 10: ''; Retrying in background
-#logger:
-#  default: info
-#  logs:
-#    homeassistant.components.fritzbox: debug
 
 frontend:
   themes: !include_dir_merge_named themes
-
-# Lovelace #####################################################################
-#
-# Since I configure lovelace via the graphical interface,
-# this section is only for demonstration purposes
-# and in case you run Home Assistant in yaml mode.
-# I have copied the raw code from the editor manually to <config>/ui-lovelace.yaml
-#
-# Take a look here for more information:
-# https://www.home-assistant.io/lovelace/dashboards-and-views/
-#
-#lovelace:
-#  mode: yaml
-#  resources:
-     # Toggle fullscreen
-#    - url: /hacsfiles/fullscreen-card/fullscreen-card.js
-#      type: module
-     # Kiosk mode - not tested yet
-#    - url: /hacsfiles/kiosk-mode/kiosk-mode.js
-#      type: module
-#    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
-#      type: module
-#    - url: /hacsfiles/lovelace-card-mod/card-mod.js
-#      type: module
-#    - url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js?hacstag=1507819942004
-#      type: module
-#    - url: /hacsfiles/lovelace-layout-card/layout-card.js
-#      type: module
-#    - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js?hacstag=1448997001710
-#      type: module
-     # Vacuum card not only for Xiaomi products
-#    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
-#      type: module
-     # Very configurable media player
-#    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-#      type: module
-     # Custom thermostat
-#    - url: /hacsfiles/simple-thermostat/simple-thermostat.js
-#      type: module
-     # Nice timer bar for my timer
-#    - url: /hacsfiles/timer-bar-card/timer-bar-card.js?hacstag=37690451712
-#      type: module
-#    - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
-#      type: module
-################################################################################
 
 # Includes #####################################################################
 automation: !include automations.yaml
@@ -75,10 +19,6 @@ default_config: # Configure a default setup of Home Assistant (frontend, api, et
 tts: # Text to speech
   - platform: google_translate
     language: 'en'
-
-# Experiment
-folder_watcher:
-  - folder: /mnt
 
 wake_on_lan: # Further configuration in the corresponding package yaml files
 
@@ -144,29 +84,11 @@ sensor:
     resources:
     - type: disk_use_percent
       arg: "/"
-    # ToDo ##########################
-    - type: disk_use_percent
-      arg: "/dev/sda" # /mnt/Music
-    - type: disk_use_percent
-      arg: "/dev/sdc1" # /mnt/Backups
-    - type: disk_use_percent
-      arg: "/dev/sdb1" # /mnt/External
-    ##################################
     - type: last_boot
     - type: load_1m
     - type: load_5m
     - type: load_15m
     - type: memory_use_percent
-    # ToDo ###########################
-    - type: network_in
-      arg: eth0
-    - type: throughput_network_in
-      arg: eth0
-    - type: network_out
-      arg: eth0
-    - type: throughput_network_out
-      arg: eth0
-    #################################
     - type: processor_temperature
     - type: processor_use
     - type: swap_use_percent

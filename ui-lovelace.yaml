@@ -1,3 +1,7 @@
+media_art_background:
+  width: 100%
+  entities:
+    - media_player.roon_livingroom
 title: Home
 views:
   - path: default_view
@@ -722,6 +726,9 @@ views:
           - entity: binary_sensor.updater
             name: HASS Updater
           - entity: sensor.hacs
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+          - entity: sensor.home_assistant_operating_system_newest_version
+          - entity: sensor.home_assistant_operating_system_version
         view_layout:
           position: sidebar
       - type: markdown
