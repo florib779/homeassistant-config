@@ -46,7 +46,7 @@ sensor:
       time_formatted:
         value_template: "{{ as_timestamp(states('sensor.date_time_utc')) | timestamp_custom('%A %B %-m, %I:%M %p') }}"
       basement_washer_on:
-        friendly_name: 'Washer'
+        #friendly_name: 'Washer'
         value_template: >
           {% if states.sensor.basement_washer_power_consumption.state | float > 5 %}
             Washing
@@ -54,7 +54,7 @@ sensor:
             Off
           {% endif %}
       kitchen_dishwasher_on:
-        friendly_name: 'Dishwasher'
+        #friendly_name: 'Dishwasher'
         value_template: >
           {% if states.sensor.kitchen_dishwasher_power_consumption.state | float > 5 %}
             Cleaning
@@ -62,15 +62,13 @@ sensor:
             Off
           {% endif %}
       office_laptop_charged:
-        friendly_name: 'Laptop'
         value_template:  >
-          {% if states.sensor.office_laptop_power_consumption.state | float > 1 %}
-            Connected
+          {% if states.sensor.office_switch_power_consumption.state | float > 10 %}
+            On
           {% else %}
-            Ready
+            Off
           {% endif %}
       storeroom_akku_charged:
-        friendly_name: 'Akku'
         value_template:  >
           {% if states.sensor.storeroom_switch_power_consumption.state | float > 1 %}
             Charging
@@ -78,7 +76,7 @@ sensor:
             Charged
           {% endif %}
       electricity_price:
-        friendly_name: 'Electricity Price'
+        #friendly_name: 'Electricity Price'
         value_template: "0.298"
   - platform: systemmonitor
     resources:

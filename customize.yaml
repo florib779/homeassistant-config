@@ -279,5 +279,10 @@ sensor.corridor_rock_total_energy_cost:
   friendly_name: Corridor ROCK Total Energy Cost
 sensor.kitchen_dishwasher_on:
   icon: mdi:dishwasher
+  friendly_name: Dishwasher
 sensor.electricity_price:
   unit_of_measurement: EUR/kWh
+sensor.office_laptop_charged:
+  friendly_name: PC
+sensor.storeroom_akku_charged:
+  friendly_name: Akku

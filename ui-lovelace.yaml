@@ -279,6 +279,8 @@ views:
                 name: Shutter
               - entity: binary_sensor.livingroom_balcony_door
                 name: Balcony Door
+              - entity: sensor.livingroom_pushbutton_humidity
+                name: Humidity
             header:
               toggle:
                 entity: switch.livingroom_fan
@@ -415,15 +417,18 @@ views:
               step: row
             header:
               name: Bathroom
+              toggle: {}
             sensors:
               - entity: sensor.bathroom_thermostat_battery
                 name: T-Battery
               - entity: sensor.bathroom_pushbutton_battery
                 name: P-Battery
-            view_layout:
-              step: row
+              - entity: sensor.bathroom_pushbutton_humidity
+                name: Humidity
             label:
               temperature: Temperature
+            view_layout:
+              step: row
           - type: custom:simple-thermostat
             style: |
               ha-card {
@@ -478,6 +483,7 @@ views:
             header:
               name: Heatingroom
               icon: mdi:power-socket-de
+              toggle: {}
             fallback: ' '
             view_layout:
               step: row
@@ -744,6 +750,8 @@ views:
         cards:
           - type: entities
             entities:
+              - entity: binary_sensor.fritz_box_7490_firmware_update
+                name: Fritz!OS
               - entity: sensor.fritz_box_7490_connection_uptime
                 name: Connection Uptime
               - entity: binary_sensor.fritz_box_7490_connectivity
@@ -1123,3 +1131,217 @@ views:
               power: true
               progress: true
               volume_level: false
+  - title: Music
+    path: music
+    type: custom:horizontal-layout
+    layout:
+      width: 600
+      column: 2
+    badges: []
+    cards:
+      - type: custom:auto-entities
+        filter:
+          include:
+            - entity_id: media_player.roon_*
+              state: playing
+              options:
+                type: custom:mini-media-player
+                artwork: full-cover-fit
+                group: true
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume: true
+        card:
+          type: entities
+        sort:
+          method: state
+          reverse: true
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: entities
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_livingroom
+                group: true
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume: true
+              - type: custom:mini-media-player
+                entity: media_player.sonos_livingroom
+                group: true
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
+                speaker_group:
+                  platform: sonos
+                  show_group_count: true
+                  entities:
+                    - entity_id: media_player.sonos_livingroom
+                      name: Livingroom
+                    - entity_id: media_player.sonos_kitchen
+                      name: Kitchen
+                    - entity_id: media_player.sonos_office
+                      name: Office
+                    - entity_id: media_player.sonos_bathroom
+                      name: Bathroom
+                    - entity_id: media_player.sonos_bedroom
+                      name: Bedroom
+              - type: custom:fold-entity-row
+                head:
+                  type: section
+                padding: 0
+                entities:
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_bass
+                    name: Bass
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_treble
+                    name: Treble
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_sub_gain
+                    name: Sub Gain
+                  - type: custom:slider-entity-row
+                    entity: input_number.sonos_livingroom_sub_crossover
+                    name: Sub Crossover
+                  - type: buttons
+                    entities:
+                      - entity: switch.sonos_livingroom_night_sound
+                      - entity: switch.sonos_livingroom_speech_enhance
+                      - entity: switch.sonos_livingroom_sub
+                      - entity: switch.sonos_livingroom_sub_polarity
+                      - entity: switch.sonos_livingroom_buttons_enabled
+                      - entity: switch.sonos_livingroom_status_light
+          - type: custom:mini-media-player
+            entity: media_player.roon_headphones
+            hide:
+              mute: true
+              power: true
+              progress: true
+              volume: true
+              volume_level: true
+            idle_view:
+              when_idle: true
+              when_paused: true
+              when_standby: true
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Kitchen
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_kitchen
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_kitchen_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_kitchen_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_kitchen_buttons_enabled
+                  - entity: switch.sonos_kitchen_status_light
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Office
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_office
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_office_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_office_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_office_buttons_enabled
+                  - entity: switch.sonos_office_status_light
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Bathroom
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_bathroom
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bathroom_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bathroom_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_bathroom_buttons_enabled
+                  - entity: switch.sonos_bathroom_status_light
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Bedroom
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_bedroom
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  mute: true
+                  name: true
+                  power: true
+                  progress: true
+                  volume_level: false
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bedroom_bass
+                name: Bass
+              - type: custom:slider-entity-row
+                entity: input_number.sonos_bedroom_treble
+                name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_bedroom_night_sound
+                  - entity: switch.sonos_bedroom_speech_enhance
+                  - entity: switch.sonos_bedroom_buttons_enabled
+                  - entity: switch.sonos_bedroom_status_light
