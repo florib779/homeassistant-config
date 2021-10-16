@@ -527,6 +527,15 @@ views:
                 names: true
                 icons: true
                 headings: true
+      - type: picture-glance
+        image: https://demo.home-assistant.io/stub_config/kitchen.png
+        entities:
+          - entity: switch.cruise_tracking
+          - entity: switch.infrared_light
+          - entity: switch.light
+          - entity: switch.sleep
+        camera_image: camera.office
+        camera_view: live
       - type: vertical-stack
         cards:
           - type: entities
