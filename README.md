@@ -86,7 +86,7 @@ My Home Assistant config files including products of:
     - [x] AVM FRITZ!DECT 440 (push button switch).
       - [x] Temperature.
       - [x] Battery Level.
-      - [ ] Humidity.
+      - [x] Humidity.
         * Currently not implemented in Home Assistant.
     - [x] Rademacher RolloTron DECT 1213 (shutter).
       * Shows only whether open or closed (even if only half open) - no intermediate levels.
