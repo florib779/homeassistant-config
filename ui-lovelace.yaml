@@ -1,14 +1,18 @@
 media_art_background:
   width: 100%
   entities:
-    - media_player.roon_livingroom
+    - entity: media_player.roon_livingroom
+      valid_states:
+        - playing
+      views:
+        - music
 title: Home
 views:
   - path: default_view
     title: Home
     layout:
       max_cols: 3
-      width: 300
+      width: 400
     icon: si:homeassistant
     theme: ''
     type: custom:masonry-layout
@@ -527,20 +531,101 @@ views:
                 names: true
                 icons: true
                 headings: true
-      - type: picture-glance
-        image: https://demo.home-assistant.io/stub_config/kitchen.png
-        entities:
-          - entity: switch.cruise_tracking
-          - entity: switch.infrared_light
-          - entity: switch.light
-          - entity: switch.sleep
-        camera_image: camera.office
+      - camera_image: camera.office
         camera_view: live
+        elements:
+          - icon: mdi:arrow-up
+            style:
+              background: rgba(255, 255, 255, 0.5)
+              top: 15px
+              right: 25px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: up
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - icon: mdi:arrow-down
+            style:
+              background: rgba(255, 255, 255, 0.5)
+              top: 65px
+              right: 25px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: down
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - icon: mdi:arrow-left
+            style:
+              background: rgba(255, 255, 255, 0.5)
+              top: 40px
+              right: 50px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: left
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - icon: mdi:arrow-right
+            style:
+              background: rgba(255, 255, 255, 0.5)
+              top: 40px
+              right: 0px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: right
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - type: state-icon
+            entity: switch.office_camera_infrared_light
+            tap_action:
+              action: toggle
+            style:
+              left: 16%
+              top: 13px
+          - type: state-icon
+            entity: switch.office_camera_light
+            tap_action:
+              action: toggle
+            style:
+              left: 22%
+              top: 13px
+          - type: state-icon
+            entity: switch.office_camera_sleep
+            style:
+              left: 28%
+              top: 13px
+          - type: state-icon
+            entity: switch.office_camera_sound
+            style:
+              left: 34%
+              top: 13px
+          - type: state-icon
+            entity: switch.office_camera_tracking
+            style:
+              left: 40%
+              top: 13px
+          - type: state-icon
+            entity: alarm_control_panel.office_camera_alarm
+            style:
+              left: 76%
+              top: 15px
+        entity: camera.office
+        type: picture-elements
       - type: vertical-stack
         cards:
           - type: entities
             entities:
-              - entity: sensor.time
               - entity: timer.cooking_timer
                 type: custom:timer-bar-card
               - entity: input_number.timer_minutes
@@ -740,14 +825,21 @@ views:
             name: HASS Version
           - entity: binary_sensor.updater
             name: HASS Updater
-          - entity: sensor.hacs
           - entity: binary_sensor.home_assistant_operating_system_update_available
-          - entity: sensor.home_assistant_operating_system_newest_version
-          - entity: sensor.home_assistant_operating_system_version
+            name: HASS System
+          - entity: sensor.hacs
         view_layout:
           position: sidebar
       - type: markdown
         content: '* `sudo systemctl restart roonserver`'
+        view_layout:
+          position: sidebar
+      - type: iframe
+        url: http://192.168.178.79:1400/support/review
+        aspect_ratio: 100%
+      - type: markdown
+        content: '* 21/10/16 16pm: Connected the two Sonos Ones with ethernet'
+        title: Changelog
         view_layout:
           position: sidebar
   - title: Network
@@ -763,8 +855,6 @@ views:
                 name: Fritz!OS
               - entity: sensor.fritz_box_7490_connection_uptime
                 name: Connection Uptime
-              - entity: binary_sensor.fritz_box_7490_connectivity
-                name: Connectivity
               - entity: sensor.fritz_box_7490_max_kbit_s_received
                 name: Download Speed
               - entity: sensor.fritz_box_7490_max_kbit_s_sent
@@ -795,17 +885,6 @@ views:
                 icon_height: 20px
                 show_name: false
                 entity: sensor.fritz_box_7490_device_uptime
-              - type: button
-                tap_action:
-                  action: call-service
-                  service: fritz.reconnect
-                  service_data: {}
-                  target: {}
-                icon: mdi:lan-connect
-                name: Reconnect
-                show_name: false
-                icon_height: 20px
-                entity: binary_sensor.fritz_box_7490_connectivity
             square: false
             columns: 2
       - type: picture
@@ -1146,6 +1225,7 @@ views:
     layout:
       width: 600
       column: 2
+    icon: mdi:music
     badges: []
     cards:
       - type: custom:auto-entities
