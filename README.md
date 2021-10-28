@@ -103,8 +103,6 @@ My Home Assistant config files including products of:
     - [x] Connectivity.
     - [x] Control, as with the remote control.
     - [x] Notifications/Messages.
-    - [x] Show Home Assistant notifications ([Notifications for Android TV / Fire TV ](https://www.home-assistant.io/integrations/nfandroidtv/)).
-      * Not tested yet.
     - [x] State.
 
 ## ToDo/Ideas
