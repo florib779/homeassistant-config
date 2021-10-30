@@ -12,7 +12,7 @@ views:
     title: Home
     layout:
       max_cols: 3
-      width: 400
+      width: 350
     icon: si:homeassistant
     theme: ''
     type: custom:masonry-layout
@@ -93,20 +93,29 @@ views:
               type: buttons
               entities:
                 - entity: switch.livingroom_tv_power
+                  icon: mdi:television
                 - entity: light.livingroom_tv_light
+                  icon: mdi:television-ambient-light
                 - entity: switch.livingroom_fan
+                  icon: mdi:ceiling-fan
                 - entity: switch.kitchen_light
+                  icon: mdi:lightbulb
                 - entity: switch.kitchen_cookerhood
+                  icon: mdi:stove
                 - entity: binary_sensor.livingroom_shutter_small
+                  icon: mdi:window-shutter
                   tap_action:
                     action: more-info
                 - entity: binary_sensor.livingroom_balcony_door
+                  icon: mdi:door-sliding
                   tap_action:
                     action: more-info
                 - entity: sensor.basement_washer_on
+                  icon: mdi:washing-machine
                   tap_action:
                     action: more-info
                 - entity: sensor.kitchen_dishwasher_on
+                  icon: mdi:dishwasher
                   tap_action:
                     action: more-info
           - type: custom:auto-entities
@@ -252,10 +261,6 @@ views:
                   - entity: switch.sonos_bedroom_status_light
       - type: vertical-stack
         cards:
-          - type: weather-forecast
-            entity: weather.home
-            secondary_info_attribute: humidity
-            show_forecast: false
           - type: custom:simple-thermostat
             style: |
               ha-card {
@@ -315,7 +320,7 @@ views:
               step: row
             sensors:
               - entity: sensor.office_thermostat_battery
-                name: Battery
+                name: T-Battery
               - entity: sensor.office_laptop_charged
             header:
               name: Office
@@ -533,10 +538,12 @@ views:
                 headings: true
       - camera_image: camera.office
         camera_view: live
+        tap_action:
+          service_data:
+            entity_id: camera.office
         elements:
           - icon: mdi:arrow-up
             style:
-              background: rgba(255, 255, 255, 0.5)
               top: 15px
               right: 25px
             tap_action:
@@ -549,7 +556,6 @@ views:
             type: icon
           - icon: mdi:arrow-down
             style:
-              background: rgba(255, 255, 255, 0.5)
               top: 65px
               right: 25px
             tap_action:
@@ -562,7 +568,6 @@ views:
             type: icon
           - icon: mdi:arrow-left
             style:
-              background: rgba(255, 255, 255, 0.5)
               top: 40px
               right: 50px
             tap_action:
@@ -575,7 +580,6 @@ views:
             type: icon
           - icon: mdi:arrow-right
             style:
-              background: rgba(255, 255, 255, 0.5)
               top: 40px
               right: 0px
             tap_action:
@@ -615,44 +619,59 @@ views:
             style:
               left: 40%
               top: 13px
+          - type: state-label
+            entity: sensor.office_camera_last_alarm_time
+            style:
+              right: '-30px'
+              bottom: '-25px'
+              color: black
+              font-size: 12px
+          - type: state-icon
+            entity: weather.home
+            style:
+              right: 45%
+              bottom: '-25px'
+              color: black
+              font-size: 12px
+          - type: state-label
+            entity: weather.home
+            attribute: temperature
+            suffix: ' °C'
+            style:
+              right: 35%
+              bottom: '-25px'
+              color: black
+              font-size: 12px
           - type: state-icon
             entity: alarm_control_panel.office_camera_alarm
             style:
-              left: 76%
-              top: 15px
+              right: '-25px'
+              bottom: '-25px'
         entity: camera.office
         type: picture-elements
       - type: vertical-stack
         cards:
           - type: entities
             entities:
-              - entity: timer.cooking_timer
-                type: custom:timer-bar-card
-              - entity: input_number.timer_minutes
-              - entity: script.timer_start
-              - entity: script.timer_cancel
-            title: Timer
-          - type: entities
-            entities:
-              - entity: sensor.zuk_z1_letzte_benachrichtigung
+              - entity: sensor.zuk_z1_last_notification
                 name: Nachricht
             show_header_toggle: false
             footer:
               type: buttons
               entities:
-                - entity: sensor.zuk_z1_akkufullstand
+                - entity: sensor.zuk_z1_battery_level
                   tap_action:
                     action: more-info
-                - entity: binary_sensor.zuk_z1_ladt_derzeit
+                - entity: binary_sensor.zuk_z1_is_charging
                   tap_action:
                     action: more-info
-                - entity: binary_sensor.zuk_z1_bluetooth_status
+                - entity: binary_sensor.zuk_z1_bluetooth_state
                   tap_action:
                     action: more-info
-                - entity: binary_sensor.zuk_z1_wlan_status
+                - entity: binary_sensor.zuk_z1_wifi_state
                   tap_action:
                     action: more-info
-                - entity: binary_sensor.zuk_z1_inaktiv
+                - entity: binary_sensor.zuk_z1_interactive
                   tap_action:
                     action: more-info
                 - entity: sensor.zuk_z1_sim_1
@@ -684,6 +703,14 @@ views:
               locate: false
               spot:
                 show: true
+          - type: entities
+            entities:
+              - entity: timer.cooking_timer
+                type: custom:timer-bar-card
+              - entity: input_number.timer_minutes
+              - entity: script.timer_start
+              - entity: script.timer_cancel
+            title: Timer
   - title: System
     path: system
     type: sidebar
@@ -1221,36 +1248,16 @@ views:
               volume_level: false
   - title: Music
     path: music
-    type: custom:horizontal-layout
+    type: sidebar
     layout:
       width: 600
       column: 2
     icon: mdi:music
     badges: []
     cards:
-      - type: custom:auto-entities
-        filter:
-          include:
-            - entity_id: media_player.roon_*
-              state: playing
-              options:
-                type: custom:mini-media-player
-                artwork: full-cover-fit
-                group: true
-                hide:
-                  controls: true
-                  icon: true
-                  info: true
-                  mute: true
-                  name: true
-                  power: true
-                  progress: true
-                  volume: true
-        card:
-          type: entities
-        sort:
-          method: state
-          reverse: true
+      - type: iframe
+        url: http://rock:9100/display/
+        aspect_ratio: 50%
       - type: custom:vertical-stack-in-card
         cards:
           - type: entities
@@ -1434,3 +1441,5 @@ views:
                   - entity: switch.sonos_bedroom_speech_enhance
                   - entity: switch.sonos_bedroom_buttons_enabled
                   - entity: switch.sonos_bedroom_status_light
+        view_layout:
+          position: sidebar
