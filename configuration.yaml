@@ -63,7 +63,7 @@ sensor:
           {% endif %}
       office_laptop_charged:
         value_template:  >
-          {% if states.sensor.office_switch_power_consumption.state | float > 10 %}
+          {% if states.sensor.office_switch_power_consumption.state | float > 5 %}
             On
           {% else %}
             Off
