@@ -90,3 +90,6 @@ sensor:
     - type: processor_temperature
     - type: processor_use
     - type: swap_use_percent
+  - platform: command_line
+    name: RoonServer-Log
+    command: '/var/roon/RoonServer/Logs/RoonServer_log.txt'
