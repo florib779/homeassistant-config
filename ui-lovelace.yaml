@@ -94,12 +94,16 @@ views:
               entities:
                 - entity: switch.livingroom_tv_power
                   icon: mdi:television
+                - entity: light.livingroom_floodlight
+                  icon: mdi:floor-lamp
                 - entity: light.livingroom_tv_light
                   icon: mdi:television-ambient-light
                 - entity: switch.livingroom_fan
                   icon: mdi:ceiling-fan
                 - entity: switch.kitchen_light
                   icon: mdi:lightbulb
+                - entity: light.bedroom_light
+                  icon: mdi:bed
                 - entity: switch.kitchen_cookerhood
                   icon: mdi:stove
                 - entity: binary_sensor.livingroom_shutter_small
@@ -492,7 +496,8 @@ views:
             header:
               name: Heatingroom
               icon: mdi:power-socket-de
-              toggle: {}
+              toggle:
+                entity: switch.heatingroom_pump
             fallback: ' '
             view_layout:
               step: row
@@ -711,156 +716,63 @@ views:
               - entity: script.timer_start
               - entity: script.timer_cancel
             title: Timer
+      - type: logbook
+        entities:
+          - sensor.basement_washer_on
+        hours_to_show: 8
   - title: System
     path: system
     type: sidebar
     icon: mdi:server
+    theme: Caule Light Blue
     badges: []
     cards:
-      - type: picture-elements
-        elements:
-          - type: image
-            image: /local/img/roon-moon-white.png
-            tap_action:
-              action: url
-              url_path: https://community.roonlabs.com
-            style:
-              top: 49%
-              left: 25%
-              color: white
-          - type: icon
-            icon: si:homeassistant
-            tap_action:
-              action: url
-              url_path: https://community.home-assistant.io
-            style:
-              top: 49%
-              left: 30%
-              color: white
-          - type: icon
-            tap_action:
-              action: url
-              url_path: http://rock:9100/display/
-            name: WOL
-            icon: mdi:web
-            icon_height: 10px
-            hold_action:
-              action: none
-            style:
-              top: 50%
-              left: 64%
-              color: '#3073ad'
-        image: /local/img/rock_akasa_case_front.jpg
-      - type: grid
-        cards:
-          - type: gauge
-            entity: sensor.processor_use_percent
-            min: 0
-            max: 100
-            name: CPU
-            severity:
-              green: 0
-              yellow: 50
-              red: 80
-          - type: gauge
-            entity: sensor.corridor_rock_power_consumption
-            min: 0
-            max: 100
-            name: Power
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-          - type: gauge
-            entity: sensor.processor_temperature
-            min: 0
-            max: 100
-            severity:
-              green: 0
-              yellow: 80
-              red: 90
-            name: CPU
-          - type: gauge
-            entity: sensor.corridor_rock_temperature
-            min: 0
-            max: 60
-            name: Environment
-            severity:
-              green: 0
-              yellow: 35
-              red: 40
-          - type: gauge
-            entity: sensor.memory_use_percent
-            min: 0
-            max: 100
-            name: Memory
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-          - type: gauge
-            entity: sensor.disk_use_percent
-            min: 0
-            max: 100
-            name: Disk
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-          - type: gauge
-            entity: sensor.swap_use_percent
-            min: 0
-            max: 100
-            name: Swap
-            severity:
-              green: 0
-              yellow: 50
-              red: 90
-        columns: 4
-        square: false
       - type: custom:auto-entities
+        card:
+          type: entities
+          show_header_toggle: true
+          state_color: false
         filter:
           include:
             - entity_id: media_player.roon_*
-              state: playing
-              options:
-                type: custom:mini-media-player
-                group: true
-                volume_stateless: true
-                volume_step: 1
-                hide:
-                  power: true
-                  progress: true
-        card:
-          type: entities
+          exclude: []
         sort:
           method: state
           reverse: true
-        view_layout:
-          position: sidebar
-      - type: sensor
-        entity: sensor.load_15m
-        detail: 2
-        hours_to_show: 1
-        graph: line
-        view_layout:
-          position: sidebar
-      - type: entities
-        entities:
-          - entity: sensor.last_boot
-          - entity: binary_sensor.home_assistant_operating_system_update_available
-            name: HASS Version
-          - entity: binary_sensor.updater
-            name: HASS Updater
-          - entity: binary_sensor.home_assistant_operating_system_update_available
-            name: HASS System
-          - entity: sensor.hacs
+          numeric: false
         view_layout:
           position: sidebar
       - type: markdown
-        content: '* `sudo systemctl restart roonserver`'
+        content: |-
+          * `sudo systemctl restart roonserver`
+          * `tail -f /var/roon/RoonServer/Logs/RoonServer_log.txt | grep Debug:`
+          * `tail -fn 100 /var/roon/RoonServer/Logs/RoonServer_log.txt`
         view_layout:
           position: sidebar
+      - type: grid
+        cards:
+          - type: custom:bar-card
+            entities:
+              - entity: sensor.processor_temperature
+                name: CPU Temperature
+            height: 10px
+            color: '#00458a'
+          - type: custom:bar-card
+            entities:
+              - entity: sensor.corridor_rock_temperature
+                name: Environment Temperature
+            height: 10px
+            color: '#00458a'
+          - type: custom:bar-card
+            entities:
+              - entity: sensor.corridor_rock_power_consumption
+                name: Current Power Consumtion
+            height: 10px
+            color: '#00458a'
+        square: false
+      - type: iframe
+        url: https://rock:9090/system
+        aspect_ratio: 50%
       - type: iframe
         url: http://192.168.178.79:1400/support/review
         aspect_ratio: 100%
@@ -921,6 +833,18 @@ views:
           url_path: https://fritz.box
         hold_action:
           action: none
+      - type: entities
+        entities:
+          - entity: sensor.last_boot
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+            name: HASS Version
+          - entity: binary_sensor.updater
+            name: HASS Updater
+          - entity: binary_sensor.home_assistant_operating_system_update_available
+            name: HASS System
+          - entity: sensor.hacs
+        view_layout:
+          position: sidebar
   - title: Devel
     path: devel
     icon: mdi:developer-board
@@ -1443,3 +1367,69 @@ views:
                   - entity: switch.sonos_bedroom_status_light
         view_layout:
           position: sidebar
+  - title: Cam
+    path: cam
+    type: panel
+    badges: []
+    cards:
+      - camera_image: camera.office
+        camera_view: live
+        tap_action:
+          service_data:
+            entity_id: camera.office
+        elements:
+          - icon: mdi:arrow-up
+            style:
+              top: 15px
+              right: 25px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: up
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - icon: mdi:arrow-down
+            style:
+              top: 65px
+              right: 25px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: down
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - icon: mdi:arrow-left
+            style:
+              top: 40px
+              right: 50px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: left
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - icon: mdi:arrow-right
+            style:
+              top: 40px
+              right: 0px
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              service_data:
+                direction: right
+                entity_id: camera.office
+                speed: 5
+            type: icon
+          - type: state-icon
+            entity: binary_sensor.livingroom_balcony_door
+            style:
+              left: 16%
+              top: 13px
+        entity: camera.office
+        type: picture-elements
