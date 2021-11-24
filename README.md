@@ -64,8 +64,7 @@ My Home Assistant config files including products of:
       * Currently not implemented in Home Assistant.
     - [ ] AVM FRITZ!DECT 440 (push button switch).
       * Currently not implemented in Home Assistant.
-    - [ ] AVM FRITZ!DECT 500 (LED light).
-      * Currently not implemented in Home Assistant.
+    - [x] AVM FRITZ!DECT 500 (LED light).
     - [ ] Rademacher RolloTron DECT 1213 (shutter).
       * Currently not implemented in Home Assistant.
       - [ ] Close shutter when TV is turned on.
@@ -81,13 +80,12 @@ My Home Assistant config files including products of:
       - [x] Total Power Consumption.
     - [x] AVM FRITZ!DECT 300/Eurotronic Comet DECT (radiator control).
       - [x] Battery level.
-    - [ ] AVM FRITZ!DECT 400 (push button switch).
+    - [x] AVM FRITZ!DECT 400 (push button switch).
       - [x] Battery Level.
     - [x] AVM FRITZ!DECT 440 (push button switch).
       - [x] Temperature.
       - [x] Battery Level.
       - [x] Humidity.
-        * Currently not implemented in Home Assistant.
     - [x] Rademacher RolloTron DECT 1213 (shutter).
       * Shows only whether open or closed (even if only half open) - no intermediate levels.
 * **Ecovacs Deebot** ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card)).
