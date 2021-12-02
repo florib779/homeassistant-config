@@ -285,4 +285,4 @@ sensor.electricity_price:
 sensor.office_laptop_charged:
   friendly_name: PC
 sensor.storeroom_akku_charged:
-  friendly_name: Akku
+  friendly_name: Makita
