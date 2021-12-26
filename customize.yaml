@@ -269,7 +269,7 @@ sensor.basement_dishwasher_finished:
 sensor.basement_dishwasher_on:
   icon: mdi:dishwasher
 sensor.basement_washer_on:
-  friendly_name: Basement Washer on
+  friendly_name: Washer
   icon: mdi:washing-machine
 sensor.basement_washer_total_energy_cost:
   friendly_name: Basement Washer Total Energy Cost

@@ -2,4 +2,4 @@ panel_iframe:
   roon_display:
     title: 'Roon Web Display'
     icon: 'mdi:waveform'
-    url: 'http://rock:9100/display/'
+    url: 'http://rock:9330/display/'
