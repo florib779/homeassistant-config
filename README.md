@@ -22,6 +22,7 @@ My Home Assistant config files including products of:
   - [x] Speech enhancement (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player).
   - [x] Bass/Treble via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api).
+  - [x] Switch rear speakers
   - [ ] Loudness.
     * Seems to be not possible yet.
   - [ ] Balance.
@@ -65,9 +66,10 @@ My Home Assistant config files including products of:
     - [ ] AVM FRITZ!DECT 440 (push button switch).
       * Currently not implemented in Home Assistant.
     - [x] AVM FRITZ!DECT 500 (LED light).
-    - [ ] Rademacher RolloTron DECT 1213 (shutter).
+    - [x] Rademacher RolloTron DECT 1213 (shutter).
       * Currently not implemented in Home Assistant.
-      - [ ] Close shutter when TV is turned on.
+      * Possible via Homebridge [info](https://community.home-assistant.io/t/support-rademacher-rollotron-1213-dect-with-avm-fritz-smarthome/319854/5)
+      - [x] Close shutter when TV is turned on.
         * To avoid light glare.
       - [ ] Go to favorite position at a given time.
   * Show info
@@ -104,8 +106,6 @@ My Home Assistant config files including products of:
     - [x] State.
 
 ## ToDo/Ideas
-- [ ] Make timer card more compact.
-  - [ ] Show date.
 - [ ] Child lock automation.
   - [ ] All buttons of Fritz!Dect devices off.
   - [ ] All buttons of Sonos devices off.

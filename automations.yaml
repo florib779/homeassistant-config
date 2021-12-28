@@ -1,1 +1,33 @@
-
+- id: '1640522228516'
+  alias: TV on - Shutter down
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.livingroom_tv_power_consumption
+    above: '20'
+  condition: []
+  action:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 0
+  mode: single
+- id: '1640523693313'
+  alias: TV off - Shutter up
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.livingroom_tv_power_consumption
+    below: '20'
+  condition:
+  - condition: sun
+    before: sunset
+    before_offset: '1'
+  action:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 100
+  mode: single

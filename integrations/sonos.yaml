@@ -29,28 +29,28 @@ switch:
             buttons_enabled: false
 
       # Playbar bedroom ########################################################
-      sonos_bedroom_night_sound:
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_bedroom
-            night_sound: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_bedroom
-            night_sound: false
-      sonos_bedroom_speech_enhance:
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_bedroom
-            speech_enhance: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_bedroom
-            speech_enhance: false
+      #sonos_bedroom_night_sound:
+      #  turn_on:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_bedroom
+      #      night_sound: true
+      #  turn_off:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_bedroom
+      #      night_sound: false
+      #sonos_bedroom_speech_enhance:
+      #  turn_on:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_bedroom
+      #      speech_enhance: true
+      #  turn_off:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_bedroom
+      #      speech_enhance: false
       sonos_bedroom_status_light:
         turn_on:
           service: sonos.set_option
@@ -99,28 +99,28 @@ switch:
             buttons_enabled: false
 
       # Playbase livingroom ####################################################
-      sonos_livingroom_night_sound:
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            night_sound: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            night_sound: false
-      sonos_livingroom_speech_enhance:
-        turn_on:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            speech_enhance: true
-        turn_off:
-          service: sonos.set_option
-          data:
-            entity_id: media_player.sonos_livingroom
-            speech_enhance: false
+      #sonos_livingroom_night_sound:
+      #  turn_on:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_livingroom
+      #      night_sound: true
+      #  turn_off:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_livingroom
+      #      night_sound: false
+      #sonos_livingroom_speech_enhance:
+      #  turn_on:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_livingroom
+      #      speech_enhance: true
+      #  turn_off:
+      #    service: sonos.set_option
+      #    data:
+      #      entity_id: media_player.sonos_livingroom
+      #      speech_enhance: false
       sonos_livingroom_status_light:
         turn_on:
           service: sonos.set_option
