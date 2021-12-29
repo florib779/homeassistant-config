@@ -1,324 +1,308 @@
-media_art_background:
-  width: 100%
-  entities:
-    - entity: media_player.roon_livingroom
-      valid_states:
-        - playing
-      views:
-        - music
 title: Home
 views:
-  - title: Dash
-    path: dash
-    theme: Caule Black Blue Glass
+  - theme: Caule Black Blue Glass
+    title: Home
     icon: mdi:home
-    badges:
-      - entity: weather.home
-      - entity: sensor.fritz_box_7490_max_kbit_s_received
-      - entity: sensor.sm_g960f_battery_level
-      - entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
-      - entity: sensor.storeroom_akku_charged
-      - entity: sensor.basement_washer_on
-      - entity: sensor.kitchen_dishwasher_on
-      - entity: switch.heatingroom_pump
+    badges: []
     cards:
-      - type: grid
-        cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_livingroom
-            toggle_power: true
-            volume_stateless: true
-            group: false
+      - type: glance
+        entities:
+          - entity: sensor.sm_g960f_battery_level
+            icon: mdi:cellphone
+          - entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
+            icon: mdi:tablet
+          - entity: sensor.storeroom_akku_charged
+            icon: mdi:battery
+          - entity: switch.heatingroom_pump
+            icon: mdi:pump
+          - entity: binary_sensor.livingroom_balcony_door
+          - entity: camera.office
+        show_icon: true
+        state_color: true
+        columns: 6
+        show_name: false
+      - type: entities
+        entities:
+          - entity: weather.home
+          - entity: media_player.roon_headphones
+            type: custom:mini-media-player
+            group: true
             hide:
-              info: true
-              icon: true
               mute: true
               power: true
-              progress: true
-              volume_level: false
-            volume_step: '1'
-            artwork: full-cover-fit
-          - type: gauge
-            entity: input_number.sonos_livingroom_bass
-            max: 10
-            min: -10
-            name: Bass
-            needle: true
-          - type: gauge
-            entity: input_number.sonos_livingroom_treble
-            max: 10
-            min: -10
-            name: Treble
-            needle: true
-          - type: thermostat
-            entity: climate.livingroom_thermostat
-            name: ' '
-          - type: gauge
-            entity: sensor.livingroom_pushbutton_humidity
-            min: 0
-            max: 100
-            name: ' Humidity'
-            severity:
-              green: 40
-              yellow: 39
-              red: 60
-          - type: button
-            tap_action:
-              action: more-info
-            entity: binary_sensor.livingroom_balcony_door
-            show_name: false
-          - type: light
-            entity: light.livingroom_floodlight
-            name: ' '
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.livingroom_tv_power
-            show_name: false
-            show_state: false
-          - type: light
-            entity: light.livingroom_tv_light
-            name: ' '
-          - type: button
-            tap_action:
-              action: toggle
-            entity: vacuum.e0001103417610630506
-            show_state: false
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.livingroom_fan
-            show_name: false
-          - type: button
-            tap_action:
-              action: more-info
-            entity: binary_sensor.livingroom_shutter_small
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_sub
-            name: Sub
-            show_name: true
-            icon: phu:sonos-sub
-          - type: gauge
-            entity: input_number.sonos_livingroom_sub_gain
-            max: 15
-            min: -15
-            name: Gain
-            needle: true
-          - type: gauge
-            entity: input_number.sonos_livingroom_sub_crossover
-            min: 50
-            max: 110
-            name: Crossover
-            needle: true
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_night_sound
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_speech_enhancement
-            show_state: false
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_buttons_enabled
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_sub_polarity
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_livingroom_surround_enabled
-            show_name: false
-          - type: custom:cover-icon-element
-            entities:
-              - entity: binary_sensor.livingroom_shutter_small
-        square: true
-      - type: grid
-        cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_headphones
-            toggle_power: true
-            volume_stateless: true
-            group: false
-            hide:
-              info: true
-              icon: true
-              power: true
-              progress: true
-            volume_step: '1'
-            artwork: full-cover-fit
-          - type: sensor
-            entity: sensor.corridor_rock_power_consumption
-            graph: line
-            name: ' '
-          - type: sensor
-            entity: sensor.corridor_rock_temperature
-            graph: line
-            name: ' '
-      - type: grid
-        cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_kitchen
-            toggle_power: true
-            volume_stateless: true
-            group: false
-            hide:
-              info: true
-              icon: true
-              mute: true
-              power: true
-              progress: true
-              volume_level: false
-            volume_step: '1'
-            artwork: full-cover-fit
-          - type: gauge
-            entity: input_number.sonos_kitchen_bass
-            max: 10
-            name: Bass
-            min: -10
-            needle: true
-          - type: gauge
-            entity: input_number.sonos_kitchen_treble
-            max: 10
-            name: Treble
-            min: -10
-            needle: true
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.kitchen_cookerhood
-            name: ' '
-            show_name: false
-            show_state: false
-            icon: mdi:stove
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.kitchen_light
-            name: ' '
-            show_name: false
-          - type: light
-            entity: light.kitchen_mood_light
-            name: ' '
-      - type: grid
-        cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_office
-            toggle_power: true
-            volume_stateless: true
-            group: false
-            hide:
-              info: true
-              icon: true
-              mute: true
-              power: true
-              progress: true
-              volume_level: false
-            volume_step: '1'
-            artwork: full-cover-fit
-          - type: gauge
-            entity: input_number.sonos_office_bass
-            max: 10
-            min: -10
-            needle: true
-            name: Bass
-          - type: gauge
-            entity: input_number.sonos_office_treble
-            max: 10
-            min: -10
-            needle: true
-            name: Treble
-          - type: picture-glance
-            image: https://demo.home-assistant.io/stub_config/kitchen.png
-            entities:
-              - sensor.time
-              - sensor.date
-            camera_image: camera.office
-          - type: thermostat
-            entity: climate.office_thermostat
-            name: ' '
-          - type: sensor
-            entity: sensor.office_switch_power_consumption
-            graph: line
-            name: ' '
-            detail: 1
-            hours_to_show: 1
-      - type: grid
-        cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_bathroom
-            toggle_power: true
-            volume_stateless: true
-            group: false
-            hide:
-              info: true
-              icon: true
-              mute: true
-              power: true
-              progress: true
-              volume_level: false
-            volume_step: '1'
-            artwork: full-cover-fit
-          - type: thermostat
-            entity: climate.bathroom_thermostat
-            name: ' '
-          - type: gauge
-            entity: sensor.bathroom_pushbutton_humidity
-            min: 0
-            max: 100
+              volume: true
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: climate.livingroom_thermostat
+            name: Livingroom
+          - entity: sensor.livingroom_pushbutton_humidity
             name: Humidity
-            severity:
-              green: 40
-              yellow: 39
-              red: 60
-      - type: grid
-        cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_bedroom
-            toggle_power: true
+          - entity: media_player.roon_livingroom
+            type: custom:mini-media-player
+            group: true
             volume_stateless: true
-            group: false
+            volume_step: 1
             hide:
-              info: true
-              icon: true
               mute: true
+              name: true
+              power: true
+              progress: true
+              source: true
+              volume_level: false
+            speaker_group:
+              platform: media_player
+              show_group_count: true
+              supports_master: false
+              entities:
+                - entity_id: media_player.roon_livingroom
+                  name: Livingroom
+                - entity_id: media_player.roon_office
+                  name: Office
+                - entity_id: media_player.roon_kitchen
+                  name: Kitchen
+                - entity_id: media_player.roon_bathroom
+                  name: Bathroom
+                - entity_id: media_player.roon_bedroom
+                  name: Bedroom
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_livingroom_bass
+            name: Bass
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_livingroom_treble
+            name: Treble
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_livingroom_sub_gain
+            name: Sub Gain
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_livingroom_sub_crossover
+            name: Sub Crossover
+        header:
+          type: buttons
+          entities:
+            - cover.livingroom_shutter_small
+            - light.livingroom_floodlight
+            - light.livingroom_tv_light
+            - switch.livingroom_tv_power
+            - vacuum.e0001103417610630506
+            - switch.livingroom_fan
+            - binary_sensor.livingroom_balcony_door
+        footer:
+          type: buttons
+          entities:
+            - switch.sonos_livingroom_speech_enhancement
+            - switch.sonos_livingroom_night_sound
+            - switch.sonos_livingroom_surround_enabled
+            - switch.sonos_livingroom_subwoofer_enabled
+            - switch.sonos_livingroom_sub_polarity
+            - switch.sonos_livingroom_touch_controls
+            - switch.sonos_livingroom_status_light
+            - sensor.livingroom_audio_input_format
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: climate.office_thermostat
+            name: Office
+          - entity: media_player.roon_office
+            type: custom:mini-media-player
+            group: true
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              mute: true
+              name: true
               power: true
               progress: true
               volume_level: false
-            volume_step: '1'
-            artwork: full-cover-fit
-          - type: light
-            entity: light.bedroom_light
-            name: ' '
-          - type: thermostat
-            entity: climate.bedroom_thermostat
-            name: ' '
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_bedroom_night_sound
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_bedroom_speech_enhance
-            show_name: false
-          - type: button
-            tap_action:
-              action: toggle
-            entity: switch.sonos_bedroom_buttons_enabled
-            show_name: false
+            speaker_group:
+              platform: media_player
+              show_group_count: true
+              supports_master: false
+              entities:
+                - entity_id: media_player.roon_livingroom
+                  name: Livingroom
+                - entity_id: media_player.roon_office
+                  name: Office
+                - entity_id: media_player.roon_kitchen
+                  name: Kitchen
+                - entity_id: media_player.roon_bathroom
+                  name: Bathroom
+                - entity_id: media_player.roon_bedroom
+                  name: Bedroom
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_office_bass
+            name: Bass
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_office_treble
+            name: Treble
+        show_header_toggle: false
+        footer:
+          type: buttons
+          entities:
+            - switch.sonos_office_touch_controls
+            - switch.sonos_office_status_light
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.kitchen_cookerhood_temperature
+            name: Kitchen
+          - entity: media_player.roon_kitchen
+            type: custom:mini-media-player
+            group: true
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume_level: false
+            speaker_group:
+              platform: media_player
+              show_group_count: true
+              supports_master: false
+              entities:
+                - entity_id: media_player.roon_livingroom
+                  name: Livingroom
+                - entity_id: media_player.roon_office
+                  name: Office
+                - entity_id: media_player.roon_kitchen
+                  name: Kitchen
+                - entity_id: media_player.roon_bathroom
+                  name: Bathroom
+                - entity_id: media_player.roon_bedroom
+                  name: Bedroom
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_kitchen_bass
+            name: Bass
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_kitchen_treble
+            name: Treble
+        header:
+          type: buttons
+          entities:
+            - light.kitchen_mood_light
+            - switch.kitchen_light
+            - switch.kitchen_cookerhood
+            - sensor.kitchen_dishwasher_on
+        show_header_toggle: false
+        state_color: true
+        footer:
+          type: buttons
+          entities:
+            - switch.sonos_kitchen_touch_controls
+            - switch.sonos_kitchen_status_light
+      - type: entities
+        entities:
+          - entity: sensor.basement_washer_temperature
+            name: Basement
+          - entity: sensor.basement_washer_on
+      - type: entities
+        entities:
+          - entity: climate.bedroom_thermostat
+            name: Bedroom
+          - entity: media_player.roon_bedroom
+            type: custom:mini-media-player
+            group: true
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume_level: false
+            speaker_group:
+              platform: media_player
+              show_group_count: true
+              supports_master: false
+              entities:
+                - entity_id: media_player.roon_livingroom
+                  name: Livingroom
+                - entity_id: media_player.roon_office
+                  name: Office
+                - entity_id: media_player.roon_kitchen
+                  name: Kitchen
+                - entity_id: media_player.roon_bathroom
+                  name: Bathroom
+                - entity_id: media_player.roon_bedroom
+                  name: Bedroom
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_bedroom_bass
+            name: Bass
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_bedroom_treble
+            name: Treble
+        header:
+          type: buttons
+          entities:
+            - light.bedroom_light
+        footer:
+          type: buttons
+          entities:
+            - switch.sonos_bedroom_night_sound
+            - switch.sonos_bedroom_speech_enhancement
+            - switch.sonos_bedroom_surround_enabled
+            - switch.sonos_bedroom_touch_controls
+            - switch.sonos_bedroom_status_light
+            - sensor.bedroom_audio_input_format
+      - type: entities
+        entities:
+          - entity: climate.bathroom_thermostat
+            name: Bathroom
+          - entity: sensor.bathroom_pushbutton_humidity
+            name: Humidity
+          - entity: media_player.roon_bathroom
+            type: custom:mini-media-player
+            group: true
+            volume_stateless: true
+            volume_step: 1
+            hide:
+              mute: true
+              name: true
+              power: true
+              progress: true
+              volume_level: false
+            speaker_group:
+              platform: media_player
+              show_group_count: true
+              supports_master: false
+              entities:
+                - entity_id: media_player.roon_livingroom
+                  name: Livingroom
+                - entity_id: media_player.roon_office
+                  name: Office
+                - entity_id: media_player.roon_kitchen
+                  name: Kitchen
+                - entity_id: media_player.roon_bathroom
+                  name: Bathroom
+                - entity_id: media_player.roon_bedroom
+                  name: Bedroom
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_bathroom_bass
+            name: Bass
+          - type: custom:numberbox-card
+            delay: 0
+            entity: input_number.sonos_bathroom_treble
+            name: Treble
+        footer:
+          type: buttons
+          entities:
+            - switch.sonos_bathroom_touch_controls
+            - switch.sonos_bathroom_status_light
   - icon: mdi:clock
     title: Scheduler
     badges: []
