@@ -31,3 +31,82 @@
     type: set_position
     position: 100
   mode: single
+- id: '1641237098329'
+  alias: Shutter down
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-1'
+  condition: []
+  action:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 0
+  mode: single
+- id: '1641237270223'
+  alias: Shutter up
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:45
+  - platform: sun
+    event: sunrise
+    offset: '+1'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.livingroom_tv_power_consumption
+    below: '20'
+  action:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 100
+  mode: single
+- id: '1642241222443'
+  alias: Auto-Backup
+  description: ''
+  trigger:
+  - platform: time
+    at: '15:00:00'
+  condition: []
+  action:
+  - service: hassio.backup_full
+  - service: hassio.addon_stdin
+    data:
+      addon: 782428ea_dropbox-backup
+      input:
+        command: upload
+  mode: single
+- id: '1642349297435'
+  alias: Leave Home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: device_tracker.galaxy_s9
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 9ee581302e6a06dac1df31d1a909f7ef
+    entity_id: light.bedroom_light
+    domain: light
+  - service: media_player.media_pause
+    target:
+      entity_id: media_player.roon_bedroom
+  mode: single
+- id: '1645221509073'
+  alias: HASS config to GitHub
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:00
+  condition: []
+  action:
+  - service: hassio.addon_stdin
+    data:
+      addon: a0d7b954_ssh
+      input: /config/integrations/gitpush/gitpush.sh
+  mode: single

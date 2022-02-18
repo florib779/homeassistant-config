@@ -1,0 +1,5 @@
+panel_iframe:
+  rclone_web_gui:
+    title: 'Rclone'
+    icon: 'si:dropbox'
+    url: 'http://rock:5572/'

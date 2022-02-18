@@ -1,35 +1,30 @@
 title: Home
 views:
-  - theme: Caule Black Blue Glass
+  - theme: Caule Black Blue
     title: Home
     icon: mdi:home
-    badges: []
+    badges:
+      - entity: sensor.sm_g960f_battery_level
+      - entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
+      - entity: sensor.storeroom_akku_charged
+      - entity: sensor.kitchen_dishwasher_on
+      - entity: sensor.basement_washer_on
+      - entity: switch.heatingroom_pump
+      - entity: binary_sensor.livingroom_balcony_door
     cards:
-      - type: glance
-        entities:
-          - entity: sensor.sm_g960f_battery_level
-            icon: mdi:cellphone
-          - entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
-            icon: mdi:tablet
-          - entity: sensor.storeroom_akku_charged
-            icon: mdi:battery
-          - entity: switch.heatingroom_pump
-            icon: mdi:pump
-          - entity: binary_sensor.livingroom_balcony_door
-          - entity: camera.office
-        show_icon: true
-        state_color: true
-        columns: 6
-        show_name: false
       - type: entities
         entities:
           - entity: weather.home
           - entity: media_player.roon_headphones
             type: custom:mini-media-player
+            artwork: full-cover-fit
             group: true
+            idle_view:
+              when_paused: true
             hide:
               mute: true
               power: true
+              progress: true
               volume: true
         show_header_toggle: false
         state_color: true
@@ -39,6 +34,8 @@ views:
             name: Livingroom
           - entity: sensor.livingroom_pushbutton_humidity
             name: Humidity
+          - entity: sensor.sm_g960f_pressure_sensor
+            name: Pressure
           - entity: media_player.roon_livingroom
             type: custom:mini-media-player
             group: true
@@ -85,13 +82,12 @@ views:
         header:
           type: buttons
           entities:
-            - cover.livingroom_shutter_small
             - light.livingroom_floodlight
-            - light.livingroom_tv_light
             - switch.livingroom_tv_power
+            - light.livingroom_tv_light
             - vacuum.e0001103417610630506
             - switch.livingroom_fan
-            - binary_sensor.livingroom_balcony_door
+            - cover.livingroom_shutter_small
         footer:
           type: buttons
           entities:
@@ -111,7 +107,10 @@ views:
             name: Office
           - entity: media_player.roon_office
             type: custom:mini-media-player
+            artwork: full-cover-fit
             group: true
+            idle_view:
+              when_paused: true
             volume_stateless: true
             volume_step: 1
             hide:
@@ -149,14 +148,22 @@ views:
           entities:
             - switch.sonos_office_touch_controls
             - switch.sonos_office_status_light
+            - binary_sensor.sonos_office_microphone
         state_color: true
+        header:
+          type: buttons
+          entities:
+            - camera.office
       - type: entities
         entities:
           - entity: sensor.kitchen_cookerhood_temperature
             name: Kitchen
           - entity: media_player.roon_kitchen
             type: custom:mini-media-player
+            artwork: full-cover-fit
             group: true
+            idle_view:
+              when_paused: true
             volume_stateless: true
             volume_step: 1
             hide:
@@ -194,7 +201,6 @@ views:
             - light.kitchen_mood_light
             - switch.kitchen_light
             - switch.kitchen_cookerhood
-            - sensor.kitchen_dishwasher_on
         show_header_toggle: false
         state_color: true
         footer:
@@ -202,11 +208,6 @@ views:
           entities:
             - switch.sonos_kitchen_touch_controls
             - switch.sonos_kitchen_status_light
-      - type: entities
-        entities:
-          - entity: sensor.basement_washer_temperature
-            name: Basement
-          - entity: sensor.basement_washer_on
       - type: entities
         entities:
           - entity: climate.bedroom_thermostat
@@ -249,6 +250,7 @@ views:
           type: buttons
           entities:
             - light.bedroom_light
+            - switch.adaptive_lighting_adapt_brightness_adaptive_lighting
         footer:
           type: buttons
           entities:
@@ -266,9 +268,9 @@ views:
             name: Humidity
           - entity: media_player.roon_bathroom
             type: custom:mini-media-player
-            group: true
             volume_stateless: true
             volume_step: 1
+            group: true
             hide:
               mute: true
               name: true
@@ -303,6 +305,25 @@ views:
           entities:
             - switch.sonos_bathroom_touch_controls
             - switch.sonos_bathroom_status_light
+      - type: entities
+        entities:
+          - entity: sensor.fritz_box_7490_max_connection_download_throughput
+            name: Download
+          - entity: sensor.fritz_box_7490_max_connection_upload_throughput
+            name: Upload
+        header:
+          type: buttons
+          entities:
+            - entity: binary_sensor.fritz_box_7490_connection
+            - entity: switch.fritz_box_7490_wi_fi_fritz_nomap
+            - entity: switch.fritz_box_7490_wi_fi_fritz_nomap_5ghz
+            - entity: switch.fritz_box_7490_wi_fi_fnet
+            - entity: binary_sensor.fritz_box_7490_firmware_update
+        footer:
+          type: graph
+          entity: sensor.fritz_box_7490_download_throughput
+          detail: 2
+          hours_to_show: 1
   - icon: mdi:clock
     title: Scheduler
     badges: []
@@ -332,3 +353,9 @@ views:
         include:
           - input_number
         title: Sound
+      - type: custom:scheduler-card
+        include:
+          - automation
+          - script
+          - switch
+        exclude: []

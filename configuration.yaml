@@ -54,7 +54,7 @@ sensor:
           {% endif %}
       kitchen_dishwasher_on:
         value_template: >
-          {% if states.sensor.kitchen_dishwasher_power_consumption.state | float > 5 %}
+          {% if states.sensor.kitchen_dishwasher_power_consumption.state | float > 2 %}
             On
           {% else %}
             Off
