@@ -9,17 +9,10 @@ switch:
     switches:
       # Sub polarity
       sonos_livingroom_sub_polarity:
-        #command_on: curl http://192.168.178.32:5005/Livingroom/sub/polarity/0
-        #command_off: curl http://192.168.178.32:5005/Livingroom/sub/polarity/1
         command_on: curl http://192.168.178.32:5005/Livingroom/sub/polarity/1
         command_off: curl http://192.168.178.32:5005/Livingroom/sub/polarity/0
-        # ToDo
-        #command_state: curl -X GET http://192.168.178.32:5005/Livingroom/state | grep -o -P '(?<="polarity":).*(?=})' | sed s'/.$//'
-        #value_template: '{{ value == "1" }}'
 
 shell_command:
-  sonos_bass: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/bass/{{bass}}'
-  sonos_treble: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/treble/{{treble}}'
   sonos_sub_gain: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/sub/gain/{{sub_gain}}'
   sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/sub/crossover/{{sub_crossover}}'
   
@@ -33,85 +26,7 @@ shell_command:
 
 automation:
 
-# Play:3 bathroom ##############################################################
-- id: sonos_bathroom_bass
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_bathroom_bass
-  action:
-    - service: shell_command.sonos_bass
-      data_template:
-        room: 'Bathroom' # Use the name from the Sonos app
-        bass: '{{ trigger.to_state.state | int }}'
-- id: sonos_bathroom_treble
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_bathroom_treble
-  action:
-    - service: shell_command.sonos_treble
-      data_template:
-        room: 'Bathroom' # Use the name from the Sonos app
-        treble: '{{ trigger.to_state.state | int }}'
-
-# Playbar bedroom ##############################################################
-- id: sonos_bedroom_bass
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_bedroom_bass
-  action:
-    - service: shell_command.sonos_bass
-      data_template:
-        room: 'Bedroom' # Use the name from the Sonos app
-        bass: '{{ trigger.to_state.state | int }}'
-- id: sonos_bedroom_treble
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_bedroom_treble
-  action:
-    - service: shell_command.sonos_treble
-      data_template:
-        room: 'Bedroom' # Use the name from the Sonos app
-        treble: '{{ trigger.to_state.state | int }}'
-
-# Play:1 kitchen ###############################################################
-- id: sonos_kitchen_bass
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_kitchen_bass
-  action:
-    - service: shell_command.sonos_bass
-      data_template:
-        room: 'Kitchen' # Use the name from the Sonos app
-        bass: '{{ trigger.to_state.state | int }}'
-- id: sonos_kitchen_treble
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_kitchen_treble
-  action:
-    - service: shell_command.sonos_treble
-      data_template:
-        room: 'Kitchen' # Use the name from the Sonos app
-        treble: '{{ trigger.to_state.state | int }}'
-
 # Playbase livingroom ##########################################################
-- id: sonos_livingroom_bass
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_livingroom_bass
-  action:
-    - service: shell_command.sonos_bass
-      data_template:
-        room: 'Livingroom' # Use the name from the Sonos app
-        bass: '{{ trigger.to_state.state | int }}'
-- id: sonos_livingroom_treble
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_livingroom_treble
-  action:
-    - service: shell_command.sonos_treble
-      data_template:
-        room: 'Livingroom' # Use the name from the Sonos app
-        treble: '{{ trigger.to_state.state | int }}'
 - id: sonos_livingroom_sub_gain
   trigger:
     - platform: state
@@ -130,26 +45,6 @@ automation:
       data_template:
         room: 'Livingroom' # Use the name from the Sonos app
         sub_crossover: '{{ trigger.to_state.state | int }}'
-
-# One office ###################################################################
-- id: sonos_office_bass
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_office_bass
-  action:
-    - service: shell_command.sonos_bass
-      data_template:
-        room: 'Office' # Use the name from the Sonos app
-        bass: '{{ trigger.to_state.state | int }}'
-- id: sonos_office_treble
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_office_treble
-  action:
-    - service: shell_command.sonos_treble
-      data_template:
-        room: 'Office' # Use the name from the Sonos app
-        treble: '{{ trigger.to_state.state | int }}'
 
 ################################################################################
 
@@ -177,53 +72,7 @@ automation:
 input_number:
 # Leave unit_of_measurement in this file for better understanding of the values.
 
-# Play:3 bathroom ##############################################################
-  sonos_bathroom_bass:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_bathroom_treble:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-
-# Playbar bedroom ##############################################################
-  sonos_bedroom_bass:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_bedroom_treble:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-
-# Play:1 kitchen ##############################################################
-  sonos_kitchen_bass:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_kitchen_treble:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-
 # Playbase livingroom ##########################################################
-  sonos_livingroom_bass:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_livingroom_treble:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
 
   # Bigger adjustments are possible, but might damage the Sub.
   sonos_livingroom_sub_gain:
@@ -239,18 +88,6 @@ input_number:
     max: 110
     step: 10
     unit_of_measurement: Hz
-
-# One office ###################################################################
-  sonos_office_bass:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
-  sonos_office_treble:
-    min: -10
-    max: 10
-    step: 1
-    unit_of_measurement: dB
 
 ################################################################################
 
