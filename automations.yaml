@@ -119,3 +119,16 @@
     input:
       cl_light:
         device_id: 237f1616d458e306a1f3083de05f2d08
+- id: '1648232507634'
+  alias: Kitchen PC
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:00:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 48608a926e1e91846fb7ded6dafd2b0c
+    entity_id: switch.kitchen_pc
+    domain: switch
+  mode: single

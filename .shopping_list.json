@@ -22,7 +22,7 @@
     {
         "name": "Zwiebeln",
         "id": "e14b4b70858a4a138bfd3b25ecf00fd4",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Knoblauch",
@@ -47,12 +47,12 @@
     {
         "name": "Essigessenz",
         "id": "44b4c8553fd249f38c643cdd6b9f1cc6",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Asia Nudeln",
         "id": "3bf8b460c2c14360b5fa6077268cc71a",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Tabasco",
@@ -62,7 +62,7 @@
     {
         "name": "Oliven",
         "id": "a2462d8e2b084e42a8b7934d4de0d663",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Pepperoni",
@@ -72,31 +72,36 @@
     {
         "name": "Seife",
         "id": "7db5f51b1a9c4231beceadce8b3bcebc",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Pizza",
         "id": "a9d7131d420a46acbd9a0d112b2be70c",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Pommes",
         "id": "a3e362e8523946ab96ff6c387604528e",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Tiefk\u00fchlgem\u00fcse",
         "id": "76673f30f85e4e73a47786fb982a36ca",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Sojasauce",
         "id": "7e749c071e0d4c0394720c62c8c65c69",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Multivitamintabs",
         "id": "11eaf0692285404fa4c9ceb40384ad41",
-        "complete": false
+        "complete": true
+    },
+    {
+        "name": "Waschpulver",
+        "id": "057eb8e427cc40eebe089525d80f0ec0",
+        "complete": true
     }
 ]

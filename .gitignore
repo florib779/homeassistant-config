@@ -26,6 +26,7 @@
 # Ignore these files/folders
 .storage
 .cloud
+.shopping_list.json
 .google.token
 govee_learning.yaml
 home-assistant.log
