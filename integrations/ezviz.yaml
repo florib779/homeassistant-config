@@ -1,10 +1,10 @@
-ffmpeg:
-stream:
-camera:
-  - platform: ezviz_cloud
-    username: "!secret ezviz_username"
-    password: "!secret ezviz_password"
-    cameras:
-      !secret ezviz_camera:
-        username: admin
-        password: !secret ezviz_secret
+#ffmpeg:
+#stream:
+#camera:
+#  - platform: ezviz_cloud
+#    username: "!secret ezviz_username"
+#    password: "!secret ezviz_password"
+#    cameras:
+#      !secret ezviz_camera:
+#        username: admin
+#        password: !secret ezviz_secret

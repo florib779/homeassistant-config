@@ -7,12 +7,12 @@
     {
         "name": "Tomaten",
         "id": "681cfc2fa41c483f82b03aea67d1d6b2",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Paprika",
         "id": "9db8f662caf24c539b91b6a7e33b8388",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Kartoffeln",
@@ -22,7 +22,7 @@
     {
         "name": "Zwiebeln",
         "id": "e14b4b70858a4a138bfd3b25ecf00fd4",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Knoblauch",
@@ -37,22 +37,22 @@
     {
         "name": "Sojamilch",
         "id": "a91821caad9b41dbb53b63709db05716",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Backpulver",
         "id": "70975c8be2d7424082f95382264d4826",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Essigessenz",
         "id": "44b4c8553fd249f38c643cdd6b9f1cc6",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Asia Nudeln",
         "id": "3bf8b460c2c14360b5fa6077268cc71a",
-        "complete": true
+        "complete": false
     },
     {
         "name": "Tabasco",
@@ -87,7 +87,7 @@
     {
         "name": "Tiefk\u00fchlgem\u00fcse",
         "id": "76673f30f85e4e73a47786fb982a36ca",
-        "complete": false
+        "complete": true
     },
     {
         "name": "Sojasauce",
@@ -103,5 +103,10 @@
         "name": "Waschpulver",
         "id": "057eb8e427cc40eebe089525d80f0ec0",
         "complete": true
+    },
+    {
+        "name": "Haarb\u00fcrste",
+        "id": "ccbfa14b519541fca28aaa6a25e4739d",
+        "complete": false
     }
 ]

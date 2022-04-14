@@ -13,29 +13,13 @@ switch:
         command_off: curl http://192.168.178.32:5005/Livingroom/sub/polarity/0
 
 shell_command:
-  sonos_sub_gain: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/sub/gain/{{sub_gain}}'
   sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/sub/crossover/{{sub_crossover}}'
-  
-  # ToDo (create an automation)
-  # This is only for TV remote control
-  # All other volume adjustments are made with the Sonos integration.
-  sonos_livingroom_volume_plus: '/usr/bin/curl -X GET http://192.168.178.32:5005/Livingroom/volume/+1'
-  sonos_livingroom_volume_minus: '/usr/bin/curl -X GET http://192.168.178.32:5005/Livingroom/volume/-1'
 
 ################################################################################
 
 automation:
 
 # Playbase livingroom ##########################################################
-- id: sonos_livingroom_sub_gain
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_livingroom_sub_gain
-  action:
-    - service: shell_command.sonos_sub_gain
-      data_template:
-        room: 'Livingroom' # Use the name from the Sonos app
-        sub_gain: '{{ trigger.to_state.state | int }}'
 - id: sonos_livingroom_sub_crossover
   trigger:
     - platform: state
@@ -46,40 +30,8 @@ automation:
         room: 'Livingroom' # Use the name from the Sonos app
         sub_crossover: '{{ trigger.to_state.state | int }}'
 
-################################################################################
-
-# TV remote livingroom #########################################################
-- id: sonos_livingroom_volume_plus
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_livingroom_volume_plus
-  action:
-    - service: shell_command.sonos_volume_plus
-      data_template:
-        room: 'Livingroom' # Use the name from the Sonos app
-        bass: '{{ trigger.to_state.state | int }}'
-- id: sonos_livingroom_volume_minus
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_livingroom_volume_minus
-  action:
-    - service: shell_command.sonos_volume_minus
-      data_template:
-        room: 'Livingroom' # Use the name from the Sonos app
-        treble: '{{ trigger.to_state.state | int }}'
-################################################################################
-
 input_number:
 # Leave unit_of_measurement in this file for better understanding of the values.
-
-# Playbase livingroom ##########################################################
-
-  # Bigger adjustments are possible, but might damage the Sub.
-  sonos_livingroom_sub_gain:
-    min: -15
-    max: 15
-    step: 1
-    unit_of_measurement: dB
 
   # Official values are 50 - 110 in increments of 10.
   # Other values are possible, but might damage the Sub.
