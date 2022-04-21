@@ -132,3 +132,15 @@
     entity_id: switch.kitchen_pc
     domain: switch
   mode: single
+- id: '1650517762669'
+  alias: Low battery level
+  description: Low battery level detection & notification for all battery sensors
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      exclude:
+        entity_id: []
+      actions:
+      - service: notify.persistent_notification
+        data:
+          message: Low Battery Level
