@@ -144,3 +144,22 @@
       - service: notify.persistent_notification
         data:
           message: Low Battery Level
+      time: '18:00:00'
+      threshold: 10
+- id: '1650897986474'
+  alias: Camera Snapshot
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 6a5581225ce6faee428b6b8ffe79f19f
+    domain: alarm_control_panel
+    entity_id: alarm_control_panel.office_camera_alarm
+    type: triggered
+  condition: []
+  action:
+  - service: camera.snapshot
+    data:
+      filename: /config/www/camera_snapshots/office_cam.jpg
+    target:
+      entity_id: camera.office
+  mode: single
