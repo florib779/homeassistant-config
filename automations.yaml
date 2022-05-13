@@ -13,24 +13,6 @@
     type: set_position
     position: 0
   mode: single
-- id: '1640523693313'
-  alias: TV off - Shutter up
-  description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.livingroom_tv_power_consumption
-    below: '20'
-  condition:
-  - condition: sun
-    before: sunset
-    before_offset: '1'
-  action:
-  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
-    domain: cover
-    entity_id: cover.livingroom_shutter_small
-    type: set_position
-    position: 100
-  mode: single
 - id: '1641237098329'
   alias: Shutter down
   description: ''
@@ -45,9 +27,19 @@
     entity_id: cover.livingroom_shutter_small
     type: set_position
     position: 0
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 0
+  - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
+    domain: cover
+    entity_id: cover.office_shutter
+    type: set_position
+    position: 0
   mode: single
 - id: '1641237270223'
-  alias: Shutter up
+  alias: Shutter Livingroom up
   description: ''
   trigger:
   - platform: time
@@ -82,22 +74,6 @@
       input:
         command: upload
   mode: single
-- id: '1642349297435'
-  alias: Leave Home
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: device_tracker.galaxy_s9
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 9ee581302e6a06dac1df31d1a909f7ef
-    entity_id: light.bedroom_light
-    domain: light
-  - service: media_player.media_pause
-    target:
-      entity_id: media_player.roon_bedroom
-  mode: single
 - id: '1645221509073'
   alias: GitHub-Backup
   description: Pushes HASS config files to GitHub.
@@ -118,20 +94,8 @@
     path: hugalafutro/Color_Loop.yaml
     input:
       cl_light:
-        device_id: 237f1616d458e306a1f3083de05f2d08
-- id: '1648232507634'
-  alias: Kitchen PC
-  description: ''
-  trigger:
-  - platform: time
-    at: 02:00:00
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 48608a926e1e91846fb7ded6dafd2b0c
-    entity_id: switch.kitchen_pc
-    domain: switch
-  mode: single
+        entity_id:
+        - light.kitchen_mood_light
 - id: '1650517762669'
   alias: Low battery level
   description: Low battery level detection & notification for all battery sensors
@@ -144,22 +108,45 @@
       - service: notify.persistent_notification
         data:
           message: Low Battery Level
+          title: Warning
       time: '18:00:00'
       threshold: 10
-- id: '1650897986474'
-  alias: Camera Snapshot
+- id: '1652179746791'
+  alias: Shutter Office Up
   description: ''
   trigger:
-  - platform: device
-    device_id: 6a5581225ce6faee428b6b8ffe79f19f
-    domain: alarm_control_panel
-    entity_id: alarm_control_panel.office_camera_alarm
-    type: triggered
+  - platform: time
+    at: 07:45:00
   condition: []
   action:
-  - service: camera.snapshot
-    data:
-      filename: /config/www/camera_snapshots/office_cam.jpg
+  - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
+    domain: cover
+    entity_id: cover.office_shutter
+    type: set_position
+    position: 100
+  mode: single
+- id: '1652424507352'
+  alias: Stop @ 01:00
+  description: ''
+  trigger:
+  - platform: time
+    at: 01:00:00
+  condition: []
+  action:
+  - service: media_player.media_pause
+    data: {}
+  - service: light.turn_off
+    data: {}
     target:
-      entity_id: camera.office
+      area_id:
+      - schlafzimmer
+      - kuche
+      - wohnzimmer
+  - service: switch.turn_off
+    data: {}
+    target:
+      device_id:
+      - 99d209732266ca4eec3e7b5a439ffb70
+      - 2963d98a0a5f3f18a618dbb4ff4339b5
+      - 28356a9d25a4ef255d928c52044a7839
   mode: single

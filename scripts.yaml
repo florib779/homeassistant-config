@@ -1,0 +1,30 @@
+bedroom_shutter_10:
+  alias: Bedroom Shutter Cam View
+  sequence:
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 40
+  mode: single
+  icon: mdi:window-shutter-alert
+livingroom_shutter_favorite:
+  alias: Livingroom Shutter Favorite
+  sequence:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 25
+  mode: single
+  icon: mdi:window-shutter-alert
+bedroom_shutter_cam_view:
+  alias: Office Shutter Cam View
+  sequence:
+  - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
+    domain: cover
+    entity_id: cover.office_shutter
+    type: set_position
+    position: 50
+  mode: single
+  icon: mdi:window-shutter-alert

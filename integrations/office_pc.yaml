@@ -1,4 +1,0 @@
-switch:
-  - platform: wake_on_lan
-    name: office_pc_wol
-    mac: !secret office_pc_mac
