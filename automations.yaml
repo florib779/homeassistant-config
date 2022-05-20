@@ -36,14 +36,14 @@
     domain: cover
     entity_id: cover.office_shutter
     type: set_position
-    position: 0
+    position: 50
   mode: single
 - id: '1641237270223'
   alias: Shutter Livingroom up
   description: ''
   trigger:
   - platform: time
-    at: 07:45
+    at: 08:00:00
   - platform: sun
     event: sunrise
     offset: '+1'
@@ -112,11 +112,14 @@
       time: '18:00:00'
       threshold: 10
 - id: '1652179746791'
-  alias: Shutter Office Up
+  alias: Shutter Office up
   description: ''
   trigger:
   - platform: time
-    at: 07:45:00
+    at: 08:00:00
+  - platform: sun
+    event: sunrise
+    offset: '+1'
   condition: []
   action:
   - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
@@ -133,15 +136,23 @@
     at: 01:00:00
   condition: []
   action:
-  - service: media_player.media_pause
+  - service: media_player.media_stop
     data: {}
+    target:
+      device_id:
+      - b87286876b55c180c8dfc16316a35e7d
+      - 1553b70b046b6dd8fbeba4f0e8c0aeea
+      - 5e01f8a267780babcc5de58e7fcc77ac
+      - 972d524e912f3936491f7e6c8adf8ded
+      - 247f7122aa7a90ff13b8ba771073539e
+      - 6620ecddea86dec1ea7853bc633cc8a6
   - service: light.turn_off
     data: {}
     target:
       area_id:
       - schlafzimmer
-      - kuche
       - wohnzimmer
+      - kuche
   - service: switch.turn_off
     data: {}
     target:
@@ -149,4 +160,101 @@
       - 99d209732266ca4eec3e7b5a439ffb70
       - 2963d98a0a5f3f18a618dbb4ff4339b5
       - 28356a9d25a4ef255d928c52044a7839
+      - 48608a926e1e91846fb7ded6dafd2b0c
+  mode: single
+- id: '1652647649459'
+  alias: Kitchen Cookerhood
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: 0d509434e5813a91e01bf0330ab90f17
+    entity_id: switch.kitchen_cookerhood
+    domain: switch
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 0d509434e5813a91e01bf0330ab90f17
+    entity_id: switch.kitchen_cookerhood
+    domain: switch
+  mode: single
+- id: '1652896923568'
+  alias: Shutter Bedroom up
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: '+2'
+  condition:
+  - condition: time
+    after: 07:00:00
+  action:
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 100
+  mode: single
+- id: '1652978544840'
+  alias: Away
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - device_tracker.galaxy_s9_2
+    from: home
+    to: not_home
+  condition: []
+  action:
+  - service: vacuum.turn_on
+    data: {}
+    target:
+      entity_id: vacuum.e0001103417610630506
+  - service: media_player.media_stop
+    data: {}
+    target:
+      device_id:
+      - b87286876b55c180c8dfc16316a35e7d
+      - 1553b70b046b6dd8fbeba4f0e8c0aeea
+      - 5e01f8a267780babcc5de58e7fcc77ac
+      - 972d524e912f3936491f7e6c8adf8ded
+      - 247f7122aa7a90ff13b8ba771073539e
+      - 6620ecddea86dec1ea7853bc633cc8a6
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id:
+      - 9ee581302e6a06dac1df31d1a909f7ef
+      - 99d209732266ca4eec3e7b5a439ffb70
+      - 3d552a5eb99abde51e5bee131dc77dc3
+      - b293373a494cdc07946cf52181bd5db3
+  - service: switch.turn_off
+    data: {}
+    target:
+      device_id:
+      - cbf6bb49e2823487b31dfdf305e033d8
+      - 1e9a16f4d3c307044b1aafaec641833b
+      - 0d509434e5813a91e01bf0330ab90f17
+      - 2963d98a0a5f3f18a618dbb4ff4339b5
+      - 48608a926e1e91846fb7ded6dafd2b0c
+  mode: single
+- id: '1652986188792'
+  alias: At Home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - device_tracker.galaxy_s9_2
+    from: not_home
+    to: home
+  condition: []
+  action:
+  - service: vacuum.return_to_base
+    data: {}
+    target:
+      entity_id: vacuum.e0001103417610630506
   mode: single

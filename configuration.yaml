@@ -16,18 +16,11 @@ scene: !include scenes.yaml
 
 default_config: # Configure a default setup of Home Assistant (frontend, api, etc)
 
-tts: # Text to speech
-  - platform: google_translate
-    language: 'en'
-
 wake_on_lan: # Further configuration in the corresponding package yaml files
 
 sensor:
   - platform: template
     sensors:
-      bedroom_current_temperature:
-        value_template: "{{ state_attr('climate.bedroom_thermostat', 'current_temperature') }}"
-        unit_of_measurement: "°C"
       basement_washer_on:
         value_template: >
           {% if states.sensor.basement_washer_power_consumption.state | float > 4 %}
@@ -35,7 +28,9 @@ sensor:
           {% else %}
             Off
           {% endif %}
-    
+      bedroom_current_temperature:
+        value_template: "{{ state_attr('climate.bedroom_thermostat', 'current_temperature') }}"
+        unit_of_measurement: "°C"
       kitchen_dishwasher_on:
         value_template: >
           {% if states.sensor.kitchen_dishwasher_power_consumption.state | float > 2 %}
@@ -46,13 +41,6 @@ sensor:
       office_current_temperature:
         value_template: "{{ state_attr('climate.office_thermostat', 'current_temperature') }}"
         unit_of_measurement: "°C"
-      office_laptop_charged:
-        value_template:  >
-          {% if states.sensor.office_switch_power_consumption.state | float > 5 %}
-            On
-          {% else %}
-            Off
-          {% endif %}
       storeroom_akku_charged:
         value_template:  >
           {% if states.sensor.storeroom_switch_power_consumption.state | float > 1 %}
@@ -62,23 +50,3 @@ sensor:
           {% endif %}
       electricity_price:
         value_template: "0.298"
-  - platform: systemmonitor
-    resources:
-    - type: disk_free
-      arg: "/"
-    - type: disk_use
-      arg: "/"
-    - type: disk_use_percent
-      arg: "/"
-    - type: last_boot
-    - type: load_1m
-    - type: load_5m
-    - type: load_15m
-    - type: memory_free
-    - type: memory_use
-    - type: memory_use_percent
-    - type: processor_temperature
-    - type: processor_use
-    - type: swap_free
-    - type: swap_use
-    - type: swap_use_percent
