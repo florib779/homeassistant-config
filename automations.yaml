@@ -208,6 +208,10 @@
     - device_tracker.galaxy_s9_2
     from: home
     to: not_home
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
   condition: []
   action:
   - service: vacuum.turn_on

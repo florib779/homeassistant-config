@@ -1,5 +1,5 @@
-panel_iframe:
-  homebridge:
-    title: 'Homebridge'
-    icon: 'si:homebridge'
-    url: 'http://rock:8581'
+#panel_iframe:
+#  homebridge:
+#    title: 'Homebridge'
+#    icon: 'si:homebridge'
+#    url: 'http://rock:8581'

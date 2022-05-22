@@ -20,168 +20,34 @@ views:
   - theme: Backend-selected
     title: Home
     icon: mdi:home
-    layout:
-      max-cols: 5
-      min-width: 200
-    type: custom:masonry-layout
     badges:
-      - entity: binary_sensor.sm_g960f_wifi_state
-      - entity: binary_sensor.sm_g960f_mobile_data
+      - type: entity-filter
+        entities:
+          - entity: binary_sensor.sm_g960f_bluetooth_state
+            name: BT
+          - entity: binary_sensor.sm_g960f_wifi_state
+            name: WiFi
+          - entity: binary_sensor.sm_g960f_mobile_data
+            name: Data
+        state_filter:
+          - 'on'
+      - entity: sensor.sm_g960f_battery_level
+        name: Handy
+      - entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
+        name: Tablet
+      - entity: sensor.storeroom_akku_charged
+        name: Makita
+      - entity: sensor.temperature_outside
+        name: Outside
     cards:
       - type: vertical-stack
         cards:
-          - type: custom:mini-media-player
-            entity: media_player.roon_headphones
-            artwork: material
-            hide:
-              icon: true
-              power: true
-              progress: true
-              volume: true
-            shortcuts:
-              label: Transfer
-              list:
-                - name: Bathroom
-                  type: script
-                  id: script.roon_transfer_to_bathroom
-                - name: Bedroom
-                  type: script
-                  id: script.roon_transfer_to_bedroom
-                - name: Kitchen
-                  type: script
-                  id: script.roon_transfer_to_kitchen
-                - name: Livingroom
-                  type: script
-                  id: script.roon_transfer_to_livingroom
-                - name: Office
-                  type: script
-                  id: script.roon_transfer_to_office
-            name: Headphones
-          - square: true
-            columns: 5
-            type: grid
-            cards:
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: binary_sensor.sm_g960f_wifi_state
-                show_state: true
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: binary_sensor.sm_g960f_mobile_data
-                show_state: true
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: binary_sensor.sm_g960f_bluetooth_state
-                show_state: true
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: sensor.sm_g960f_internal_storage
-                show_state: true
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: more-info
-                entity: binary_sensor.livingroom_balcony_door
-                show_state: true
-          - square: false
-            columns: 4
-            type: grid
-            cards:
-              - show_name: true
-                show_icon: false
-                type: button
-                tap_action:
-                  action: more-info
-                entity: sensor.sm_g960f_battery_level
-                show_state: true
-              - show_name: false
-                show_icon: false
-                type: button
-                tap_action:
-                  action: more-info
-                entity: sensor.sm_g960f_active_notification_count
-                show_state: true
-              - show_name: true
-                show_icon: false
-                type: button
-                tap_action:
-                  action: more-info
-                entity: sensor.lenovo_tab_2_a10_70f_akkufullstand
-                show_state: true
-              - show_name: true
-                show_icon: false
-                type: button
-                tap_action:
-                  action: more-info
-                entity: sensor.storeroom_akku_charged
-                show_state: true
-          - type: custom:mini-media-player
-            entity: media_player.roon_livingroom
-            volume_stateless: true
-            volume_step: '1'
-            hide:
-              icon: true
-              power: true
-              progress: true
-              source: true
-              volume_level: false
-            speaker_group:
-              platform: sonos
-              show_group_count: true
-              group_mgmt_entity: media_player.sonos_livingroom
-              entities:
-                - entity_id: media_player.sonos_livingroom
-                  name: Livingroom
-                - entity_id: media_player.sonos_office
-                  name: Office
-                - entity_id: media_player.sonos_kitchen
-                  name: Kitchen
-                - entity_id: media_player.sonos_bathroom
-                  name: Bathroom
-                - entity_id: media_player.sonos_bedroom
-                  name: Bedroom
-            shortcuts:
-              label: Transfer
-              list:
-                - name: Bathroom
-                  type: script
-                  id: script.roon_transfer_to_bathroom
-                - name: Bedroom
-                  type: script
-                  id: script.roon_transfer_to_bedroom
-                - name: Headphones
-                  type: script
-                  id: script.roon_transfer_to_headphones
-                - name: Kitchen
-                  type: script
-                  id: script.roon_transfer_to_kitchen
-                - name: Office
-                  type: script
-                  id: script.roon_transfer_to_office
-            artwork: material
-            name: Livingroom
-            card_mod:
-              style: |
-                .mmp-player {
-                  padding: 8px;
-                }
-            info: short
+          - type: iframe
+            url: http://rock:9330/display/
+            aspect_ratio: '16:9'
           - type: custom:mini-climate
             entity: climate.livingroom_thermostat
-            name: ' '
+            name: Livingroom
             hide_current_temperature: true
             icon: mdi:thermostat
             toggle:
@@ -205,15 +71,34 @@ views:
                 source:
                   entity: sensor.livingroom_pushbutton_humidity
               battery_thermostat:
-                icon: mdi:battery
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
                 unit: '%'
                 source:
                   entity: sensor.livingroom_thermostat_battery
               battery_pushbutton:
-                icon: mdi:battery
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
                 unit: '%'
                 source:
                   entity: sensor.livingroom_pushbutton_battery
+              balcony_door:
+                icon:
+                  template: >
+                    (value) => (value == 'on' ? 'mdi:door-open' :
+                    'mdi:door-closed')
+                  style: |
+                    (value) => (value == 'on' ? { color: 'gold'} : {})
+                source:
+                  entity: binary_sensor.livingroom_balcony_door
+                  values:
+                    'on': open
+                    'off': closed
+                  mapper: value => this.source.values[value]
             buttons:
               tv:
                 location: main
@@ -304,32 +189,57 @@ views:
                       show: true
                       tap_action:
                         action: toggle
-          - type: entities
-            entities:
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_livingroom_bass
-                name: Bass
-                unit: dB
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_livingroom_treble
-                name: Treble
-                unit: dB
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.livingroom_sub_gain
-                name: Sub Gain
-                unit: dB
-                border: false
-                icon: mdi:music-clef-bass
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: input_number.sonos_livingroom_sub_crossover
-                name: Sub Crossover
-                unit: Hz
-            show_header_toggle: false
-            state_color: true
+          - type: custom:mini-media-player
+            entity: media_player.roon_livingroom
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              icon: true
+              power: true
+              progress: true
+              source: true
+              volume_level: false
+            speaker_group:
+              platform: sonos
+              show_group_count: true
+              group_mgmt_entity: media_player.sonos_livingroom
+              entities:
+                - entity_id: media_player.sonos_livingroom
+                  name: Livingroom
+                - entity_id: media_player.sonos_office
+                  name: Office
+                - entity_id: media_player.sonos_kitchen
+                  name: Kitchen
+                - entity_id: media_player.sonos_bathroom
+                  name: Bathroom
+                - entity_id: media_player.sonos_bedroom
+                  name: Bedroom
+            shortcuts:
+              label: Transfer
+              list:
+                - name: Bathroom
+                  type: script
+                  id: script.roon_transfer_to_bathroom
+                - name: Bedroom
+                  type: script
+                  id: script.roon_transfer_to_bedroom
+                - name: Headphones
+                  type: script
+                  id: script.roon_transfer_to_headphones
+                - name: Kitchen
+                  type: script
+                  id: script.roon_transfer_to_kitchen
+                - name: Office
+                  type: script
+                  id: script.roon_transfer_to_office
+            artwork: material
+            name: ' '
+            info: short
+            card_mod:
+              style: |
+                .mmp-player {
+                  padding: 8px;
+                }
           - square: true
             columns: 7
             type: grid
@@ -376,11 +286,36 @@ views:
                 tap_action:
                   action: toggle
                 entity: switch.sonos_livingroom_status_light
+          - type: entities
+            entities:
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_livingroom_bass
+                name: Bass
+                unit: dB
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_livingroom_treble
+                name: Treble
+                unit: dB
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.livingroom_sub_gain
+                name: Sub Gain
+                unit: dB
+                border: false
+                icon: mdi:music-clef-bass
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: input_number.sonos_livingroom_sub_crossover
+                name: Sub Crossover
+                unit: Hz
+            show_header_toggle: false
+            state_color: true
       - type: vertical-stack
         cards:
           - type: custom:webrtc-camera
             entity: camera.kitchen
-            title: Kitchen
             intersection: 0.5
             muted: true
             ui: true
@@ -388,59 +323,9 @@ views:
               top: 0
               left: 100
               orientation: vertical
-          - type: custom:mini-media-player
-            entity: media_player.roon_kitchen
-            volume_stateless: true
-            volume_step: '1'
-            hide:
-              icon: true
-              power: true
-              progress: true
-              volume_level: false
-            speaker_group:
-              platform: sonos
-              show_group_count: true
-              group_mgmt_entity: media_player.sonos_kitchen
-              entities:
-                - entity_id: media_player.sonos_livingroom
-                  name: Livingroom
-                - entity_id: media_player.sonos_office
-                  name: Office
-                - entity_id: media_player.sonos_kitchen
-                  name: Kitchen
-                - entity_id: media_player.sonos_bathroom
-                  name: Bathroom
-                - entity_id: media_player.sonos_bedroom
-                  name: Bedroom
-            shortcuts:
-              label: Transfer
-              list:
-                - name: Bathroom
-                  type: script
-                  id: script.roon_transfer_to_bathroom
-                - name: Bedroom
-                  type: script
-                  id: script.roon_transfer_to_bedroom
-                - name: Headphones
-                  type: script
-                  id: script.roon_transfer_to_headphones
-                - name: Livingroom
-                  type: script
-                  id: script.roon_transfer_to_livingroom
-                - name: Office
-                  type: script
-                  id: script.roon_transfer_to_office
-            artwork: material
-            name: Kitchen
-            card_mod:
-              style: |
-                .mmp-player {
-                  padding: 8px;
-                }
-            info: short
           - type: custom:mini-climate
             entity: climate.livingroom_thermostat
-            name: ' '
+            name: Kitchen
             fan_mode:
               hide: true
             hide_current_temperature: true
@@ -454,16 +339,25 @@ views:
                 source:
                   entity: sensor.kitchen_light_temperature
               battery:
-                icon: mdi:battery
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
                 unit: '%'
                 source:
                   entity: sensor.kitchen_pushbutton_battery
               dishwasher:
-                icon: mdi:dishwasher
+                icon:
+                  template: () => 'mdi:dishwasher'
+                  style: |
+                    (value) => (value == 'On' ? { color: 'gold'} : {})
                 source:
                   entity: sensor.kitchen_dishwasher_on
               washer:
-                icon: mdi:washing-machine
+                icon:
+                  template: () => 'mdi:washing-machine'
+                  style: |
+                    (value) => (value == 'On' ? { color: 'gold'} : {})
                 source:
                   entity: sensor.basement_washer_on
             buttons:
@@ -517,62 +411,19 @@ views:
                       action: toggle
                     entity: switch.kitchen_pc
                     show_state: false
-          - type: entities
-            entities:
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_kitchen_bass
-                name: Bass
-                unit: dB
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_kitchen_treble
-                name: Treble
-                unit: dB
-            show_header_toggle: false
-            state_color: true
-          - square: true
-            columns: 7
-            type: grid
-            cards:
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: switch.sonos_kitchen_status_light
-              - show_name: false
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: switch.sonos_kitchen_touch_controls
-      - type: vertical-stack
-        cards:
-          - type: custom:webrtc-camera
-            entity: camera.bedroom
-            title: Bedroom
-            intersection: 0.5
-            muted: true
-            ui: true
-            shortcuts:
-              top: 0
-              left: 100
-              orientation: vertical
           - type: custom:mini-media-player
-            entity: media_player.roon_bedroom
+            entity: media_player.roon_kitchen
             volume_stateless: true
             volume_step: '1'
             hide:
               icon: true
               power: true
               progress: true
-              source: true
               volume_level: false
             speaker_group:
               platform: sonos
               show_group_count: true
-              group_mgmt_entity: media_player.sonos_bedroom
+              group_mgmt_entity: media_player.sonos_kitchen
               entities:
                 - entity_id: media_player.sonos_livingroom
                   name: Livingroom
@@ -590,12 +441,12 @@ views:
                 - name: Bathroom
                   type: script
                   id: script.roon_transfer_to_bathroom
+                - name: Bedroom
+                  type: script
+                  id: script.roon_transfer_to_bedroom
                 - name: Headphones
                   type: script
                   id: script.roon_transfer_to_headphones
-                - name: Kitchen
-                  type: script
-                  id: script.roon_transfer_to_kitchen
                 - name: Livingroom
                   type: script
                   id: script.roon_transfer_to_livingroom
@@ -603,16 +454,57 @@ views:
                   type: script
                   id: script.roon_transfer_to_office
             artwork: material
-            name: Bedroom
+            info: short
+            name: ' '
             card_mod:
               style: |
                 .mmp-player {
                   padding: 8px;
                 }
-            info: short
+          - square: true
+            columns: 7
+            type: grid
+            cards:
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: switch.sonos_kitchen_status_light
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: switch.sonos_kitchen_touch_controls
+          - type: entities
+            entities:
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_kitchen_bass
+                name: Bass
+                unit: dB
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_kitchen_treble
+                name: Treble
+                unit: dB
+            show_header_toggle: false
+            state_color: true
+      - type: vertical-stack
+        cards:
+          - type: custom:webrtc-camera
+            entity: camera.bedroom
+            intersection: 0.5
+            muted: true
+            ui: true
+            shortcuts:
+              top: 0
+              left: 100
+              orientation: vertical
           - type: custom:mini-climate
             entity: climate.bedroom_thermostat
-            name: ' '
+            name: Bedroom
             hide_current_temperature: true
             icon: mdi:thermostat
             toggle:
@@ -627,7 +519,10 @@ views:
                 source:
                   entity: sensor.bedroom_current_temperature
               battery:
-                icon: mdi:battery
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
                 unit: '%'
                 source:
                   entity: sensor.bedroom_thermostat_battery
@@ -694,18 +589,57 @@ views:
                     entity: script.bedroom_shutter_favorite
                     show_state: false
                     icon: mdi:window-shutter-alert
-          - type: entities
-            entities:
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_bedroom_bass
-                name: Bass
-                unit: dB
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_bedroom_treble
-                name: Treble
-                unit: dB
+          - type: custom:mini-media-player
+            entity: media_player.roon_bedroom
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              icon: true
+              power: true
+              progress: true
+              source: true
+              volume_level: false
+            speaker_group:
+              platform: sonos
+              show_group_count: true
+              group_mgmt_entity: media_player.sonos_bedroom
+              entities:
+                - entity_id: media_player.sonos_livingroom
+                  name: Livingroom
+                - entity_id: media_player.sonos_office
+                  name: Office
+                - entity_id: media_player.sonos_kitchen
+                  name: Kitchen
+                - entity_id: media_player.sonos_bathroom
+                  name: Bathroom
+                - entity_id: media_player.sonos_bedroom
+                  name: Bedroom
+            shortcuts:
+              label: Transfer
+              list:
+                - name: Bathroom
+                  type: script
+                  id: script.roon_transfer_to_bathroom
+                - name: Headphones
+                  type: script
+                  id: script.roon_transfer_to_headphones
+                - name: Kitchen
+                  type: script
+                  id: script.roon_transfer_to_kitchen
+                - name: Livingroom
+                  type: script
+                  id: script.roon_transfer_to_livingroom
+                - name: Office
+                  type: script
+                  id: script.roon_transfer_to_office
+            artwork: material
+            info: short
+            name: ' '
+            card_mod:
+              style: |
+                .mmp-player {
+                  padding: 8px;
+                }
           - square: true
             columns: 7
             type: grid
@@ -746,11 +680,22 @@ views:
                 tap_action:
                   action: more-info
                 entity: sensor.bedroom_audio_input_format
+          - type: entities
+            entities:
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_bedroom_bass
+                name: Bass
+                unit: dB
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_bedroom_treble
+                name: Treble
+                unit: dB
       - type: vertical-stack
         cards:
           - type: custom:webrtc-camera
             entity: camera.office
-            title: Office
             intersection: 0.5
             muted: true
             ui: true
@@ -758,6 +703,78 @@ views:
               top: 0
               left: 100
               orientation: vertical
+          - type: custom:mini-climate
+            entity: climate.office_thermostat
+            name: Office
+            hide_current_temperature: true
+            icon: mdi:thermostat
+            toggle:
+              hide: true
+            secondary_info:
+              type: hvac-mode
+              icon: mdi:fan
+            indicators:
+              temperature:
+                icon: mdi:thermometer
+                unit: °C
+                source:
+                  entity: sensor.office_current_temperature
+              battery:
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
+                unit: '%'
+                source:
+                  entity: sensor.office_thermostat_battery
+          - type: horizontal-stack
+            cards:
+              - square: true
+                columns: 3
+                type: grid
+                cards:
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: url
+                      url_path: http://rock:9330/display/
+                    entity: light.kitchen_light
+                    hold_action:
+                      action: none
+                    icon: mdi:monitor-shimmer
+                  - type: custom:slider-button-card
+                    entity: cover.office_shutter
+                    slider:
+                      direction: top-bottom
+                      background: striped
+                      use_state_color: false
+                      use_percentage_bg_opacity: false
+                      toggle_on_click: false
+                      show_track: false
+                      force_square: false
+                      invert: true
+                    show_name: false
+                    show_state: true
+                    compact: false
+                    icon:
+                      show: true
+                      use_state_color: true
+                      tap_action:
+                        action: more-info
+                      icon: ''
+                    action_button:
+                      tap_action:
+                        action: toggle
+                      mode: custom
+                      icon: mdi:swap-vertical
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: script.office_shutter_favorite
+                    show_state: false
           - type: custom:mini-media-player
             entity: media_player.roon_office
             volume_stateless: true
@@ -801,96 +818,13 @@ views:
                   type: script
                   id: script.roon_transfer_to_livingroom
             artwork: material
-            name: Office
+            info: short
+            name: ' '
             card_mod:
               style: |
                 .mmp-player {
                   padding: 8px;
                 }
-            info: short
-          - type: custom:mini-climate
-            entity: climate.office_thermostat
-            name: ' '
-            hide_current_temperature: true
-            icon: mdi:thermostat
-            toggle:
-              hide: true
-            secondary_info:
-              type: hvac-mode
-              icon: mdi:fan
-            indicators:
-              temperature:
-                icon: mdi:thermometer
-                unit: °C
-                source:
-                  entity: sensor.office_current_temperature
-              battery:
-                icon: mdi:battery
-                unit: '%'
-                source:
-                  entity: sensor.office_thermostat_battery
-          - type: horizontal-stack
-            cards:
-              - square: true
-                columns: 3
-                type: grid
-                cards:
-                  - type: custom:slider-button-card
-                    entity: cover.office_shutter
-                    slider:
-                      direction: top-bottom
-                      background: striped
-                      use_state_color: false
-                      use_percentage_bg_opacity: false
-                      toggle_on_click: false
-                      show_track: false
-                      force_square: false
-                      invert: true
-                    show_name: false
-                    show_state: true
-                    compact: false
-                    icon:
-                      show: true
-                      use_state_color: true
-                      tap_action:
-                        action: more-info
-                      icon: ''
-                    action_button:
-                      tap_action:
-                        action: toggle
-                      mode: custom
-                      icon: mdi:swap-vertical
-                  - show_name: false
-                    show_icon: true
-                    type: button
-                    tap_action:
-                      action: toggle
-                    entity: script.office_shutter_favorite
-                    show_state: false
-                  - show_name: false
-                    show_icon: true
-                    type: button
-                    tap_action:
-                      action: url
-                      url_path: http://rock:9330/display/
-                    entity: light.kitchen_light
-                    hold_action:
-                      action: none
-                    icon: mdi:monitor-shimmer
-          - type: entities
-            entities:
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_office_bass
-                name: Bass
-                unit: dB
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_office_treble
-                name: Treble
-                unit: dB
-            show_header_toggle: false
-            state_color: true
           - square: true
             columns: 7
             type: grid
@@ -913,11 +847,92 @@ views:
                 tap_action:
                   action: toggle
                 entity: binary_sensor.sonos_office_microphone
+          - type: entities
+            entities:
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_office_bass
+                name: Bass
+                unit: dB
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_office_treble
+                name: Treble
+                unit: dB
+            show_header_toggle: false
+            state_color: true
       - type: vertical-stack
         cards:
-          - type: iframe
-            url: http://rock:9330/display/
-            aspect_ratio: '16:9'
+          - type: custom:mini-media-player
+            entity: media_player.roon_headphones
+            artwork: material
+            hide:
+              icon: true
+              power: true
+              progress: true
+              volume: true
+            shortcuts:
+              label: Transfer
+              list:
+                - name: Bathroom
+                  type: script
+                  id: script.roon_transfer_to_bathroom
+                - name: Bedroom
+                  type: script
+                  id: script.roon_transfer_to_bedroom
+                - name: Kitchen
+                  type: script
+                  id: script.roon_transfer_to_kitchen
+                - name: Livingroom
+                  type: script
+                  id: script.roon_transfer_to_livingroom
+                - name: Office
+                  type: script
+                  id: script.roon_transfer_to_office
+            name: Headphones
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-climate
+            entity: climate.bathroom_thermostat
+            name: Bathroom
+            hide_current_temperature: true
+            icon: mdi:thermostat
+            toggle:
+              hide: true
+            secondary_info:
+              type: hvac-mode
+              icon: mdi:fan
+            indicators:
+              temperature:
+                icon: mdi:thermometer
+                unit: °C
+                source:
+                  entity: sensor.bathroom_pushbutton_temperature
+              humidity:
+                icon:
+                  template: () => 'mdi:water'
+                  style: |
+                    (value) => (value > 60 ? { color: 'red'} : {})
+                unit: '%'
+                round: 1
+                source:
+                  entity: sensor.bathroom_pushbutton_humidity
+              battery_thermostat:
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
+                unit: '%'
+                source:
+                  entity: sensor.bathroom_thermostat_battery
+              battery_pushbutton:
+                icon:
+                  template: () => 'mdi:battery'
+                  style: |
+                    (value) => (value < 10 ? { color: 'red'} : {})
+                unit: '%'
+                source:
+                  entity: sensor.bathroom_pushbutton_battery
           - type: custom:mini-media-player
             entity: media_player.roon_bathroom
             volume_stateless: true
@@ -961,77 +976,13 @@ views:
                   type: script
                   id: script.roon_transfer_to_office
             artwork: material
-            name: Bathroom
+            info: short
+            name: ' '
             card_mod:
               style: |
                 .mmp-player {
                   padding: 8px;
                 }
-            info: short
-          - type: custom:mini-climate
-            entity: climate.bathroom_thermostat
-            name: ' '
-            hide_current_temperature: true
-            icon: mdi:thermostat
-            toggle:
-              hide: true
-            secondary_info:
-              type: hvac-mode
-              icon: mdi:fan
-            indicators:
-              temperature:
-                icon: mdi:thermometer
-                unit: °C
-                source:
-                  entity: sensor.bathroom_pushbutton_temperature
-              humidity:
-                icon:
-                  template: () => 'mdi:water'
-                  style: |
-                    (value) => (value > 60 ? { color: 'red'} : {})
-                unit: '%'
-                round: 1
-                source:
-                  entity: sensor.bathroom_pushbutton_humidity
-              battery_thermostat:
-                icon: mdi:battery
-                unit: '%'
-                source:
-                  entity: sensor.bathroom_thermostat_battery
-              battery_pushbutton:
-                icon: mdi:battery
-                unit: '%'
-                source:
-                  entity: sensor.bathroom_pushbutton_battery
-          - type: grid
-            cards:
-              - type: entity
-                entity: weather.home_hourly
-                attribute: temperature
-                unit: °C
-                name: Weather
-              - type: entity
-                entity: vacuum.e0001103417610630506
-                attribute: battery_level
-                unit: '%'
-              - hours_to_show: 6
-                graph: line
-                type: sensor
-                entity: sensor.bathroom_pushbutton_humidity
-                detail: 1
-                name: Humidity
-          - type: entities
-            entities:
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_bathroom_bass
-                name: Bass
-                unit: dB
-              - type: custom:numberbox-card
-                delay: '0'
-                entity: number.sonos_bathroom_treble
-                name: Treble
-                unit: dB
           - square: true
             columns: 7
             type: grid
@@ -1048,6 +999,18 @@ views:
                 tap_action:
                   action: toggle
                 entity: switch.sonos_bathroom_status_light
+          - type: entities
+            entities:
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_bathroom_bass
+                name: Bass
+                unit: dB
+              - type: custom:numberbox-card
+                delay: '0'
+                entity: number.sonos_bathroom_treble
+                name: Treble
+                unit: dB
   - theme: Backend-selected
     title: Sidebar
     path: sidebar

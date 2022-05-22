@@ -50,3 +50,6 @@ sensor:
           {% endif %}
       electricity_price:
         value_template: "0.298"
+      temperature_outside:
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('weather.home', 'temperature') }}"

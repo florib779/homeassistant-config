@@ -71,7 +71,6 @@ My Home Assistant config files including products of:
       * Possible via Homebridge [info](https://community.home-assistant.io/t/support-rademacher-rollotron-1213-dect-with-avm-fritz-smarthome/319854/5)
       - [x] Close shutter when TV is turned on.
         * To avoid light glare.
-      - [ ] Go to favorite position at a given time.
   * Show info
     - [x] Deutsche Telekom (Eurotronic) 40318684 (door/window contact).
     - [x] AVM FRITZ!DECT 200 (smart plug).
@@ -93,7 +92,6 @@ My Home Assistant config files including products of:
 * **Ecovacs Deebot** ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card)).
   - [x] Control.
   - [x] Show info.
-- [x] Cooking Timer.
 * **Android** (Mobile/TV)
   - [x] Control.
     - [x] Turn TV on via [Wake on LAN integration](https://www.home-assistant.io/integrations/wake_on_lan/).
@@ -109,10 +107,10 @@ My Home Assistant config files including products of:
 - [ ] Child lock automation.
   - [ ] All buttons of Fritz!Dect devices off.
   - [ ] All buttons of Sonos devices off.
-- [ ] Presence detection.
-  - [ ] Music off.
-  - [ ] All devices off.
-- [ ] Show humidity of basement.
+- [x] Presence detection.
+  - [x] Music off.
+  - [x] All devices off.
+  - [x] Vacuum on.
 
 ## Links
 
