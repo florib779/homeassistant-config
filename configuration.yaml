@@ -50,6 +50,16 @@ sensor:
           {% endif %}
       electricity_price:
         value_template: "0.298"
+# Weather
+      humidity_outside:
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('weather.home', 'humidity') }}"
+      pressure_outside:
+        unit_of_measurement: 'hPa'
+        value_template: "{{ state_attr('weather.home', 'pressure') }}"
       temperature_outside:
         unit_of_measurement: '°C'
         value_template: "{{ state_attr('weather.home', 'temperature') }}"
+      wind_speed_outside:
+        unit_of_measurement: 'km/h'
+        value_template: "{{ state_attr('weather.home', 'wind_speed') }}"

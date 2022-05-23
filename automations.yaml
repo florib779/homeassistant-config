@@ -188,16 +188,14 @@
   trigger:
   - platform: sun
     event: sunrise
-    offset: '+2'
-  condition:
-  - condition: time
-    after: 07:00:00
+    offset: '+1'
+  condition: []
   action:
   - device_id: cc7215817ef8193b2df878dad98cb347
     domain: cover
     entity_id: cover.bedroom_shutter
     type: set_position
-    position: 100
+    position: 60
   mode: single
 - id: '1652978544840'
   alias: Away
@@ -231,11 +229,11 @@
   - service: light.turn_off
     data: {}
     target:
-      device_id:
-      - 9ee581302e6a06dac1df31d1a909f7ef
-      - 99d209732266ca4eec3e7b5a439ffb70
-      - 3d552a5eb99abde51e5bee131dc77dc3
-      - b293373a494cdc07946cf52181bd5db3
+      entity_id:
+      - light.bedroom_light
+      - light.kitchen_light_group
+      - light.livingroom_floodlight
+      - light.livingroom_tv_light
   - service: switch.turn_off
     data: {}
     target:
