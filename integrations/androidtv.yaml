@@ -15,6 +15,7 @@ switch:
           service: wake_on_lan.send_magic_packet
           data:
             mac: !secret tv_livingroom_mac
+            host: 192.168.178.28
         turn_off:
           service: androidtv.adb_command
           target:

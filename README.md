@@ -71,6 +71,7 @@ My Home Assistant config files including products of:
       * Possible via Homebridge [info](https://community.home-assistant.io/t/support-rademacher-rollotron-1213-dect-with-avm-fritz-smarthome/319854/5)
       - [x] Close shutter when TV is turned on.
         * To avoid light glare.
+      - [x] Close shutter depending on the phases of the sun.
   * Show info
     - [x] Deutsche Telekom (Eurotronic) 40318684 (door/window contact).
     - [x] AVM FRITZ!DECT 200 (smart plug).

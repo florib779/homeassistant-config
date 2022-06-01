@@ -195,7 +195,7 @@
     domain: cover
     entity_id: cover.bedroom_shutter
     type: set_position
-    position: 60
+    position: 40
   mode: single
 - id: '1652978544840'
   alias: Away
