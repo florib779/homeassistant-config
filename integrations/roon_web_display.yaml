@@ -1,5 +1,0 @@
-#panel_iframe:
-#  roon_display:
-#    title: 'Roon Web Display'
-#    icon: 'mdi:monitor-shimmer'
-#    url: 'http://rock:9330/display/'

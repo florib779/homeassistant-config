@@ -282,7 +282,5 @@ sensor.kitchen_dishwasher_on:
   friendly_name: Dishwasher
 sensor.electricity_price:
   unit_of_measurement: EUR/kWh
-sensor.office_laptop_charged:
-  friendly_name: PC
 sensor.storeroom_akku_charged:
   friendly_name: Makita

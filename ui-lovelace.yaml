@@ -17,8 +17,8 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - square: false
-            columns: 5
+          - square: true
+            columns: 6
             type: grid
             cards:
               - show_name: false
@@ -59,6 +59,47 @@ views:
                 entity: sensor.storeroom_akku_charged
                 show_state: true
                 icon: mdi:screwdriver
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: url
+                  url_path: http://rock:9330/display/
+                entity: ''
+                hold_action:
+                  action: url
+                  url_path: http://rock:9330/display/
+                icon: mdi:monitor
+                show_state: false
+          - type: entities
+            entities:
+              - entity: sensor.sm_g960f_active_notification_count
+                name: Handy
+                secondary_info: last-changed
+              - type: conditional
+                conditions:
+                  - entity: sensor.fritz_box_7490_call_monitor_google_telefonbuch
+                    state_not: idle
+                row:
+                  entity: sensor.fritz_box_7490_call_monitor_google_telefonbuch
+                  name: Phone
+              - type: conditional
+                conditions:
+                  - entity: sensor.basement_washer_on
+                    state: 'on'
+                row:
+                  entity: sensor.basement_washer_on
+                  name: Washer
+                  type: custom:secondaryinfo-entity-row
+                  secondary_info: 'Power: [[ sensor.basement_washer_power_consumption ]] W'
+              - type: conditional
+                conditions:
+                  - entity: timer.cooking_timer
+                    state_not: idle
+                row:
+                  entity: timer.cooking_timer
+                  name: Timer
+            state_color: true
           - type: entities
             entities:
               - type: custom:mini-media-player
@@ -81,13 +122,13 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - switch.sonos_livingroom_speech_enhancement
-                  - switch.sonos_livingroom_night_sound
-                  - switch.sonos_livingroom_subwoofer_enabled
-                  - switch.sonos_livingroom_sub_polarity
-                  - switch.sonos_livingroom_surround_enabled
-                  - switch.sonos_livingroom_touch_controls
-                  - switch.sonos_livingroom_status_light
+                  - entity: switch.sonos_livingroom_speech_enhancement
+                  - entity: switch.sonos_livingroom_night_sound
+                  - entity: switch.sonos_livingroom_subwoofer_enabled
+                  - entity: switch.sonos_livingroom_sub_polarity
+                  - entity: switch.sonos_livingroom_surround_enabled
+                  - entity: switch.sonos_livingroom_touch_controls
+                  - entity: switch.sonos_livingroom_status_light
               - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
                 volume_stateless: true
@@ -149,16 +190,30 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - switch.livingroom_tv_power
-                  - light.livingroom_tv_light
-                  - light.livingroom_floodlight
-                  - fan.livingroom_fan
-                  - vacuum.e0001103417610630506
-                  - script.livingroom_shutter_favorite
-                  - binary_sensor.livingroom_balcony_door
+                  - entity: switch.livingroom_tv_power
+                  - entity: light.livingroom_tv_light
+                  - entity: light.livingroom_floodlight
+                  - entity: fan.livingroom_fan
+                  - entity: vacuum.e0001103417610630506
+                    tap_action:
+                      action: toggle
+                  - entity: script.livingroom_shutter_favorite
+                    tap_action:
+                      action: toggle
               - entity: cover.livingroom_shutter_small
                 secondary_info: position
                 name: Shutter
+              - type: divider
+              - entity: binary_sensor.livingroom_balcony_door
+                secondary_info: last-changed
+              - type: conditional
+                conditions:
+                  - entity: light.livingroom_tv_light
+                    state: 'on'
+                row:
+                  entity: light.livingroom_tv_light
+                  name: TV-Light
+                  secondary_info: brightness
               - type: conditional
                 conditions:
                   - entity: light.livingroom_floodlight
@@ -169,12 +224,13 @@ views:
                   secondary_info: brightness
               - type: conditional
                 conditions:
-                  - entity: light.livingroom_tv_light
+                  - entity: switch.livingroom_fan
                     state: 'on'
                 row:
-                  entity: light.livingroom_tv_light
-                  name: TV-Light
-                  secondary_info: brightness
+                  entity: switch.livingroom_fan
+                  name: Fan
+                  type: custom:secondaryinfo-entity-row
+                  secondary_info: 'Power: [[ sensor.livingroom_fan_power_consumption ]] W'
               - entity: climate.livingroom_thermostat
                 type: custom:secondaryinfo-entity-row
                 secondary_info: 'Battery: [[ sensor.livingroom_thermostat_battery ]] %'
@@ -194,8 +250,8 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - switch.sonos_kitchen_touch_controls
-                  - switch.sonos_kitchen_status_light
+                  - entity: switch.sonos_kitchen_touch_controls
+                  - entity: switch.sonos_kitchen_status_light
               - type: custom:mini-media-player
                 entity: media_player.roon_kitchen
                 volume_stateless: true
@@ -241,9 +297,19 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - light.kitchen_light_group
-                  - switch.kitchen_cookerhood
-                  - switch.kitchen_pc
+                  - entity: light.kitchen_light_group
+                  - entity: switch.kitchen_cookerhood
+                  - entity: switch.kitchen_pc
+              - type: divider
+              - type: conditional
+                conditions:
+                  - entity: sensor.kitchen_dishwasher_on
+                    state: 'on'
+                row:
+                  entity: sensor.kitchen_dishwasher_on
+                  name: Washer
+                  type: custom:secondaryinfo-entity-row
+                  secondary_info: 'Power: [[ sensor.kitchen_dishwasher_power_consumption ]] W'
               - type: conditional
                 conditions:
                   - entity: light.kitchen_light_group
@@ -252,6 +318,24 @@ views:
                   entity: light.kitchen_light_group
                   secondary_info: brightness
                   name: Light
+              - type: conditional
+                conditions:
+                  - entity: switch.kitchen_cookerhood
+                    state: 'on'
+                row:
+                  entity: switch.kitchen_cookerhood
+                  name: Cookerhood
+                  type: custom:secondaryinfo-entity-row
+                  secondary_info: 'Power: [[ sensor.kitchen_cookerhood_power_consumption ]] W'
+              - type: conditional
+                conditions:
+                  - entity: switch.kitchen_pc
+                    state: 'on'
+                row:
+                  entity: switch.kitchen_pc
+                  name: Kiosk
+                  type: custom:secondaryinfo-entity-row
+                  secondary_info: 'Power: [[ sensor.kitchen_pc_power_consumption ]] W'
               - entity: sensor.kitchen_pushbutton_temperature
                 name: Temperature
                 type: custom:secondaryinfo-entity-row
@@ -266,9 +350,9 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - switch.sonos_office_touch_controls
-                  - switch.sonos_office_status_light
-                  - binary_sensor.sonos_office_microphone
+                  - entity: switch.sonos_office_touch_controls
+                  - entity: switch.sonos_office_status_light
+                  - entity: binary_sensor.sonos_office_microphone
               - type: custom:mini-media-player
                 entity: media_player.roon_office
                 volume_stateless: true
@@ -314,10 +398,13 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - script.office_shutter_favorite
+                  - entity: script.office_shutter_favorite
+                    tap_action:
+                      action: toggle
               - entity: cover.office_shutter
                 secondary_info: position
-                name: ' '
+                name: Shutter
+              - type: divider
               - entity: climate.office_thermostat
                 name: Thermostat
                 type: custom:secondaryinfo-entity-row
@@ -333,11 +420,11 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - switch.sonos_bedroom_speech_enhancement
-                  - switch.sonos_bedroom_night_sound
-                  - switch.sonos_bedroom_surround_enabled
-                  - switch.sonos_bedroom_touch_controls
-                  - switch.sonos_bedroom_status_light
+                  - entity: switch.sonos_bedroom_speech_enhancement
+                  - entity: switch.sonos_bedroom_night_sound
+                  - entity: switch.sonos_bedroom_surround_enabled
+                  - entity: switch.sonos_bedroom_touch_controls
+                  - entity: switch.sonos_bedroom_status_light
               - type: custom:mini-media-player
                 entity: media_player.roon_bedroom
                 volume_stateless: true
@@ -346,7 +433,16 @@ views:
                   power: true
                   progress: true
                   source: true
-                  volume_level: false
+                  volume: true
+                artwork: none
+                info: short
+                name: ' '
+                group: true
+                icon: phu:sonos-playbar
+              - type: custom:mini-media-player
+                entity: media_player.sonos_bedroom
+                volume_stateless: true
+                volume_step: '1'
                 speaker_group:
                   platform: sonos
                   show_group_count: true
@@ -362,11 +458,16 @@ views:
                       name: Bathroom
                     - entity_id: media_player.sonos_bedroom
                       name: Bedroom
+                hide:
+                  controls: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
                 artwork: none
                 info: short
                 name: ' '
                 group: true
-                icon: phu:sonos-playbar
               - type: conditional
                 conditions:
                   - entity: media_player.roon_bedroom
@@ -384,11 +485,14 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - light.bedroom_light
-                  - script.bedroom_shutter_favorite
+                  - entity: light.bedroom_light
+                  - entity: script.bedroom_shutter_favorite
+                    tap_action:
+                      action: toggle
               - entity: cover.bedroom_shutter
                 secondary_info: position
                 name: Shutter
+              - type: divider
               - type: conditional
                 conditions:
                   - entity: light.bedroom_light
@@ -412,8 +516,8 @@ views:
               - type: divider
               - type: buttons
                 entities:
-                  - switch.sonos_bathroom_touch_controls
-                  - switch.sonos_bathroom_status_light
+                  - entity: switch.sonos_bathroom_touch_controls
+                  - entity: switch.sonos_bathroom_status_light
               - type: custom:mini-media-player
                 entity: media_player.roon_bathroom
                 volume_stateless: true
@@ -662,6 +766,18 @@ views:
                     progress: true
                     volume: true
                   group: true
+          - type: entities
+            entities:
+              - entity: input_number.timer_minutes
+              - type: buttons
+                entities:
+                  - entity: script.timer_start
+                    tap_action:
+                      action: toggle
+                  - entity: script.timer_cancel
+                    tap_action:
+                      action: toggle
+                  - entity: automation.timer_done
           - show_current: true
             show_forecast: true
             type: weather-forecast
@@ -671,6 +787,15 @@ views:
             show_forecast: true
             type: weather-forecast
             entity: weather.home
+  - theme: Backend-selected
+    title: Roon Web Display
+    path: web-display
+    icon: mdi:monitor
+    type: panel
+    badges: []
+    cards:
+      - type: iframe
+        url: http://rock:9330/display/
   - theme: Backend-selected
     title: Sidebar
     path: sidebar

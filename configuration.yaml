@@ -29,10 +29,10 @@ sensor:
     sensors:
       basement_washer_on:
         value_template: >
-          {% if states.sensor.basement_washer_power_consumption.state | float > 4 %}
-            On
+          {% if states.sensor.basement_washer_power_consumption.state | float > 2 %}
+            on
           {% else %}
-            Off
+            off
           {% endif %}
       bedroom_current_temperature:
         value_template: "{{ state_attr('climate.bedroom_thermostat', 'current_temperature') }}"
@@ -40,9 +40,9 @@ sensor:
       kitchen_dishwasher_on:
         value_template: >
           {% if states.sensor.kitchen_dishwasher_power_consumption.state | float > 2 %}
-            On
+            on
           {% else %}
-            Off
+            off
           {% endif %}
       office_current_temperature:
         value_template: "{{ state_attr('climate.office_thermostat', 'current_temperature') }}"
@@ -50,7 +50,7 @@ sensor:
       storeroom_akku_charged:
         value_template:  >
           {% if states.sensor.storeroom_switch_power_consumption.state | float > 1 %}
-            Charging
+            charging
           {% else %}
             100%
           {% endif %}

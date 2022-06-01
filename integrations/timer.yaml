@@ -17,24 +17,6 @@ automation:
         volume: 0.3
         message: 'Your time is over.'
         delay: '00:00:03'
-- alias: 'Phone Status'
-  trigger:
-    - platform: state
-      entity_id: sensor.phone
-  action:
-    - service: notify.notify
-      data:
-        title: 'Phone'
-        message: >-
-          {% if is_state("sensor.phone", "idle") %}
-            Phone in standby
-          {% elif is_state("sensor.phone", "dialing") %}
-            Calling {{ state_attr('sensor.phone', 'to_name') }} ({{ state_attr('sensor.phone', 'to') }})
-          {% elif is_state("sensor.phone", "ringing") %}
-            Incoming call from {{ state_attr('sensor.phone', 'from_name') }} ({{ state_attr('sensor.phone', 'from') }})
-          {% else %}
-            Phone with {{ state_attr('sensor.phone', 'with_name') }} ({{ state_attr('sensor.phone', 'with') }})
-          {% endif %}
 
 input_number:
   timer_seconds:
