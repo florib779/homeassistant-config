@@ -267,7 +267,14 @@
   trigger:
   - platform: time
     at: 06:55:00
-  condition: []
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - service: media_player.media_stop
     data: {}
