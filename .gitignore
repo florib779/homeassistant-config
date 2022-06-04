@@ -31,4 +31,5 @@
 govee_learning.yaml
 home-assistant.log
 integrations/beets.yaml
+rtsp2webrtc_v5_amd64
 secrets.yaml

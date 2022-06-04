@@ -183,7 +183,7 @@
     domain: switch
   mode: single
 - id: '1652896923568'
-  alias: Shutter Bedroom up
+  alias: Shutter Bedroom Favorite
   description: ''
   trigger:
   - platform: sun
@@ -208,7 +208,7 @@
     to: not_home
     for:
       hours: 0
-      minutes: 3
+      minutes: 10
       seconds: 0
   condition: []
   action:
@@ -259,4 +259,39 @@
     data: {}
     target:
       entity_id: vacuum.e0001103417610630506
+  mode: single
+- id: '1654138222259'
+  alias: Headphones Stop
+  description: This automation is intended to prevent the morning alarm clock from
+    being accidentally overheard.
+  trigger:
+  - platform: time
+    at: 06:55:00
+  condition: []
+  action:
+  - service: media_player.media_stop
+    data: {}
+    target:
+      device_id: 5e01f8a267780babcc5de58e7fcc77ac
+  mode: single
+- id: '1654140113306'
+  alias: Shutter Bedroom up
+  description: ''
+  trigger:
+  - platform: time
+    at: 08:00:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 100
   mode: single
