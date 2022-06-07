@@ -1,6 +1,7 @@
 - id: '1640522228516'
-  alias: TV on - Shutter down
-  description: ''
+  alias: Livingroom TV on - Shutter down
+  description: 'Closes the shutter to avoid reflections through the window while watching
+    TV. '
   trigger:
   - platform: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
@@ -14,7 +15,7 @@
     position: 0
   mode: single
 - id: '1641237098329'
-  alias: Shutter down
+  alias: All Shutter down
   description: ''
   trigger:
   - platform: sun
@@ -39,8 +40,9 @@
     position: 50
   mode: single
 - id: '1641237270223'
-  alias: Shutter Livingroom up
-  description: ''
+  alias: Livingroom Shutter up
+  description: Open the shutter in the living room when the TV is on, after sunrise
+    or at the appropriate time.
   trigger:
   - platform: time
     at: 08:00:00
@@ -59,7 +61,7 @@
     position: 100
   mode: single
 - id: '1642241222443'
-  alias: Dropbox-Backup
+  alias: 'HASS: Dropbox-Backup'
   description: ''
   trigger:
   - platform: time
@@ -75,7 +77,7 @@
         command: upload
   mode: single
 - id: '1645221509073'
-  alias: GitHub-Backup
+  alias: 'HASS: GitHub-Backup (fixme)'
   description: Pushes HASS config files to GitHub.
   trigger:
   - platform: time
@@ -88,7 +90,7 @@
       input: /config/integrations/gitpush/gitpush.sh
   mode: single
 - id: '1646247406476'
-  alias: Color Loop (Kitchen)
+  alias: Kitchen Color Loop
   description: ''
   use_blueprint:
     path: hugalafutro/Color_Loop.yaml
@@ -97,7 +99,7 @@
         entity_id:
         - light.kitchen_mood_light
 - id: '1650517762669'
-  alias: Low battery level
+  alias: 'HASS: Low battery level'
   description: Low battery level detection & notification for all battery sensors
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
@@ -112,8 +114,9 @@
       time: '18:00:00'
       threshold: 10
 - id: '1652179746791'
-  alias: Shutter Office up
-  description: ''
+  alias: Office Shutter up
+  description: Open the shutter in the office on weekdays after sunrise or at an appropriate
+    time.
   trigger:
   - platform: time
     at: 08:00:00
@@ -124,12 +127,12 @@
   action:
   - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
     domain: cover
-    entity_id: cover.office_shutter
+    entity_id: cover.office_shutter_2
     type: set_position
     position: 100
   mode: single
 - id: '1652424507352'
-  alias: Stop @ 01:00
+  alias: All Stop @ 01:00
   description: ''
   trigger:
   - platform: time
@@ -183,13 +186,17 @@
     domain: switch
   mode: single
 - id: '1652896923568'
-  alias: Shutter Bedroom Favorite
+  alias: Bedroom Shutter Favorite
   description: ''
   trigger:
   - platform: sun
     event: sunrise
     offset: '+1'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    attribute: workdays
+    state: 'on'
   action:
   - device_id: cc7215817ef8193b2df878dad98cb347
     domain: cover
@@ -198,7 +205,7 @@
     position: 40
   mode: single
 - id: '1652978544840'
-  alias: Away
+  alias: 'HASS: Away'
   description: ''
   trigger:
   - platform: state
@@ -245,7 +252,7 @@
       - 48608a926e1e91846fb7ded6dafd2b0c
   mode: single
 - id: '1652986188792'
-  alias: At Home
+  alias: 'HASS: At Home'
   description: ''
   trigger:
   - platform: state
@@ -261,20 +268,17 @@
       entity_id: vacuum.e0001103417610630506
   mode: single
 - id: '1654138222259'
-  alias: Headphones Stop
+  alias: Corridor Headphones Stop
   description: This automation is intended to prevent the morning alarm clock from
     being accidentally overheard.
   trigger:
   - platform: time
     at: 06:55:00
   condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    attribute: workdays
+    state: 'on'
   action:
   - service: media_player.media_stop
     data: {}
@@ -282,23 +286,51 @@
       device_id: 5e01f8a267780babcc5de58e7fcc77ac
   mode: single
 - id: '1654140113306'
-  alias: Shutter Bedroom up
-  description: ''
+  alias: Bedroom Shutter up
+  description: Open the shutter in the bedroom on weekdays at the appropriate time.
   trigger:
   - platform: time
     at: 08:00:00
   condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    attribute: workdays
+    state: 'on'
   action:
   - device_id: cc7215817ef8193b2df878dad98cb347
     domain: cover
     entity_id: cover.bedroom_shutter
     type: set_position
     position: 100
+  mode: single
+- id: '1654438759695'
+  alias: Sonos Night Mode Workday (Bedroom)
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  action:
+  - device_id: 4c4c037e477694001454c9891259cbce
+    domain: number
+    entity_id: number.sonos_bedroom_bass
+    type: set_value
+    value: -10
+  mode: single
+- id: '1654439759794'
+  alias: Sonos Livingroom Sub Crossover (fixme)
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - automation.sonos_livingroom_sub_crossover
+  condition: []
+  action:
+  - service: shell_command.sonos_livingroom_sub_crossover
+    data_template:
+      room: Livingroom
+      sub_crossover: '{{ trigger.to_state.state | int }}'
   mode: single

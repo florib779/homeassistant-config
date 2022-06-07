@@ -12,55 +12,34 @@ switch:
         command_on: curl http://192.168.178.32:5005/Livingroom/sub/polarity/1
         command_off: curl http://192.168.178.32:5005/Livingroom/sub/polarity/0
 
+# Fix me
+# sonos-http-api doesn't seem to work anymore
 shell_command:
-  sonos_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/sub/crossover/{{sub_crossover}}'
+  sonos_livingroom_sub_crossover: '/usr/bin/curl -X GET http://192.168.178.32:5005/{{room}}/sub/crossover/{{sub_crossover}}'
 
 ################################################################################
 
-automation:
+#automation:
 
 # Playbase livingroom ##########################################################
-- id: sonos_livingroom_sub_crossover
-  trigger:
-    - platform: state
-      entity_id: input_number.sonos_livingroom_sub_crossover
-  action:
-    - service: shell_command.sonos_sub_crossover
-      data_template:
-        room: 'Livingroom' # Use the name from the Sonos app
-        sub_crossover: '{{ trigger.to_state.state | int }}'
+#- id: sonos_livingroom_sub_crossover
+#  trigger:
+#    - platform: state
+#      entity_id: input_number.sonos_livingroom_sub_crossover
+#  action:
+#    - service: shell_command.sonos_sub_crossover
+#      data_template:
+#        room: 'Livingroom' # Use the name from the Sonos app
+#        sub_crossover: '{{ trigger.to_state.state | int }}'
 
-input_number:
+#input_number:
 # Leave unit_of_measurement in this file for better understanding of the values.
 
   # Official values are 50 - 110 in increments of 10.
   # Other values are possible, but might damage the Sub.
-  sonos_livingroom_sub_crossover:
-    min: 50
-    max: 110
-    step: 10
+#  sonos_livingroom_sub_crossover:
+#    min: 50
+#    max: 110
+#    step: 10
 
 ################################################################################
-
-script:
-  sonos_say:
-    alias: "Sonos TTS script"
-    sequence:
-     - service: sonos.snapshot
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-     - service: sonos.unjoin
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-     - service: media_player.volume_set
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-         volume_level: "{{ volume }}"
-     - service: tts.google_say
-       data_template:
-         entity_id: "{{ sonos_entity }}"
-         message: "{{ message }}"
-     - delay: "{{ delay }}"
-     - service: sonos.restore
-       data_template:
-         entity_id: "{{ sonos_entity }}"
