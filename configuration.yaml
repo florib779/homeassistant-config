@@ -48,6 +48,16 @@ template:
           {% else %}
             off
           {% endif %}
+
+      - name: "Livingroom NUC on"
+        unique_id: "livingroom_nuc_on"
+        state: >
+          {% if states.sensor.livingroom_nuc_power_consumption.state | float > 2 %}
+            on
+          {% else %}
+            off
+          {% endif %}
+
       - name: "Makita Akku charged"
         unique_id: "makita_akku_charged"
         state:  >
