@@ -13,34 +13,34 @@ My Home Assistant config files including products of:
 ## Features and goals
 
 - [x] A [script](https://github.com/florib779/homeassistant-config/blob/master/integrations/gitpush/gitpush.sh) which automatically pushes Home Assistant config files to GitHub.
-- [x] A [modified Roon Web Display](https://florib779.github.io/Roon/articles/roon-web-display.html).
-- [x] A [Roon ROCK dashboard](https://florib779.github.io/Roon/articles/home-assistant-roon-rock-view.html).
-  * Is no longer current. I have decided to use a Debian based Roon server. More shortly...
 
 * **Sonos**
   - [x] Night mode (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speech enhancement (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player).
-  - [x] Bass/Treble via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api).
+  - [x] Bass/Treble via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Switch rear speakers
   - [ ] Loudness.
     * Seems to be not possible yet.
   - [ ] Balance.
     * Seems to be not possible yet.
-  - [ ] Volume level of rear speakers.
-    * Seems to be not possible yet.
+  - [x] Rear speakers.
+    - [x] On/Off.
+    - [ ] Volume level.
+      * Seems to be not possible yet.
   - [x] Control subwoofer via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api).
     - [x] On/Off.
     - [x] Volume level.
     - [x] Crossover frequency.
     - [x] Polarity.
   - [x] Control status lights via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
+    - [x] Turn on/off lights at a given time as night light
   - [x] Control buttons via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
 * **Roon**
   - [x] Control/Show info.
     - [x] [RoonLabs music player integration](https://www.home-assistant.io/integrations/roon/).
       - [ ] Transfer zones.
-    - [ ] Remote control with [roon-cec-controller-extension](https://github.com/benjaminbellamy/roon-cec-controller-extension).
+    - [ ] Remote control via [roon-cec-controller-extension](https://github.com/benjaminbellamy/roon-cec-controller-extension).
       - [ ] Start/pause.
         * Possible, but currently not enabled.
       - [ ] ~Forward.~
@@ -55,7 +55,7 @@ My Home Assistant config files including products of:
         * My remote control does not send a command for this.
 * **AVM FRITZ!Box**
   - [x] Show internet connectivity (with external IP and uptime attributes) via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/).
-  - [x] Turn wifi and guest wifi on/off ([AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/).
+  - [x] Turn wifi and guest wifi on/off via [AVM FRITZ!Box Tools integration](https://www.home-assistant.io/integrations/fritz/).
 * **AVM FRITZ!DECT devices**
   * Control.
     - [x] AVM FRITZ!DECT 200 (smart plug).
@@ -71,8 +71,9 @@ My Home Assistant config files including products of:
       * Possible via Homebridge [info](https://community.home-assistant.io/t/support-rademacher-rollotron-1213-dect-with-avm-fritz-smarthome/319854/5)
       - [x] Close shutter when TV is turned on.
         * To avoid light glare.
-      - [x] Close shutter depending on the phases of the sun.
+      - [x] Close shutter depending on time and the phases of the sun.
   * Show info
+    - [x] Show phone status with caller information
     - [x] Deutsche Telekom (Eurotronic) 40318684 (door/window contact).
     - [x] AVM FRITZ!DECT 200 (smart plug).
       - [x] Power consumption.
@@ -89,10 +90,6 @@ My Home Assistant config files including products of:
       - [x] Battery Level.
       - [x] Humidity.
     - [x] Rademacher RolloTron DECT 1213 (shutter).
-      * Shows only whether open or closed (even if only half open) - no intermediate levels.
-* **Ecovacs Deebot** ([lovelace-xiaomi-vacuum-card](https://github.com/benct/lovelace-xiaomi-vacuum-card)).
-  - [x] Control.
-  - [x] Show info.
 * **Android** (Mobile/TV)
   - [x] Control.
     - [x] Turn TV on via [Wake on LAN integration](https://www.home-assistant.io/integrations/wake_on_lan/).
@@ -104,14 +101,11 @@ My Home Assistant config files including products of:
     - [x] Notifications/Messages.
     - [x] State.
 
-## ToDo/Ideas
-- [ ] Child lock automation.
-  - [ ] All buttons of Fritz!Dect devices off.
-  - [ ] All buttons of Sonos devices off.
+## Automations
 - [x] Presence detection.
-  - [x] Music off.
-  - [x] All devices off.
-  - [x] Vacuum on.
+  - [x] Music on/off.
+  - [x] All devices on/off.
+  - [x] Vacuum on/off.
 
 ## Links
 

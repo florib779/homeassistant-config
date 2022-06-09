@@ -71,3 +71,25 @@ template:
         unique_id: "electricity_price"
         # 2022-06-07
         state: "0.309"
+      - name: "Fritzbox Callmonitor Phonebook"
+        unique_id: "fritzbox_callmonitor_phonebook"
+        state: >-
+            {%- if is_state("sensor.fritzbox_callmonitor", "idle") %}
+                Free
+            {%  elif is_state("sensor.fritzbox_callmonitor", "dialing") %}
+                Dialing '{{ states.sensor.fritzbox_callmonitor.attributes.to_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.to }})'
+            {%  elif is_state("sensor.fritzbox_callmonitor", "ringing") %}
+                Incoming call from '{{ states.sensor.fritzbox_callmonitor.attributes.from_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.from }})'
+            {% else %}
+                Talking with '{{ states.sensor.fritzbox_callmonitor.attributes.with_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.with }})'
+            {%- endif %}
+        icon: >-
+            {% if is_state("sensor.fritzbox_callmonitor", "idle") %}
+                mdi:phone-classic
+            {% elif is_state("sensor.fritzbox_callmonitor", "dialing") %}
+                mdi:phone-outgoing
+            {% elif is_state("sensor.fritzbox_callmonitor", "ringing") %}
+                mdi:phone-incoming
+            {% else %}
+                mdi:phone-in-talk
+            {% endif %}
