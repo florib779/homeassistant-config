@@ -14,6 +14,7 @@ header_cards:
       style: |
         ha-card {
           background: rgba(0,0,0,0);
+          font-size: .8em;
         }
     - type: custom:browser-control-card
       hide_fullscreen: false
@@ -22,13 +23,12 @@ header_cards:
       hide_refresh: false
       no_padding: true
       small_buttons: true
-      card_mod:
-        style: |
-          .type-custom-browser-control-card a {
-            background: var(--app-header-background-color) !important;
-            color: var(--primary-text-color) !important;
-            border: var(--card-background-color) !important;
-          }
+      style: |
+        .type-custom-browser-control-card a {
+          background: var(--app-header-background-color) !important;
+          color: var(--primary-text-color) !important;
+          border: var(--card-background-color) !important;
+        }
 media_art_background:
   entities:
     - entity: media_player.roon_livingroom
@@ -218,12 +218,12 @@ views:
             card:
               type: entities
             show_empty: false
-          - card_mod:
-              style: |
-                .card-header {
-                  padding: 0 16px;
-                }
-            type: entities
+          - show_current: true
+            show_forecast: false
+            type: weather-forecast
+            entity: weather.home_hourly
+            name: ' '
+          - type: entities
             title: Info
             icon: mdi:information
             entities:
@@ -235,10 +235,10 @@ views:
                   - entity: sensor.sm_g960f_ringer_mode
               - type: conditional
                 conditions:
-                  - entity: sensor.fritz_box_7490_call_monitor_google_telefonbuch
-                    state_not: idle
+                  - entity: sensor.fritzbox_callmonitor_phonebook
+                    state_not: Free
                 row:
-                  entity: sensor.fritz_box_7490_call_monitor_google_telefonbuch
+                  entity: sensor.fritzbox_callmonitor_phonebook
                   name: Phone
               - type: conditional
                 conditions:
@@ -268,12 +268,11 @@ views:
                 row:
                   entity: sensor.sm_g960f_next_alarm
                   name: Next Alarm
-              - type: section
-              - entity: sensor.time_date
-                secondary_info: none
-              - entity: weather.home_hourly
-                secondary_info: none
-                name: Weather
+            card_mod:
+              style: |
+                .card-header {
+                  padding: 0 16px;
+                }
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -1255,24 +1254,138 @@ views:
       - camera_view: live
         type: picture-glance
         title: Office
-        image: https://demo.home-assistant.io/stub_config/kitchen.png
+        image: /local/blank.png
         entities:
-          - binary_sensor.remote_ui
-          - binary_sensor.workday_sensor
+          - entity: camera.office
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: a8fe9962f7871e6d157488401c753681
+                direction: left
+                speed: 5
+            icon: mdi:arrow-left
+            show_icon: true
+          - entity: camera.office
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: a8fe9962f7871e6d157488401c753681
+                direction: up
+                speed: 5
+            icon: mdi:arrow-up
+            show_icon: true
+          - entity: camera.office
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: a8fe9962f7871e6d157488401c753681
+                direction: down
+                speed: 5
+            icon: mdi:arrow-down
+            show_icon: true
+          - entity: camera.office
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: a8fe9962f7871e6d157488401c753681
+                direction: right
+                speed: 5
+            icon: mdi:arrow-right
+            show_icon: true
         camera_image: camera.office
       - camera_view: live
         type: picture-glance
-        title: Bedroom
-        image: https://demo.home-assistant.io/stub_config/kitchen.png
+        title: Kitchen
+        image: /local/blank.png
         entities:
-          - binary_sensor.makita_akku_charged
-          - sensor.time
-        camera_image: camera.bedroom
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: left
+                speed: 5
+            icon: mdi:arrow-left
+            show_icon: true
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: up
+                speed: 5
+            icon: mdi:arrow-up
+            show_icon: true
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: down
+                speed: 5
+            icon: mdi:arrow-down
+            show_icon: true
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: right
+                speed: 5
+            icon: mdi:arrow-right
+            show_icon: true
+        camera_image: camera.kitchen
       - camera_view: live
         type: picture-glance
-        title: Kitchen
-        image: https://demo.home-assistant.io/stub_config/kitchen.png
+        title: Bedroom
+        image: /local/blank.png
         entities:
-          - sensor.date
-          - sensor.date_time
-        camera_image: camera.kitchen
+          - entity: camera.bedroom
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: 06a03f780de1fb8a18b996bb939a42b6
+                direction: left
+                speed: 5
+            icon: mdi:arrow-left
+            show_icon: true
+          - entity: camera.bedroom
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: 06a03f780de1fb8a18b996bb939a42b6
+                direction: up
+                speed: 5
+            icon: mdi:arrow-up
+            show_icon: true
+          - entity: camera.bedroom
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: 06a03f780de1fb8a18b996bb939a42b6
+                direction: down
+                speed: 5
+            icon: mdi:arrow-down
+            show_icon: true
+          - entity: camera.bedroom
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: 06a03f780de1fb8a18b996bb939a42b6
+                direction: right
+                speed: 5
+            icon: mdi:arrow-right
+            show_icon: true
+        camera_image: camera.bedroom
