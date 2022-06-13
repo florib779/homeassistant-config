@@ -44,23 +44,63 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - type: entity-filter
-            entities:
-              - media_player.roon_bathroom
-              - media_player.roon_bedroom
-              - media_player.roon_headphones
-              - media_player.roon_kitchen
-              - media_player.roon_livingroom
-              - media_player.roon_office
-            state_filter:
-              - playing
+          - type: conditional
+            conditions:
+              - entity: sensor.bedroom_audio_input_format
+                state_not: No input
             card:
-              type: iframe
-              url: http://rock:9330/display/
-              aspect_ratio: '16:9'
-            show_empty: false
+              type: entities
+              entities:
+                - type: custom:mini-media-player
+                  entity: media_player.sonos_bedroom
+                  volume_stateless: true
+                  volume_step: '1'
+                  hide:
+                    controls: true
+                    icon: true
+                    power: true
+                    progress: true
+                    source: true
+                    volume_level: false
+                  info: short
+                  group: true
+                  name: Bedroom
+          - type: conditional
+            conditions:
+              - entity: sensor.livingroom_audio_input_format
+                state_not: No input
+            card:
+              type: entities
+              entities:
+                - type: custom:mini-media-player
+                  entity: media_player.sonos_livingroom
+                  volume_stateless: true
+                  volume_step: '1'
+                  hide:
+                    controls: true
+                    icon: true
+                    power: true
+                    progress: true
+                    source: true
+                    volume_level: false
+                  info: short
+                  group: true
+                  name: Livingroom
           - type: entity-filter
             entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_bathroom
+                artwork: full-cover-fit
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                group: true
               - type: custom:mini-media-player
                 entity: media_player.roon_bathroom
                 volume_stateless: true
@@ -71,24 +111,22 @@ views:
                   progress: true
                   source: true
                   volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_bathroom
-                  entities:
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_office
-                      name: Bathroom
                 info: short
                 group: true
-                name: Bedroom
+                name: Bathroom
+              - type: custom:mini-media-player
+                entity: media_player.roon_bedroom
+                artwork: full-cover-fit
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                group: true
               - type: custom:mini-media-player
                 entity: media_player.roon_bedroom
                 volume_stateless: true
@@ -99,24 +137,22 @@ views:
                   progress: true
                   source: true
                   volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_bedroom
-                  entities:
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_office
-                      name: Office
                 info: short
                 group: true
                 name: Bedroom
+              - type: custom:mini-media-player
+                entity: media_player.roon_headphones
+                artwork: full-cover-fit
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                group: true
               - type: custom:mini-media-player
                 entity: media_player.roon_headphones
                 hide:
@@ -130,6 +166,19 @@ views:
                 name: Headphones
               - type: custom:mini-media-player
                 entity: media_player.roon_kitchen
+                artwork: full-cover-fit
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                group: true
+              - type: custom:mini-media-player
+                entity: media_player.roon_kitchen
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -138,24 +187,22 @@ views:
                   progress: true
                   source: true
                   volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_kitchen
-                  entities:
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_office
-                      name: Office
                 info: short
                 group: true
                 name: Kitchen
+              - type: custom:mini-media-player
+                entity: media_player.roon_livingroom
+                artwork: full-cover-fit
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                group: true
               - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
                 volume_stateless: true
@@ -166,24 +213,22 @@ views:
                   progress: true
                   source: true
                   volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_livingroom
-                  entities:
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_office
-                      name: Office
                 info: short
                 group: true
                 name: Livingroom
+              - type: custom:mini-media-player
+                entity: media_player.roon_office
+                artwork: full-cover-fit
+                hide:
+                  controls: true
+                  icon: true
+                  info: true
+                  name: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                group: true
               - type: custom:mini-media-player
                 entity: media_player.roon_office
                 volume_stateless: true
@@ -194,37 +239,16 @@ views:
                   progress: true
                   source: true
                   volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_office
-                  entities:
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_office
-                      name: Office
                 info: short
                 group: true
                 name: Office
             state_filter:
-              - 'on'
               - playing
             card:
               type: entities
             show_empty: false
-          - show_current: true
-            show_forecast: false
-            type: weather-forecast
-            entity: weather.home_hourly
-            name: ' '
           - type: entities
-            title: Info
+            title: Mobile
             icon: mdi:information
             entities:
               - type: buttons
@@ -242,11 +266,19 @@ views:
                   name: Phone
               - type: conditional
                 conditions:
+                  - entity: sensor.lenovo_tab_2_a10_70f_battery_level
+                    state_not: '100'
+                row:
+                  entity: sensor.lenovo_tab_2_a10_70f_battery_level
+                  type: custom:secondaryinfo-entity-row
+                  secondary_info: '[[ sensor.lenovo_tab_2_a10_70f_battery_state ]]'
+              - type: conditional
+                conditions:
                   - entity: sensor.sm_g960f_phone_state
                     state_not: idle
                 row:
                   entity: sensor.sm_g960f_phone_state
-                  name: Phone
+                  name: Handy
                   secondary_info: last-updated
               - type: conditional
                 conditions:
@@ -254,7 +286,7 @@ views:
                     state_not: '100'
                 row:
                   entity: sensor.sm_g960f_battery_level
-                  name: Akku
+                  name: Handy
                   type: custom:secondaryinfo-entity-row
                   secondary_info: '[[ sensor.sm_g960f_battery_state ]]'
               - entity: sensor.sm_g960f_active_notification_count
@@ -338,14 +370,14 @@ views:
               icon: mdi:information
               state_color: true
               show_header_toggle: true
+          - show_current: true
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.home_hourly
+            name: ' '
       - type: vertical-stack
         cards:
-          - card_mod:
-              style: |
-                .card-header {
-                  padding: 0 16px;
-                }
-            type: entities
+          - type: entities
             entities:
               - type: buttons
                 entities:
@@ -396,6 +428,40 @@ views:
                       name: Bedroom
                     - entity_id: media_player.roon_bathroom
                       name: Bathroom
+                shortcuts:
+                  label: Transfer
+                  column_height: 10px
+                  list:
+                    - name: Bathroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_bathroom
+                    - name: Bedroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_bedroom
+                    - name: Headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_headphones
+                    - name: Kitchen
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_kitchen
+                    - name: Office
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_office
                 info: short
                 group: true
                 name: ' '
@@ -496,6 +562,14 @@ views:
             show_header_toggle: true
             title: Livingroom
             icon: mdi:sofa
+            card_mod:
+              style: |
+                .card-header {
+                  padding: 0 16px;
+                }
+                ha-card {
+                  background: rgba(176, 138, 138, 0.5);
+                }
           - type: entities
             entities:
               - entity: sensor.corridor_pushbutton_temperature
@@ -507,6 +581,40 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_headphones
+                shortcuts:
+                  label: Transfer
+                  column_height: 10px
+                  list:
+                    - name: Bathroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_headphones
+                        transfer_id: media_player.roon_bathroom
+                    - name: Bedroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_headphones
+                        transfer_id: media_player.roon_bedroom
+                    - name: Kitchen
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_headphones
+                        transfer_id: media_player.roon_kitchen
+                    - name: Livingroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_headphones
+                        transfer_id: media_player.roon_livingroom
+                    - name: Office
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_headphones
+                        transfer_id: media_player.roon_office
                 hide:
                   power: true
                   progress: true
@@ -521,14 +629,18 @@ views:
                       opacity: 1 !important;
                     }
               - type: divider
-              - entity: sensor.fritz_box_7490_max_connection_download_throughput
+              - entity: sensor.fritz_box_7490_download_throughput
                 name: Download
                 type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.fritz_box_7490_download_throughput ]] kB/s'
-              - entity: sensor.fritz_box_7490_max_connection_upload_throughput
+                secondary_info: >-
+                  [[ sensor.fritz_box_7490_max_connection_download_throughput ]]
+                  kB/s
+              - entity: sensor.fritz_box_7490_upload_throughput
                 name: Upload
                 type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.fritz_box_7490_upload_throughput ]] kB/s'
+                secondary_info: >-
+                  [[ sensor.fritz_box_7490_max_connection_upload_throughput ]]
+                  kB/s
               - entity: sensor.corridor_rock_power_consumption
                 name: Server
                 icon: mdi:server
@@ -538,19 +650,21 @@ views:
             show_header_toggle: true
             title: Corridor
             icon: mdi:wardrobe
+            footer:
+              type: graph
+              entity: sensor.corridor_rock_power_consumption
+              detail: 2
             card_mod:
               style: |
                 .card-header {
                   padding: 0 16px;
                 }
+                ha-card {
+                  background: rgba(30, 30, 30, 0.3);
+                }
       - type: vertical-stack
         cards:
-          - card_mod:
-              style: |
-                .card-header {
-                  padding: 0 16px;
-                }
-            type: entities
+          - type: entities
             entities:
               - type: buttons
                 entities:
@@ -589,6 +703,40 @@ views:
                       name: Bedroom
                     - entity_id: media_player.roon_bathroom
                       name: Bathroom
+                shortcuts:
+                  label: Transfer
+                  column_height: 10px
+                  list:
+                    - name: Bathroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_bathroom
+                    - name: Bedroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_bedroom
+                    - name: Headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_headphones
+                    - name: Livingroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_livingroom
+                    - name: Office
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_office
                 info: short
                 name: ' '
                 group: true
@@ -620,6 +768,14 @@ views:
             show_header_toggle: true
             icon: mdi:stove
             state_color: true
+            card_mod:
+              style: |
+                .card-header {
+                  padding: 0 16px;
+                }
+                ha-card {
+                  background: rgba(211, 188, 0, 0.5);
+                }
           - type: entities
             entities:
               - type: buttons
@@ -660,6 +816,40 @@ views:
                       name: Bedroom
                     - entity_id: media_player.roon_bathroom
                       name: Bathroom
+                shortcuts:
+                  label: Transfer
+                  column_height: 10px
+                  list:
+                    - name: Bathroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_bathroom
+                    - name: Bedroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_bedroom
+                    - name: Headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_headphones
+                    - name: Kitchen
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_kitchen
+                    - name: Livingroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_livingroom
                 info: short
                 name: ' '
                 group: true
@@ -697,14 +887,12 @@ views:
                 .card-header {
                   padding: 0 16px;
                 }
+                ha-card {
+                  background: rgba(255, 255, 255, 0.3);
+                }
       - type: vertical-stack
         cards:
-          - card_mod:
-              style: |
-                .card-header {
-                  padding: 0 16px;
-                }
-            type: entities
+          - type: entities
             entities:
               - type: buttons
                 entities:
@@ -744,6 +932,40 @@ views:
                       name: Bedroom
                     - entity_id: media_player.roon_bathroom
                       name: Bathroom
+                shortcuts:
+                  label: Transfer
+                  column_height: 10px
+                  list:
+                    - name: Bathroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bedroom
+                        transfer_id: media_player.roon_bathroom
+                    - name: Headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bedroom
+                        transfer_id: media_player.roon_headphones
+                    - name: Kitchen
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bedroom
+                        transfer_id: media_player.roon_kitchen
+                    - name: Livingroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bedroom
+                        transfer_id: media_player.roon_livingroom
+                    - name: Office
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bedroom
+                        transfer_id: media_player.roon_office
                 hide:
                   power: true
                   progress: true
@@ -811,12 +1033,15 @@ views:
             state_color: true
             show_header_toggle: true
             icon: mdi:bed-king
-          - card_mod:
+            card_mod:
               style: |
                 .card-header {
                   padding: 0 16px;
                 }
-            type: entities
+                ha-card {
+                  background: rgba(255, 0, 255, 0.1);
+                }
+          - type: entities
             entities:
               - entity: climate.bathroom_thermostat
                 name: Thermostat
@@ -850,6 +1075,40 @@ views:
                       name: Bedroom
                     - entity_id: media_player.roon_bathroom
                       name: Bathroom
+                shortcuts:
+                  label: Transfer
+                  column_height: 10px
+                  list:
+                    - name: Bedroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bathroom
+                        transfer_id: media_player.roon_bedroom
+                    - name: Headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bathroom
+                        transfer_id: media_player.roon_headphones
+                    - name: Kitchen
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bathroom
+                        transfer_id: media_player.roon_kitchen
+                    - name: Livingroom
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bathroom
+                        transfer_id: media_player.roon_livingroom
+                    - name: Office
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_bathroom
+                        transfer_id: media_player.roon_office
                 info: short
                 name: ' '
                 group: true
@@ -880,6 +1139,14 @@ views:
             title: Bathroom
             show_header_toggle: true
             icon: mdi:bathtub
+            card_mod:
+              style: |
+                .card-header {
+                  padding: 0 16px;
+                }
+                ha-card {
+                  background: rgba(0, 151, 255, 0.5);
+                }
   - theme: Backend-selected
     title: Camera
     path: camera
@@ -1299,52 +1566,6 @@ views:
         camera_image: camera.office
       - camera_view: live
         type: picture-glance
-        title: Kitchen
-        image: /local/blank.png
-        entities:
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: left
-                speed: 5
-            icon: mdi:arrow-left
-            show_icon: true
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: up
-                speed: 5
-            icon: mdi:arrow-up
-            show_icon: true
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: down
-                speed: 5
-            icon: mdi:arrow-down
-            show_icon: true
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: right
-                speed: 5
-            icon: mdi:arrow-right
-            show_icon: true
-        camera_image: camera.kitchen
-      - camera_view: live
-        type: picture-glance
         title: Bedroom
         image: /local/blank.png
         entities:
@@ -1389,3 +1610,49 @@ views:
             icon: mdi:arrow-right
             show_icon: true
         camera_image: camera.bedroom
+      - camera_view: live
+        type: picture-glance
+        title: Kitchen
+        image: /local/blank.png
+        entities:
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: left
+                speed: 5
+            icon: mdi:arrow-left
+            show_icon: true
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: up
+                speed: 5
+            icon: mdi:arrow-up
+            show_icon: true
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: down
+                speed: 5
+            icon: mdi:arrow-down
+            show_icon: true
+          - entity: camera.kitchen
+            tap_action:
+              action: call-service
+              service: ezviz_cloud.ptz
+              data:
+                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
+                direction: right
+                speed: 5
+            icon: mdi:arrow-right
+            show_icon: true
+        camera_image: camera.kitchen

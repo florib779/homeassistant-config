@@ -52,7 +52,7 @@
   condition:
   - condition: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
-    below: '20'
+    below: '5'
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
@@ -127,7 +127,7 @@
   action:
   - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
     domain: cover
-    entity_id: cover.office_shutter_2
+    entity_id: cover.office_shutter
     type: set_position
     position: 100
   mode: single
