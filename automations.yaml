@@ -357,7 +357,7 @@
   description: ''
   trigger:
   - platform: time
-    at: 02:00:00
+    at: 01:00:00
   condition: []
   action:
   - type: turn_on
@@ -375,6 +375,10 @@
   - type: turn_on
     device_id: 35ca0a10f0d4ef5b5dfcbd94329f8432
     entity_id: switch.sonos_office_status_light
+    domain: switch
+  - type: turn_on
+    device_id: 4c4c037e477694001454c9891259cbce
+    entity_id: switch.sonos_bedroom_status_light
     domain: switch
   mode: single
 - id: '1654703080922'
@@ -401,5 +405,9 @@
   - type: turn_off
     device_id: 35ca0a10f0d4ef5b5dfcbd94329f8432
     entity_id: switch.sonos_office_status_light
+    domain: switch
+  - type: turn_off
+    device_id: 4c4c037e477694001454c9891259cbce
+    entity_id: switch.sonos_bedroom_status_light
     domain: switch
   mode: single
