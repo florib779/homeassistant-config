@@ -93,3 +93,18 @@ template:
             {% else %}
                 mdi:phone-in-talk
             {% endif %}
+      - name: "Livingroom Fan stages"
+        unique_id: "livingroom_fan_stages"
+        # Stage 1 > 32
+        # Stage 2 > 34
+        # Stage 3 > 37 W
+        state: >
+          {% if states.sensor.livingroom_fan_power_consumption.state | float > 37 %}
+            Stage 3
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 34 %}
+            Stage 2
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 32 %}
+            Stage 1
+          {% else %}
+            off
+          {% endif %}
