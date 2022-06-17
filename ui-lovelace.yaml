@@ -1,5 +1,5 @@
 wallpanel_screensaver:
-  enabled: true
+  enabled: false
   idle_time: 600
   night_mode:
     start_time: '23:00'
@@ -460,6 +460,8 @@ views:
                   - entity: binary_sensor.sm_g960f_wifi_state
                   - entity: binary_sensor.sm_g960f_mobile_data
                   - entity: binary_sensor.sm_g960f_bluetooth_state
+                  - entity: binary_sensor.sm_g960f_music_active
+                    state_color: true
                   - entity: sensor.sm_g960f_ringer_mode
               - type: conditional
                 conditions:
@@ -504,6 +506,10 @@ views:
                 row:
                   entity: sensor.sm_g960f_next_alarm
                   name: Next Alarm
+              - entity: sensor.sm_g960f_internal_storage
+                name: Free Internal Storage
+              - entity: sensor.sm_g960f_mobile_rx_gb
+                name: Mobile Data
             card_mod:
               style: |
                 .card-header {
@@ -565,7 +571,7 @@ views:
               - entity: switch.livingroom_fan
                 state_color: true
                 type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.livingroom_fan_power_consumption ]] W'
+                secondary_info: '[[ sensor.livingroom_fan_stages ]]'
             state_filter:
               - 'on'
             card:
@@ -575,6 +581,11 @@ views:
               state_color: true
               show_header_toggle: true
           - show_current: true
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.home
+            name: ' '
+          - show_current: false
             show_forecast: true
             type: weather-forecast
             entity: weather.home_hourly
@@ -768,6 +779,11 @@ views:
             show_header_toggle: true
             title: Livingroom
             icon: mdi:sofa
+            header:
+              type: graph
+              entity: sensor.livingroom_thermostat_current_temperature
+              detail: 1
+              hours_to_show: 24
             card_mod:
               style: |
                 .card-header {
@@ -860,6 +876,9 @@ views:
               type: graph
               entity: sensor.corridor_rock_power_consumption
               detail: 2
+            header:
+              type: graph
+              entity: sensor.corridor_pushbutton_temperature
             card_mod:
               style: |
                 .card-header {
@@ -974,6 +993,9 @@ views:
             show_header_toggle: true
             icon: mdi:stove
             state_color: true
+            header:
+              type: graph
+              entity: sensor.kitchen_pushbutton_temperature
             card_mod:
               style: |
                 .card-header {
@@ -1090,6 +1112,9 @@ views:
             show_header_toggle: true
             title: Office
             icon: mdi:desk
+            header:
+              type: graph
+              entity: sensor.office_thermostat_current_temperature
             card_mod:
               style: |
                 .card-header {
@@ -1243,6 +1268,9 @@ views:
             state_color: true
             show_header_toggle: true
             icon: mdi:bed-king
+            header:
+              type: graph
+              entity: sensor.bedroom_thermostat_current_temperature
             card_mod:
               style: |
                 .card-header {
@@ -1349,6 +1377,9 @@ views:
             title: Bathroom
             show_header_toggle: true
             icon: mdi:bathtub
+            header:
+              type: graph
+              entity: sensor.bathroom_thermostat_current_temperature
             card_mod:
               style: |
                 .card-header {
@@ -1363,6 +1394,7 @@ views:
             name: false
             attributes:
               main_brush: false
+              sensor: false
               side_brush:
                 key: component_side_brush
               filter:
