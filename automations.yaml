@@ -28,16 +28,10 @@
     entity_id: cover.livingroom_shutter_small
     type: set_position
     position: 0
-  - device_id: cc7215817ef8193b2df878dad98cb347
-    domain: cover
-    entity_id: cover.bedroom_shutter
-    type: set_position
-    position: 0
-  - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
-    domain: cover
-    entity_id: cover.office_shutter
-    type: set_position
-    position: 50
+  - service: script.bedroom_shutter_favorite
+    data: {}
+  - service: script.office_shutter_favorite
+    data: {}
   mode: single
 - id: '1641237270223'
   alias: Livingroom Shutter up
@@ -119,8 +113,6 @@
   description: Open the shutter in the office on weekdays after sunrise or at an appropriate
     time.
   trigger:
-  - platform: time
-    at: 08:00:00
   - platform: sun
     event: sunrise
     offset: '+1'
@@ -160,11 +152,10 @@
   - service: switch.turn_off
     data: {}
     target:
-      device_id:
-      - 99d209732266ca4eec3e7b5a439ffb70
-      - 2963d98a0a5f3f18a618dbb4ff4339b5
-      - 28356a9d25a4ef255d928c52044a7839
-      - 48608a926e1e91846fb7ded6dafd2b0c
+      entity_id:
+      - switch.kitchen_pc
+      - switch.kitchen_cookerhood
+      - switch.livingroom_fan
   mode: single
 - id: '1652647649459'
   alias: Kitchen Cookerhood stop
@@ -291,7 +282,7 @@
   description: Open the shutter in the bedroom on weekdays at the appropriate time.
   trigger:
   - platform: time
-    at: 08:00:00
+    at: 07:00:00
   condition:
   - condition: state
     entity_id: binary_sensor.workday_sensor
@@ -342,6 +333,10 @@
   - platform: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
     below: '2'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
   condition:
   - condition: sun
     before: sunset
@@ -425,4 +420,18 @@
   action:
   - service: script.livingroom_shutter_favorite
     data: {}
+  mode: single
+- id: '1656021860713'
+  alias: Bedroom Shutter Down
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition: []
+  action:
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 0
   mode: single
