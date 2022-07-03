@@ -475,15 +475,13 @@ views:
               - entity: binary_sensor.basement_washer_on
                 name: Washer
                 state_color: true
-                type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.basement_washer_power_consumption ]] W'
+                secondary_info: last-changed
               - entity: binary_sensor.fritz_box_7490_firmware_update
                 name: FRITZ!Box Firmware Update
                 secondary_info: last-changed
               - entity: binary_sensor.kitchen_dishwasher_on
                 state_color: true
-                type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.kitchen_dishwasher_power_consumption ]] W'
+                secondary_info: last-changed
               - entity: binary_sensor.livingroom_balcony_door
                 name: Balcony Door
                 secondary_info: last-changed
