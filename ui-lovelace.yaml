@@ -385,6 +385,7 @@ views:
                   - entity: binary_sensor.sm_g960f_music_active
                     state_color: true
                   - entity: sensor.sm_g960f_ringer_mode
+                  - entity: camera.office
               - type: conditional
                 conditions:
                   - entity: sensor.fritzbox_callmonitor_phonebook
@@ -686,6 +687,7 @@ views:
                   name: Sub Crossover
               - type: buttons
                 entities:
+                  - entity: switch.sonos_livingroom_loudness
                   - entity: switch.sonos_livingroom_speech_enhancement
                   - entity: switch.sonos_livingroom_night_sound
                   - entity: switch.sonos_livingroom_subwoofer_enabled
@@ -907,6 +909,7 @@ views:
                   name: Treble
               - type: buttons
                 entities:
+                  - entity: switch.sonos_kitchen_loudness
                   - entity: switch.sonos_kitchen_touch_controls
                   - entity: switch.sonos_kitchen_status_light
             title: Kitchen
@@ -1025,6 +1028,7 @@ views:
                   name: Treble
               - type: buttons
                 entities:
+                  - entity: switch.sonos_office_loudness
                   - entity: switch.sonos_office_touch_controls
                   - entity: switch.sonos_office_status_light
                   - entity: binary_sensor.sonos_office_microphone
@@ -1179,6 +1183,7 @@ views:
                   name: Treble
               - type: buttons
                 entities:
+                  - entity: switch.sonos_bedroom_loudness
                   - entity: switch.sonos_bedroom_speech_enhancement
                   - entity: switch.sonos_bedroom_night_sound
                   - entity: switch.sonos_bedroom_surround_enabled
@@ -1292,6 +1297,7 @@ views:
                   name: Treble
               - type: buttons
                 entities:
+                  - entity: switch.sonos_bathroom_loudness
                   - entity: switch.sonos_bathroom_touch_controls
                   - entity: switch.sonos_bathroom_status_light
             title: Bathroom
@@ -1485,6 +1491,11 @@ views:
         aspect_ratio: '16:9'
       - type: vertical-stack
         cards:
+          - type: logbook
+            entities:
+              - sensor.lastfm
+            hours_to_show: 1
+            title: Play History
           - type: entities
             entities:
               - type: custom:mini-media-player

@@ -20,8 +20,7 @@ My Home Assistant config files including products of:
   - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player).
   - [x] Bass/Treble via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Switch rear speakers
-  - [ ] Loudness.
-    * Seems to be not possible yet.
+  - [x] Loudness.
   - [ ] Balance.
     * Seems to be not possible yet.
   - [x] Rear speakers.

@@ -406,7 +406,7 @@
 - id: '1655212907581'
   alias: Livingroom Sun Protection (test)
   description: Close the shutter when the sun shines into the window and the in-/outside
-    temperature is above a certain value.
+    temperature is above a certain value, but only if the TV is off.
   trigger:
   - platform: numeric_state
     entity_id: sensor.livingroom_pushbutton_temperature
@@ -415,8 +415,11 @@
   - condition: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: '90'
+    above: '100'
     below: '250'
+  - condition: numeric_state
+    entity_id: sensor.livingroom_tv_power_consumption
+    below: '20'
   action:
   - service: script.livingroom_shutter_favorite
     data: {}
