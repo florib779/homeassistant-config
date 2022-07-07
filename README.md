@@ -25,8 +25,7 @@ My Home Assistant config files including products of:
     * Seems to be not possible yet.
   - [x] Rear speakers.
     - [x] On/Off.
-    - [ ] Volume level.
-      * Seems to be not possible yet.
+    - [x] Volume level.
   - [x] Control subwoofer via [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api).
     - [x] On/Off.
     - [x] Volume level.
