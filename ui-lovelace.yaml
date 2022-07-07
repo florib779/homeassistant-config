@@ -566,7 +566,6 @@ views:
                       name: Bathroom
                 shortcuts:
                   label: Transfer
-                  column_height: 10px
                   list:
                     - name: Bathroom
                       type: service
@@ -637,6 +636,13 @@ views:
                   name: Treble
               - type: conditional
                 conditions:
+                  - entity: media_player.roon_livingroom
+                    state: playing
+                row:
+                  entity: number.sonos_livingroom_music_surround_level
+                  name: Surround Level
+              - type: conditional
+                conditions:
                   - entity: sensor.livingroom_audio_input_format
                     state_not: No input
                 row:
@@ -678,6 +684,13 @@ views:
                   name: Sub Gain
               - type: conditional
                 conditions:
+                  - entity: sensor.livingroom_audio_input_format
+                    state_not: No input
+                row:
+                  entity: number.sonos_livingroom_surround_level
+                  name: Surround Level
+              - type: conditional
+                conditions:
                   - entity: switch.sonos_livingroom_subwoofer_enabled
                     state: 'on'
                   - entity: sensor.livingroom_audio_input_format
@@ -693,6 +706,7 @@ views:
                   - entity: switch.sonos_livingroom_subwoofer_enabled
                   - entity: switch.sonos_livingroom_sub_polarity
                   - entity: switch.sonos_livingroom_surround_enabled
+                  - entity: switch.sonos_livingroom_surround_music_full_volume
                   - entity: switch.sonos_livingroom_touch_controls
                   - entity: switch.sonos_livingroom_status_light
             state_color: true
@@ -726,7 +740,6 @@ views:
                 entity: media_player.roon_headphones
                 shortcuts:
                   label: Transfer
-                  column_height: 10px
                   list:
                     - name: Bathroom
                       type: service
@@ -831,7 +844,6 @@ views:
                 entity: media_player.roon_kitchen
                 shortcuts:
                   label: Transfer
-                  column_height: 10px
                   list:
                     - name: Bathroom
                       type: service
@@ -950,7 +962,6 @@ views:
                 entity: media_player.roon_office
                 shortcuts:
                   label: Transfer
-                  column_height: 10px
                   list:
                     - name: Bathroom
                       type: service
@@ -1076,7 +1087,6 @@ views:
                 entity: media_player.roon_bedroom
                 shortcuts:
                   label: Transfer
-                  column_height: 10px
                   list:
                     - name: Bathroom
                       type: service
@@ -1186,7 +1196,6 @@ views:
                   - entity: switch.sonos_bedroom_loudness
                   - entity: switch.sonos_bedroom_speech_enhancement
                   - entity: switch.sonos_bedroom_night_sound
-                  - entity: switch.sonos_bedroom_surround_enabled
                   - entity: switch.sonos_bedroom_touch_controls
                   - entity: switch.sonos_bedroom_status_light
             title: Bedroom
@@ -1219,7 +1228,6 @@ views:
                 entity: media_player.roon_bathroom
                 shortcuts:
                   label: Transfer
-                  column_height: 10px
                   list:
                     - name: Bedroom
                       type: service
