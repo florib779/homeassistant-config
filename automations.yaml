@@ -46,8 +46,8 @@
   condition:
   - condition: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
-    below: '5'
-    enabled: false
+    below: '2'
+    enabled: true
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
@@ -437,4 +437,39 @@
     entity_id: cover.bedroom_shutter
     type: set_position
     position: 0
+  mode: single
+- id: '1657476087267'
+  alias: Livingroom PC off - TV off
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.livingroom_nuc_power_consumption
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    below: '10'
+  condition: []
+  action:
+  - service: media_player.turn_off
+    data: {}
+    target:
+      entity_id: media_player.android_tv_livingroom
+  mode: single
+- id: '1657477115931'
+  alias: Livingroom PC on - TV on
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.livingroom_nuc_power_consumption
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    above: '10'
+  condition: []
+  action:
+  - service: wake_on_lan.send_magic_packet
+    data:
+      mac: 34:93:42:22:74:92
   mode: single

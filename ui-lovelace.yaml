@@ -36,8 +36,7 @@ media_art_background:
         - web-display
 title: Home
 views:
-  - theme: Caule Dark Aqua
-    title: Home
+  - title: Home
     path: home
     icon: mdi:home
     badges: []
@@ -718,7 +717,6 @@ views:
               entity: sensor.livingroom_thermostat_current_temperature
               detail: 1
               hours_to_show: 24
-            theme: Caule Light Aqua
             card_mod:
               style: |
                 .card-header {
@@ -813,7 +811,6 @@ views:
             header:
               type: graph
               entity: sensor.corridor_pushbutton_temperature
-            theme: Caule Light Aqua
             card_mod:
               style: |
                 .card-header {
