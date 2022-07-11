@@ -473,3 +473,22 @@
     data:
       mac: 34:93:42:22:74:92
   mode: single
+- id: '1657518721213'
+  alias: Office Sun Protection (test)
+  description: Close the shutter when the sun shines into the window and the in-/outside
+    temperature is above a certain value, but only if the TV is off.
+  trigger:
+  - platform: numeric_state
+    entity_id: climate.office_thermostat
+    above: '23'
+    attribute: current_temperature
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: '0'
+    below: '120'
+  action:
+  - service: script.office_shutter_favorite
+    data: {}
+  mode: single
