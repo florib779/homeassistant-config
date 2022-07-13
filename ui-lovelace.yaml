@@ -373,18 +373,7 @@ views:
               type: entities
             show_empty: false
           - type: entities
-            title: Mobile
-            icon: mdi:information
             entities:
-              - type: buttons
-                entities:
-                  - entity: binary_sensor.sm_g960f_wifi_state
-                  - entity: binary_sensor.sm_g960f_mobile_data
-                  - entity: binary_sensor.sm_g960f_bluetooth_state
-                  - entity: binary_sensor.sm_g960f_music_active
-                    state_color: true
-                  - entity: sensor.sm_g960f_ringer_mode
-                  - entity: camera.office
               - type: conditional
                 conditions:
                   - entity: sensor.fritzbox_callmonitor_phonebook
@@ -392,49 +381,87 @@ views:
                 row:
                   entity: sensor.fritzbox_callmonitor_phonebook
                   name: Phone
-              - type: conditional
-                conditions:
-                  - entity: sensor.lenovo_tab_2_a10_70f_battery_level
-                    state_not: '100'
-                row:
-                  entity: sensor.lenovo_tab_2_a10_70f_battery_level
-                  type: custom:secondaryinfo-entity-row
-                  secondary_info: '[[ sensor.lenovo_tab_2_a10_70f_battery_state ]]'
-              - type: conditional
-                conditions:
-                  - entity: sensor.sm_g960f_phone_state
-                    state_not: idle
-                row:
-                  entity: sensor.sm_g960f_phone_state
-                  name: Handy
-                  secondary_info: last-updated
-              - type: conditional
-                conditions:
-                  - entity: sensor.sm_g960f_battery_level
-                    state_not: '100'
-                row:
-                  entity: sensor.sm_g960f_battery_level
-                  name: Handy
-                  type: custom:secondaryinfo-entity-row
-                  secondary_info: '[[ sensor.sm_g960f_battery_state ]]'
               - entity: sensor.sm_g960f_active_notification_count
                 name: Notifications
                 type: custom:secondaryinfo-entity-row
                 secondary_info: '[[ sensor.sm_g960f_last_notification ]]'
-              - type: conditional
-                conditions:
-                  - entity: sensor.sm_g960f_next_alarm
-                    state_not: unavailable
-                row:
-                  entity: sensor.sm_g960f_next_alarm
-                  name: Next Alarm
-              - entity: sensor.sm_g960f_internal_storage
-                name: Free Internal Storage
             card_mod:
               style: |
                 .card-header {
                   padding: 0 16px;
                 }
+          - square: true
+            columns: 2
+            type: grid
+            cards:
+              - type: entities
+                header:
+                  type: buttons
+                  entities:
+                    - entity: binary_sensor.sm_g960f_wifi_state
+                    - entity: binary_sensor.sm_g960f_bluetooth_state
+                    - entity: binary_sensor.sm_g960f_mobile_data
+                    - entity: sensor.sm_g960f_ringer_mode
+                entities:
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.sm_g960f_phone_state
+                        state_not: idle
+                    row:
+                      entity: sensor.sm_g960f_phone_state
+                      name: ' '
+                      secondary_info: last-updated
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.sm_g960f_battery_level
+                        state_not: '100'
+                    row:
+                      entity: sensor.sm_g960f_battery_level
+                      name: ' '
+                      type: custom:secondaryinfo-entity-row
+                      secondary_info: '[[ sensor.sm_g960f_battery_state ]]'
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.sm_g960f_next_alarm
+                        state_not: unavailable
+                    row:
+                      entity: sensor.sm_g960f_next_alarm
+                      name: Alarm
+                  - entity: sensor.sm_g960f_internal_storage
+                    name: ' '
+                card_mod:
+                  style: |
+                    .card-header {
+                      padding: 0 16px;
+                    }
+              - type: entities
+                header:
+                  type: buttons
+                  entities:
+                    - entity: binary_sensor.sm_t220_wifi_state
+                    - entity: binary_sensor.sm_t220_bluetooth_state
+                    - entity: binary_sensor.sm_t220_music_active
+                      state_color: true
+                    - entity: sensor.sm_t220_audio_mode
+                entities:
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.sm_t220_battery_level
+                        state_not: '100'
+                    row:
+                      entity: sensor.sm_t220_battery_level
+                      name: ' '
+                      type: custom:secondaryinfo-entity-row
+                      secondary_info: '[[ sensor.sm_t220_battery_state ]]'
+                  - entity: sensor.sm_t220_internal_storage
+                    name: ' '
+                  - entity: sensor.sm_t220_external_storage
+                    name: ' '
+                card_mod:
+                  style: |
+                    .card-header {
+                      padding: 0 16px;
+                    }
           - type: entity-filter
             show_empty: false
             state_color: true

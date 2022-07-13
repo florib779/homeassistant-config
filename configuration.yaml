@@ -108,7 +108,7 @@ template:
         state: >
           {% if states.sensor.livingroom_fan_power_consumption.state | float > 37 %}
             Stage 3
-          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 35 %}
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 33 %}
             Stage 2
           {% elif states.sensor.livingroom_fan_power_consumption.state | float > 1 %}
             Stage 1

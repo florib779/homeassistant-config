@@ -486,8 +486,8 @@
   - condition: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: '0'
-    below: '120'
+    above: '50'
+    below: '130'
   action:
   - service: script.office_shutter_favorite
     data: {}
