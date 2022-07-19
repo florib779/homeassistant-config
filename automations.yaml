@@ -84,15 +84,6 @@
       addon: a0d7b954_ssh
       input: /config/integrations/gitpush/gitpush.sh
   mode: single
-- id: '1646247406476'
-  alias: Kitchen Color Loop
-  description: ''
-  use_blueprint:
-    path: hugalafutro/Color_Loop.yaml
-    input:
-      cl_light:
-        entity_id:
-        - light.kitchen_mood_light
 - id: '1650517762669'
   alias: 'HASS: Low battery level'
   description: Low battery level detection & notification for all battery sensors
@@ -341,6 +332,9 @@
   - condition: sun
     before: sunset
     before_offset: '-1'
+  - condition: numeric_state
+    entity_id: sensor.livingroom_pushbutton_temperature
+    below: '23'
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
@@ -404,7 +398,7 @@
     domain: switch
   mode: single
 - id: '1655212907581'
-  alias: Livingroom Sun Protection (test)
+  alias: Livingroom Sun Protection
   description: Close the shutter when the sun shines into the window and the in-/outside
     temperature is above a certain value, but only if the TV is off.
   trigger:
@@ -448,7 +442,7 @@
       hours: 0
       minutes: 0
       seconds: 0
-    below: '10'
+    below: '9'
   condition: []
   action:
   - service: media_player.turn_off
@@ -474,20 +468,20 @@
       mac: 34:93:42:22:74:92
   mode: single
 - id: '1657518721213'
-  alias: Office Sun Protection (test)
+  alias: Office Sun Protection
   description: Close the shutter when the sun shines into the window and the in-/outside
-    temperature is above a certain value, but only if the TV is off.
+    temperature is above a certain value.
   trigger:
   - platform: numeric_state
     entity_id: climate.office_thermostat
-    above: '23'
+    above: '22'
     attribute: current_temperature
   condition:
   - condition: numeric_state
     entity_id: sun.sun
     attribute: azimuth
     above: '50'
-    below: '130'
+    below: '150'
   action:
   - service: script.office_shutter_favorite
     data: {}

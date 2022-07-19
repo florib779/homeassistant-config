@@ -374,6 +374,13 @@ views:
             show_empty: false
           - type: entities
             entities:
+              - entity: weather.home
+                secondary_info: none
+              - entity: weather.home_hourly
+                secondary_info: none
+                name: Weather Hourly
+          - type: entities
+            entities:
               - type: conditional
                 conditions:
                   - entity: sensor.fritzbox_callmonitor_phonebook
@@ -487,6 +494,9 @@ views:
                 state_color: true
                 state_filter:
                   - '1'
+                tap_action:
+                  action: navigate
+                  navigation_path: /hacs
               - entity: switch.kitchen_cookerhood
                 state_color: true
                 type: custom:secondaryinfo-entity-row
@@ -525,16 +535,6 @@ views:
               icon: mdi:information
               state_color: true
               show_header_toggle: true
-          - show_current: true
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.home_hourly
-            name: ' '
-          - show_current: false
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.home
-            name: ' '
       - type: vertical-stack
         cards:
           - type: entities
@@ -1346,23 +1346,145 @@ views:
                 ha-card {
                   background: rgba(0, 151, 255, 0.5);
                 }
-          - type: custom:xiaomi-vacuum-card
-            entity: vacuum.livingroom_deebot
-            vendor: ecovacs
-            name: false
-            attributes:
-              main_brush: false
-              sensor: false
-              side_brush:
-                key: component_side_brush
-              filter:
-                key: component_filter
   - theme: Backend-selected
     title: Camera
     path: camera
     icon: mdi:cctv
     badges: []
     cards:
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: sensor.bedroom_audio_input_format
+                state_not: No input
+            card:
+              type: entities
+              entities:
+                - type: custom:mini-media-player
+                  entity: media_player.sonos_bedroom
+                  volume_stateless: true
+                  volume_step: '1'
+                  hide:
+                    controls: true
+                    icon: true
+                    power: true
+                    progress: true
+                    source: true
+                    volume_level: false
+                  info: short
+                  group: true
+                  name: Bedroom
+          - type: conditional
+            conditions:
+              - entity: sensor.livingroom_audio_input_format
+                state_not: No input
+            card:
+              type: entities
+              entities:
+                - type: custom:mini-media-player
+                  entity: media_player.sonos_livingroom
+                  volume_stateless: true
+                  volume_step: '1'
+                  hide:
+                    controls: true
+                    icon: true
+                    power: true
+                    progress: true
+                    source: true
+                    volume_level: false
+                  info: short
+                  group: true
+                  name: Livingroom
+          - type: entity-filter
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_bathroom
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
+                info: short
+                group: true
+                artwork: material
+                name: Bathroom
+              - type: custom:mini-media-player
+                entity: media_player.roon_bedroom
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
+                info: short
+                group: true
+                artwork: material
+                name: Bedroom
+              - type: custom:mini-media-player
+                entity: media_player.roon_headphones
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                info: short
+                group: true
+                artwork: material
+                name: Headphones
+              - type: custom:mini-media-player
+                entity: media_player.roon_kitchen
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
+                info: short
+                group: true
+                artwork: material
+                name: Kitchen
+              - type: custom:mini-media-player
+                entity: media_player.roon_livingroom
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
+                info: short
+                group: true
+                artwork: material
+                name: Livingroom
+              - type: custom:mini-media-player
+                entity: media_player.roon_office
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume_level: false
+                info: short
+                group: true
+                artwork: material
+                name: Office
+            state_filter:
+              - playing
+            card:
+              type: entities
+            show_empty: false
       - type: conditional
         conditions:
           - entity: cover.office_shutter
