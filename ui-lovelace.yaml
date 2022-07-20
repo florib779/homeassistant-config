@@ -550,6 +550,7 @@ views:
                   - entity: vacuum.livingroom_deebot
                     tap_action:
                       action: toggle
+              - type: divider
               - entity: cover.livingroom_shutter_small
                 secondary_info: position
                 name: Shutter
@@ -558,7 +559,6 @@ views:
                   service: script.livingroom_shutter_favorite
                 hold_action:
                   action: more-info
-              - type: divider
               - entity: climate.livingroom_thermostat
                 type: custom:secondaryinfo-entity-row
                 secondary_info: 'Battery: [[ sensor.livingroom_thermostat_battery ]] %'
@@ -738,9 +738,6 @@ views:
                   - entity: switch.sonos_livingroom_touch_controls
                   - entity: switch.sonos_livingroom_status_light
             state_color: true
-            show_header_toggle: true
-            title: Livingroom
-            icon: mdi:sofa
             header:
               type: graph
               entity: sensor.livingroom_thermostat_current_temperature
@@ -828,11 +825,8 @@ views:
                 name: Server
                 icon: mdi:server
                 type: custom:secondaryinfo-entity-row
-                secondary_info: 'Temperature: [[ sensor.corridor_rock_temperature ]] °C'
+                secondary_info: '[[ sensor.corridor_rock_temperature ]] °C'
             state_color: true
-            show_header_toggle: true
-            title: Corridor
-            icon: mdi:wardrobe
             footer:
               type: graph
               entity: sensor.corridor_rock_power_consumption
@@ -856,6 +850,7 @@ views:
                 entities:
                   - entity: light.kitchen_light_group
                   - entity: switch.kitchen_cookerhood
+                  - entity: automation.kitchen_cookerhood
                   - entity: switch.kitchen_pc
                   - entity: camera.kitchen
               - type: divider
@@ -950,9 +945,6 @@ views:
                   - entity: switch.sonos_kitchen_loudness
                   - entity: switch.sonos_kitchen_touch_controls
                   - entity: switch.sonos_kitchen_status_light
-            title: Kitchen
-            show_header_toggle: true
-            icon: mdi:stove
             state_color: true
             header:
               type: graph
@@ -970,6 +962,7 @@ views:
               - type: buttons
                 entities:
                   - entity: camera.office
+              - type: divider
               - entity: cover.office_shutter
                 secondary_info: position
                 name: Shutter
@@ -978,7 +971,6 @@ views:
                   service: script.office_shutter_favorite
                 hold_action:
                   action: more-info
-              - type: divider
               - entity: climate.office_thermostat
                 name: Thermostat
                 type: custom:secondaryinfo-entity-row
@@ -1070,9 +1062,6 @@ views:
                   - entity: switch.sonos_office_status_light
                   - entity: binary_sensor.sonos_office_microphone
             state_color: true
-            show_header_toggle: true
-            title: Office
-            icon: mdi:desk
             header:
               type: graph
               entity: sensor.office_thermostat_current_temperature
@@ -1092,6 +1081,7 @@ views:
                 entities:
                   - entity: light.bedroom_light
                   - entity: camera.bedroom
+              - type: divider
               - entity: cover.bedroom_shutter
                 secondary_info: position
                 name: Shutter
@@ -1100,7 +1090,6 @@ views:
                   service: script.bedroom_shutter_favorite
                 hold_action:
                   action: more-info
-              - type: divider
               - entity: climate.bedroom_thermostat
                 name: Thermostat
                 type: custom:secondaryinfo-entity-row
@@ -1224,10 +1213,7 @@ views:
                   - entity: switch.sonos_bedroom_night_sound
                   - entity: switch.sonos_bedroom_touch_controls
                   - entity: switch.sonos_bedroom_status_light
-            title: Bedroom
             state_color: true
-            show_header_toggle: true
-            icon: mdi:bed-king
             header:
               type: graph
               entity: sensor.bedroom_thermostat_current_temperature
@@ -1334,9 +1320,6 @@ views:
                   - entity: switch.sonos_bathroom_loudness
                   - entity: switch.sonos_bathroom_touch_controls
                   - entity: switch.sonos_bathroom_status_light
-            title: Bathroom
-            show_header_toggle: true
-            icon: mdi:bathtub
             header:
               type: graph
               entity: sensor.bathroom_thermostat_current_temperature
