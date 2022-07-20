@@ -372,13 +372,15 @@ views:
             card:
               type: entities
             show_empty: false
-          - type: entities
-            entities:
-              - entity: weather.home
-                secondary_info: none
-              - entity: weather.home_hourly
-                secondary_info: none
-                name: Weather Hourly
+          - type: vertical-stack
+            cards:
+              - type: entities
+                entities:
+                  - entity: weather.home
+              - show_current: false
+                show_forecast: true
+                type: weather-forecast
+                entity: weather.home_hourly
           - type: entities
             entities:
               - type: conditional
@@ -729,10 +731,10 @@ views:
                   - entity: switch.sonos_livingroom_loudness
                   - entity: switch.sonos_livingroom_speech_enhancement
                   - entity: switch.sonos_livingroom_night_sound
-                  - entity: switch.sonos_livingroom_subwoofer_enabled
-                  - entity: switch.sonos_livingroom_sub_polarity
                   - entity: switch.sonos_livingroom_surround_enabled
                   - entity: switch.sonos_livingroom_surround_music_full_volume
+                  - entity: switch.sonos_livingroom_subwoofer_enabled
+                  - entity: switch.sonos_livingroom_sub_polarity
                   - entity: switch.sonos_livingroom_touch_controls
                   - entity: switch.sonos_livingroom_status_light
             state_color: true
