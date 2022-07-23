@@ -342,31 +342,6 @@
     type: set_position
     position: 100
   mode: single
-- id: '1654703012752'
-  alias: Sonos Night Light on
-  description: ''
-  trigger:
-  - platform: time
-    at: 01:00:00
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 662784da2f9ebd37eaf61933752980c3
-    entity_id: switch.sonos_bathroom_status_light
-    domain: switch
-  - type: turn_on
-    device_id: 8c64314c257f91f3e312a0595308be00
-    entity_id: switch.sonos_kitchen_status_light
-    domain: switch
-  - type: turn_on
-    device_id: ed83c0a7b5745c8f9a1b3e9aef50a991
-    entity_id: switch.sonos_livingroom_status_light
-    domain: switch
-  - type: turn_on
-    device_id: 35ca0a10f0d4ef5b5dfcbd94329f8432
-    entity_id: switch.sonos_office_status_light
-    domain: switch
-  mode: single
 - id: '1654703080922'
   alias: Sonos Night Light off
   description: ''
@@ -410,7 +385,7 @@
     entity_id: sun.sun
     attribute: azimuth
     above: '100'
-    below: '250'
+    below: '320'
   - condition: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
     below: '20'
