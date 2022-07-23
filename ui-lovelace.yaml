@@ -570,9 +570,11 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
+                artwork: none
                 volume_stateless: true
                 volume_step: '1'
                 hide:
+                  icon: true
                   power: true
                   progress: true
                   source: true
@@ -594,32 +596,34 @@ views:
                       name: Bathroom
                 shortcuts:
                   label: Transfer
-                  list:
-                    - name: Bathroom
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_livingroom
                         transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
+                    - icon: mdi:bed-king
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_livingroom
                         transfer_id: media_player.roon_bedroom
-                    - name: Headphones
+                    - icon: mdi:headphones
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_livingroom
                         transfer_id: media_player.roon_headphones
-                    - name: Kitchen
+                    - icon: mdi:stove
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_livingroom
                         transfer_id: media_player.roon_kitchen
-                    - name: Office
+                    - icon: mdi:desk
                       type: service
                       id: roon.transfer
                       data:
@@ -762,40 +766,44 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_headphones
+                artwork: none
                 shortcuts:
                   label: Transfer
-                  list:
-                    - name: Bathroom
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_headphones
                         transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
+                    - icon: mdi:bed-king
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_headphones
                         transfer_id: media_player.roon_bedroom
-                    - name: Kitchen
+                    - icon: mdi:stove
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_headphones
                         transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
+                    - icon: mdi:sofa
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_headphones
                         transfer_id: media_player.roon_livingroom
-                    - name: Office
+                    - icon: mdi:desk
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_headphones
                         transfer_id: media_player.roon_office
                 hide:
+                  icon: true
                   power: true
                   progress: true
                   state_label: true
@@ -863,34 +871,37 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_kitchen
+                artwork: none
                 shortcuts:
                   label: Transfer
-                  list:
-                    - name: Bathroom
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_kitchen
                         transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
+                    - icon: mdi:bed-king
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_kitchen
                         transfer_id: media_player.roon_bedroom
-                    - name: Headphones
+                    - icon: mdi:headphones
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_kitchen
                         transfer_id: media_player.roon_headphones
-                    - name: Livingroom
+                    - icon: mdi:sofa
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_kitchen
                         transfer_id: media_player.roon_livingroom
-                    - name: Office
+                    - icon: mdi:desk
                       type: service
                       id: roon.transfer
                       data:
@@ -899,6 +910,7 @@ views:
                 volume_stateless: true
                 volume_step: '1'
                 hide:
+                  icon: true
                   power: true
                   progress: true
                   volume_level: false
@@ -978,34 +990,37 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_office
+                artwork: none
                 shortcuts:
                   label: Transfer
-                  list:
-                    - name: Bathroom
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_office
                         transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
+                    - icon: mdi:bed-king
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_office
                         transfer_id: media_player.roon_bedroom
-                    - name: Headphones
+                    - icon: mdi:headphones
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_office
                         transfer_id: media_player.roon_headphones
-                    - name: Kitchen
+                    - icon: mdi:stove
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_office
                         transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
+                    - icon: mdi:sofa
                       type: service
                       id: roon.transfer
                       data:
@@ -1014,6 +1029,7 @@ views:
                 volume_stateless: true
                 volume_step: '1'
                 hide:
+                  icon: true
                   power: true
                   progress: true
                   volume_level: false
@@ -1100,34 +1116,37 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_bedroom
+                artwork: none
                 shortcuts:
                   label: Transfer
-                  list:
-                    - name: Bathroom
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bedroom
                         transfer_id: media_player.roon_bathroom
-                    - name: Headphones
+                    - icon: mdi:headphones
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bedroom
                         transfer_id: media_player.roon_headphones
-                    - name: Kitchen
+                    - icon: mdi:stove
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bedroom
                         transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
+                    - icon: mdi:sofa
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bedroom
                         transfer_id: media_player.roon_livingroom
-                    - name: Office
+                    - icon: mdi:desk
                       type: service
                       id: roon.transfer
                       data:
@@ -1151,6 +1170,7 @@ views:
                     - entity_id: media_player.roon_bathroom
                       name: Bathroom
                 hide:
+                  icon: true
                   power: true
                   progress: true
                   source: true
@@ -1238,34 +1258,37 @@ views:
               - type: divider
               - type: custom:mini-media-player
                 entity: media_player.roon_bathroom
+                artwork: none
                 shortcuts:
                   label: Transfer
-                  list:
-                    - name: Bedroom
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bed-king
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bathroom
                         transfer_id: media_player.roon_bedroom
-                    - name: Headphones
+                    - icon: mdi:headphones
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bathroom
                         transfer_id: media_player.roon_headphones
-                    - name: Kitchen
+                    - icon: mdi:stove
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bathroom
                         transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
+                    - icon: mdi:sofa
                       type: service
                       id: roon.transfer
                       data:
                         entity_id: media_player.roon_bathroom
                         transfer_id: media_player.roon_livingroom
-                    - name: Office
+                    - icon: mdi:desk
                       type: service
                       id: roon.transfer
                       data:
@@ -1274,6 +1297,7 @@ views:
                 volume_stateless: true
                 volume_step: '1'
                 hide:
+                  icon: true
                   power: true
                   progress: true
                   volume_level: false
