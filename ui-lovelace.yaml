@@ -1,5 +1,5 @@
 wallpanel_screensaver:
-  enabled: false
+  enabled: true
   idle_time: 600
   night_mode:
     start_time: '23:00'
@@ -89,39 +89,6 @@ views:
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_bathroom
-                shortcuts:
-                  label: Transfer
-                  list:
-                    - name: Bedroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_bedroom
-                    - name: Headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_headphones
-                    - name: Kitchen
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_livingroom
-                    - name: Office
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_office
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -136,39 +103,6 @@ views:
                 name: Bathroom
               - type: custom:mini-media-player
                 entity: media_player.roon_bedroom
-                shortcuts:
-                  label: Transfer
-                  list:
-                    - name: Bathroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_bathroom
-                    - name: Headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_headphones
-                    - name: Kitchen
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_livingroom
-                    - name: Office
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_office
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -183,39 +117,6 @@ views:
                 name: Bedroom
               - type: custom:mini-media-player
                 entity: media_player.roon_headphones
-                shortcuts:
-                  label: Transfer
-                  list:
-                    - name: Bathroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_headphones
-                        transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_headphones
-                        transfer_id: media_player.roon_bedroom
-                    - name: Kitchen
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_headphones
-                        transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_headphones
-                        transfer_id: media_player.roon_livingroom
-                    - name: Office
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_headphones
-                        transfer_id: media_player.roon_office
                 hide:
                   icon: true
                   power: true
@@ -228,39 +129,6 @@ views:
                 name: Headphones
               - type: custom:mini-media-player
                 entity: media_player.roon_kitchen
-                shortcuts:
-                  label: Transfer
-                  list:
-                    - name: Bathroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_bedroom
-                    - name: Headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_headphones
-                    - name: Livingroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_livingroom
-                    - name: Office
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_office
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -275,39 +143,6 @@ views:
                 name: Kitchen
               - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
-                shortcuts:
-                  label: Transfer
-                  list:
-                    - name: Bathroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_bedroom
-                    - name: Headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_headphones
-                    - name: Kitchen
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_kitchen
-                    - name: Office
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_office
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -322,39 +157,6 @@ views:
                 name: Livingroom
               - type: custom:mini-media-player
                 entity: media_player.roon_office
-                shortcuts:
-                  label: Transfer
-                  list:
-                    - name: Bathroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_bathroom
-                    - name: Bedroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_bedroom
-                    - name: Headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_headphones
-                    - name: Kitchen
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_kitchen
-                    - name: Livingroom
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_livingroom
                 volume_stateless: true
                 volume_step: '1'
                 hide:
