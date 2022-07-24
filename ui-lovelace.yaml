@@ -88,95 +88,120 @@ views:
                   info: short
                   group: true
                   name: Livingroom
-          - type: entity-filter
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_bathroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Bathroom
-              - type: custom:mini-media-player
-                entity: media_player.roon_bedroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Bedroom
-              - type: custom:mini-media-player
-                entity: media_player.roon_headphones
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume: true
-                info: short
-                group: true
-                artwork: material
-                name: Headphones
-              - type: custom:mini-media-player
-                entity: media_player.roon_kitchen
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Kitchen
-              - type: custom:mini-media-player
-                entity: media_player.roon_livingroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Livingroom
-              - type: custom:mini-media-player
-                entity: media_player.roon_office
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Office
-            state_filter:
-              - playing
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bathroom
+                state: playing
             card:
-              type: entities
-            show_empty: false
+              type: custom:mini-media-player
+              entity: media_player.roon_bathroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Bathroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bedroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_bedroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Bedroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_headphones
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_headphones
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Headphones
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_kitchen
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_kitchen
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Kitchen
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_livingroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_livingroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Livingroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_office
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_office
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Office
           - type: entities
             entities:
               - type: conditional
@@ -1199,95 +1224,120 @@ views:
                   info: short
                   group: true
                   name: Livingroom
-          - type: entity-filter
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_bathroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Bathroom
-              - type: custom:mini-media-player
-                entity: media_player.roon_bedroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Bedroom
-              - type: custom:mini-media-player
-                entity: media_player.roon_headphones
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume: true
-                info: short
-                group: true
-                artwork: material
-                name: Headphones
-              - type: custom:mini-media-player
-                entity: media_player.roon_kitchen
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Kitchen
-              - type: custom:mini-media-player
-                entity: media_player.roon_livingroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Livingroom
-              - type: custom:mini-media-player
-                entity: media_player.roon_office
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                info: short
-                group: true
-                artwork: material
-                name: Office
-            state_filter:
-              - playing
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bathroom
+                state: playing
             card:
-              type: entities
-            show_empty: false
+              type: custom:mini-media-player
+              entity: media_player.roon_bathroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Bathroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bedroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_bedroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Bedroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_headphones
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_headphones
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Headphones
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_kitchen
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_kitchen
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Kitchen
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_livingroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_livingroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Livingroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_office
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_office
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Office
       - type: conditional
         conditions:
           - entity: cover.office_shutter
