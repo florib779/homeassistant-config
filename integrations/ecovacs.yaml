@@ -1,8 +1,0 @@
-## Ecovacs integration broken on core-2022.7
-## https://github.com/home-assistant/core/issues/74564
-
-#ecovacs:
-#  username: !secret ecovacs_username
-#  password: !secret ecovacs_password
-#  country: !secret ecovacs_country
-#  continent: !secret ecovacs_continent

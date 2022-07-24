@@ -43,6 +43,11 @@ views:
     cards:
       - type: vertical-stack
         cards:
+          - show_current: true
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.weather_station
+            name: ' '
           - type: conditional
             conditions:
               - entity: sensor.bedroom_audio_input_format
@@ -57,7 +62,6 @@ views:
                   hide:
                     controls: true
                     icon: true
-                    power: true
                     progress: true
                     source: true
                     volume_level: false
@@ -78,7 +82,6 @@ views:
                   hide:
                     controls: true
                     icon: true
-                    power: true
                     progress: true
                     source: true
                     volume_level: false
@@ -174,15 +177,6 @@ views:
             card:
               type: entities
             show_empty: false
-          - type: vertical-stack
-            cards:
-              - type: entities
-                entities:
-                  - entity: weather.home
-              - show_current: false
-                show_forecast: true
-                type: weather-forecast
-                entity: weather.home_hourly
           - type: entities
             entities:
               - type: conditional
@@ -239,7 +233,7 @@ views:
                       entity: sensor.sm_g960f_next_alarm
                       name: Alarm
                   - entity: sensor.sm_g960f_internal_storage
-                    name: ' '
+                    name: Free
                 card_mod:
                   style: |
                     .card-header {
@@ -265,9 +259,9 @@ views:
                       type: custom:secondaryinfo-entity-row
                       secondary_info: '[[ sensor.sm_t220_battery_state ]]'
                   - entity: sensor.sm_t220_internal_storage
-                    name: ' '
+                    name: Free
                   - entity: sensor.sm_t220_external_storage
-                    name: ' '
+                    name: Free
                 card_mod:
                   style: |
                     .card-header {
@@ -775,128 +769,6 @@ views:
             entities:
               - type: buttons
                 entities:
-                  - entity: camera.office
-              - type: divider
-              - entity: cover.office_shutter
-                secondary_info: position
-                name: Shutter
-                tap_action:
-                  action: call-service
-                  service: script.office_shutter_favorite
-                hold_action:
-                  action: more-info
-              - entity: climate.office_thermostat
-                name: Thermostat
-                type: custom:secondaryinfo-entity-row
-                secondary_info: 'Battery: [[ sensor.office_thermostat_battery ]] %'
-              - type: divider
-              - type: custom:mini-media-player
-                entity: media_player.roon_office
-                artwork: none
-                shortcuts:
-                  label: Transfer
-                  columns: 5
-                  column_height: 1
-                  buttons:
-                    - icon: mdi:bathtub
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_bathroom
-                    - icon: mdi:bed-king
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_bedroom
-                    - icon: mdi:headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_headphones
-                    - icon: mdi:stove
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_kitchen
-                    - icon: mdi:sofa
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_livingroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  icon: true
-                  power: true
-                  progress: true
-                  volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_office
-                  entities:
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_office
-                      name: Office
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                info: short
-                name: ' '
-                group: true
-                card_mod:
-                  style: |
-                    .entity__info__media {
-                      color: var(--primary-text-color) !important;
-                      opacity: 1 !important;
-                    }
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_office
-                    state: playing
-                row:
-                  entity: number.sonos_office_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_office
-                    state: playing
-                row:
-                  entity: number.sonos_office_treble
-                  name: Treble
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_office_loudness
-                  - entity: switch.sonos_office_touch_controls
-                  - entity: switch.sonos_office_status_light
-                  - entity: binary_sensor.sonos_office_microphone
-            state_color: true
-            header:
-              type: graph
-              entity: sensor.office_thermostat_current_temperature
-            card_mod:
-              style: |
-                .card-header {
-                  padding: 0 16px;
-                }
-                ha-card {
-                  background: rgba(255, 255, 255, 0.3);
-                }
-      - type: vertical-stack
-        cards:
-          - type: entities
-            entities:
-              - type: buttons
-                entities:
                   - entity: light.bedroom_light
                   - entity: camera.bedroom
               - type: divider
@@ -1047,6 +919,128 @@ views:
                 ha-card {
                   background: rgba(255, 0, 255, 0.1);
                 }
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - type: buttons
+                entities:
+                  - entity: camera.office
+              - type: divider
+              - entity: cover.office_shutter
+                secondary_info: position
+                name: Shutter
+                tap_action:
+                  action: call-service
+                  service: script.office_shutter_favorite
+                hold_action:
+                  action: more-info
+              - entity: climate.office_thermostat
+                name: Thermostat
+                type: custom:secondaryinfo-entity-row
+                secondary_info: 'Battery: [[ sensor.office_thermostat_battery ]] %'
+              - type: divider
+              - type: custom:mini-media-player
+                entity: media_player.roon_office
+                artwork: none
+                shortcuts:
+                  label: Transfer
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_bathroom
+                    - icon: mdi:bed-king
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_bedroom
+                    - icon: mdi:headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_headphones
+                    - icon: mdi:stove
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_kitchen
+                    - icon: mdi:sofa
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_office
+                        transfer_id: media_player.roon_livingroom
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  icon: true
+                  power: true
+                  progress: true
+                  volume_level: false
+                speaker_group:
+                  platform: media_player
+                  show_group_count: true
+                  group_mgmt_entity: media_player.roon_office
+                  entities:
+                    - entity_id: media_player.roon_livingroom
+                      name: Livingroom
+                    - entity_id: media_player.roon_kitchen
+                      name: Kitchen
+                    - entity_id: media_player.roon_office
+                      name: Office
+                    - entity_id: media_player.roon_bedroom
+                      name: Bedroom
+                    - entity_id: media_player.roon_bathroom
+                      name: Bathroom
+                info: short
+                name: ' '
+                group: true
+                card_mod:
+                  style: |
+                    .entity__info__media {
+                      color: var(--primary-text-color) !important;
+                      opacity: 1 !important;
+                    }
+              - type: conditional
+                conditions:
+                  - entity: media_player.roon_office
+                    state: playing
+                row:
+                  entity: number.sonos_office_bass
+                  name: Bass
+              - type: conditional
+                conditions:
+                  - entity: media_player.roon_office
+                    state: playing
+                row:
+                  entity: number.sonos_office_treble
+                  name: Treble
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_office_loudness
+                  - entity: switch.sonos_office_touch_controls
+                  - entity: switch.sonos_office_status_light
+                  - entity: binary_sensor.sonos_office_microphone
+            state_color: true
+            header:
+              type: graph
+              entity: sensor.office_thermostat_current_temperature
+            card_mod:
+              style: |
+                .card-header {
+                  padding: 0 16px;
+                }
+                ha-card {
+                  background: rgba(255, 255, 255, 0.3);
+                }
           - type: entities
             entities:
               - entity: climate.bathroom_thermostat
@@ -1179,7 +1173,6 @@ views:
                   hide:
                     controls: true
                     icon: true
-                    power: true
                     progress: true
                     source: true
                     volume_level: false
@@ -1200,7 +1193,6 @@ views:
                   hide:
                     controls: true
                     icon: true
-                    power: true
                     progress: true
                     source: true
                     volume_level: false
@@ -1800,3 +1792,38 @@ views:
             state_color: true
         view_layout:
           position: sidebar
+  - theme: Backend-selected
+    title: Music
+    path: music
+    icon: mdi:music
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - type: weblink
+            name: Qobuz
+            url: https://www.qobuz.com/de-de/shop
+          - type: weblink
+            name: Bandcamp
+            url: https://bandcamp.com/
+            icon: si:bandcamp
+          - type: weblink
+            name: 7digital
+            url: https://de.7digital.com/
+          - type: weblink
+            name: HIGHRESAUDIO
+            url: https://www.highresaudio.com/de
+          - type: weblink
+            name: HDtracks
+            url: https://www.hdtracks.com/
+      - type: entities
+        entities:
+          - type: weblink
+            name: Community
+            url: https://community.roonlabs.com/
+          - type: weblink
+            name: Art Director
+            url: https://valence.roonlabs.net/artdirector/
+          - type: weblink
+            name: Translations
+            url: https://translations.roonlabs.net/lang/german/all
