@@ -43,11 +43,6 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - show_current: true
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.weather_station
-            name: ' '
           - type: conditional
             conditions:
               - entity: sensor.bedroom_audio_input_format
@@ -202,6 +197,11 @@ views:
               group: true
               artwork: material
               name: Office
+          - show_current: true
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.weather_station
+            name: ' '
           - type: entities
             entities:
               - type: conditional
@@ -220,78 +220,6 @@ views:
                 .card-header {
                   padding: 0 16px;
                 }
-          - square: true
-            columns: 2
-            type: grid
-            cards:
-              - type: entities
-                header:
-                  type: buttons
-                  entities:
-                    - entity: binary_sensor.sm_g960f_wifi_state
-                    - entity: binary_sensor.sm_g960f_bluetooth_state
-                    - entity: binary_sensor.sm_g960f_mobile_data
-                    - entity: sensor.sm_g960f_ringer_mode
-                entities:
-                  - type: conditional
-                    conditions:
-                      - entity: sensor.sm_g960f_phone_state
-                        state_not: idle
-                    row:
-                      entity: sensor.sm_g960f_phone_state
-                      name: ' '
-                      secondary_info: last-updated
-                  - type: conditional
-                    conditions:
-                      - entity: sensor.sm_g960f_battery_level
-                        state_not: '100'
-                    row:
-                      entity: sensor.sm_g960f_battery_level
-                      name: ' '
-                      type: custom:secondaryinfo-entity-row
-                      secondary_info: '[[ sensor.sm_g960f_battery_state ]]'
-                  - type: conditional
-                    conditions:
-                      - entity: sensor.sm_g960f_next_alarm
-                        state_not: unavailable
-                    row:
-                      entity: sensor.sm_g960f_next_alarm
-                      name: Alarm
-                  - entity: sensor.sm_g960f_internal_storage
-                    name: Free
-                card_mod:
-                  style: |
-                    .card-header {
-                      padding: 0 16px;
-                    }
-              - type: entities
-                header:
-                  type: buttons
-                  entities:
-                    - entity: binary_sensor.sm_t220_wifi_state
-                    - entity: binary_sensor.sm_t220_bluetooth_state
-                    - entity: binary_sensor.sm_t220_music_active
-                      state_color: true
-                    - entity: sensor.sm_t220_audio_mode
-                entities:
-                  - type: conditional
-                    conditions:
-                      - entity: sensor.sm_t220_battery_level
-                        state_not: '100'
-                    row:
-                      entity: sensor.sm_t220_battery_level
-                      name: ' '
-                      type: custom:secondaryinfo-entity-row
-                      secondary_info: '[[ sensor.sm_t220_battery_state ]]'
-                  - entity: sensor.sm_t220_internal_storage
-                    name: Free
-                  - entity: sensor.sm_t220_external_storage
-                    name: Free
-                card_mod:
-                  style: |
-                    .card-header {
-                      padding: 0 16px;
-                    }
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -358,6 +286,75 @@ views:
               icon: mdi:information
               state_color: true
               show_header_toggle: true
+          - square: false
+            columns: 2
+            type: grid
+            cards:
+              - square: true
+                columns: 2
+                type: grid
+                cards:
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: binary_sensor.sm_g960f_bluetooth_state
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: binary_sensor.sm_g960f_mobile_data
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: binary_sensor.sm_g960f_wifi_state
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: sensor.sm_g960f_ringer_mode
+                  - type: gauge
+                    entity: sensor.sm_g960f_battery_level
+                    name: Akku
+                  - type: gauge
+                    entity: sensor.lenovo_tab_2_a10_70f_interner_speicher
+                    name: Int.
+              - square: true
+                columns: 2
+                type: grid
+                cards:
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: binary_sensor.sm_t220_bluetooth_state
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: binary_sensor.sm_t220_wifi_state
+                  - show_name: false
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: sensor.sm_t220_audio_mode
+                  - type: gauge
+                    entity: sensor.sm_t220_battery_level
+                    name: Akku
+                  - type: gauge
+                    entity: sensor.sm_g960f_internal_storage
+                    name: Int.
+                  - type: gauge
+                    entity: sensor.sm_t220_external_storage
+                    name: Ext.
       - type: vertical-stack
         cards:
           - type: entities
@@ -1176,6 +1173,260 @@ views:
                 ha-card {
                   background: rgba(0, 151, 255, 0.5);
                 }
+      - square: false
+        columns: 2
+        type: grid
+        cards:
+          - square: false
+            columns: 3
+            type: grid
+            cards:
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: binary_sensor.sm_g960f_bluetooth_state
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: binary_sensor.sm_g960f_mobile_data
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: binary_sensor.sm_g960f_wifi_state
+              - type: gauge
+                entity: sensor.sm_g960f_battery_level
+                name: Akku
+              - type: gauge
+                entity: sensor.lenovo_tab_2_a10_70f_interner_speicher
+                name: Int.
+          - square: false
+            columns: 3
+            type: grid
+            cards:
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: binary_sensor.sm_t220_bluetooth_state
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: binary_sensor.sm_t220_wifi_state
+              - show_name: false
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: binary_sensor.sm_t220_music_active
+              - type: gauge
+                entity: sensor.sm_t220_battery_level
+                name: Akku
+              - type: gauge
+                entity: sensor.sm_g960f_internal_storage
+                name: Int.
+              - type: gauge
+                entity: sensor.sm_t220_external_storage
+                name: Ext.
+  - theme: Backend-selected
+    title: Roon Web Display
+    path: web-display
+    icon: mdi:monitor
+    type: sidebar
+    badges: []
+    cards:
+      - type: iframe
+        url: http://rock:9330/display/
+        aspect_ratio: '16:9'
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-media-player
+            entity: media_player.roon_headphones
+            hide:
+              power: true
+              progress: true
+              state_label: true
+              volume: true
+            name: Headphones
+            state_color: true
+          - type: custom:mini-media-player
+            entity: media_player.roon_livingroom
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              power: true
+              progress: true
+              source: true
+              volume_level: false
+            info: short
+            name: Livingroom
+          - type: custom:mini-media-player
+            entity: media_player.roon_kitchen
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              power: true
+              progress: true
+              volume_level: false
+            info: short
+            name: Kitchen
+          - type: custom:mini-media-player
+            entity: media_player.roon_office
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              power: true
+              progress: true
+              volume_level: false
+            info: short
+            name: Office
+          - type: custom:mini-media-player
+            entity: media_player.roon_bedroom
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              power: true
+              progress: true
+              source: true
+              volume_level: false
+            info: short
+            name: Bedroom
+          - type: custom:mini-media-player
+            entity: media_player.roon_bathroom
+            volume_stateless: true
+            volume_step: '1'
+            hide:
+              power: true
+              progress: true
+              volume_level: false
+            info: short
+            name: Bathroom
+        view_layout:
+          position: sidebar
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bathroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_bathroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Bathroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bedroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_bedroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Bedroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_headphones
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_headphones
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Headphones
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_kitchen
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_kitchen
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Kitchen
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_livingroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_livingroom
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Livingroom
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_office
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_office
+              volume_stateless: true
+              volume_step: '1'
+              hide:
+                icon: true
+                power: true
+                progress: true
+                source: true
+                volume_level: false
+              info: short
+              group: true
+              artwork: material
+              name: Office
   - theme: Backend-selected
     title: Camera
     path: camera
@@ -1487,362 +1738,6 @@ views:
             show_icon: true
         camera_image: camera.kitchen
   - theme: Backend-selected
-    title: Roon Web Display
-    path: web-display
-    icon: mdi:monitor
-    type: sidebar
-    badges: []
-    cards:
-      - type: iframe
-        url: http://rock:9330/display/
-        aspect_ratio: '16:9'
-      - type: vertical-stack
-        cards:
-          - type: logbook
-            entities:
-              - sensor.lastfm
-            hours_to_show: 1
-            title: Play History
-          - type: entities
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_headphones
-                hide:
-                  power: true
-                  progress: true
-                  state_label: true
-                  volume: true
-                name: Headphones
-                group: true
-            state_color: true
-          - type: entities
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_livingroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_livingroom
-                  entities:
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_office
-                      name: Office
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                info: short
-                group: true
-                name: Livingroom
-              - type: conditional
-                conditions:
-                  - entity: sensor.livingroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: sensor.livingroom_audio_input_format
-                  name: Audio Input Format
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_livingroom
-                    state: playing
-                row:
-                  entity: number.sonos_livingroom_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_livingroom
-                    state: playing
-                row:
-                  entity: number.sonos_livingroom_treble
-                  name: Treble
-              - type: conditional
-                conditions:
-                  - entity: sensor.livingroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: number.sonos_livingroom_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: sensor.livingroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: number.sonos_livingroom_treble
-                  name: Treble
-              - type: conditional
-                conditions:
-                  - entity: switch.sonos_livingroom_subwoofer_enabled
-                    state: 'on'
-                  - entity: media_player.roon_livingroom
-                    state: playing
-                row:
-                  entity: number.sonos_livingroom_sub_gain
-                  name: Sub Gain
-              - type: conditional
-                conditions:
-                  - entity: switch.sonos_livingroom_subwoofer_enabled
-                    state: 'on'
-                  - entity: media_player.roon_livingroom
-                    state: playing
-                row:
-                  entity: input_number.sonos_livingroom_sub_crossover
-                  name: Sub Crossover
-              - type: conditional
-                conditions:
-                  - entity: switch.sonos_livingroom_subwoofer_enabled
-                    state: 'on'
-                  - entity: sensor.livingroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: number.sonos_livingroom_sub_gain
-                  name: Sub Gain
-              - type: conditional
-                conditions:
-                  - entity: switch.sonos_livingroom_subwoofer_enabled
-                    state: 'on'
-                  - entity: sensor.livingroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: input_number.sonos_livingroom_sub_crossover
-                  name: Sub Crossover
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_livingroom_speech_enhancement
-                  - entity: switch.sonos_livingroom_night_sound
-                  - entity: switch.sonos_livingroom_subwoofer_enabled
-                  - entity: switch.sonos_livingroom_sub_polarity
-                  - entity: switch.sonos_livingroom_surround_enabled
-                  - entity: switch.sonos_livingroom_touch_controls
-                  - entity: switch.sonos_livingroom_status_light
-            state_color: true
-            show_header_toggle: true
-          - type: entities
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_kitchen
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_kitchen
-                  entities:
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_office
-                      name: Office
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                info: short
-                name: Kitchen
-                group: true
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_kitchen
-                    state: playing
-                row:
-                  entity: number.sonos_kitchen_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_kitchen
-                    state: playing
-                row:
-                  entity: number.sonos_kitchen_treble
-                  name: Treble
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_kitchen_touch_controls
-                  - entity: switch.sonos_kitchen_status_light
-            state_color: true
-          - type: entities
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_office
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_office
-                  entities:
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_office
-                      name: Office
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                info: short
-                name: Office
-                group: true
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_office
-                    state: playing
-                row:
-                  entity: number.sonos_office_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_office
-                    state: playing
-                row:
-                  entity: number.sonos_office_treble
-                  name: Treble
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_office_touch_controls
-                  - entity: switch.sonos_office_status_light
-                  - entity: binary_sensor.sonos_office_microphone
-            state_color: true
-          - type: entities
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_bedroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  source: true
-                  volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_bedroom
-                  entities:
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_office
-                      name: Office
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                info: short
-                name: Bedroom
-                group: true
-              - type: conditional
-                conditions:
-                  - entity: sensor.bedroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: sensor.bedroom_audio_input_format
-                  name: Audio Input Format
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_bedroom
-                    state: playing
-                row:
-                  entity: number.sonos_bedroom_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_bedroom
-                    state: playing
-                row:
-                  entity: number.sonos_bedroom_treble
-                  name: Treble
-              - type: conditional
-                conditions:
-                  - entity: sensor.bedroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: number.sonos_bedroom_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: sensor.bedroom_audio_input_format
-                    state_not: No input
-                row:
-                  entity: number.sonos_bedroom_treble
-                  name: Treble
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_bedroom_speech_enhancement
-                  - entity: switch.sonos_bedroom_night_sound
-                  - entity: switch.sonos_bedroom_surround_enabled
-                  - entity: switch.sonos_bedroom_touch_controls
-                  - entity: switch.sonos_bedroom_status_light
-            state_color: true
-          - type: entities
-            entities:
-              - type: custom:mini-media-player
-                entity: media_player.roon_bathroom
-                volume_stateless: true
-                volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  volume_level: false
-                speaker_group:
-                  platform: media_player
-                  show_group_count: true
-                  group_mgmt_entity: media_player.roon_bathroom
-                  entities:
-                    - entity_id: media_player.roon_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.roon_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.roon_office
-                      name: Office
-                    - entity_id: media_player.roon_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.roon_bathroom
-                      name: Bathroom
-                info: short
-                name: Bathroom
-                group: true
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_bathroom
-                    state: playing
-                row:
-                  entity: number.sonos_bathroom_bass
-                  name: Bass
-              - type: conditional
-                conditions:
-                  - entity: media_player.roon_bathroom
-                    state: playing
-                row:
-                  entity: number.sonos_bathroom_treble
-                  name: Treble
-              - type: buttons
-                entities:
-                  - entity: switch.sonos_bathroom_touch_controls
-                  - entity: switch.sonos_bathroom_status_light
-            state_color: true
-        view_layout:
-          position: sidebar
-  - theme: Backend-selected
     title: Music
     path: music
     icon: mdi:music
@@ -1877,3 +1772,6 @@ views:
           - type: weblink
             name: Translations
             url: https://translations.roonlabs.net/lang/german/all
+      - type: logbook
+        entities:
+          - sensor.lastfm
