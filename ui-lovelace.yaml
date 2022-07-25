@@ -1,5 +1,5 @@
 wallpanel_screensaver:
-  enabled: true
+  enabled: false
   idle_time: 600
   night_mode:
     start_time: '23:00'
@@ -291,7 +291,7 @@ views:
             type: grid
             cards:
               - square: true
-                columns: 2
+                columns: 3
                 type: grid
                 cards:
                   - show_name: false
@@ -325,7 +325,7 @@ views:
                     entity: sensor.lenovo_tab_2_a10_70f_interner_speicher
                     name: Int.
               - square: true
-                columns: 2
+                columns: 3
                 type: grid
                 cards:
                   - show_name: false
@@ -373,6 +373,7 @@ views:
                 entity: media_player.roon_livingroom
                 group: true
                 volume_stateless: true
+                volume_step: '1'
                 artwork: none
                 hide:
                   name: true
@@ -486,6 +487,7 @@ views:
                 entity: media_player.roon_kitchen
                 group: true
                 volume_stateless: true
+                volume_step: '1'
                 artwork: none
                 hide:
                   name: true
@@ -527,6 +529,7 @@ views:
                 entity: media_player.roon_bedroom
                 group: true
                 volume_stateless: true
+                volume_step: '1'
                 artwork: none
                 hide:
                   name: true
@@ -576,6 +579,7 @@ views:
                 entity: media_player.roon_office
                 group: true
                 volume_stateless: true
+                volume_step: '1'
                 artwork: none
                 hide:
                   name: true
@@ -617,6 +621,7 @@ views:
                 entity: media_player.roon_bathroom
                 group: true
                 volume_stateless: true
+                volume_step: '1'
                 artwork: none
                 hide:
                   name: true

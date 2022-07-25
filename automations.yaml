@@ -277,7 +277,6 @@
   condition:
   - condition: state
     entity_id: binary_sensor.workday_sensor
-    attribute: workdays
     state: 'on'
   action:
   - device_id: cc7215817ef8193b2df878dad98cb347
@@ -417,7 +416,7 @@
       hours: 0
       minutes: 1
       seconds: 0
-    below: '9'
+    below: '8'
   condition: []
   action:
   - service: media_player.turn_off
@@ -455,7 +454,7 @@
   - condition: numeric_state
     entity_id: sun.sun
     attribute: azimuth
-    above: '70'
+    above: '75'
     below: '150'
   action:
   - service: script.office_shutter_favorite
