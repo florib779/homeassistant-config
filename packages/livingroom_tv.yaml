@@ -1,0 +1,36 @@
+media_player:
+  # Use the Python ADB implementation
+  - platform: androidtv
+    # TV livingroom
+    host: !secret androidtv_ip
+    device_class: androidtv
+
+switch:
+  - platform: template
+    switches:
+      # Turn TV on/off
+      livingroom_tv_power:
+        value_template: "{{ is_state('binary_sensor.livingroom_tv_on', 'on') }}"
+        turn_on:
+          service: wake_on_lan.send_magic_packet
+          data:
+            mac: !secret tv_livingroom_mac
+        turn_off:
+          service: androidtv.adb_command
+          target:
+            entity_id: media_player.android_tv_livingroom
+          data:
+            command: "POWER"
+        icon_template: >-
+            mdi:television
+
+template:
+  - binary_sensor:
+      - name: "Livingroom TV on"
+        unique_id: "livingroom_tv_on"
+        state: >
+          {% if states.sensor.livingroom_tv_power_consumption.state | float > 2 %}
+            on
+          {% else %}
+            off
+          {% endif %}

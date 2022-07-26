@@ -1,0 +1,9 @@
+conversation:
+  intents:
+    LivingRoomTemperature:
+     - What is the [current] temperature in the living room
+
+intent_script:
+  LivingRoomTemperature:
+    speech:
+      text: It is currently {{ states.climate.bathroom_thermostat.attributes["current_temperature"] }} degrees in the living room.

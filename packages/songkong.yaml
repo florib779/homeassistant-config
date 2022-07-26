@@ -1,0 +1,5 @@
+panel_iframe:
+  songkong:
+    title: 'Songkong'
+    icon: 'si:musicbrainz'
+    url: 'http://rock:4567'
