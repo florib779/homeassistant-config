@@ -372,7 +372,7 @@
     domain: switch
   mode: single
 - id: '1655212907581'
-  alias: Livingroom Sun Protection
+  alias: Livingroom Sun Protection start
   description: Close the shutter when the sun shines into the window and the in-/outside
     temperature is above a certain value, but only if the TV is off.
   trigger:
@@ -442,7 +442,7 @@
       mac: 34:93:42:22:74:92
   mode: single
 - id: '1657518721213'
-  alias: Office Sun Protection
+  alias: Office Sun Protection start
   description: Close the shutter when the sun shines into the window and the in-/outside
     temperature is above a certain value.
   trigger:
@@ -459,4 +459,45 @@
   action:
   - service: script.office_shutter_favorite
     data: {}
+  mode: single
+- id: '1658740560574'
+  alias: Office Sun Protection stop (test)
+  description: Close the shutter when the sun shines into the window and the in-/outside
+    temperature is above a certain value.
+  trigger:
+  - platform: numeric_state
+    entity_id: climate.office_thermostat
+    attribute: current_temperature
+    below: '24'
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: '170'
+  action:
+  - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
+    domain: cover
+    entity_id: cover.office_shutter
+    type: set_position
+    position: 100
+  mode: single
+- id: '1658752132439'
+  alias: Livingroom Sun Protection stop
+  description: Close the shutter when the sun shines into the window and the in-/outside
+    temperature is above a certain value, but only if the TV is off.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.livingroom_pushbutton_temperature
+    below: '24'
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: '330'
+  action:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 100
   mode: single

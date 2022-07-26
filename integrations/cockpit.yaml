@@ -1,5 +1,0 @@
-panel_iframe:
-  system_config:
-    title: 'System'
-    icon: 'mdi:debian'
-    url: 'https://rock:9090'

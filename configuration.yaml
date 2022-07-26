@@ -1,5 +1,5 @@
 homeassistant:
-  packages: !include_dir_named integrations
+  packages: !include_dir_named packages
 
 ################################################################################
 
@@ -22,7 +22,12 @@ weather:
     name: "Weather Station"
     condition_template: "{{ states('weather.home') }}"
     forecast_template: "{{ state_attr('weather.home_hourly', 'forecast') }}"
+    humidity_template: "{{ state_attr('weather.home', 'humidity') | float }}"
+    pressure_template: "{{ state_attr('weather.home', 'pressure') | float }}"
     temperature_template: "{{ state_attr('weather.home', 'temperature') | float }}"
+    visibility_template: "{{ state_attr('weather.home', 'visibility') | float }}"
+    wind_bearing_template: "{{ state_attr('weather.home', 'wind_bearing') | float }}"
+    wind_speed_template: "{{ state_attr('weather.home', 'wind_speed') | float }}"
 
 binary_sensor:
   - platform: 'workday'
