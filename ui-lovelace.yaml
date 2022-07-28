@@ -1,11 +1,3 @@
-wallpanel_screensaver:
-  enabled: true
-  idle_time: 600
-  night_mode:
-    start_time: '23:00'
-    end_time: '06:30'
-    idle_time: 120
-    display_tint: 75
 header_cards:
   cards:
     - type: markdown
@@ -35,6 +27,14 @@ media_art_background:
       views:
         - web-display
 title: Home
+wallpanel_screensaver:
+  enabled: true
+  idle_time: 600
+  night_mode:
+    start_time: '23:00'
+    end_time: '06:30'
+    idle_time: 120
+    display_tint: 75
 views:
   - title: Home
     path: home
@@ -139,7 +139,7 @@ views:
                 volume_level: false
               info: short
               group: true
-              artwork: full-cover-fit
+              artwork: material
               name: Headphones
           - type: conditional
             conditions:
@@ -321,6 +321,22 @@ views:
                   - entity: sensor.sm_t220_external_storage
                 state_color: true
                 columns: 3
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.deebot
+                state: 'on'
+            card:
+              type: entities
+              entities:
+                - entity: binary_sensor.deebot
+                  name: State
+                - entity: sensor.deebot_battery
+                  name: Akku
+              header:
+                type: buttons
+                entities:
+                  - entity: switch.deebot
+                  - entity: switch.deebot_docking
       - type: entities
         entities:
           - entity: climate.livingroom_thermostat
@@ -357,9 +373,7 @@ views:
               - entity: light.livingroom_tv_light
               - entity: light.livingroom_floodlight
               - entity: fan.livingroom_fan
-              - entity: vacuum.livingroom_deebot
-                tap_action:
-                  action: toggle
+              - entity: switch.deebot
           - entity: cover.livingroom_shutter_small
             secondary_info: position
             name: Shutter
