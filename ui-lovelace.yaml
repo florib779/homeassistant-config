@@ -574,6 +574,7 @@ views:
               - entity: light.livingroom_tv_light
               - entity: light.livingroom_floodlight
               - entity: fan.livingroom_fan
+              - entity: light.balcony_light
               - entity: switch.deebot
           - entity: cover.livingroom_shutter_small
             secondary_info: position
@@ -697,10 +698,11 @@ views:
           - entity: climate.bedroom_thermostat
             name: Thermostat
             type: custom:secondaryinfo-entity-row
-            secondary_info: >-
-              Battery: [[ sensor.bedroom_thermostat_battery ]] %, [[
-              sensor.bedroom_pushbutton_battery ]] %, [[
-              sensor.bedroom_pushbutton_2_battery ]] %
+            secondary_info: 'Battery: [[ sensor.bedroom_thermostat_battery ]] %'
+          - entity: sensor.bedroom_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.bedroom_pushbutton_battery ]] %'
           - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_bedroom
