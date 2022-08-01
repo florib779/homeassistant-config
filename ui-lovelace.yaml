@@ -28,7 +28,7 @@ media_art_background:
         - web-display
 title: Home
 wallpanel_screensaver:
-  enabled: true
+  enabled: false
   idle_time: 600
   night_mode:
     start_time: '23:00'
@@ -422,6 +422,8 @@ views:
                 secondary_info: 'Power: [[ sensor.livingroom_tv_power_consumption ]] W'
               - entity: light.bedroom_light
                 secondary_info: brightness
+              - entity: light.balcony_light
+                secondary_info: brightness
               - entity: light.kitchen_light_group
                 secondary_info: brightness
               - entity: light.livingroom_floodlight
@@ -524,20 +526,23 @@ views:
                 columns: 3
           - type: conditional
             conditions:
-              - entity: binary_sensor.deebot
+              - entity: switch.deebot
                 state: 'on'
             card:
               type: entities
               entities:
-                - entity: binary_sensor.deebot
-                  name: State
                 - entity: sensor.deebot_battery
                   name: Akku
+                - entity: binary_sensor.deebot
+                  name: Errors
               header:
                 type: buttons
                 entities:
                   - entity: switch.deebot
                   - entity: switch.deebot_docking
+              footer:
+                type: graph
+                entity: sensor.deebot_battery
       - type: entities
         entities:
           - entity: climate.livingroom_thermostat
@@ -1798,19 +1803,34 @@ views:
             name: HIGHRESAUDIO
             url: https://www.highresaudio.com/de
           - type: weblink
+            name: TIDAL Store
+            url: https://store.tidal.com/
+            icon: si:tidal
+          - type: weblink
             name: HDtracks
             url: https://www.hdtracks.com/
+        title: Download
       - type: entities
         entities:
+          - type: section
+            label: Forum
           - type: weblink
             name: Community
             url: https://community.roonlabs.com/
+          - type: section
+            label: Artwork
           - type: weblink
             name: Art Director
             url: https://valence.roonlabs.net/artdirector/
           - type: weblink
+            name: Image Upscaler
+            url: https://imgupscaler.com/
+          - type: section
+            label: Translations
+          - type: weblink
             name: Translations
             url: https://translations.roonlabs.net/lang/german/all
+        title: Roon
       - type: entities
         entities:
           - type: weblink
@@ -1832,6 +1852,12 @@ views:
           - type: weblink
             name: Deepl
             url: https://www.deepl.com/translator
+        title: Tools
       - type: logbook
         entities:
           - sensor.lastfm
+        title: Last.fm
+      - type: iframe
+        url: http://192.168.178.62:1400/support/review
+        title: Sonos
+        aspect_ratio: 80%
