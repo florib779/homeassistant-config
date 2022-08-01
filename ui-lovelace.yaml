@@ -209,37 +209,40 @@ views:
               group: true
               artwork: material
               name: Headphones
-              buttons:
-                - icon: mdi:bathtub
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_bathroom
-                - icon: mdi:bed-king
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_bedroom
-                - icon: mdi:stove
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_kitchen
-                - icon: mdi:sofa
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_livingroom
-                - icon: mdi:desk
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_office
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bathtub
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_bathroom
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_livingroom
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_kitchen
