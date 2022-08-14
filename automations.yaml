@@ -420,9 +420,6 @@
     above: '325'
   condition:
   - condition: numeric_state
-    entity_id: sensor.kitchen_pushbutton_temperature
-    below: '24'
-  - condition: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
     below: '20'
   action:

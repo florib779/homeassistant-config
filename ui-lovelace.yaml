@@ -21,20 +21,7 @@ header_cards:
           color: var(--primary-text-color) !important;
           border: var(--card-background-color) !important;
         }
-media_art_background:
-  entities:
-    - entity: media_player.roon_livingroom
-      views:
-        - web-display
 title: Home
-wallpanel_screensaver:
-  enabled: false
-  idle_time: 600
-  night_mode:
-    start_time: '23:00'
-    end_time: '06:30'
-    idle_time: 120
-    display_tint: 75
 views:
   - title: Home
     path: home
@@ -402,18 +389,10 @@ views:
                     data:
                       entity_id: media_player.roon_office
                       transfer_id: media_player.roon_livingroom
-          - type: entities
-            entities:
-              - entity: sun.sun
-                type: attribute
-                attribute: azimuth
-                icon: mdi:sun-angle
-                name: Sun azimuth
           - show_current: true
             show_forecast: true
             type: weather-forecast
             entity: weather.weather_station
-            name: ' '
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -514,6 +493,7 @@ views:
                   - entity: sensor.sm_g960f_battery_level
                   - entity: sensor.sm_g960f_internal_storage
                 columns: 3
+                title: Samsung Handy
               - show_name: false
                 show_icon: true
                 show_state: true
@@ -527,25 +507,7 @@ views:
                   - entity: sensor.sm_t220_external_storage
                 state_color: true
                 columns: 3
-          - type: conditional
-            conditions:
-              - entity: switch.deebot
-                state: 'on'
-            card:
-              type: entities
-              entities:
-                - entity: sensor.deebot_battery
-                  name: Akku
-                - entity: binary_sensor.deebot
-                  name: Errors
-              header:
-                type: buttons
-                entities:
-                  - entity: switch.deebot
-                  - entity: switch.deebot_docking
-              footer:
-                type: graph
-                entity: sensor.deebot_battery
+                title: Samsung Tablet
       - type: entities
         entities:
           - entity: climate.livingroom_thermostat
@@ -584,6 +546,7 @@ views:
               - entity: fan.livingroom_fan
               - entity: light.balcony_light
               - entity: switch.deebot
+              - entity: switch.deebot_docking
           - entity: cover.livingroom_shutter_small
             secondary_info: position
             name: Shutter
