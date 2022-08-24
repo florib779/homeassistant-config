@@ -880,7 +880,7 @@ views:
               source: true
               volume_level: false
             speaker_group:
-              platform: media_player
+              platform: sonos
               show_group_count: true
               group_mgmt_entity: media_player.roon_livingroom
               entities:
@@ -1089,7 +1089,7 @@ views:
               progress: true
               volume_level: false
             speaker_group:
-              platform: media_player
+              platform: sonos
               show_group_count: true
               group_mgmt_entity: media_player.roon_office
               entities:
@@ -1181,7 +1181,7 @@ views:
               progress: true
               volume_level: false
             speaker_group:
-              platform: media_player
+              platform: sonos
               show_group_count: true
               group_mgmt_entity: media_player.roon_kitchen
               entities:
@@ -1267,7 +1267,7 @@ views:
             volume_stateless: true
             volume_step: '1'
             speaker_group:
-              platform: media_player
+              platform: sonos
               show_group_count: true
               group_mgmt_entity: media_player.roon_bedroom
               entities:
@@ -1394,7 +1394,7 @@ views:
               progress: true
               volume_level: false
             speaker_group:
-              platform: media_player
+              platform: sonos
               show_group_count: true
               group_mgmt_entity: media_player.roon_bathroom
               entities:
@@ -1537,11 +1537,46 @@ views:
                 power: true
                 progress: true
                 source: true
+                volume: true
                 volume_level: false
               info: short
               group: true
               artwork: material
               name: Headphones
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bathtub
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_bathroom
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_livingroom
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_kitchen
@@ -1652,7 +1687,7 @@ views:
           camera_image: camera.office
       - type: conditional
         conditions:
-          - entity: cover.bedroom_shutter
+          - entity: shutter
             state_not: closed
         card:
           camera_view: live

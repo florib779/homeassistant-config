@@ -18,30 +18,30 @@ wake_on_lan: # Further configuration in the corresponding package yaml files
 
 # https://www.home-assistant.io/integrations/weather.template/
 # https://www.home-assistant.io/integrations/openweathermap/
-weather:
-  - platform: 'template'
-    name: "Weather Station"
-    condition_template: "{{ states('weather.openweathermap') }}" # hourly
-    forecast_template: "{{ state_attr('weather.openweathermap','forecast')[:24] }}" # hourly
-    #forecast_template: "{{ state_attr('weather.openweathermap','forecast') }}" # weekly
-    humidity_template: "{{ states('sensor.openweathermap_humidity') }}"
-    ozone_template: "{{ states('sensor.openweathermap_uv_index') }}" # ToDo
-    pressure_template: "{{ states('sensor.openweathermap_pressure') | float }}"
-    temperature_template: "{{ states('sensor.openweathermap_temperature') | float }}"
-    visibility_template: "{{ states('sensor.openweathermap_visibility') | float }}"
-    wind_bearing_template: "{{ states('sensor.openweathermap_wind_bearing') | float }}"
-    wind_speed_template: "{{ states('sensor.openweathermap_wind_speed') | float }}"
 #weather:
 #  - platform: 'template'
 #    name: "Weather Station"
-#    condition_template: "{{ states('weather.home') }}"
-#    forecast_template: "{{ state_attr('weather.home_hourly', 'forecast') }}"
-#    humidity_template: "{{ state_attr('weather.home', 'humidity') | float }}"
-#    pressure_template: "{{ state_attr('weather.home', 'pressure') | float }}"
-#    temperature_template: "{{ state_attr('weather.home', 'temperature') | float }}"
-#    visibility_template: "{{ state_attr('weather.home', 'visibility') | float }}"
-#    wind_bearing_template: "{{ state_attr('weather.home', 'wind_bearing') | float }}"
-#    wind_speed_template: "{{ state_attr('weather.home', 'wind_speed') | float }}"
+#    condition_template: "{{ states('weather.openweathermap') }}" # hourly
+#    forecast_template: "{{ state_attr('weather.openweathermap','forecast')[:24] }}" # hourly
+#    #forecast_template: "{{ state_attr('weather.openweathermap','forecast') }}" # weekly
+#    humidity_template: "{{ states('sensor.openweathermap_humidity') }}"
+#    ozone_template: "{{ states('sensor.openweathermap_uv_index') }}" # ToDo
+#    pressure_template: "{{ states('sensor.openweathermap_pressure') | float }}"
+#    temperature_template: "{{ states('sensor.openweathermap_temperature') | float }}"
+#    visibility_template: "{{ states('sensor.openweathermap_visibility') | float }}"
+#    wind_bearing_template: "{{ states('sensor.openweathermap_wind_bearing') | float }}"
+#    wind_speed_template: "{{ states('sensor.openweathermap_wind_speed') | float }}"
+weather:
+  - platform: 'template'
+    name: "Weather Station"
+    condition_template: "{{ states('weather.home') }}"
+    forecast_template: "{{ state_attr('weather.home_hourly', 'forecast') }}"
+    humidity_template: "{{ state_attr('weather.home', 'humidity') | float }}"
+    pressure_template: "{{ state_attr('weather.home', 'pressure') | float }}"
+    temperature_template: "{{ state_attr('weather.home', 'temperature') | float }}"
+    visibility_template: "{{ state_attr('weather.home', 'visibility') | float }}"
+    wind_bearing_template: "{{ state_attr('weather.home', 'wind_bearing') | float }}"
+    wind_speed_template: "{{ state_attr('weather.home', 'wind_speed') | float }}"
 
 binary_sensor:
   - platform: 'workday'
@@ -61,7 +61,7 @@ template:
       - name: "Basement Washer on"
         unique_id: "basement_washer_on"
         state: >
-          {% if states.sensor.basement_washer_power_consumption.state | float > 2 %}
+          {% if states.sensor.basement_washer_power_consumption.state | float > 5 %}
             on
           {% else %}
             off

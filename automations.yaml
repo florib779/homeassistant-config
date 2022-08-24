@@ -331,6 +331,7 @@
   - condition: numeric_state
     entity_id: sensor.livingroom_pushbutton_temperature
     below: '23'
+    enabled: false
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
@@ -504,4 +505,30 @@
       - switch.kitchen_pc
       - switch.kitchen_cookerhood
       - switch.livingroom_fan
+  mode: single
+- id: '1660664658456'
+  alias: Heatingroom Pump on (draft)
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:59:00
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 1e9a16f4d3c307044b1aafaec641833b
+    entity_id: switch.heatingroom_pump
+    domain: switch
+  mode: single
+- id: '1660664766395'
+  alias: Heatingroom Pump off (draft)
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 1e9a16f4d3c307044b1aafaec641833b
+    entity_id: switch.heatingroom_pump
+    domain: switch
   mode: single
