@@ -40,6 +40,7 @@
   trigger:
   - platform: time
     at: 08:00:00
+    enabled: false
   - platform: sun
     event: sunrise
     offset: '+1'
@@ -116,7 +117,7 @@
     position: 100
   mode: single
 - id: '1652424507352'
-  alias: All Stop/Off @ 01:00 on workdays
+  alias: All Stop/Off @ 01:00 at workdays
   description: ''
   trigger:
   - platform: time
@@ -331,7 +332,7 @@
   - condition: numeric_state
     entity_id: sensor.livingroom_pushbutton_temperature
     below: '23'
-    enabled: false
+    enabled: true
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
@@ -340,12 +341,16 @@
     position: 100
   mode: single
 - id: '1656021860713'
-  alias: Bedroom Shutter Down
+  alias: Bedroom Shutter Down at 23:00 at workdays
   description: ''
   trigger:
   - platform: time
     at: '23:00:00'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    attribute: workdays
+    state: 'on'
   action:
   - device_id: cc7215817ef8193b2df878dad98cb347
     domain: cover
@@ -401,7 +406,7 @@
     to: '320'
   condition:
   - condition: numeric_state
-    entity_id: sensor.livingroom_pushbutton_temperature
+    entity_id: sensor.livingroom_thermostat_current_temperature
     above: '23'
   - condition: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
@@ -409,6 +414,11 @@
   action:
   - service: script.livingroom_shutter_favorite
     data: {}
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 0
   mode: single
 - id: '1658865634343'
   alias: Livingroom Sun Protection stop
@@ -470,11 +480,11 @@
     position: 100
   mode: single
 - id: '1659015695693'
-  alias: All Stop/Off @ 03:00 on weekends
+  alias: All Stop/Off @ 02:00 at weekends
   description: ''
   trigger:
   - platform: time
-    at: 03:00:00
+    at: 02:00:00
   condition:
   - condition: state
     entity_id: binary_sensor.workday_sensor
@@ -507,12 +517,16 @@
       - switch.livingroom_fan
   mode: single
 - id: '1660664658456'
-  alias: Heatingroom Pump on (draft)
+  alias: Heatingroom Pump on at workdays
   description: ''
   trigger:
   - platform: time
     at: 06:59:00
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    attribute: workdays
+    state: 'on'
   action:
   - type: turn_on
     device_id: 1e9a16f4d3c307044b1aafaec641833b
@@ -520,7 +534,7 @@
     domain: switch
   mode: single
 - id: '1660664766395'
-  alias: Heatingroom Pump off (draft)
+  alias: Heatingroom Pump off (always)
   description: ''
   trigger:
   - platform: time

@@ -37,6 +37,7 @@ weather:
     condition_template: "{{ states('weather.home') }}"
     forecast_template: "{{ state_attr('weather.home_hourly', 'forecast') }}"
     humidity_template: "{{ state_attr('weather.home', 'humidity') | float }}"
+    ozone_template: "{{ state_attr('weather.home', 'ozone') | float }}"
     pressure_template: "{{ state_attr('weather.home', 'pressure') | float }}"
     temperature_template: "{{ state_attr('weather.home', 'temperature') | float }}"
     visibility_template: "{{ state_attr('weather.home', 'visibility') | float }}"

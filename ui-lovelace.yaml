@@ -389,10 +389,22 @@ views:
                     data:
                       entity_id: media_player.roon_office
                       transfer_id: media_player.roon_livingroom
-          - show_current: true
+          - show_current: false
             show_forecast: true
             type: weather-forecast
-            entity: weather.weather_station
+            entity: weather.home_hourly
+            name: ' '
+          - type: entities
+            entities:
+              - entity: weather.openweathermap
+                name: Temperature
+              - entity: sensor.openweathermap_forecast_precipitation
+                name: Precipitation
+                icon: mdi:weather-rainy
+                type: custom:secondaryinfo-entity-row
+                secondary_info: >-
+                  [[ sensor.openweathermap_forecast_precipitation_probability ]]
+                  %
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -1850,6 +1862,9 @@ views:
             name: Genius
             url: https://genius.com/
             icon: si:genius
+          - type: weblink
+            name: Lyricsify
+            url: https://www.lyricsify.com
           - type: weblink
             name: Deepl
             url: https://www.deepl.com/translator
