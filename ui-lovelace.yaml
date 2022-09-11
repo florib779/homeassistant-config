@@ -389,11 +389,6 @@ views:
                     data:
                       entity_id: media_player.roon_office
                       transfer_id: media_player.roon_livingroom
-          - show_current: false
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.home_hourly
-            name: ' '
           - type: entities
             entities:
               - entity: weather.openweathermap
@@ -405,6 +400,11 @@ views:
                 secondary_info: >-
                   [[ sensor.openweathermap_forecast_precipitation_probability ]]
                   %
+          - show_current: false
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.home_hourly
+            name: ' '
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -464,7 +464,10 @@ views:
                 state_color: true
                 name: Livingroom PC
                 type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.livingroom_nuc_power_consumption ]] W'
+                secondary_info: 'Power: [[ sensor.livingroom_nuc_power_consumption ]]W'
+              - entity: binary_sensor.makita_akku_charging
+                state_color: true
+                secondary_info: last-changed
             state_filter:
               - 'on'
             card:

@@ -85,13 +85,13 @@ template:
             off
           {% endif %}
 
-      - name: "Makita Akku charged"
-        unique_id: "makita_akku_charged"
+      - name: "Makita Akku charging"
+        unique_id: "makita_akku_charging"
         state:  >
           {% if states.sensor.storeroom_switch_power_consumption.state | float > 1 %}
-            charging
+            on
           {% else %}
-            100
+            off
           {% endif %}
   - sensor:
       - name: "Electricity Price"
