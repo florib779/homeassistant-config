@@ -207,11 +207,6 @@
       seconds: 0
   condition: []
   action:
-  - service: vacuum.turn_on
-    data: {}
-    target:
-      entity_id: vacuum.e0001103417610630506
-    enabled: false
   - service: media_player.media_stop
     data: {}
     target:
@@ -243,6 +238,10 @@
     device_id: 339ed19795f98147dc81c7cdd0e27b34
     entity_id: switch.deebot
     domain: switch
+  - service: vacuum.turn_on
+    data: {}
+    target:
+      entity_id: vacuum.livingroom_deebot
   mode: single
 - id: '1652986188792'
   alias: 'HASS: At Home'
@@ -255,19 +254,14 @@
     to: home
   condition: []
   action:
-  - service: vacuum.return_to_base
-    data: {}
-    target:
-      entity_id: vacuum.e0001103417610630506
-    enabled: false
-  - type: turn_on
-    device_id: 339ed19795f98147dc81c7cdd0e27b34
-    entity_id: switch.deebot_docking
-    domain: switch
   - type: turn_on
     device_id: 0d509434e5813a91e01bf0330ab90f17
     entity_id: switch.kitchen_cookerhood
     domain: switch
+  - service: vacuum.return_to_base
+    data: {}
+    target:
+      entity_id: vacuum.livingroom_deebot
   mode: single
 - id: '1654138222259'
   alias: Corridor Headphones Stop

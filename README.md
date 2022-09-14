@@ -65,11 +65,9 @@ My Home Assistant config files including products of:
       * Currently not implemented in Home Assistant.
     - [x] AVM FRITZ!DECT 500 (LED light).
     - [x] Rademacher RolloTron DECT 1213 (shutter).
-      * Currently not implemented in Home Assistant.
-      * Possible via Homebridge [info](https://community.home-assistant.io/t/support-rademacher-rollotron-1213-dect-with-avm-fritz-smarthome/319854/5)
       - [x] Close shutter when TV is turned on.
         * To avoid light glare.
-      - [x] Close shutter depending on time and the phases of the sun.
+      - [x] Close shutters depending on time and the phases of the sun.
   * Show info
     - [x] Show phone status with caller information
     - [x] Deutsche Telekom (Eurotronic) 40318684 (door/window contact).
