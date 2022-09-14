@@ -67,6 +67,14 @@ template:
           {% else %}
             off
           {% endif %}
+      - name: "Kitchen Cookerhood on"
+        unique_id: "kitchen_cookerhood_on"
+        state: >
+          {% if states.sensor.kitchen_cookerhood_power_consumption.state | float > 1 %}
+            on
+          {% else %}
+            off
+          {% endif %}
       - name: "Kitchen Dishwasher on"
         unique_id: "kitchen_dishwasher_on"
         state: >
@@ -75,7 +83,6 @@ template:
           {% else %}
             off
           {% endif %}
-
       - name: "Livingroom NUC on"
         unique_id: "livingroom_nuc_on"
         state: >
@@ -84,7 +91,6 @@ template:
           {% else %}
             off
           {% endif %}
-
       - name: "Makita Akku charging"
         unique_id: "makita_akku_charging"
         state:  >
@@ -120,16 +126,6 @@ template:
             {% else %}
                 mdi:phone-in-talk
             {% endif %}
-      - name: "Kitchen Cookerhood stages"
-        unique_id: "kitchen_cookerhood_stages"
-        state: >
-          {% if states.sensor.kitchen_cookerhood_power_consumption.state | float > 95 %}
-            Stage 2
-          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 60 %}
-            Stage 1
-          {% else %}
-            off
-          {% endif %}
       - name: "Livingroom Fan stages"
         unique_id: "livingroom_fan_stages"
         state: >

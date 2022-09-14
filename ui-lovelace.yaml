@@ -389,22 +389,6 @@ views:
                     data:
                       entity_id: media_player.roon_office
                       transfer_id: media_player.roon_livingroom
-          - type: entities
-            entities:
-              - entity: weather.openweathermap
-                name: Temperature
-              - entity: sensor.openweathermap_forecast_precipitation
-                name: Precipitation
-                icon: mdi:weather-rainy
-                type: custom:secondaryinfo-entity-row
-                secondary_info: >-
-                  [[ sensor.openweathermap_forecast_precipitation_probability ]]
-                  %
-          - show_current: false
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.home_hourly
-            name: ' '
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -428,6 +412,9 @@ views:
                 name: Pump
                 type: custom:secondaryinfo-entity-row
                 secondary_info: 'Power: [[ sensor.heatingroom_pump_power_consumption ]] W'
+              - entity: vacuum.livingroom_deebot
+                name: Deebot
+                state_color: true
               - entity: sensor.hacs
                 state_color: true
                 state_filter:
@@ -435,10 +422,6 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: /hacs
-              - entity: switch.kitchen_cookerhood
-                state_color: true
-                type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.kitchen_cookerhood_stages ]]'
               - entity: switch.kitchen_pc
                 state_color: true
                 type: custom:secondaryinfo-entity-row
@@ -454,6 +437,11 @@ views:
               - entity: binary_sensor.fritz_box_7490_firmware_update
                 name: FRITZ!Box Firmware Update
                 secondary_info: last-changed
+              - entity: binary_sensor.kitchen_cookerhood_on
+                name: Kitchen Cookerhood
+                state_color: true
+                type: custom:secondaryinfo-entity-row
+                secondary_info: '[[ sensor.kitchen_cookerhood_power_consumption ]] W'
               - entity: binary_sensor.kitchen_dishwasher_on
                 state_color: true
                 secondary_info: last-changed
@@ -474,6 +462,22 @@ views:
               type: entities
               state_color: true
               show_header_toggle: true
+          - type: entities
+            entities:
+              - entity: weather.openweathermap
+                name: Temperature
+              - entity: sensor.openweathermap_forecast_precipitation
+                name: Precipitation
+                icon: mdi:weather-rainy
+                type: custom:secondaryinfo-entity-row
+                secondary_info: >-
+                  [[ sensor.openweathermap_forecast_precipitation_probability ]]
+                  %
+          - show_current: false
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.home_hourly
+            name: ' '
           - type: entities
             entities:
               - type: conditional
@@ -560,8 +564,7 @@ views:
               - entity: light.livingroom_floodlight
               - entity: fan.livingroom_fan
               - entity: light.balcony_light
-              - entity: switch.deebot
-              - entity: switch.deebot_docking
+              - entity: vacuum.livingroom_deebot
           - entity: cover.livingroom_shutter_small
             secondary_info: position
             name: Shutter

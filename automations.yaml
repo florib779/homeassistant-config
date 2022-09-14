@@ -264,6 +264,10 @@
     device_id: 339ed19795f98147dc81c7cdd0e27b34
     entity_id: switch.deebot_docking
     domain: switch
+  - type: turn_on
+    device_id: 0d509434e5813a91e01bf0330ab90f17
+    entity_id: switch.kitchen_cookerhood
+    domain: switch
   mode: single
 - id: '1654138222259'
   alias: Corridor Headphones Stop
