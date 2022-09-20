@@ -18,6 +18,7 @@ My Home Assistant config files including products of:
   - [x] Night mode (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speech enhancement (does not work when playing music via roon) via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Speaker group management via [Mini Media Player](https://github.com/kalkih/mini-media-player).
+    * As long as Roon's DSP settings for groups are not saved, it doesn't make sense for me personally to use Roon grouping.
   - [x] Bass/Treble via [Sonos integration](https://www.home-assistant.io/integrations/sonos).
   - [x] Switch rear speakers
   - [x] Loudness.
@@ -37,7 +38,7 @@ My Home Assistant config files including products of:
 * **Roon**
   - [x] Control/Show info.
     - [x] [RoonLabs music player integration](https://www.home-assistant.io/integrations/roon/).
-      - [ ] Transfer zones.
+      - [x] Transfer zones.
     - [ ] Remote control via [roon-cec-controller-extension](https://github.com/benjaminbellamy/roon-cec-controller-extension).
       - [ ] Start/pause.
         * Possible, but currently not enabled.
