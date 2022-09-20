@@ -664,6 +664,8 @@ views:
             name: Upload
             type: custom:secondaryinfo-entity-row
             secondary_info: '[[ sensor.fritz_box_7490_max_connection_upload_throughput ]] kB/s'
+          - entity: button.fritz_box_7490_reconnect
+            name: FB-Reconnect
           - entity: sensor.corridor_rock_power_consumption
             name: Server
             icon: mdi:server
