@@ -466,7 +466,6 @@ views:
                     - entity: switch.sonos_livingroom_speech_enhancement
                     - entity: switch.sonos_livingroom_night_sound
                     - entity: switch.sonos_livingroom_surround_enabled
-                    - entity: switch.sonos_livingroom_surround_music_full_volume
                     - entity: switch.sonos_livingroom_sub_enabled
                     - entity: switch.sonos_livingroom_sub_polarity
                     - entity: switch.sonos_livingroom_touch_controls
@@ -568,8 +567,6 @@ views:
                 - type: buttons
                   entities:
                     - entity: switch.sonos_livingroom_loudness
-                    - entity: switch.sonos_livingroom_speech_enhancement
-                    - entity: switch.sonos_livingroom_night_sound
                     - entity: switch.sonos_livingroom_surround_enabled
                     - entity: switch.sonos_livingroom_surround_music_full_volume
                     - entity: switch.sonos_livingroom_sub_enabled
@@ -772,37 +769,38 @@ views:
                 .card-header {
                   padding: 0 16px;
                 }
-          - square: true
-            columns: 2
-            type: grid
-            cards:
-              - show_name: false
-                show_icon: true
-                show_state: true
-                type: glance
+          - type: entities
+            entities:
+              - type: buttons
                 entities:
                   - entity: binary_sensor.sm_g960f_bluetooth_state
                   - entity: binary_sensor.sm_g960f_wifi_state
                   - entity: sensor.sm_g960f_ringer_mode
                   - entity: binary_sensor.sm_g960f_mobile_data
-                  - entity: sensor.sm_g960f_battery_level
-                  - entity: sensor.sm_g960f_internal_storage
-                columns: 3
-                title: Samsung Handy
-              - show_name: false
-                show_icon: true
-                show_state: true
-                type: glance
+              - entity: sensor.sm_g960f_battery_level
+                name: Battery Level
+              - entity: sensor.sm_g960f_geocoded_location
+                name: Location
+              - entity: sensor.sm_g960f_internal_storage
+                name: Internal Storage
+          - type: entities
+            entities:
+              - type: buttons
                 entities:
                   - entity: binary_sensor.sm_t220_bluetooth_state
                   - entity: binary_sensor.sm_t220_wifi_state
                   - entity: sensor.sm_t220_audio_mode
-                  - entity: sensor.sm_t220_battery_level
-                  - entity: sensor.sm_t220_internal_storage
-                  - entity: sensor.sm_t220_external_storage
-                state_color: true
-                columns: 3
-                title: Samsung Tablet
+                  - entity: binary_sensor.sm_t220_interactive
+              - entity: sensor.sm_t220_battery_level
+                name: Battery Level
+              - entity: sensor.sm_t220_battery_temperature
+                name: Temperature
+              - entity: sensor.sm_t220_geocoded_location
+                name: Location
+              - entity: sensor.sm_t220_internal_storage
+                name: Internal Storage
+              - entity: sensor.sm_t220_external_storage
+                name: External Storage
       - type: entities
         entities:
           - entity: climate.livingroom_thermostat
