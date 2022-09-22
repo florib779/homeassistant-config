@@ -47,7 +47,7 @@
   condition:
   - condition: numeric_state
     entity_id: sensor.livingroom_tv_power_consumption
-    below: '2'
+    below: 20
     enabled: true
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
@@ -164,7 +164,7 @@
     domain: switch
     for:
       hours: 0
-      minutes: 30
+      minutes: 10
       seconds: 0
   condition: []
   action:
@@ -384,7 +384,7 @@
       hours: 0
       minutes: 0
       seconds: 0
-    above: '10'
+    above: 8
   condition: []
   action:
   - service: wake_on_lan.send_magic_packet
