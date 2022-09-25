@@ -23,7 +23,8 @@ header_cards:
         }
 title: Home
 views:
-  - title: Home
+  - theme: Google Dark Theme
+    title: Home
     path: home
     icon: mdi:home
     badges: []
@@ -933,13 +934,6 @@ views:
             }
       - type: entities
         entities:
-          - entity: sensor.corridor_pushbutton_temperature
-            name: Temperature
-          - entity: sensor.corridor_pushbutton_humidity
-            name: Humidity
-            type: custom:secondaryinfo-entity-row
-            secondary_info: 'Battery: [[ sensor.corridor_pushbutton_battery ]] %'
-          - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_headphones
             group: true
@@ -1060,6 +1054,10 @@ views:
             name: Thermostat
             type: custom:secondaryinfo-entity-row
             secondary_info: 'Battery: [[ sensor.office_thermostat_battery ]] %'
+          - entity: sensor.office_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.office_pushbutton_battery ]] %'
           - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_office
@@ -1374,6 +1372,10 @@ views:
           - type: weblink
             name: Translations
             url: https://translations.roonlabs.net/lang/german/all
+          - type: weblink
+            name: ARC Translations
+            url: >-
+              https://app.localizely.com/projects/1267a6db-ea99-4e37-8ce6-a193e6548ddb/main/translations
         title: Roon
       - type: entities
         entities:
