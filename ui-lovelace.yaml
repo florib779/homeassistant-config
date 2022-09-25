@@ -765,9 +765,9 @@ views:
             entities:
               - type: buttons
                 entities:
-                  - entity: sensor.iphone_connection_type
-                  - entity: binary_sensor.iphone_focus
-                  - entity: sensor.iphone_activity
+                  - entity: sensor.iphone_xs_connection_type
+                  - entity: binary_sensor.iphone_xs_focus
+                  - entity: sensor.iphone_xs_activity
                   - entity: sensor.iphone_xs_sim_1
               - entity: sensor.iphone_xs_battery_level
                 name: Battery
