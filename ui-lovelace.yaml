@@ -9,10 +9,10 @@ header_cards:
           font-size: .8em;
         }
     - type: custom:browser-control-card
-      hide_fullscreen: false
+      hide_fullscreen: true
       hide_screenlock: true
       hide_zoom: true
-      hide_refresh: false
+      hide_refresh: true
       no_padding: true
       small_buttons: true
       style: |
@@ -752,38 +752,30 @@ views:
             type: weather-forecast
             entity: weather.home_hourly
             name: ' '
-          - type: entities
-            entities:
-              - type: conditional
-                conditions:
-                  - entity: sensor.fritzbox_callmonitor_phonebook
-                    state_not: Free
-                row:
-                  entity: sensor.fritzbox_callmonitor_phonebook
+          - type: conditional
+            conditions:
+              - entity: sensor.fritzbox_callmonitor_phonebook
+                state_not: Free
+            card:
+              type: entities
+              entities:
+                - entity: sensor.fritzbox_callmonitor_phonebook
                   name: Phone
-              - entity: sensor.sm_g960f_active_notification_count
-                name: Notifications
-                type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.sm_g960f_last_notification ]]'
-            card_mod:
-              style: |
-                .card-header {
-                  padding: 0 16px;
-                }
           - type: entities
             entities:
               - type: buttons
                 entities:
-                  - entity: binary_sensor.sm_g960f_bluetooth_state
-                  - entity: binary_sensor.sm_g960f_wifi_state
-                  - entity: sensor.sm_g960f_ringer_mode
-                  - entity: binary_sensor.sm_g960f_mobile_data
-              - entity: sensor.sm_g960f_battery_level
-                name: Battery Level
-              - entity: sensor.sm_g960f_geocoded_location
-                name: Location
-              - entity: sensor.sm_g960f_internal_storage
+                  - entity: sensor.iphone_connection_type
+                  - entity: binary_sensor.iphone_focus
+                  - entity: sensor.iphone_activity
+                  - entity: sensor.iphone_xs_sim_1
+              - entity: sensor.iphone_xs_battery_level
+                name: Battery
+              - entity: sensor.iphone_xs_storage
                 name: Internal Storage
+              - entity: sensor.iphone_xs_geocoded_location
+                name: Location
+            state_color: true
           - type: entities
             entities:
               - type: buttons
@@ -793,15 +785,16 @@ views:
                   - entity: sensor.sm_t220_audio_mode
                   - entity: binary_sensor.sm_t220_interactive
               - entity: sensor.sm_t220_battery_level
-                name: Battery Level
+                name: Battery
               - entity: sensor.sm_t220_battery_temperature
                 name: Temperature
-              - entity: sensor.sm_t220_geocoded_location
-                name: Location
               - entity: sensor.sm_t220_internal_storage
                 name: Internal Storage
               - entity: sensor.sm_t220_external_storage
                 name: External Storage
+              - entity: sensor.sm_t220_geocoded_location
+                name: Location
+            state_color: true
       - type: entities
         entities:
           - entity: climate.livingroom_thermostat
@@ -974,9 +967,6 @@ views:
           type: graph
           entity: sensor.corridor_rock_power_consumption
           detail: 2
-        header:
-          type: graph
-          entity: sensor.corridor_pushbutton_temperature
         card_mod:
           style: |
             ha-card {

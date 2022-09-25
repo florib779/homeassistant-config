@@ -198,7 +198,7 @@
   trigger:
   - platform: state
     entity_id:
-    - device_tracker.galaxy_s9_2
+    - device_tracker.iphone_xs_2
     from: home
     to: not_home
     for:
@@ -249,7 +249,7 @@
   trigger:
   - platform: state
     entity_id:
-    - device_tracker.galaxy_s9_2
+    - device_tracker.iphone_xs_2
     from: not_home
     to: home
   condition: []
