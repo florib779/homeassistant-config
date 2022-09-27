@@ -327,6 +327,8 @@
   - condition: sun
     before: sunset
     before_offset: '-1'
+    after: sunrise
+    after_offset: '1'
   - condition: numeric_state
     entity_id: sensor.livingroom_pushbutton_temperature
     below: '23'
@@ -410,8 +412,6 @@
     entity_id: sensor.livingroom_tv_power_consumption
     below: '20'
   action:
-  - service: script.livingroom_shutter_favorite
-    data: {}
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
     entity_id: cover.livingroom_shutter_small

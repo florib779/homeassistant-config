@@ -57,6 +57,25 @@ sensor:
       - 'date_time'
       - 'time_date'
 
+switch:
+  - platform: flux # https://www.home-assistant.io/integrations/flux/
+    lights:
+      - light.bedroom_light
+      - light.kitchen_mood_light
+      - light.livingroom_floodlight
+      - light.livingroom_tv_light
+    name: Fluxer
+    start_time: "7:00"
+    stop_time: "1:00"
+    #start_colortemp: 4000
+    #sunset_colortemp: 3000
+    #stop_colortemp: 1900
+    #brightness: 200
+    #disable_brightness_adjust: true
+    #mode: xy
+    #transition: 30
+    #interval: 60
+
 template:
   - binary_sensor:
       - name: "Basement Washer on"

@@ -25,6 +25,6 @@ office_shutter_favorite:
     domain: cover
     entity_id: cover.office_shutter
     type: set_position
-    position: 50
+    position: 48
   mode: single
   icon: mdi:window-shutter-alert
