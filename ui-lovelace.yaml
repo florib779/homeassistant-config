@@ -1,13 +1,5 @@
 header_cards:
   cards:
-    - type: markdown
-      content: |
-        {{ states("sensor.time_date") }}
-      style: |
-        ha-card {
-          background: rgba(0,0,0,0);
-          font-size: .8em;
-        }
     - type: custom:browser-control-card
       hide_fullscreen: true
       hide_screenlock: true
@@ -663,6 +655,7 @@ views:
                   ha-card {
                     background: rgba(255, 255, 255, 0.3);
                   }
+          - type: energy-distribution
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -736,22 +729,6 @@ views:
               type: entities
               state_color: true
               show_header_toggle: true
-          - type: entities
-            entities:
-              - entity: weather.openweathermap
-                name: Temperature
-              - entity: sensor.openweathermap_forecast_precipitation
-                name: Precipitation
-                icon: mdi:weather-rainy
-                type: custom:secondaryinfo-entity-row
-                secondary_info: >-
-                  [[ sensor.openweathermap_forecast_precipitation_probability ]]
-                  %
-          - show_current: false
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.home_hourly
-            name: ' '
           - type: conditional
             conditions:
               - entity: sensor.fritzbox_callmonitor_phonebook
@@ -763,38 +740,47 @@ views:
                   name: Phone
           - type: entities
             entities:
-              - type: buttons
+              - entity: device_tracker.iphone_xs_2
+                type: custom:multiple-entity-row
+                show_state: false
+                state_color: true
                 entities:
+                  - entity: sensor.iphone_xs_battery_level
+                    name: Akku
+                  - entity: sensor.sm_t220_internal_storage
+                    name: Int.
                   - entity: sensor.iphone_xs_connection_type
-                  - entity: binary_sensor.iphone_xs_focus
-                  - entity: sensor.iphone_xs_activity
-                  - entity: sensor.iphone_xs_sim_1
-              - entity: sensor.iphone_xs_battery_level
-                name: Battery
-              - entity: sensor.iphone_xs_storage
-                name: Internal Storage
+                    name: Con.
               - entity: sensor.iphone_xs_geocoded_location
                 name: Location
             state_color: true
           - type: entities
             entities:
-              - type: buttons
+              - entity: device_tracker.sm_t220
+                type: custom:multiple-entity-row
+                show_state: false
+                state_color: true
                 entities:
-                  - entity: binary_sensor.sm_t220_bluetooth_state
-                  - entity: binary_sensor.sm_t220_wifi_state
-                  - entity: sensor.sm_t220_audio_mode
+                  - entity: sensor.sm_t220_battery_level
+                    name: Akku
+                  - entity: sensor.sm_t220_battery_temperature
+                    name: Temp.
+                  - entity: sensor.sm_t220_internal_storage
+                    name: Int.
+                  - entity: sensor.sm_t220_external_storage
+                    name: Ext.
                   - entity: binary_sensor.sm_t220_interactive
-              - entity: sensor.sm_t220_battery_level
-                name: Battery
-              - entity: sensor.sm_t220_battery_temperature
-                name: Temperature
-              - entity: sensor.sm_t220_internal_storage
-                name: Internal Storage
-              - entity: sensor.sm_t220_external_storage
-                name: External Storage
+                    name: Disp.
+                  - entity: binary_sensor.sm_t220_music_active
+                    name: Play.
               - entity: sensor.sm_t220_geocoded_location
                 name: Location
             state_color: true
+          - show_current: true
+            show_forecast: true
+            type: weather-forecast
+            entity: weather.home_hourly
+            name: ' '
       - type: entities
         entities:
           - entity: climate.livingroom_thermostat
