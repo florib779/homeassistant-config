@@ -123,6 +123,7 @@ template:
         unique_id: "electricity_price"
         # 2022-06-07
         state: "0.309"
+        unit_of_measurement: "€/kWh"
       - name: "Fritzbox Callmonitor Phonebook"
         unique_id: "fritzbox_callmonitor_phonebook"
         state: >-
