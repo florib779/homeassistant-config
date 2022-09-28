@@ -1,5 +1,6 @@
 template:
   - sensor:
+      # Current Temperature
       - name: "Bathroom Thermostat Current Temperature"
         unique_id: "bathroom_thermostat_current_temperature"
         state: >
@@ -20,3 +21,38 @@ template:
         state: >
           {{ states.climate.office_thermostat.attributes["current_temperature"] | float }}
         unit_of_measurement: "°C"
+  - binary_sensor:
+      # Battery Low
+      - name: "Bathroom Thermostat Battery Low"
+        unique_id: "bathroom_thermostat_battery_low"
+        state: >
+          {{ states.climate.bathroom_thermostat.attributes["battery_low"] | float }}
+      - name: "Bedroom Thermostat Battery Low"
+        unique_id: "bedroom_thermostat_battery_low"
+        state: >
+          {{ states.climate.bedroom_thermostat.attributes["battery_low"] | float }}
+      - name: "Livingroom Thermostat Battery Low"
+        unique_id: "livingroom_thermostat_battery_low"
+        state: >
+          {{ states.climate.livingroom_thermostat.attributes["battery_low"] | float }}
+      - name: "Office Thermostat Battery Low"
+        unique_id: "office_thermostat_battery_low"
+        state: >
+          {{ states.climate.office_thermostat.attributes["battery_low"] | float }}
+      # Window Open
+      - name: "Bathroom Thermostat Window Open"
+        unique_id: "bathroom_thermostat_window_open"
+        state: >
+          {{ states.climate.bathroom_thermostat.attributes["window_open"] | float }}
+      - name: "Bedroom Thermostat Window Open"
+        unique_id: "bedroom_thermostat_window_open"
+        state: >
+          {{ states.climate.bedroom_thermostat.attributes["window_open"] | float }}
+      - name: "Livingroom Thermostat Window Open"
+        unique_id: "livingroom_thermostat_window_open"
+        state: >
+          {{ states.climate.livingroom_thermostat.attributes["window_open"] | float }}
+      - name: "Office Thermostat Window Open"
+        unique_id: "office_thermostat_window_open"
+        state: >
+          {{ states.climate.office_thermostat.attributes["window_open"] | float }}

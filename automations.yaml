@@ -85,21 +85,6 @@
       addon: a0d7b954_ssh
       input: /config/integrations/gitpush/gitpush.sh
   mode: single
-- id: '1650517762669'
-  alias: 'HASS: Low battery level'
-  description: Low battery level detection & notification for all battery sensors
-  use_blueprint:
-    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
-    input:
-      exclude:
-        entity_id: []
-      actions:
-      - service: notify.persistent_notification
-        data:
-          message: Low Battery Level
-          title: Warning
-      time: '18:00:00'
-      threshold: 10
 - id: '1652179746791'
   alias: Office Shutter up
   description: Open the shutter in the office on weekdays after sunrise or at an appropriate

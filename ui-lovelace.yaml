@@ -25,11 +25,75 @@ views:
         cards:
           - type: conditional
             conditions:
+              - entity: media_player.roon_bathroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_bathroom
+              artwork: full-cover-fit
+              hide:
+                controls: true
+                icon: true
+                info: true
+                name: true
+                power: true
+                progress: true
+                volume: true
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bedroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_bedroom
+              artwork: full-cover-fit
+              hide:
+                controls: true
+                icon: true
+                info: true
+                name: true
+                power: true
+                progress: true
+                volume: true
+          - type: conditional
+            conditions:
               - entity: media_player.roon_headphones
                 state: playing
             card:
               type: custom:mini-media-player
               entity: media_player.roon_headphones
+              artwork: full-cover-fit
+              hide:
+                controls: true
+                icon: true
+                info: true
+                name: true
+                power: true
+                progress: true
+                volume: true
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_kitchen
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_kitchen
+              artwork: full-cover-fit
+              hide:
+                controls: true
+                icon: true
+                info: true
+                name: true
+                power: true
+                progress: true
+                volume: true
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_livingroom
+                state: playing
+            card:
+              type: custom:mini-media-player
+              entity: media_player.roon_livingroom
               artwork: full-cover-fit
               hide:
                 controls: true
@@ -696,7 +760,7 @@ views:
                 state_color: true
                 name: Livingroom TV
                 type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.livingroom_tv_power_consumption ]] W'
+                secondary_info: '[[ sensor.livingroom_tv_power_consumption ]] W'
               - entity: light.bedroom_light
                 secondary_info: brightness
               - entity: light.balcony_light
@@ -710,7 +774,7 @@ views:
               - entity: switch.heatingroom_pump
                 name: Pump
                 type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.heatingroom_pump_power_consumption ]] W'
+                secondary_info: '[[ sensor.heatingroom_pump_power_consumption ]] W'
               - entity: vacuum.livingroom_deebot
                 secondary_info: last-changed
                 name: Deebot
@@ -722,16 +786,10 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: /hacs
-              - entity: sensor.kitchen_fridge_power_consumption
-                name: Fridge
-                icon: mdi:fridge
-                state_filter:
-                  - value: 20
-                    operator: '>'
               - entity: switch.kitchen_pc
                 state_color: true
                 type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.kitchen_pc_power_consumption ]] W'
+                secondary_info: '[[ sensor.kitchen_pc_power_consumption ]] W'
               - entity: switch.livingroom_fan
                 state_color: true
                 type: custom:secondaryinfo-entity-row
@@ -740,6 +798,10 @@ views:
                 name: Washer
                 state_color: true
                 secondary_info: last-changed
+              - entity: binary_sensor.bathroom_thermostat_battery_low
+              - entity: binary_sensor.bathroom_thermostat_window_open
+              - entity: binary_sensor.bedroom_thermostat_battery_low
+              - entity: binary_sensor.bedroom_thermostat_window_open
               - entity: binary_sensor.fritz_box_7490_firmware_update
                 name: FRITZ!Box Firmware Update
                 secondary_info: last-changed
@@ -754,14 +816,27 @@ views:
               - entity: binary_sensor.livingroom_balcony_door
                 name: Balcony Door
                 secondary_info: last-changed
-              - entity: binary_sensor.livingroom_nuc_on
-                state_color: true
-                name: Livingroom PC
-                type: custom:secondaryinfo-entity-row
-                secondary_info: 'Power: [[ sensor.livingroom_nuc_power_consumption ]]W'
+              - entity: binary_sensor.livingroom_thermostat_battery_low
+              - entity: binary_sensor.livingroom_thermostat_window_open
               - entity: binary_sensor.makita_akku_charging
                 state_color: true
                 secondary_info: last-changed
+              - entity: binary_sensor.office_thermostat_battery_low
+              - entity: binary_sensor.office_thermostat_window_open
+              - entity: sensor.kitchen_fridge_states
+                name: Fridge
+                type: custom:secondaryinfo-entity-row
+                secondary_info: '[[ sensor.kitchen_fridge_power_consumption ]] W'
+                state_filter:
+                  - value: 'off'
+                    operator: not in
+              - entity: sensor.livingroom_nuc_on
+                state_filter:
+                  - value: 'off'
+                    operator: not in
+                name: Livingroom PC
+                type: custom:secondaryinfo-entity-row
+                secondary_info: '[[ sensor.livingroom_nuc_power_consumption ]] W'
             state_filter:
               - 'on'
             card:
@@ -777,6 +852,7 @@ views:
               entities:
                 - entity: sensor.fritzbox_callmonitor_phonebook
                   name: Phone
+                  secondary_info: last-changed
           - type: entities
             entities:
               - entity: device_tracker.iphone_xs_2
