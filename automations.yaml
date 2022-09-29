@@ -379,7 +379,7 @@
       mac: 34:93:42:22:74:92
   mode: single
 - id: '1658865314989'
-  alias: Livingroom Sun Protection start
+  alias: Livingroom Sun Protection start (test)
   description: Close the shutter when the sun shines into the window and the in-/outside
     temperature is above a certain value, but only if the TV is off.
   trigger:
@@ -389,6 +389,12 @@
     attribute: azimuth
     from: '100'
     to: '320'
+    enabled: false
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 100
+    below: 320
   condition:
   - condition: numeric_state
     entity_id: sensor.livingroom_thermostat_current_temperature
@@ -528,4 +534,27 @@
     device_id: 1e9a16f4d3c307044b1aafaec641833b
     entity_id: switch.heatingroom_pump
     domain: switch
+  mode: single
+- id: '1664445539990'
+  alias: Bedroom Shutter up (new)
+  description: Open the shutter in the bedroom on workdays at the appropriate time.
+  trigger:
+  - platform: time
+    at: 00:07:00
+    enabled: false
+  - platform: sun
+    event: sunrise
+    offset: '+1'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: time
+    after: 00:07:00
+  action:
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 100
   mode: single
