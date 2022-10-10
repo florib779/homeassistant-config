@@ -219,10 +219,6 @@
       - 0d509434e5813a91e01bf0330ab90f17
       - 2963d98a0a5f3f18a618dbb4ff4339b5
       - 48608a926e1e91846fb7ded6dafd2b0c
-  - type: turn_on
-    device_id: 339ed19795f98147dc81c7cdd0e27b34
-    entity_id: switch.deebot
-    domain: switch
   - service: vacuum.turn_on
     data: {}
     target:
@@ -243,6 +239,7 @@
     device_id: 0d509434e5813a91e01bf0330ab90f17
     entity_id: switch.kitchen_cookerhood
     domain: switch
+    enabled: false
   - service: vacuum.return_to_base
     data: {}
     target:
@@ -265,23 +262,6 @@
     data: {}
     target:
       device_id: 5e01f8a267780babcc5de58e7fcc77ac
-  mode: single
-- id: '1654140113306'
-  alias: Bedroom Shutter up
-  description: Open the shutter in the bedroom on workdays at the appropriate time.
-  trigger:
-  - platform: time
-    at: 07:00:00
-  condition:
-  - condition: state
-    entity_id: binary_sensor.workday_sensor
-    state: 'on'
-  action:
-  - device_id: cc7215817ef8193b2df878dad98cb347
-    domain: cover
-    entity_id: cover.bedroom_shutter
-    type: set_position
-    position: 100
   mode: single
 - id: '1654439759794'
   alias: Sonos Livingroom Sub Crossover (fixme)
@@ -348,7 +328,7 @@
   description: ''
   trigger:
   - platform: numeric_state
-    entity_id: sensor.livingroom_nuc_power_consumption
+    entity_id: sensor.livingroom_pc_power_consumption
     for:
       hours: 0
       minutes: 1
@@ -366,7 +346,7 @@
   description: ''
   trigger:
   - platform: numeric_state
-    entity_id: sensor.livingroom_nuc_power_consumption
+    entity_id: sensor.livingroom_pc_power_consumption
     for:
       hours: 0
       minutes: 0
@@ -536,12 +516,9 @@
     domain: switch
   mode: single
 - id: '1664445539990'
-  alias: Bedroom Shutter up (new)
+  alias: Bedroom Shutter up
   description: Open the shutter in the bedroom on workdays at the appropriate time.
   trigger:
-  - platform: time
-    at: 00:07:00
-    enabled: false
   - platform: sun
     event: sunrise
     offset: '+1'
@@ -557,4 +534,23 @@
     entity_id: cover.bedroom_shutter
     type: set_position
     position: 100
+  mode: single
+- id: '1664633447509'
+  alias: Livingroom PC off in standby
+  description: Disconnects the Computer completely from the mains after 5 minutes
+    of standby to save energy.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.livingroom_pc_power_consumption
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    below: 1
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 7e92a60d7e4a20cba0670dd772cf8fa7
+    entity_id: switch.livingroom_pc
+    domain: switch
   mode: single

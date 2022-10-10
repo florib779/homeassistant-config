@@ -12,9 +12,9 @@ switch:
       livingroom_tv_power:
         value_template: "{{ is_state('binary_sensor.livingroom_tv_on', 'on') }}"
         turn_on:
-          service: wake_on_lan.send_magic_packet
-          data:
-            mac: !secret tv_livingroom_mac
+          - service: wake_on_lan.send_magic_packet
+            data:
+              mac: !secret tv_livingroom_mac
         turn_off:
           service: androidtv.adb_command
           target:

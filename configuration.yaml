@@ -62,7 +62,7 @@ template:
         delay_off:
           hours: 2
         state: >
-          {% if states.sensor.basement_washer_power_consumption.state | float > 5 %}
+          {% if states.sensor.basement_washer_power_consumption.state | float > 10 %}
             on
           {% else %}
             off
@@ -124,7 +124,7 @@ template:
         state: >
           {% if states.sensor.kitchen_fridge_power_consumption.state | float > 75 %}
             open
-          {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 60 %}
+          {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 58 %}
             cooling
           {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 1 %}
             open
@@ -143,12 +143,12 @@ template:
           {% else %}
             off
           {% endif %}
-      - name: "Livingroom NUC on"
-        unique_id: "livingroom_nuc_on"
+      - name: "Livingroom PC on"
+        unique_id: "livingroom_pc_on"
         state: >
-          {% if states.sensor.livingroom_nuc_power_consumption.state | float > 2 %}
+          {% if states.sensor.livingroom_pc_power_consumption.state | float > 2 %}
             on
-          {% elif states.sensor.livingroom_nuc_power_consumption.state | float > 0 %}
+          {% elif states.sensor.livingroom_pc_power_consumption.state | float > 0.5 %}
             standby
           {% else %}
             off

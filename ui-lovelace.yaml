@@ -31,14 +31,14 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_bathroom
               artwork: full-cover-fit
+              volume_step: 1
+              volume_stateless: true
               hide:
-                controls: true
                 icon: true
                 info: true
-                name: true
                 power: true
                 progress: true
-                volume: true
+                volume_level: false
           - type: conditional
             conditions:
               - entity: media_player.roon_bedroom
@@ -47,14 +47,14 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_bedroom
               artwork: full-cover-fit
+              volume_step: 1
+              volume_stateless: true
               hide:
-                controls: true
                 icon: true
                 info: true
-                name: true
                 power: true
                 progress: true
-                volume: true
+                volume_level: false
           - type: conditional
             conditions:
               - entity: media_player.roon_headphones
@@ -63,14 +63,14 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_headphones
               artwork: full-cover-fit
+              volume_step: 1
+              volume_stateless: true
               hide:
-                controls: true
                 icon: true
                 info: true
-                name: true
                 power: true
                 progress: true
-                volume: true
+                volume_level: false
           - type: conditional
             conditions:
               - entity: media_player.roon_kitchen
@@ -79,14 +79,14 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_kitchen
               artwork: full-cover-fit
+              volume_step: 1
+              volume_stateless: true
               hide:
-                controls: true
                 icon: true
                 info: true
-                name: true
                 power: true
                 progress: true
-                volume: true
+                volume_level: false
           - type: conditional
             conditions:
               - entity: media_player.roon_livingroom
@@ -95,14 +95,14 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_livingroom
               artwork: full-cover-fit
+              volume_step: 1
+              volume_stateless: true
               hide:
-                controls: true
                 icon: true
                 info: true
-                name: true
                 power: true
                 progress: true
-                volume: true
+                volume_level: false
           - type: conditional
             conditions:
               - entity: media_player.roon_office
@@ -111,646 +111,14 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_office
               artwork: full-cover-fit
+              volume_step: 1
+              volume_stateless: true
               hide:
-                controls: true
                 icon: true
                 info: true
-                name: true
                 power: true
                 progress: true
-                volume: true
-          - type: conditional
-            conditions:
-              - entity: media_player.roon_bathroom
-                state: playing
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.roon_bathroom
-                  shortcuts:
-                    columns: 5
-                    column_height: 1
-                    buttons:
-                      - icon: mdi:bed-king
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bathroom
-                          transfer_id: media_player.roon_bedroom
-                      - icon: mdi:headphones
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bathroom
-                          transfer_id: media_player.roon_headphones
-                      - icon: mdi:stove
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bathroom
-                          transfer_id: media_player.roon_kitchen
-                      - icon: mdi:sofa
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bathroom
-                          transfer_id: media_player.roon_livingroom
-                      - icon: mdi:desk
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bathroom
-                          transfer_id: media_player.roon_office
-                  volume_stateless: true
-                  volume_step: '1'
-                  hide:
-                    power: true
-                    progress: true
-                    volume_level: false
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_bathroom
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  info: short
-                  name: Bathroom
-                  group: true
-                - entity: number.sonos_bathroom_bass
-                  name: Bass
-                - entity: number.sonos_bathroom_treble
-                  name: Treble
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_bathroom_loudness
-                    - entity: switch.sonos_bathroom_touch_controls
-                    - entity: switch.sonos_bathroom_status_light
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(0, 151, 255, 0.5);
-                  }
-          - type: conditional
-            conditions:
-              - entity: sensor.sonos_bedroom_audio_input_format
-                state_not: No input
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.sonos_bedroom
-                  volume_stateless: true
-                  volume_step: '1'
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_bedroom
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  hide:
-                    icon: true
-                    info: true
-                    power: true
-                    progress: true
-                    source: true
-                    volume_level: false
-                  name: Bedroom TV
-                  group: true
-                - entity: sensor.sonos_bedroom_audio_input_format
-                  name: Audio Input Format
-                - entity: number.sonos_bedroom_audio_delay
-                  name: Audio Delay
-                - entity: number.sonos_bedroom_bass
-                  name: Bass
-                - entity: number.sonos_bedroom_treble
-                  name: Treble
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_bedroom_loudness
-                    - entity: switch.sonos_bedroom_speech_enhancement
-                    - entity: switch.sonos_bedroom_night_sound
-                    - entity: switch.sonos_bedroom_touch_controls
-                    - entity: switch.sonos_bedroom_status_light
-              state_color: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(255, 0, 255, 0.1);
-                  }
-          - type: conditional
-            conditions:
-              - entity: media_player.roon_bedroom
-                state: playing
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.roon_bedroom
-                  shortcuts:
-                    columns: 5
-                    column_height: 1
-                    buttons:
-                      - icon: mdi:bathtub
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bedroom
-                          transfer_id: media_player.roon_bathroom
-                      - icon: mdi:headphones
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bedroom
-                          transfer_id: media_player.roon_headphones
-                      - icon: mdi:stove
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bedroom
-                          transfer_id: media_player.roon_kitchen
-                      - icon: mdi:sofa
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bedroom
-                          transfer_id: media_player.roon_livingroom
-                      - icon: mdi:desk
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_bedroom
-                          transfer_id: media_player.roon_office
-                  volume_stateless: true
-                  volume_step: '1'
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_bedroom
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  hide:
-                    power: true
-                    progress: true
-                    source: true
-                    volume_level: false
-                  info: short
-                  name: Bedroom
-                  group: true
-                - entity: number.sonos_bedroom_bass
-                  name: Bass
-                - entity: number.sonos_bedroom_treble
-                  name: Treble
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_bedroom_loudness
-                    - entity: switch.sonos_bedroom_speech_enhancement
-                    - entity: switch.sonos_bedroom_night_sound
-                    - entity: switch.sonos_bedroom_touch_controls
-                    - entity: switch.sonos_bedroom_status_light
-              state_color: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(255, 0, 255, 0.1);
-                  }
-          - type: conditional
-            conditions:
-              - entity: media_player.roon_headphones
-                state: playing
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.roon_headphones
-                  shortcuts:
-                    columns: 5
-                    column_height: 1
-                    buttons:
-                      - icon: mdi:bathtub
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_headphones
-                          transfer_id: media_player.roon_bathroom
-                      - icon: mdi:bed-king
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_headphones
-                          transfer_id: media_player.roon_bedroom
-                      - icon: mdi:stove
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_headphones
-                          transfer_id: media_player.roon_kitchen
-                      - icon: mdi:sofa
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_headphones
-                          transfer_id: media_player.roon_livingroom
-                      - icon: mdi:desk
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_headphones
-                          transfer_id: media_player.roon_office
-                  hide:
-                    power: true
-                    progress: true
-                    state_label: true
-                    volume: true
-                  name: Headphones
-                  group: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(255, 46, 134, 0.5);
-                  }
-          - type: conditional
-            conditions:
-              - entity: media_player.roon_kitchen
-                state: playing
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.roon_kitchen
-                  shortcuts:
-                    columns: 5
-                    column_height: 1
-                    buttons:
-                      - icon: mdi:bathtub
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_kitchen
-                          transfer_id: media_player.roon_bathroom
-                      - icon: mdi:bed-king
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_kitchen
-                          transfer_id: media_player.roon_bedroom
-                      - icon: mdi:headphones
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_kitchen
-                          transfer_id: media_player.roon_headphones
-                      - icon: mdi:sofa
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_kitchen
-                          transfer_id: media_player.roon_livingroom
-                      - icon: mdi:desk
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_kitchen
-                          transfer_id: media_player.roon_office
-                  volume_stateless: true
-                  volume_step: '1'
-                  hide:
-                    power: true
-                    progress: true
-                    volume_level: false
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_kitchen
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  info: short
-                  name: Kitchen
-                  group: true
-                - type: conditional
-                  conditions:
-                    - entity: media_player.roon_kitchen
-                      state: playing
-                  row:
-                    entity: number.sonos_kitchen_bass
-                    name: Bass
-                - type: conditional
-                  conditions:
-                    - entity: media_player.roon_kitchen
-                      state: playing
-                  row:
-                    entity: number.sonos_kitchen_treble
-                    name: Treble
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_kitchen_loudness
-                    - entity: switch.sonos_kitchen_touch_controls
-                    - entity: switch.sonos_kitchen_status_light
-              state_color: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(211, 188, 0, 0.5);
-                  }
-          - type: conditional
-            conditions:
-              - entity: sensor.sonos_livingroom_audio_input_format
-                state_not: No input
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.sonos_livingroom
-                  artwork: none
-                  volume_stateless: true
-                  volume_step: '1'
-                  hide:
-                    icon: true
-                    info: true
-                    power: true
-                    progress: true
-                    source: true
-                    volume_level: false
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_livingroom
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  info: short
-                  group: true
-                  name: Livingroom TV
-                - entity: sensor.sonos_livingroom_audio_input_format
-                  name: Audio Input Format
-                - entity: number.sonos_livingroom_audio_delay
-                  name: Audio Delay
-                - entity: number.sonos_livingroom_bass
-                  name: Bass
-                - entity: number.sonos_livingroom_treble
-                  name: Treble
-                - entity: number.sonos_livingroom_music_surround_level
-                  name: Surround Level
-                - type: conditional
-                  conditions:
-                    - entity: switch.sonos_livingroom_sub_enabled
-                      state: 'on'
-                  row:
-                    entity: number.sonos_livingroom_sub_gain
-                    name: Sub Gain
-                - type: conditional
-                  conditions:
-                    - entity: switch.sonos_livingroom_sub_enabled
-                      state: 'on'
-                  row:
-                    entity: input_number.sonos_livingroom_sub_crossover
-                    name: Sub Crossover
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_livingroom_loudness
-                    - entity: switch.sonos_livingroom_speech_enhancement
-                    - entity: switch.sonos_livingroom_night_sound
-                    - entity: switch.sonos_livingroom_surround_enabled
-                    - entity: switch.sonos_livingroom_sub_enabled
-                    - entity: switch.sonos_livingroom_sub_polarity
-                    - entity: switch.sonos_livingroom_touch_controls
-                    - entity: switch.sonos_livingroom_status_light
-              state_color: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(176, 138, 138, 0.5);
-                  }
-          - type: conditional
-            conditions:
-              - entity: media_player.roon_livingroom
-                state: playing
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.roon_livingroom
-                  group: true
-                  volume_stateless: true
-                  volume_step: '1'
-                  hide:
-                    power: true
-                    progress: true
-                    source: true
-                    volume_level: false
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_livingroom
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  shortcuts:
-                    columns: 5
-                    column_height: 1
-                    buttons:
-                      - icon: mdi:bathtub
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_livingroom
-                          transfer_id: media_player.roon_bathroom
-                      - icon: mdi:bed-king
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_livingroom
-                          transfer_id: media_player.roon_bedroom
-                      - icon: mdi:headphones
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_livingroom
-                          transfer_id: media_player.roon_headphones
-                      - icon: mdi:stove
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_livingroom
-                          transfer_id: media_player.roon_kitchen
-                      - icon: mdi:desk
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_livingroom
-                          transfer_id: media_player.roon_office
-                  info: short
-                  name: Livingroom
-                - entity: number.sonos_livingroom_bass
-                  name: Bass
-                - entity: number.sonos_livingroom_treble
-                  name: Treble
-                - entity: number.sonos_livingroom_music_surround_level
-                  name: Surround Level
-                - type: conditional
-                  conditions:
-                    - entity: switch.sonos_livingroom_sub_enabled
-                      state: 'on'
-                  row:
-                    entity: number.sonos_livingroom_sub_gain
-                    name: Sub Gain
-                - type: conditional
-                  conditions:
-                    - entity: switch.sonos_livingroom_sub_enabled
-                      state: 'on'
-                  row:
-                    entity: input_number.sonos_livingroom_sub_crossover
-                    name: Sub Crossover
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_livingroom_loudness
-                    - entity: switch.sonos_livingroom_surround_enabled
-                    - entity: switch.sonos_livingroom_surround_music_full_volume
-                    - entity: switch.sonos_livingroom_sub_enabled
-                    - entity: switch.sonos_livingroom_sub_polarity
-                    - entity: switch.sonos_livingroom_touch_controls
-                    - entity: switch.sonos_livingroom_status_light
-              state_color: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(176, 138, 138, 0.5);
-                  }type: ''
-          - type: conditional
-            conditions:
-              - entity: media_player.roon_office
-                state: playing
-            card:
-              type: entities
-              entities:
-                - type: custom:mini-media-player
-                  entity: media_player.roon_office
-                  shortcuts:
-                    columns: 5
-                    column_height: 1
-                    buttons:
-                      - icon: mdi:bathtub
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_office
-                          transfer_id: media_player.roon_bathroom
-                      - icon: mdi:bed-king
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_office
-                          transfer_id: media_player.roon_bedroom
-                      - icon: mdi:headphones
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_office
-                          transfer_id: media_player.roon_headphones
-                      - icon: mdi:stove
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_office
-                          transfer_id: media_player.roon_kitchen
-                      - icon: mdi:sofa
-                        type: service
-                        id: roon.transfer
-                        data:
-                          entity_id: media_player.roon_office
-                          transfer_id: media_player.roon_livingroom
-                  volume_stateless: true
-                  volume_step: '1'
-                  hide:
-                    power: true
-                    progress: true
-                    volume_level: false
-                  speaker_group:
-                    platform: sonos
-                    show_group_count: true
-                    group_mgmt_entity: media_player.sonos_office
-                    entities:
-                      - entity_id: media_player.sonos_livingroom
-                        name: Livingroom
-                      - entity_id: media_player.sonos_kitchen
-                        name: Kitchen
-                      - entity_id: media_player.sonos_office
-                        name: Office
-                      - entity_id: media_player.sonos_bedroom
-                        name: Bedroom
-                      - entity_id: media_player.sonos_bathroom
-                        name: Bathroom
-                  info: short
-                  name: Office
-                  group: true
-                - entity: number.sonos_office_bass
-                  name: Bass
-                - entity: number.sonos_office_treble
-                  name: Treble
-                - type: buttons
-                  entities:
-                    - entity: switch.sonos_office_loudness
-                    - entity: switch.sonos_office_touch_controls
-                    - entity: switch.sonos_office_status_light
-                    - entity: binary_sensor.sonos_office_microphone
-              state_color: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: rgba(255, 255, 255, 0.3);
-                  }
+                volume_level: false
           - type: energy-distribution
           - type: entity-filter
             show_empty: false
@@ -830,13 +198,13 @@ views:
                 state_filter:
                   - value: 'off'
                     operator: not in
-              - entity: sensor.livingroom_nuc_on
+              - entity: sensor.livingroom_pc_on
                 state_filter:
                   - value: 'off'
                     operator: not in
                 name: Livingroom PC
                 type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.livingroom_nuc_power_consumption ]] W'
+                secondary_info: '[[ sensor.livingroom_pc_power_consumption ]] W'
             state_filter:
               - 'on'
             card:
@@ -912,7 +280,6 @@ views:
             group: true
             volume_stateless: true
             volume_step: '1'
-            artwork: none
             name: ' '
             speaker_group:
               platform: sonos
@@ -930,16 +297,122 @@ views:
                 - entity_id: media_player.sonos_bathroom
                   name: Bathroom
             hide:
-              icon_state: false
               power: true
               progress: true
               volume_level: false
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bathtub
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_livingroom
+                    transfer_id: media_player.roon_bathroom
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_livingroom
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:headphones
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_livingroom
+                    transfer_id: media_player.roon_headphones
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_livingroom
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_livingroom
+                    transfer_id: media_player.roon_office
             card_mod:
               style: |
                 .entity__info__media {
                   color: var(--primary-text-color) !important;
                   opacity: 1 !important;
                 }
+          - type: buttons
+            entities:
+              - entity: switch.sonos_livingroom_loudness
+              - entity: switch.sonos_livingroom_speech_enhancement
+              - entity: switch.sonos_livingroom_night_sound
+              - entity: switch.sonos_livingroom_surround_enabled
+              - entity: switch.sonos_livingroom_sub_enabled
+              - entity: switch.sonos_livingroom_sub_polarity
+              - entity: switch.sonos_livingroom_touch_controls
+              - entity: switch.sonos_livingroom_status_light
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_livingroom_audio_input_format
+                state_not: No input
+            row:
+              entity: number.sonos_livingroom_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_livingroom_audio_input_format
+                state_not: No input
+            row:
+              entity: number.sonos_livingroom_treble
+              name: Treble
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_livingroom_audio_input_format
+                state_not: No input
+            row:
+              entity: number.sonos_livingroom_audio_delay
+              name: Audio Delay
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_livingroom_audio_input_format
+                state_not: No input
+            row:
+              entity: sensor.sonos_livingroom_audio_input_format
+              name: Audio Input Format
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_livingroom
+                state: playing
+            row:
+              entity: number.sonos_livingroom_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_livingroom
+                state: playing
+            row:
+              entity: number.sonos_livingroom_treble
+              name: Treble
+          - type: conditional
+            conditions:
+              - entity: switch.sonos_livingroom_surround_enabled
+                state: 'on'
+            row:
+              entity: number.sonos_livingroom_surround_level
+              name: Surround Level
+          - type: conditional
+            conditions:
+              - entity: switch.sonos_livingroom_sub_enabled
+                state: 'on'
+            row:
+              entity: number.sonos_livingroom_sub_gain
+              name: Sub Gain
+          - type: conditional
+            conditions:
+              - entity: switch.sonos_livingroom_sub_enabled
+                state: 'on'
+            row:
+              entity: input_number.sonos_livingroom_sub_crossover
+              name: Sub Crossover
           - type: divider
           - type: buttons
             entities:
@@ -978,11 +451,46 @@ views:
           - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_kitchen
-            group: true
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bathtub
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_kitchen
+                    transfer_id: media_player.roon_bathroom
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_kitchen
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:headphones
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_kitchen
+                    transfer_id: media_player.roon_headphones
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_kitchen
+                    transfer_id: media_player.roon_livingroom
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_kitchen
+                    transfer_id: media_player.roon_office
             volume_stateless: true
             volume_step: '1'
-            artwork: none
-            name: ' '
+            hide:
+              power: true
+              progress: true
+              volume_level: false
             speaker_group:
               platform: sonos
               show_group_count: true
@@ -998,11 +506,28 @@ views:
                   name: Bedroom
                 - entity_id: media_player.sonos_bathroom
                   name: Bathroom
-            hide:
-              icon_state: false
-              power: true
-              progress: true
-              volume_level: false
+            info: short
+            name: Kitchen
+            group: true
+          - type: buttons
+            entities:
+              - entity: switch.sonos_kitchen_loudness
+              - entity: switch.sonos_kitchen_touch_controls
+              - entity: switch.sonos_kitchen_status_light
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_kitchen
+                state: playing
+            row:
+              entity: number.sonos_kitchen_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_kitchen
+                state: playing
+            row:
+              entity: number.sonos_kitchen_treble
+              name: Treble
             card_mod:
               style: |
                 .entity__info__media {
@@ -1030,15 +555,47 @@ views:
         entities:
           - type: custom:mini-media-player
             entity: media_player.roon_headphones
-            group: true
-            volume_stateless: true
-            artwork: none
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bathtub
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_bathroom
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_livingroom
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_office
             hide:
-              icon_state: false
-              name: true
               power: true
               progress: true
+              state_label: true
               volume: true
+            name: Headphones
+            group: true
             card_mod:
               style: |
                 .entity__info__media {
@@ -1086,11 +643,42 @@ views:
           - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_bedroom
-            group: true
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bathtub
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bedroom
+                    transfer_id: media_player.roon_bathroom
+                - icon: mdi:headphones
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bedroom
+                    transfer_id: media_player.roon_headphones
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bedroom
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bedroom
+                    transfer_id: media_player.roon_livingroom
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bedroom
+                    transfer_id: media_player.roon_office
             volume_stateless: true
             volume_step: '1'
-            artwork: none
-            name: ' '
             speaker_group:
               platform: sonos
               show_group_count: true
@@ -1107,10 +695,62 @@ views:
                 - entity_id: media_player.sonos_bathroom
                   name: Bathroom
             hide:
-              icon_state: false
               power: true
               progress: true
+              source: true
               volume_level: false
+            info: short
+            name: Bedroom
+            group: true
+          - type: buttons
+            entities:
+              - entity: switch.sonos_bedroom_loudness
+              - entity: switch.sonos_bedroom_speech_enhancement
+              - entity: switch.sonos_bedroom_night_sound
+              - entity: switch.sonos_bedroom_touch_controls
+              - entity: switch.sonos_bedroom_status_light
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_bedroom_audio_input_format
+                state_not: No input
+            row:
+              entity: number.sonos_bedroom_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_bedroom_audio_input_format
+                state_not: No input
+            row:
+              entity: number.sonos_bedroom_treble
+              name: Treble
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_bedroom_audio_input_format
+                state_not: No input
+            row:
+              entity: sensor.sonos_bedroom_audio_input_format
+              name: Audio Input Format
+          - type: conditional
+            conditions:
+              - entity: sensor.sonos_bedroom_audio_input_format
+                state_not: No input
+            row:
+              entity: number.sonos_bedroom_audio_delay
+              name: Audio Delay
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bedroom
+                state: playing
+            row:
+              entity: number.sonos_bedroom_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bedroom
+                state: playing
+            row:
+              entity: number.sonos_bedroom_treble
+              name: Treble
             card_mod:
               style: |
                 .entity__info__media {
@@ -1152,12 +792,46 @@ views:
           - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_office
-            icon_state: true
-            group: true
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bathtub
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_office
+                    transfer_id: media_player.roon_bathroom
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_office
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:headphones
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_office
+                    transfer_id: media_player.roon_headphones
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_office
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_office
+                    transfer_id: media_player.roon_livingroom
             volume_stateless: true
             volume_step: '1'
-            artwork: none
-            name: ' '
+            hide:
+              power: true
+              progress: true
+              volume_level: false
             speaker_group:
               platform: sonos
               show_group_count: true
@@ -1173,11 +847,29 @@ views:
                   name: Bedroom
                 - entity_id: media_player.sonos_bathroom
                   name: Bathroom
-            hide:
-              icon_state: false
-              power: true
-              progress: true
-              volume_level: false
+            info: short
+            name: Office
+            group: true
+          - type: buttons
+            entities:
+              - entity: switch.sonos_office_loudness
+              - entity: switch.sonos_office_touch_controls
+              - entity: switch.sonos_office_status_light
+              - entity: binary_sensor.sonos_office_microphone
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_office
+                state: playing
+            row:
+              entity: number.sonos_office_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_office
+                state: playing
+            row:
+              entity: number.sonos_office_treble
+              name: Treble
             card_mod:
               style: |
                 .entity__info__media {
@@ -1218,11 +910,46 @@ views:
           - type: divider
           - type: custom:mini-media-player
             entity: media_player.roon_bathroom
-            group: true
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bathroom
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:headphones
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bathroom
+                    transfer_id: media_player.roon_headphones
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bathroom
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bathroom
+                    transfer_id: media_player.roon_livingroom
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_bathroom
+                    transfer_id: media_player.roon_office
             volume_stateless: true
             volume_step: '1'
-            artwork: none
-            name: ' '
+            hide:
+              power: true
+              progress: true
+              volume_level: false
             speaker_group:
               platform: sonos
               show_group_count: true
@@ -1238,11 +965,28 @@ views:
                   name: Bedroom
                 - entity_id: media_player.sonos_bathroom
                   name: Bathroom
-            hide:
-              icon_state: false
-              power: true
-              progress: true
-              volume_level: false
+            info: short
+            name: Bathroom
+            group: true
+          - type: buttons
+            entities:
+              - entity: switch.sonos_bathroom_loudness
+              - entity: switch.sonos_bathroom_touch_controls
+              - entity: switch.sonos_bathroom_status_light
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bathroom
+                state: playing
+            row:
+              entity: number.sonos_bathroom_bass
+              name: Bass
+          - type: conditional
+            conditions:
+              - entity: media_player.roon_bathroom
+                state: playing
+            row:
+              entity: number.sonos_bathroom_treble
+              name: Treble
             card_mod:
               style: |
                 .entity__info__media {
@@ -1501,3 +1245,13 @@ views:
         url: http://192.168.178.62:1400/support/review
         title: Sonos
         aspect_ratio: 80%
+  - theme: Backend-selected
+    title: Roon Web Display
+    path: roon-web-display
+    icon: mdi:monitor
+    type: panel
+    badges: []
+    cards:
+      - type: iframe
+        url: http://rock:9330/display/
+        aspect_ratio: '16:9'
