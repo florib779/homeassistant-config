@@ -390,7 +390,7 @@
     position: 0
   mode: single
 - id: '1658865634343'
-  alias: Livingroom Sun Protection stop
+  alias: Livingroom Sun Protection stop (fixme)
   description: Close the shutter when the sun shines into the window and the in-/outside
     temperature is above a certain value, but only if the TV is off.
   trigger:

@@ -63,14 +63,12 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_headphones
               artwork: full-cover-fit
-              volume_step: 1
-              volume_stateless: true
               hide:
                 icon: true
                 info: true
                 power: true
                 progress: true
-                volume_level: false
+                volume: true
           - type: conditional
             conditions:
               - entity: media_player.roon_kitchen
@@ -119,7 +117,6 @@ views:
                 power: true
                 progress: true
                 volume_level: false
-          - type: energy-distribution
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -398,7 +395,14 @@ views:
                 state: 'on'
             row:
               entity: number.sonos_livingroom_surround_level
-              name: Surround Level
+              name: TV Surround Level
+          - type: conditional
+            conditions:
+              - entity: switch.sonos_livingroom_surround_enabled
+                state: 'on'
+            row:
+              entity: number.sonos_livingroom_music_surround_level
+              name: Music Surround Level
           - type: conditional
             conditions:
               - entity: switch.sonos_livingroom_sub_enabled
@@ -592,7 +596,6 @@ views:
             hide:
               power: true
               progress: true
-              state_label: true
               volume: true
             name: Headphones
             group: true
@@ -1004,6 +1007,29 @@ views:
             ha-card {
               background: rgba(0, 151, 255, 0.5);
             }
+      - square: false
+        columns: 2
+        type: grid
+        cards:
+          - type: gauge
+            entity: sensor.bathroom_pushbutton_humidity
+            needle: true
+            min: 1
+            max: 100
+            name: Humidity
+            segments:
+              - from: 0
+                color: '#db4437'
+                label: too low
+              - from: 40
+                color: green
+                label: normal
+              - from: 60
+                color: blue
+                label: warning
+          - type: thermostat
+            entity: climate.bathroom_thermostat
+            name: ' '
   - theme: Backend-selected
     title: Camera
     path: camera
