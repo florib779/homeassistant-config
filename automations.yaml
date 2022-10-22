@@ -15,7 +15,7 @@
     position: 0
   mode: single
 - id: '1641237098329'
-  alias: All Shutter down
+  alias: All Shutter down on sunset
   description: ''
   trigger:
   - platform: sun
@@ -535,22 +535,27 @@
     type: set_position
     position: 100
   mode: single
-- id: '1664633447509'
-  alias: Livingroom PC off in standby
-  description: Disconnects the Computer completely from the mains after 5 minutes
-    of standby to save energy.
+- id: '1666111589480'
+  alias: All shutter completely down
+  description: ''
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.livingroom_pc_power_consumption
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-    below: 1
+  - platform: time
+    at: '23:00:00'
   condition: []
   action:
-  - type: turn_off
-    device_id: 7e92a60d7e4a20cba0670dd772cf8fa7
-    entity_id: switch.livingroom_pc
-    domain: switch
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 0
+  - device_id: 45e23a0ca00f6a2438f7ab1782d7f260
+    domain: cover
+    entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 0
+  - device_id: 45493951566974c8f1c11c836ba797b8
+    domain: cover
+    entity_id: cover.office_shutter
+    type: set_position
+    position: 0
   mode: single

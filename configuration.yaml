@@ -63,33 +63,33 @@ template:
           hours: 2
         state: >
           {% if states.sensor.basement_washer_power_consumption.state | float > 10 %}
-            on
+            On
           {% else %}
-            off
+            Off
           {% endif %}
       - name: "Kitchen Cookerhood on"
         unique_id: "kitchen_cookerhood_on"
         state: >
           {% if states.sensor.kitchen_cookerhood_power_consumption.state | float > 1 %}
-            on
+            On
           {% else %}
-            off
+            Off
           {% endif %}
       - name: "Kitchen Dishwasher on"
         unique_id: "kitchen_dishwasher_on"
         state: >
           {% if states.sensor.kitchen_dishwasher_power_consumption.state | float > 2 %}
-            on
+            On
           {% else %}
-            off
+            Off
           {% endif %}
       - name: "Makita Akku charging"
         unique_id: "makita_akku_charging"
         state:  >
           {% if states.sensor.storeroom_switch_power_consumption.state | float > 1 %}
-            on
+            On
           {% else %}
-            off
+            Off
           {% endif %}
   - sensor:
       - name: "Electricity Price"
@@ -123,33 +123,33 @@ template:
         unique_id: "kitchen_fridge_states"
         state: >
           {% if states.sensor.kitchen_fridge_power_consumption.state | float > 75 %}
-            open
+            Open
           {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 58 %}
-            cooling
+            Cooling
           {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 1 %}
-            open
+            Open
           {% else %}
-            off
+            Off
           {% endif %}
       - name: "Livingroom Fan Stages"
         unique_id: "livingroom_fan_stages"
         state: >
           {% if states.sensor.livingroom_fan_power_consumption.state | float > 37 %}
-            stage 3
+            Stage 3
           {% elif states.sensor.livingroom_fan_power_consumption.state | float > 33 %}
-            stage 2
+            Stage 2
           {% elif states.sensor.livingroom_fan_power_consumption.state | float > 1 %}
-            stage 1
+            Stage 1
           {% else %}
-            off
+            Off
           {% endif %}
       - name: "Livingroom PC on"
         unique_id: "livingroom_pc_on"
         state: >
           {% if states.sensor.livingroom_pc_power_consumption.state | float > 2 %}
-            on
+            On
           {% elif states.sensor.livingroom_pc_power_consumption.state | float > 0.5 %}
-            standby
+            Standby
           {% else %}
-            off
+            Off
           {% endif %}
