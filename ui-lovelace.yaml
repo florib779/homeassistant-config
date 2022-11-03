@@ -15,8 +15,7 @@ header_cards:
         }
 title: Home
 views:
-  - theme: Google Dark Theme
-    title: Home
+  - title: Home
     path: home
     icon: mdi:home
     badges: []
@@ -117,15 +116,6 @@ views:
                 power: true
                 progress: true
                 volume_level: false
-          - type: conditional
-            conditions:
-              - entity: sensor.lastfm
-                state_not: Not Scrobbling
-            card:
-              type: logbook
-              entities:
-                - sensor.lastfm
-              hours_to_show: 12
           - type: entity-filter
             show_empty: false
             state_color: true
@@ -160,6 +150,10 @@ views:
                 tap_action:
                   action: navigate
                   navigation_path: /hacs
+              - entity: switch.kitchen_cookerhood
+                state_color: true
+                type: custom:secondaryinfo-entity-row
+                secondary_info: '[[ sensor.kitchen_cookerhood_power_consumption ]] W'
               - entity: switch.kitchen_pc
                 state_color: true
                 type: custom:secondaryinfo-entity-row
@@ -178,11 +172,6 @@ views:
               - entity: binary_sensor.fritz_box_7490_firmware_update
                 name: FRITZ!Box Firmware Update
                 secondary_info: last-changed
-              - entity: binary_sensor.kitchen_cookerhood_on
-                name: Kitchen Cookerhood
-                state_color: true
-                type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.kitchen_cookerhood_power_consumption ]] W'
               - entity: binary_sensor.kitchen_dishwasher_on
                 state_color: true
                 secondary_info: last-changed
@@ -225,49 +214,129 @@ views:
               entities:
                 - sensor.fritzbox_callmonitor
               hours_to_show: 72
-          - type: entities
-            entities:
-              - entity: device_tracker.iphone_xs_2
-                type: custom:multiple-entity-row
+          - square: false
+            columns: 3
+            type: grid
+            cards:
+              - type: gauge
+                entity: sensor.iphone_xs_battery_level
+                severity:
+                  green: 50
+                  yellow: 10
+                  red: 0
+                name: Battery
+                needle: true
+              - type: gauge
+                entity: sensor.iphone_xs_storage
+                severity:
+                  green: 30
+                  yellow: 10
+                  red: 0
+                name: Internal
+                needle: true
+              - show_name: false
+                show_icon: true
                 show_state: false
-                state_color: true
+                type: glance
                 entities:
-                  - entity: sensor.iphone_xs_battery_level
-                    name: Akku
-                  - entity: sensor.sm_t220_internal_storage
-                    name: Int.
+                  - entity: device_tracker.iphone_xs_2
                   - entity: sensor.iphone_xs_connection_type
-                    name: Con.
-              - entity: sensor.iphone_xs_geocoded_location
-                name: Location
-            state_color: true
-          - type: entities
-            entities:
-              - entity: device_tracker.sm_t220
-                type: custom:multiple-entity-row
-                show_state: false
                 state_color: true
+          - square: false
+            columns: 3
+            type: grid
+            cards:
+              - type: gauge
+                entity: sensor.sm_g960f_battery_level
+                severity:
+                  green: 50
+                  yellow: 10
+                  red: 0
+                name: Battery
+                needle: true
+              - type: gauge
+                entity: sensor.sm_g960f_internal_storage
+                name: Internal
+                severity:
+                  green: 30
+                  yellow: 10
+                  red: 0
+                needle: true
+              - type: gauge
+                entity: sensor.sm_t220_external_storage
+                name: External
+                severity:
+                  green: 30
+                  yellow: 10
+                  red: 0
+                needle: true
+              - type: gauge
+                entity: sensor.sm_t220_battery_temperature
+                name: Temp.
+                needle: true
+                max: 70
+                segments:
+                  - from: -10
+                    color: var(--info-color)
+                  - from: 15
+                    color: var(--success-color)
+                  - from: 50
+                    color: var(--error-color)
+              - show_name: false
+                show_icon: true
+                show_state: false
+                type: glance
                 entities:
-                  - entity: sensor.sm_t220_battery_level
-                    name: Akku
-                  - entity: sensor.sm_t220_battery_temperature
-                    name: Temp.
-                  - entity: sensor.sm_t220_internal_storage
-                    name: Int.
-                  - entity: sensor.sm_t220_external_storage
-                    name: Ext.
                   - entity: binary_sensor.sm_t220_interactive
-                    name: Disp.
                   - entity: binary_sensor.sm_t220_music_active
-                    name: Play.
-              - entity: sensor.sm_t220_geocoded_location
-                name: Location
-            state_color: true
-          - show_current: true
-            show_forecast: true
-            type: weather-forecast
-            entity: weather.home_hourly
-            name: ' '
+                state_color: true
+              - show_name: false
+                show_icon: true
+                show_state: false
+                type: glance
+                entities:
+                  - entity: binary_sensor.sm_t220_bluetooth_state
+                  - entity: binary_sensor.sm_t220_wifi_state
+          - square: false
+            columns: 4
+            type: grid
+            cards:
+              - type: gauge
+                entity: sensor.iphone_xs_distance
+                max: 5000
+                severity:
+                  green: 4000
+                  yellow: 2000
+                  red: 0
+                name: ' '
+                needle: true
+              - type: gauge
+                entity: sensor.iphone_xs_steps
+                name: ' '
+                max: 8000
+                needle: true
+                severity:
+                  green: 6500
+                  yellow: 4000
+                  red: 0
+              - type: gauge
+                entity: sensor.iphone_xs_floors_ascended
+                max: 20
+                severity:
+                  green: 10
+                  yellow: 5
+                  red: 0
+                name: ' '
+                needle: true
+              - type: gauge
+                entity: sensor.iphone_xs_floors_descended
+                needle: true
+                max: 20
+                severity:
+                  green: 10
+                  yellow: 5
+                  red: 0
+                name: ' '
       - type: entities
         entities:
           - type: custom:mini-media-player
@@ -415,9 +484,10 @@ views:
               - entity: switch.livingroom_tv_power
               - entity: light.livingroom_tv_light
               - entity: light.livingroom_floodlight
-              - entity: fan.livingroom_fan
+              - entity: switch.livingroom_fan
               - entity: light.balcony_light
               - entity: vacuum.livingroom_deebot
+              - entity: binary_sensor.livingroom_balcony_door
           - entity: cover.livingroom_shutter_small
             secondary_info: position
             name: Shutter
@@ -427,52 +497,16 @@ views:
             hold_action:
               action: more-info
           - type: divider
+          - entity: sensor.openweathermap_temperature
+            name: Outside
           - entity: climate.livingroom_thermostat
-            type: custom:mini-climate
-            name: ' '
-            hvac_mode:
-              hide: true
-            icon: mdi:thermostat
-            group: true
-            secondary_info: hvac-mode
-            swap_temperatures: true
-            temperature:
-              round: 0
-            toggle:
-              hide: true
-            indicators:
-              pushbutton_humidity:
-                icon:
-                  template: () => 'mdi:water'
-                  style: |
-                    (value) => (value > 60 ? { color: 'blue'} : {}) 
-                unit: '%'
-                round: 1
-                source:
-                  entity: sensor.livingroom_pushbutton_humidity
-              thermostat_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.livingroom_thermostat_battery
-              pushbutton_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.livingroom_pushbutton_battery
-              balcony_door:
-                source:
-                  values:
-                    'on': Open
-                    'off': Closed
-                  mapper: value => this.source.values[value]
-                  entity: binary_sensor.livingroom_balcony_door
+            name: Temperature
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.livingroom_thermostat_battery ]] %'
+          - entity: sensor.livingroom_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.livingroom_pushbutton_battery ]] %'
         state_color: true
         card_mod:
           style: |
@@ -560,12 +594,6 @@ views:
             row:
               entity: number.sonos_kitchen_treble
               name: Treble
-            card_mod:
-              style: |
-                .entity__info__media {
-                  color: var(--primary-text-color) !important;
-                  opacity: 1 !important;
-                }
           - type: divider
           - type: buttons
             entities:
@@ -575,44 +603,12 @@ views:
               - entity: switch.kitchen_pc
               - entity: camera.kitchen
           - type: divider
-          - entity: climate.bathroom_thermostat
-            type: custom:mini-climate
-            name: ' '
-            hide_current_temperature: true
-            hvac_mode:
-              hide: true
-            icon: mdi:thermostat
-            group: true
-            swap_temperatures: true
-            target_temperature:
-              source:
-                entity: sensor.kitchen_pushbutton_temperature
-              round: 0
-              icons:
-                up: ' '
-                down: ' '
-            secondary_info:
-              hide: true
-            toggle:
-              hide: true
-            indicators:
-              pushbutton_humidity:
-                icon:
-                  template: () => 'mdi:water'
-                  style: |
-                    (value) => (value > 60 ? { color: 'blue'} : {}) 
-                unit: '%'
-                round: 1
-                source:
-                  entity: sensor.kitchen_pushbutton_humidity
-              pushbutton_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.kitchen_pushbutton_battery
+          - entity: sensor.kitchen_pushbutton_temperature
+            name: Temperature
+          - entity: sensor.kitchen_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.kitchen_pushbutton_battery ]] %'
         state_color: true
         card_mod:
           style: |
@@ -701,12 +697,6 @@ views:
             row:
               entity: number.sonos_office_treble
               name: Treble
-            card_mod:
-              style: |
-                .entity__info__media {
-                  color: var(--primary-text-color) !important;
-                  opacity: 1 !important;
-                }
           - type: divider
           - type: buttons
             entities:
@@ -721,121 +711,18 @@ views:
               action: more-info
           - type: divider
           - entity: climate.office_thermostat
-            type: custom:mini-climate
-            name: ' '
-            hvac_mode:
-              hide: true
-            icon: mdi:thermostat
-            group: true
-            secondary_info: hvac-mode
-            swap_temperatures: true
-            temperature:
-              round: 0
-            toggle:
-              hide: true
-            indicators:
-              pushbutton_humidity:
-                icon:
-                  template: () => 'mdi:water'
-                  style: |
-                    (value) => (value > 60 ? { color: 'blue'} : {}) 
-                unit: '%'
-                round: 1
-                source:
-                  entity: sensor.office_pushbutton_humidity
-              thermostat_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.office_thermostat_battery
-              pushbutton_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.office_pushbutton_battery
+            name: Temperature
+            type: custom:secondaryinfo-entity-row
+            secondary_info: '[[ sensor.office_thermostat_battery ]] %'
+          - entity: sensor.office_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: '[[ sensor.office_pushbutton_battery ]] %'
         state_color: true
         card_mod:
           style: |
             ha-card {
               background: rgba(255, 255, 255, 0.3);
-            }
-      - type: entities
-        entities:
-          - type: custom:mini-media-player
-            entity: media_player.roon_headphones
-            shortcuts:
-              columns: 5
-              column_height: 1
-              buttons:
-                - icon: mdi:bathtub
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_bathroom
-                - icon: mdi:bed-king
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_bedroom
-                - icon: mdi:stove
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_kitchen
-                - icon: mdi:sofa
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_livingroom
-                - icon: mdi:desk
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_office
-            hide:
-              power: true
-              progress: true
-              volume: true
-            name: Headphones
-            group: true
-          - type: divider
-          - entity: sensor.fritz_box_7490_download_throughput
-            name: Download
-            type: custom:secondaryinfo-entity-row
-            secondary_info: >-
-              [[ sensor.fritz_box_7490_max_connection_download_throughput ]]
-              kB/s
-          - entity: sensor.fritz_box_7490_upload_throughput
-            name: Upload
-            type: custom:secondaryinfo-entity-row
-            secondary_info: '[[ sensor.fritz_box_7490_max_connection_upload_throughput ]] kB/s'
-          - entity: button.fritz_box_7490_reconnect
-            name: FB-Reconnect
-          - entity: sensor.corridor_rock_power_consumption
-            name: Server
-            icon: mdi:server
-            type: custom:secondaryinfo-entity-row
-            secondary_info: '[[ sensor.corridor_rock_temperature ]] °C'
-        state_color: true
-        footer:
-          type: graph
-          entity: sensor.corridor_rock_power_consumption
-          detail: 2
-        card_mod:
-          style: |
-            ha-card {
-              background: rgba(255, 46, 134, 0.5);
             }
       - type: entities
         entities:
@@ -949,16 +836,11 @@ views:
             row:
               entity: number.sonos_bedroom_treble
               name: Treble
-            card_mod:
-              style: |
-                .entity__info__media {
-                  color: var(--primary-text-color) !important;
-                  opacity: 1 !important;
-                }
           - type: divider
           - type: buttons
             entities:
               - entity: light.bedroom_light
+              - entity: device_tracker.bedroom_echo
               - entity: camera.bedroom
           - entity: cover.bedroom_shutter
             secondary_info: position
@@ -970,49 +852,88 @@ views:
               action: more-info
           - type: divider
           - entity: climate.bedroom_thermostat
-            type: custom:mini-climate
-            name: ' '
-            hvac_mode:
-              hide: true
-            icon: mdi:thermostat
-            group: true
-            secondary_info: hvac-mode
-            swap_temperatures: true
-            temperature:
-              round: 0
-            toggle:
-              hide: true
-            indicators:
-              pushbutton_humidity:
-                icon:
-                  template: () => 'mdi:water'
-                  style: |
-                    (value) => (value > 60 ? { color: 'blue'} : {}) 
-                unit: '%'
-                round: 1
-                source:
-                  entity: sensor.bedroom_pushbutton_humidity
-              thermostat_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.bedroom_thermostat_battery
-              pushbutton_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.bedroom_pushbutton_battery
+            name: Temperature
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.bedroom_thermostat_battery ]] %'
+          - entity: sensor.bedroom_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.bedroom_pushbutton_battery ]] %'
         state_color: true
         card_mod:
           style: |
             ha-card {
               background: rgba(255, 0, 255, 0.1);
+            }
+      - type: entities
+        entities:
+          - type: custom:mini-media-player
+            entity: media_player.roon_headphones
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bathtub
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_bathroom
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_livingroom
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_office
+            hide:
+              power: true
+              progress: true
+              volume: true
+            name: Headphones
+            group: true
+          - type: divider
+          - entity: sensor.fritz_box_7490_download_throughput
+            name: Download
+            type: custom:secondaryinfo-entity-row
+            secondary_info: >-
+              [[ sensor.fritz_box_7490_max_connection_download_throughput ]]
+              kB/s
+          - entity: sensor.fritz_box_7490_upload_throughput
+            name: Upload
+            type: custom:secondaryinfo-entity-row
+            secondary_info: '[[ sensor.fritz_box_7490_max_connection_upload_throughput ]] kB/s'
+          - entity: sensor.corridor_rock_power_consumption
+            name: Server
+            icon: mdi:server
+            type: custom:secondaryinfo-entity-row
+            secondary_info: '[[ sensor.corridor_rock_temperature ]] °C'
+        state_color: true
+        footer:
+          type: graph
+          entity: sensor.corridor_rock_power_consumption
+          detail: 2
+        card_mod:
+          style: |
+            ha-card {
+              background: rgba(255, 46, 134, 0.5);
             }
       - type: entities
         entities:
@@ -1095,90 +1016,20 @@ views:
             row:
               entity: number.sonos_bathroom_treble
               name: Treble
-            card_mod:
-              style: |
-                .entity__info__media {
-                  color: var(--primary-text-color) !important;
-                  opacity: 1 !important;
-                }
           - type: divider
           - entity: climate.bathroom_thermostat
-            type: custom:mini-climate
-            name: ' '
-            hvac_mode:
-              hide: true
-            icon: mdi:thermostat
-            group: true
-            secondary_info: hvac-mode
-            swap_temperatures: true
-            temperature:
-              round: 0
-            toggle:
-              hide: true
-            indicators:
-              pushbutton_humidity:
-                icon:
-                  template: () => 'mdi:water'
-                  style: |
-                    (value) => (value > 60 ? { color: 'blue'} : {}) 
-                unit: '%'
-                round: 1
-                source:
-                  entity: sensor.bathroom_pushbutton_humidity
-              thermostat_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.bathroom_thermostat_battery
-              pushbutton_battery:
-                icon:
-                  template: () => 'mdi:battery'
-                  style: |
-                    (value) => (value < 10 ? { color: 'red'} : {})
-                unit: '%'
-                source:
-                  entity: sensor.bathroom_pushbutton_battery
+            name: Temperature
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.bathroom_thermostat_battery ]] %'
+          - entity: sensor.bathroom_pushbutton_humidity
+            name: Humidity
+            type: custom:secondaryinfo-entity-row
+            secondary_info: 'Battery: [[ sensor.bathroom_pushbutton_battery ]] %'
         card_mod:
           style: |
             ha-card {
               background: rgba(0, 151, 255, 0.5);
             }
-      - type: vertical-stack
-        cards:
-          - square: false
-            columns: 2
-            type: grid
-            cards:
-              - type: entity
-                entity: vacuum.livingroom_deebot
-                attribute: status
-                name: ' Status'
-              - type: entity
-                entity: vacuum.livingroom_deebot
-                attribute: fan_speed
-                name: Fan Speed
-          - square: false
-            columns: 3
-            type: grid
-            cards:
-              - type: entity
-                entity: vacuum.livingroom_deebot
-                attribute: battery_level
-                unit: '%'
-                name: Akku
-              - type: entity
-                entity: vacuum.livingroom_deebot
-                attribute: component_side_brush
-                unit: '%'
-                name: Side Brush
-              - type: entity
-                entity: vacuum.livingroom_deebot
-                attribute: component_filter
-                unit: '%'
-                name: Filter
   - theme: Backend-selected
     title: Camera
     path: camera
@@ -1355,10 +1206,6 @@ views:
             name: HIGHRESAUDIO
             url: https://www.highresaudio.com/de
           - type: weblink
-            name: TIDAL Store
-            url: https://store.tidal.com/
-            icon: si:tidal
-          - type: weblink
             name: HDtracks
             url: https://www.hdtracks.com/
         title: Download
@@ -1430,3 +1277,396 @@ views:
       - type: iframe
         url: http://rock:9330/display/
         aspect_ratio: '16:9'
+  - theme: Backend-selected
+    title: Alexa Commands
+    path: alexa-commands
+    icon: si:amazonalexa
+    subview: false
+    badges: []
+    cards:
+      - type: markdown
+        content: >-
+          Alexa...
+
+
+          ## Smart Home
+
+
+          * [x] [Raum] Fenster auf/zu
+
+          * [x] [Raum] Licht an/aus / [Wert]% / [Farbe]
+
+          * [x] Schalte [Gerät] in [Zeit] an/aus
+
+
+          ### Küche
+
+          * [x] Küche Abzug an/aus
+
+          * [x] Küche PC an/aus
+
+
+          ### Wohnzimmer
+
+          * [ ] Deebot
+
+          * [x] Wohnzimmer Ventilator an/aus
+
+          * [x] Wohnzimmer TV an/aus
+
+          * [ ] Wohnzimmer TV Licht
+
+
+          ## Musik
+
+          * [x] [Raum] Musik an/aus
+
+          * [x] Verringere/Erhöhe Lautstärke von [Raum] Sonos
+
+
+          ## Allgemein
+
+          * [x] Benachrichtigun aus (bspw. Paketankündingen - gelber Leuchtring)
+
+
+          ## Skills
+
+
+          ### Einschlafgeräusche
+
+          * [ ] Starte Einschlafgeräusche
+
+
+          ### Songtext
+
+          * [ ] Frage Songtext für [Lied]
+
+
+          ### Sprachbox
+
+          Abfrage der Sprachbox eines IP-Festnetzanschlusses der Deutschen
+          Telekom.
+
+          * [ ] Öffne Sprachbox
+
+
+          ### Taschenlampe
+
+          Schaltet Alexas blaues Licht für fünf Minuten ein. Das Licht ist blau
+          und pulsiert.
+
+          * [x] Starte Taschenlampe
+
+
+          ## Links
+
+          * https://alexa.amazon.de
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_kitchen
+                shortcuts:
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_bathroom
+                    - icon: mdi:bed-king
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_bedroom
+                    - icon: mdi:headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_headphones
+                    - icon: mdi:sofa
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_livingroom
+                    - icon: mdi:desk
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_kitchen
+                        transfer_id: media_player.roon_office
+                volume_stateless: true
+                volume_step: '1'
+                hide:
+                  power: true
+                  progress: true
+                  volume_level: false
+                speaker_group:
+                  platform: sonos
+                  show_group_count: true
+                  group_mgmt_entity: media_player.sonos_kitchen
+                  entities:
+                    - entity_id: media_player.sonos_livingroom
+                      name: Livingroom
+                    - entity_id: media_player.sonos_kitchen
+                      name: Kitchen
+                    - entity_id: media_player.sonos_office
+                      name: Office
+                    - entity_id: media_player.sonos_bedroom
+                      name: Bedroom
+                    - entity_id: media_player.sonos_bathroom
+                      name: Bathroom
+                info: short
+                name: Kitchen
+                group: true
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_kitchen_loudness
+                  - entity: switch.sonos_kitchen_touch_controls
+                  - entity: switch.sonos_kitchen_status_light
+              - type: conditional
+                conditions:
+                  - entity: media_player.roon_kitchen
+                    state: playing
+                row:
+                  entity: number.sonos_kitchen_bass
+                  name: Bass
+              - type: conditional
+                conditions:
+                  - entity: media_player.roon_kitchen
+                    state: playing
+                row:
+                  entity: number.sonos_kitchen_treble
+                  name: Treble
+              - type: divider
+              - type: buttons
+                entities:
+                  - entity: light.kitchen_light_group
+                  - entity: switch.kitchen_cookerhood
+                  - entity: automation.kitchen_cookerhood
+                  - entity: switch.kitchen_pc
+                  - entity: camera.kitchen
+            state_color: true
+            card_mod:
+              style: |
+                ha-card {
+                  background: rgba(211, 188, 0, 0.5);
+                }
+          - square: false
+            columns: 2
+            type: grid
+            cards:
+              - type: gauge
+                entity: sensor.kitchen_pushbutton_temperature
+                name: ' '
+                max: 40
+                needle: true
+                segments:
+                  - from: 0
+                    color: var(--info-color)
+                  - from: 18
+                    color: var(--success-color)
+                  - from: 25
+                    color: var(--warning-color)
+              - type: gauge
+                entity: sensor.kitchen_pushbutton_humidity
+                segments:
+                  - from: 0
+                    color: var(--info-color)
+                  - from: 40
+                    color: var(--success-color)
+                  - from: 61
+                    color: var(--warning-color)
+                needle: true
+                name: ' '
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - type: custom:mini-media-player
+                entity: media_player.roon_livingroom
+                group: true
+                volume_stateless: true
+                volume_step: '1'
+                name: Livingroom
+                speaker_group:
+                  platform: sonos
+                  show_group_count: true
+                  group_mgmt_entity: media_player.sonos_livingroom
+                  entities:
+                    - entity_id: media_player.sonos_livingroom
+                      name: Livingroom
+                    - entity_id: media_player.sonos_kitchen
+                      name: Kitchen
+                    - entity_id: media_player.sonos_office
+                      name: Office
+                    - entity_id: media_player.sonos_bedroom
+                      name: Bedroom
+                    - entity_id: media_player.sonos_bathroom
+                      name: Bathroom
+                hide:
+                  power: true
+                  progress: true
+                  volume_level: false
+                shortcuts:
+                  columns: 5
+                  column_height: 1
+                  buttons:
+                    - icon: mdi:bathtub
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_bathroom
+                    - icon: mdi:bed-king
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_bedroom
+                    - icon: mdi:headphones
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_headphones
+                    - icon: mdi:stove
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_kitchen
+                    - icon: mdi:desk
+                      type: service
+                      id: roon.transfer
+                      data:
+                        entity_id: media_player.roon_livingroom
+                        transfer_id: media_player.roon_office
+              - type: buttons
+                entities:
+                  - entity: switch.sonos_livingroom_loudness
+                  - entity: switch.sonos_livingroom_speech_enhancement
+                  - entity: switch.sonos_livingroom_night_sound
+                  - entity: switch.sonos_livingroom_surround_enabled
+                  - entity: switch.sonos_livingroom_sub_enabled
+                  - entity: switch.sonos_livingroom_sub_polarity
+                  - entity: switch.sonos_livingroom_touch_controls
+                  - entity: switch.sonos_livingroom_status_light
+              - type: conditional
+                conditions:
+                  - entity: sensor.sonos_livingroom_audio_input_format
+                    state_not: No input
+                row:
+                  entity: number.sonos_livingroom_bass
+                  name: Bass
+              - type: conditional
+                conditions:
+                  - entity: sensor.sonos_livingroom_audio_input_format
+                    state_not: No input
+                row:
+                  entity: number.sonos_livingroom_treble
+                  name: Treble
+              - type: conditional
+                conditions:
+                  - entity: sensor.sonos_livingroom_audio_input_format
+                    state_not: No input
+                row:
+                  entity: number.sonos_livingroom_audio_delay
+                  name: Audio Delay
+              - type: conditional
+                conditions:
+                  - entity: sensor.sonos_livingroom_audio_input_format
+                    state_not: No input
+                row:
+                  entity: sensor.sonos_livingroom_audio_input_format
+                  name: Audio Input Format
+              - type: conditional
+                conditions:
+                  - entity: media_player.roon_livingroom
+                    state: playing
+                row:
+                  entity: number.sonos_livingroom_bass
+                  name: Bass
+              - type: conditional
+                conditions:
+                  - entity: media_player.roon_livingroom
+                    state: playing
+                row:
+                  entity: number.sonos_livingroom_treble
+                  name: Treble
+              - type: conditional
+                conditions:
+                  - entity: switch.sonos_livingroom_surround_enabled
+                    state: 'on'
+                row:
+                  entity: number.sonos_livingroom_surround_level
+                  name: TV Surround Level
+              - type: conditional
+                conditions:
+                  - entity: switch.sonos_livingroom_surround_enabled
+                    state: 'on'
+                row:
+                  entity: number.sonos_livingroom_music_surround_level
+                  name: Music Surround Level
+              - type: conditional
+                conditions:
+                  - entity: switch.sonos_livingroom_sub_enabled
+                    state: 'on'
+                row:
+                  entity: number.sonos_livingroom_sub_gain
+                  name: Sub Gain
+              - type: conditional
+                conditions:
+                  - entity: switch.sonos_livingroom_sub_enabled
+                    state: 'on'
+                row:
+                  entity: input_number.sonos_livingroom_sub_crossover
+                  name: Sub Crossover
+              - type: divider
+              - type: buttons
+                entities:
+                  - entity: switch.livingroom_tv_power
+                  - entity: light.livingroom_tv_light
+                  - entity: light.livingroom_floodlight
+                  - entity: switch.livingroom_fan
+                  - entity: light.balcony_light
+                  - entity: vacuum.livingroom_deebot
+                  - entity: binary_sensor.livingroom_balcony_door
+              - entity: cover.livingroom_shutter_small
+                secondary_info: position
+                name: Shutter
+                tap_action:
+                  action: call-service
+                  service: script.livingroom_shutter_favorite
+                hold_action:
+                  action: more-info
+            state_color: true
+            card_mod:
+              style: |
+                ha-card {
+                  background: rgba(176, 138, 138, 0.5);
+                }
+          - square: true
+            columns: 2
+            type: grid
+            cards:
+              - type: thermostat
+                entity: climate.livingroom_thermostat
+                name: ' '
+              - type: gauge
+                entity: sensor.livingroom_pushbutton_humidity
+                segments:
+                  - from: 0
+                    color: var(--info-color)
+                  - from: 40
+                    color: var(--success-color)
+                  - from: 61
+                    color: var(--warning-color)
+                needle: true
+                name: Hum.

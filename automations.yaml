@@ -23,15 +23,14 @@
     offset: '-1'
   condition: []
   action:
-  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
-    domain: cover
-    entity_id: cover.livingroom_shutter_small
-    type: set_position
-    position: 0
-  - service: script.bedroom_shutter_favorite
-    data: {}
-  - service: script.office_shutter_favorite
-    data: {}
+  - service: cover.set_cover_position
+    data:
+      position: 0
+    target:
+      entity_id:
+      - cover.office_shutter
+      - cover.bedroom_shutter
+      - cover.livingroom_shutter_small
   mode: single
 - id: '1641237270223'
   alias: Livingroom Shutter up
@@ -534,28 +533,4 @@
     entity_id: cover.bedroom_shutter
     type: set_position
     position: 100
-  mode: single
-- id: '1666111589480'
-  alias: All shutter completely down
-  description: ''
-  trigger:
-  - platform: time
-    at: '23:00:00'
-  condition: []
-  action:
-  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
-    domain: cover
-    entity_id: cover.livingroom_shutter_small
-    type: set_position
-    position: 0
-  - device_id: 45e23a0ca00f6a2438f7ab1782d7f260
-    domain: cover
-    entity_id: cover.bedroom_shutter
-    type: set_position
-    position: 0
-  - device_id: 45493951566974c8f1c11c836ba797b8
-    domain: cover
-    entity_id: cover.office_shutter
-    type: set_position
-    position: 0
   mode: single
