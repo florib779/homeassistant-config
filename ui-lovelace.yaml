@@ -24,8 +24,8 @@ views:
         cards:
           - type: markdown
             content: |-
-              Playing **{{ states('sensor.lastfm') }}**.
-              Last played **{{ state_attr('sensor.lastfm', 'last_played') }}**.
+              Jetzt: **{{ states('sensor.lastfm') }}**
+              Vorher: **{{ state_attr('sensor.lastfm', 'last_played') }}**
           - type: conditional
             conditions:
               - entity: media_player.roon_bathroom
@@ -34,14 +34,63 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_bathroom
               artwork: cover-fit
-              name: Bathroom
-              volume_step: 1
+              volume_step: '1'
               volume_stateless: true
               hide:
+                icon: true
                 info: true
                 power: true
                 progress: true
                 volume_level: false
+              speaker_group:
+                platform: sonos
+                show_group_count: true
+                group_mgmt_entity: media_player.sonos_bathroom
+                entities:
+                  - entity_id: media_player.sonos_livingroom
+                    name: Wohnzimmer
+                  - entity_id: media_player.sonos_kitchen
+                    name: Küche
+                  - entity_id: media_player.sonos_office
+                    name: Büro
+                  - entity_id: media_player.sonos_bedroom
+                    name: Schlafzimmer
+                  - entity_id: media_player.sonos_bathroom
+                    name: Bad
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bathroom
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:headphones
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bathroom
+                      transfer_id: media_player.roon_headphones
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bathroom
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bathroom
+                      transfer_id: media_player.roon_livingroom
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bathroom
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_bedroom
@@ -50,14 +99,63 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_bedroom
               artwork: cover-fit
-              name: Bedroom
-              volume_step: 1
+              volume_step: '1'
               volume_stateless: true
               hide:
+                icon: true
                 info: true
                 power: true
                 progress: true
                 volume_level: false
+              speaker_group:
+                platform: sonos
+                show_group_count: true
+                group_mgmt_entity: media_player.sonos_bedroom
+                entities:
+                  - entity_id: media_player.sonos_livingroom
+                    name: Wohnzimmer
+                  - entity_id: media_player.sonos_kitchen
+                    name: Küche
+                  - entity_id: media_player.sonos_office
+                    name: Büro
+                  - entity_id: media_player.sonos_bedroom
+                    name: Schlafzimmer
+                  - entity_id: media_player.sonos_bathroom
+                    name: Bad
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bathtub
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bedroom
+                      transfer_id: media_player.roon_bathroom
+                  - icon: mdi:headphones
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bedroom
+                      transfer_id: media_player.roon_headphones
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bedroom
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bedroom
+                      transfer_id: media_player.roon_livingroom
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_bedroom
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_headphones
@@ -66,14 +164,45 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_headphones
               artwork: cover-fit
-              name: Headphones
-              volume_step: 1
-              volume_stateless: true
               hide:
                 info: true
                 power: true
                 progress: true
-                volume_level: false
+                volume: true
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:headphones
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_headphones
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_livingroom
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_headphones
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_kitchen
@@ -82,14 +211,63 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_kitchen
               artwork: cover-fit
-              name: Kitchen
-              volume_step: 1
+              volume_step: '1'
               volume_stateless: true
               hide:
+                icon: true
                 info: true
                 power: true
                 progress: true
                 volume_level: false
+              speaker_group:
+                platform: sonos
+                show_group_count: true
+                group_mgmt_entity: media_player.sonos_kitchen
+                entities:
+                  - entity_id: media_player.sonos_livingroom
+                    name: Wohnzimmer
+                  - entity_id: media_player.sonos_kitchen
+                    name: Küche
+                  - entity_id: media_player.sonos_office
+                    name: Büro
+                  - entity_id: media_player.sonos_bedroom
+                    name: Schlafzimmer
+                  - entity_id: media_player.sonos_bathroom
+                    name: Bad
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bathtub
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_kitchen
+                      transfer_id: media_player.roon_bathroom
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_kitchen
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:headphones
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_kitchen
+                      transfer_id: media_player.roon_headphones
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_kitchen
+                      transfer_id: media_player.roon_livingroom
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_kitchen
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_livingroom
@@ -98,14 +276,63 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_livingroom
               artwork: cover-fit
-              name: Livingroom
-              volume_step: 1
+              volume_step: '1'
               volume_stateless: true
               hide:
+                icon: true
                 info: true
                 power: true
                 progress: true
                 volume_level: false
+              speaker_group:
+                platform: sonos
+                show_group_count: true
+                group_mgmt_entity: media_player.sonos_livingroom
+                entities:
+                  - entity_id: media_player.sonos_livingroom
+                    name: Wohnzimmer
+                  - entity_id: media_player.sonos_kitchen
+                    name: Küche
+                  - entity_id: media_player.sonos_office
+                    name: Büro
+                  - entity_id: media_player.sonos_bedroom
+                    name: Schlafzimmer
+                  - entity_id: media_player.sonos_bathroom
+                    name: Bad
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bathtub
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_livingroom
+                      transfer_id: media_player.roon_bathroom
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_livingroom
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:headphones
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_livingroom
+                      transfer_id: media_player.roon_headphones
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_livingroom
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:desk
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_livingroom
+                      transfer_id: media_player.roon_office
           - type: conditional
             conditions:
               - entity: media_player.roon_office
@@ -114,21 +341,69 @@ views:
               type: custom:mini-media-player
               entity: media_player.roon_office
               artwork: cover-fit
-              name: Office
-              volume_step: 1
+              volume_step: '1'
               volume_stateless: true
               hide:
+                icon: true
                 info: true
                 power: true
                 progress: true
                 volume_level: false
+              speaker_group:
+                platform: sonos
+                show_group_count: true
+                group_mgmt_entity: media_player.sonos_office
+                entities:
+                  - entity_id: media_player.sonos_livingroom
+                    name: Wohnzimmer
+                  - entity_id: media_player.sonos_kitchen
+                    name: Küche
+                  - entity_id: media_player.sonos_office
+                    name: Büro
+                  - entity_id: media_player.sonos_bedroom
+                    name: Schlafzimmer
+                  - entity_id: media_player.sonos_bathroom
+                    name: Bad
+              shortcuts:
+                columns: 5
+                column_height: 1
+                buttons:
+                  - icon: mdi:bathtub
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_office
+                      transfer_id: media_player.roon_bathroom
+                  - icon: mdi:bed-king
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_office
+                      transfer_id: media_player.roon_bedroom
+                  - icon: mdi:headphones
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_office
+                      transfer_id: media_player.roon_headphones
+                  - icon: mdi:stove
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_office
+                      transfer_id: media_player.roon_kitchen
+                  - icon: mdi:sofa
+                    type: service
+                    id: roon.transfer
+                    data:
+                      entity_id: media_player.roon_office
+                      transfer_id: media_player.roon_livingroom
           - type: entity-filter
             show_empty: false
             state_color: true
             entities:
               - entity: switch.livingroom_tv_power
                 state_color: true
-                name: Livingroom TV
                 type: custom:secondaryinfo-entity-row
                 secondary_info: '[[ sensor.livingroom_tv_power_consumption ]] W'
               - entity: light.bedroom_light
@@ -142,12 +417,11 @@ views:
               - entity: light.livingroom_tv_light
                 secondary_info: brightness
               - entity: switch.heatingroom_pump
-                name: Pump
+                state_color: true
                 type: custom:secondaryinfo-entity-row
                 secondary_info: '[[ sensor.heatingroom_pump_power_consumption ]] W'
               - entity: vacuum.livingroom_deebot
                 secondary_info: last-changed
-                name: Deebot
                 state_color: true
               - entity: sensor.hacs
                 state_color: true
@@ -169,40 +443,40 @@ views:
                 type: custom:secondaryinfo-entity-row
                 secondary_info: '[[ sensor.livingroom_fan_stages ]]'
               - entity: binary_sensor.basement_washer_on
-                name: Washer
                 secondary_info: last-changed
               - entity: binary_sensor.bathroom_thermostat_battery_low
               - entity: binary_sensor.bathroom_thermostat_window_open
+                secondary_info: last-changed
               - entity: binary_sensor.bedroom_thermostat_battery_low
               - entity: binary_sensor.bedroom_thermostat_window_open
+                secondary_info: last-changed
               - entity: binary_sensor.fritz_box_7490_firmware_update
-                name: FRITZ!Box Firmware Update
                 secondary_info: last-changed
               - entity: binary_sensor.kitchen_dishwasher_on
                 state_color: true
                 secondary_info: last-changed
               - entity: binary_sensor.livingroom_balcony_door
-                name: Balcony Door
                 secondary_info: last-changed
               - entity: binary_sensor.livingroom_thermostat_battery_low
               - entity: binary_sensor.livingroom_thermostat_window_open
+                secondary_info: last-changed
               - entity: binary_sensor.makita_akku_charging
                 state_color: true
                 secondary_info: last-changed
               - entity: binary_sensor.office_thermostat_battery_low
               - entity: binary_sensor.office_thermostat_window_open
+                secondary_info: last-changed
               - entity: sensor.kitchen_fridge_states
-                name: Fridge
                 type: custom:secondaryinfo-entity-row
                 secondary_info: '[[ sensor.kitchen_fridge_power_consumption ]] W'
                 state_filter:
                   - value: 'Off'
                     operator: not in
               - entity: sensor.livingroom_pc_on
+                state_color: true
                 state_filter:
                   - value: 'Off'
                     operator: not in
-                name: Livingroom PC
                 type: custom:secondaryinfo-entity-row
                 secondary_info: '[[ sensor.livingroom_pc_power_consumption ]] W'
             state_filter:
@@ -230,7 +504,7 @@ views:
                   green: 50
                   yellow: 10
                   red: 0
-                name: Battery
+                name: Akku
                 needle: true
                 card_mod:
                   style: |
@@ -243,7 +517,7 @@ views:
                   green: 30
                   yellow: 10
                   red: 0
-                name: Internal
+                name: Intern
                 needle: true
                 card_mod:
                   style: |
@@ -273,24 +547,24 @@ views:
                   green: 50
                   yellow: 10
                   red: 0
-                name: Battery
                 needle: true
+                name: Akku
               - type: gauge
                 entity: sensor.sm_g960f_internal_storage
-                name: Internal
                 severity:
                   green: 30
                   yellow: 10
                   red: 0
                 needle: true
+                name: Intern
               - type: gauge
                 entity: sensor.sm_t220_external_storage
-                name: External
                 severity:
                   green: 30
                   yellow: 10
                   red: 0
                 needle: true
+                name: Extern
               - type: gauge
                 entity: sensor.sm_t220_battery_temperature
                 name: Temp.
@@ -398,63 +672,19 @@ views:
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
+                artwork: none
                 group: true
                 volume_stateless: true
                 volume_step: '1'
-                name: Livingroom
                 speaker_group:
                   platform: sonos
                   show_group_count: true
                   group_mgmt_entity: media_player.sonos_livingroom
-                  entities:
-                    - entity_id: media_player.sonos_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.sonos_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.sonos_office
-                      name: Office
-                    - entity_id: media_player.sonos_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.sonos_bathroom
-                      name: Bathroom
                 hide:
+                  icon: false
                   power: true
                   progress: true
                   volume_level: false
-                shortcuts:
-                  columns: 5
-                  column_height: 1
-                  buttons:
-                    - icon: mdi:bathtub
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_bathroom
-                    - icon: mdi:bed-king
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_bedroom
-                    - icon: mdi:headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_headphones
-                    - icon: mdi:stove
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_kitchen
-                    - icon: mdi:desk
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_livingroom
-                        transfer_id: media_player.roon_office
               - type: buttons
                 entities:
                   - entity: switch.sonos_livingroom_loudness
@@ -544,10 +774,8 @@ views:
                   - entity: switch.livingroom_fan
                   - entity: light.balcony_light
                   - entity: vacuum.livingroom_deebot
-                  - entity: binary_sensor.livingroom_balcony_door
               - entity: cover.livingroom_shutter_small
                 secondary_info: position
-                name: Shutter
                 tap_action:
                   action: call-service
                   service: script.livingroom_shutter_favorite
@@ -600,46 +828,13 @@ views:
         entities:
           - type: custom:mini-media-player
             entity: media_player.roon_headphones
-            shortcuts:
-              columns: 5
-              column_height: 1
-              buttons:
-                - icon: mdi:bathtub
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_bathroom
-                - icon: mdi:bed-king
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_bedroom
-                - icon: mdi:stove
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_kitchen
-                - icon: mdi:sofa
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_livingroom
-                - icon: mdi:desk
-                  type: service
-                  id: roon.transfer
-                  data:
-                    entity_id: media_player.roon_headphones
-                    transfer_id: media_player.roon_office
+            artwork: none
+            group: true
             hide:
+              info: true
               power: true
               progress: true
               volume: true
-            name: Headphones
-            group: true
         state_color: true
         card_mod:
           style: |
@@ -652,64 +847,19 @@ views:
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_kitchen
-                shortcuts:
-                  columns: 5
-                  column_height: 1
-                  buttons:
-                    - icon: mdi:bathtub
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_bathroom
-                    - icon: mdi:bed-king
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_bedroom
-                    - icon: mdi:headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_headphones
-                    - icon: mdi:sofa
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_livingroom
-                    - icon: mdi:desk
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_kitchen
-                        transfer_id: media_player.roon_office
+                artwork: none
+                group: true
                 volume_stateless: true
                 volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  volume_level: false
                 speaker_group:
                   platform: sonos
                   show_group_count: true
                   group_mgmt_entity: media_player.sonos_kitchen
-                  entities:
-                    - entity_id: media_player.sonos_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.sonos_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.sonos_office
-                      name: Office
-                    - entity_id: media_player.sonos_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.sonos_bathroom
-                      name: Bathroom
-                info: short
-                name: Kitchen
-                group: true
+                hide:
+                  icon: false
+                  power: true
+                  progress: true
+                  volume_level: false
               - type: buttons
                 entities:
                   - entity: switch.sonos_kitchen_loudness
@@ -784,64 +934,19 @@ views:
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_bathroom
-                shortcuts:
-                  columns: 5
-                  column_height: 1
-                  buttons:
-                    - icon: mdi:bed-king
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_bedroom
-                    - icon: mdi:headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_headphones
-                    - icon: mdi:stove
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_kitchen
-                    - icon: mdi:sofa
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_livingroom
-                    - icon: mdi:desk
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bathroom
-                        transfer_id: media_player.roon_office
+                artwork: none
+                group: true
                 volume_stateless: true
                 volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  volume_level: false
                 speaker_group:
                   platform: sonos
                   show_group_count: true
                   group_mgmt_entity: media_player.sonos_bathroom
-                  entities:
-                    - entity_id: media_player.sonos_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.sonos_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.sonos_office
-                      name: Office
-                    - entity_id: media_player.sonos_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.sonos_bathroom
-                      name: Bathroom
-                info: short
-                name: Bathroom
-                group: true
+                hide:
+                  icon: false
+                  power: true
+                  progress: true
+                  volume_level: false
               - type: buttons
                 entities:
                   - entity: switch.sonos_bathroom_loudness
@@ -907,64 +1012,19 @@ views:
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_office
-                shortcuts:
-                  columns: 5
-                  column_height: 1
-                  buttons:
-                    - icon: mdi:bathtub
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_bathroom
-                    - icon: mdi:bed-king
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_bedroom
-                    - icon: mdi:headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_headphones
-                    - icon: mdi:stove
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_kitchen
-                    - icon: mdi:sofa
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_office
-                        transfer_id: media_player.roon_livingroom
+                artwork: none
+                group: true
                 volume_stateless: true
                 volume_step: '1'
-                hide:
-                  power: true
-                  progress: true
-                  volume_level: false
                 speaker_group:
                   platform: sonos
                   show_group_count: true
-                  group_mgmt_entity: media_player.sonos_office
-                  entities:
-                    - entity_id: media_player.sonos_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.sonos_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.sonos_office
-                      name: Office
-                    - entity_id: media_player.sonos_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.sonos_bathroom
-                      name: Bathroom
-                info: short
-                name: Office
-                group: true
+                  group_mgmt_entity: media_player.sonos_kitchen
+                hide:
+                  icon: false
+                  power: true
+                  progress: true
+                  volume_level: false
               - type: buttons
                 entities:
                   - entity: switch.sonos_office_loudness
@@ -977,21 +1037,18 @@ views:
                     state: playing
                 row:
                   entity: number.sonos_office_bass
-                  name: Bass
               - type: conditional
                 conditions:
                   - entity: media_player.roon_office
                     state: playing
                 row:
                   entity: number.sonos_office_treble
-                  name: Treble
               - type: divider
               - type: buttons
                 entities:
                   - entity: camera.office
               - entity: cover.office_shutter
                 secondary_info: position
-                name: Shutter
                 tap_action:
                   action: call-service
                   service: script.office_shutter_favorite
@@ -1044,65 +1101,19 @@ views:
             entities:
               - type: custom:mini-media-player
                 entity: media_player.roon_bedroom
-                shortcuts:
-                  columns: 5
-                  column_height: 1
-                  buttons:
-                    - icon: mdi:bathtub
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_bathroom
-                    - icon: mdi:headphones
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_headphones
-                    - icon: mdi:stove
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_kitchen
-                    - icon: mdi:sofa
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_livingroom
-                    - icon: mdi:desk
-                      type: service
-                      id: roon.transfer
-                      data:
-                        entity_id: media_player.roon_bedroom
-                        transfer_id: media_player.roon_office
+                artwork: none
+                group: true
                 volume_stateless: true
                 volume_step: '1'
                 speaker_group:
                   platform: sonos
                   show_group_count: true
                   group_mgmt_entity: media_player.sonos_bedroom
-                  entities:
-                    - entity_id: media_player.sonos_livingroom
-                      name: Livingroom
-                    - entity_id: media_player.sonos_kitchen
-                      name: Kitchen
-                    - entity_id: media_player.sonos_office
-                      name: Office
-                    - entity_id: media_player.sonos_bedroom
-                      name: Bedroom
-                    - entity_id: media_player.sonos_bathroom
-                      name: Bathroom
                 hide:
+                  icon: false
                   power: true
                   progress: true
-                  source: true
                   volume_level: false
-                info: short
-                name: Bedroom
-                group: true
               - type: buttons
                 entities:
                   - entity: switch.sonos_bedroom_loudness
@@ -1156,11 +1167,9 @@ views:
               - type: buttons
                 entities:
                   - entity: light.bedroom_light
-                  - entity: device_tracker.bedroom_echo
                   - entity: camera.bedroom
               - entity: cover.bedroom_shutter
                 secondary_info: position
-                name: Shutter
                 tap_action:
                   action: call-service
                   service: script.bedroom_shutter_favorite
@@ -1215,6 +1224,7 @@ views:
             entity: sensor.corridor_rock_power_consumption
             detail: 2
             name: Server
+            icon: phu:intel-nuc
           - square: false
             columns: 2
             type: grid
@@ -1230,6 +1240,11 @@ views:
               - type: gauge
                 entity: sensor.fritz_box_7490_link_upload_throughput
                 name: Upload
+                severity:
+                  green: 40
+                  yellow: 35
+                  red: 25
+                max: 50
   - theme: Backend-selected
     title: Camera
     path: camera
