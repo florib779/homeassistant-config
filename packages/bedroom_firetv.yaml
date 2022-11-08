@@ -3,3 +3,8 @@ media_player:
   - platform: androidtv
     host: 192.168.178.41
     device_class: androidtv
+
+switch:
+  - platform: wake_on_lan
+    name: 'Bedroom FireTV'
+    mac: !secret tv_bedroom_mac

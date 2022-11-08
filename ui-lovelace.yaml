@@ -505,7 +505,7 @@ views:
                   yellow: 10
                   red: 0
                 name: Akku
-                needle: true
+                needle: false
                 card_mod:
                   style: |
                     ha-card {
@@ -518,7 +518,7 @@ views:
                   yellow: 10
                   red: 0
                 name: Intern
-                needle: true
+                needle: false
                 card_mod:
                   style: |
                     ha-card {
@@ -547,7 +547,7 @@ views:
                   green: 50
                   yellow: 10
                   red: 0
-                needle: true
+                needle: false
                 name: Akku
               - type: gauge
                 entity: sensor.sm_g960f_internal_storage
@@ -555,7 +555,7 @@ views:
                   green: 30
                   yellow: 10
                   red: 0
-                needle: true
+                needle: false
                 name: Intern
               - type: gauge
                 entity: sensor.sm_t220_external_storage
@@ -563,12 +563,12 @@ views:
                   green: 30
                   yellow: 10
                   red: 0
-                needle: true
+                needle: false
                 name: Extern
               - type: gauge
                 entity: sensor.sm_t220_battery_temperature
                 name: Temp.
-                needle: true
+                needle: false
                 max: 70
                 segments:
                   - from: -10
@@ -617,7 +617,7 @@ views:
                 needle: true
                 severity:
                   green: 6500
-                  yellow: 4000
+                  yellow: 3500
                   red: 0
                 card_mod:
                   style: |
@@ -1508,36 +1508,73 @@ views:
           ## Smart Home
 
 
-          * [x] [Raum] Fenster auf/zu
+          ### Allgemein
 
-          * [x] [Raum] Licht an/aus / [Wert]% / [Farbe]
 
-          * [x] Schalte [Gerät] in [Zeit] an/aus
+          * [x] [Raum]rollo auf/zu
+
+          * [x] Licht in [Raum] an/aus / [Wert]% / [Farbe]
+            * ToDo: Funktioniert aktuell nur im Wohnzimmer
+          * [x] Schalte [Gerät] in [(Uhr)Zeit] an/aus
+
+
+          ## Musik
+
+          * [x] [Raum] Musik in an/aus
+
+          * [x] Verringere/Erhöhe Lautstärke von [Raum] Sonos
+
+
+          ### Nur Büro?
+
+          * [x] Leiser/Lauter
 
 
           ### Küche
 
-          * [x] Küche Abzug an/aus
+          * [x] Lüftung an/aus
 
-          * [x] Küche PC an/aus
+          * [x] PC in Küche an/aus
+
+
+          ### Schlafzimmer
+
+
+          #### FireTV
+
+
+          * [x] Starte (Film- oder Serientitel)
+            * ToDo: Schaltet TV an, aber ohne Ton
+          * [x] Pause
+
+          * [x] Spule [Zeit] vor/zurück
+
+          * [ ] Spiele den Inhalt von Anfang an ab
+
+          * [ ] Spiele die nächste Folge ab
+
+          * [ ] Gehe zurück
+
+          * [ ] Gehe zur Startseite
+
+          * [ ] Gehe nach [oben/unten/rechts/links]
+
+          * [ ] Öffne [App]
 
 
           ### Wohnzimmer
 
           * [ ] Deebot
 
-          * [x] Wohnzimmer Ventilator an/aus
+          * [x] Ventilator an/aus
+
+          * [x] Subwoofer an/aus
+
+          * [x] Surround an/aus
 
           * [x] Wohnzimmer TV an/aus
 
           * [ ] Wohnzimmer TV Licht
-
-
-          ## Musik
-
-          * [x] [Raum] Musik an/aus
-
-          * [x] Verringere/Erhöhe Lautstärke von [Raum] Sonos
 
 
           ## Allgemein
@@ -1550,7 +1587,7 @@ views:
 
           ### Einschlafgeräusche
 
-          * [ ] Starte Einschlafgeräusche
+          * [x] Starte Einschlafgeräusche
 
 
           ### Songtext
