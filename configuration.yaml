@@ -20,7 +20,7 @@ wake_on_lan: # Further configuration in the corresponding package yaml files
 # https://www.home-assistant.io/integrations/openweathermap/
 weather:
   - platform: 'template'
-    name: "Weather Station"
+    name: "Wetterstation"
     condition_template: "{{ states('weather.home') }}"
     forecast_template: "{{ state_attr('weather.home_hourly', 'forecast') }}"
     humidity_template: "{{ state_attr('weather.home', 'humidity') | float }}"
@@ -101,13 +101,13 @@ template:
         unique_id: "fritzbox_callmonitor_phonebook"
         state: >-
             {%- if is_state("sensor.fritzbox_callmonitor", "idle") %}
-                Free
+                Frei
             {%  elif is_state("sensor.fritzbox_callmonitor", "dialing") %}
-                Dialing '{{ states.sensor.fritzbox_callmonitor.attributes.to_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.to }})'
+                Wähle '{{ states.sensor.fritzbox_callmonitor.attributes.to_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.to }})'
             {%  elif is_state("sensor.fritzbox_callmonitor", "ringing") %}
-                Incoming call from '{{ states.sensor.fritzbox_callmonitor.attributes.from_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.from }})'
+                Eingehendes Gespräch von '{{ states.sensor.fritzbox_callmonitor.attributes.from_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.from }})'
             {% else %}
-                Talking with '{{ states.sensor.fritzbox_callmonitor.attributes.with_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.with }})'
+                Gespräch mit '{{ states.sensor.fritzbox_callmonitor.attributes.with_name }} ({{ states.sensor.fritzbox_callmonitor.attributes.with }})'
             {%- endif %}
         icon: >-
             {% if is_state("sensor.fritzbox_callmonitor", "idle") %}
@@ -123,11 +123,11 @@ template:
         unique_id: "kitchen_fridge_states"
         state: >
           {% if states.sensor.kitchen_fridge_power_consumption.state | float > 75 %}
-            Open
+            Offen
           {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 58 %}
-            Cooling
+            Kühlt
           {% elif states.sensor.kitchen_fridge_power_consumption.state | float > 1 %}
-            Open
+            Offen
           {% else %}
             Off
           {% endif %}
@@ -135,11 +135,11 @@ template:
         unique_id: "livingroom_fan_stages"
         state: >
           {% if states.sensor.livingroom_fan_power_consumption.state | float > 37 %}
-            Stage 3
+            Stufe 3
           {% elif states.sensor.livingroom_fan_power_consumption.state | float > 33 %}
-            Stage 2
+            Stufe 2
           {% elif states.sensor.livingroom_fan_power_consumption.state | float > 1 %}
-            Stage 1
+            Stufe 1
           {% else %}
             Off
           {% endif %}
