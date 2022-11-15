@@ -314,6 +314,40 @@ views:
               power: true
               progress: true
               volume: true
+            shortcuts:
+              columns: 5
+              column_height: 1
+              buttons:
+                - icon: mdi:bed-king
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_bedroom
+                - icon: mdi:headphones
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_headphones
+                - icon: mdi:stove
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_kitchen
+                - icon: mdi:sofa
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_livingroom
+                - icon: mdi:desk
+                  type: service
+                  id: roon.transfer
+                  data:
+                    entity_id: media_player.roon_headphones
+                    transfer_id: media_player.roon_office
         state_color: true
         card_mod:
           style: |
