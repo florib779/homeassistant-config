@@ -246,7 +246,7 @@ views:
             cards:
               - type: gauge
                 entity: sensor.iphone_xs_distance
-                max: 5000
+                max: 6000
                 severity:
                   green: 4000
                   yellow: 2000
@@ -261,10 +261,10 @@ views:
               - type: gauge
                 entity: sensor.iphone_xs_steps
                 name: ' '
-                max: 8000
+                max: 9000
                 needle: true
                 severity:
-                  green: 6500
+                  green: 6000
                   yellow: 3500
                   red: 0
                 card_mod:
@@ -307,7 +307,9 @@ views:
             artwork: full-cover-fit
             group: true
             idle_view:
+              when_idle: true
               when_paused: true
+              when_standby: true
             hide:
               icon: true
               name: true
@@ -363,7 +365,9 @@ views:
                 artwork: full-cover-fit
                 group: true
                 idle_view:
+                  when_idle: true
                   when_paused: true
+                  when_standby: true
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -570,7 +574,9 @@ views:
                 artwork: full-cover-fit
                 group: true
                 idle_view:
+                  when_idle: true
                   when_paused: true
+                  when_standby: true
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -705,7 +711,9 @@ views:
                 artwork: full-cover-fit
                 group: true
                 idle_view:
+                  when_idle: true
                   when_paused: true
+                  when_standby: true
                 volume_stateless: true
                 volume_step: '1'
                 speaker_group:
@@ -831,7 +839,9 @@ views:
                 artwork: full-cover-fit
                 group: true
                 idle_view:
+                  when_idle: true
                   when_paused: true
+                  when_standby: true
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -969,7 +979,9 @@ views:
                 artwork: full-cover-fit
                 group: true
                 idle_view:
+                  when_idle: true
                   when_paused: true
+                  when_standby: true
                 volume_stateless: true
                 volume_step: '1'
                 hide:
@@ -1205,101 +1217,111 @@ views:
           camera_image: camera.office
       - type: conditional
         conditions:
-          - entity: shutter
+          - entity: cover.bedroom_shutter
             state_not: closed
+        card:
+          type: conditional
+          conditions:
+            - entity: shutter
+              state_not: closed
+          card:
+            camera_view: live
+            type: picture-glance
+            title: Bedroom
+            image: /local/blank.png
+            entities:
+              - entity: camera.bedroom
+                tap_action:
+                  action: call-service
+                  service: ezviz_cloud.ptz
+                  data:
+                    device_id: 06a03f780de1fb8a18b996bb939a42b6
+                    direction: left
+                    speed: 5
+                icon: mdi:arrow-left
+                show_icon: true
+              - entity: camera.bedroom
+                tap_action:
+                  action: call-service
+                  service: ezviz_cloud.ptz
+                  data:
+                    device_id: 06a03f780de1fb8a18b996bb939a42b6
+                    direction: up
+                    speed: 5
+                icon: mdi:arrow-up
+                show_icon: true
+              - entity: camera.bedroom
+                tap_action:
+                  action: call-service
+                  service: ezviz_cloud.ptz
+                  data:
+                    device_id: 06a03f780de1fb8a18b996bb939a42b6
+                    direction: down
+                    speed: 5
+                icon: mdi:arrow-down
+                show_icon: true
+              - entity: camera.bedroom
+                tap_action:
+                  action: call-service
+                  service: ezviz_cloud.ptz
+                  data:
+                    device_id: 06a03f780de1fb8a18b996bb939a42b6
+                    direction: right
+                    speed: 5
+                icon: mdi:arrow-right
+                show_icon: true
+            camera_image: camera.bedroom
+      - type: conditional
+        conditions:
+          - entity: camera.kitchen
+            state: idle
         card:
           camera_view: live
           type: picture-glance
-          title: Bedroom
+          title: Kitchen
           image: /local/blank.png
           entities:
-            - entity: camera.bedroom
+            - entity: camera.kitchen
               tap_action:
                 action: call-service
                 service: ezviz_cloud.ptz
                 data:
-                  device_id: 06a03f780de1fb8a18b996bb939a42b6
+                  device_id: e5dab8250f7f8bca0fe4c9c32df401fb
                   direction: left
                   speed: 5
               icon: mdi:arrow-left
               show_icon: true
-            - entity: camera.bedroom
+            - entity: camera.kitchen
               tap_action:
                 action: call-service
                 service: ezviz_cloud.ptz
                 data:
-                  device_id: 06a03f780de1fb8a18b996bb939a42b6
+                  device_id: e5dab8250f7f8bca0fe4c9c32df401fb
                   direction: up
                   speed: 5
               icon: mdi:arrow-up
               show_icon: true
-            - entity: camera.bedroom
+            - entity: camera.kitchen
               tap_action:
                 action: call-service
                 service: ezviz_cloud.ptz
                 data:
-                  device_id: 06a03f780de1fb8a18b996bb939a42b6
+                  device_id: e5dab8250f7f8bca0fe4c9c32df401fb
                   direction: down
                   speed: 5
               icon: mdi:arrow-down
               show_icon: true
-            - entity: camera.bedroom
+            - entity: camera.kitchen
               tap_action:
                 action: call-service
                 service: ezviz_cloud.ptz
                 data:
-                  device_id: 06a03f780de1fb8a18b996bb939a42b6
+                  device_id: e5dab8250f7f8bca0fe4c9c32df401fb
                   direction: right
                   speed: 5
               icon: mdi:arrow-right
               show_icon: true
-          camera_image: camera.bedroom
-      - camera_view: live
-        type: picture-glance
-        title: Kitchen
-        image: /local/blank.png
-        entities:
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: left
-                speed: 5
-            icon: mdi:arrow-left
-            show_icon: true
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: up
-                speed: 5
-            icon: mdi:arrow-up
-            show_icon: true
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: down
-                speed: 5
-            icon: mdi:arrow-down
-            show_icon: true
-          - entity: camera.kitchen
-            tap_action:
-              action: call-service
-              service: ezviz_cloud.ptz
-              data:
-                device_id: e5dab8250f7f8bca0fe4c9c32df401fb
-                direction: right
-                speed: 5
-            icon: mdi:arrow-right
-            show_icon: true
-        camera_image: camera.kitchen
+          camera_image: camera.kitchen
   - theme: Backend-selected
     title: Music
     path: music
