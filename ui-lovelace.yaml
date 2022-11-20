@@ -30,7 +30,6 @@ views:
               - entity: weather.openweathermap
               - entity: sensor.openweathermap_humidity
               - entity: sensor.openweathermap_temperature
-              - entity: sensor.basement_washer_temperature
             state_color: true
           - type: markdown
             content: |-
@@ -368,11 +367,11 @@ views:
                   when_idle: true
                   when_paused: true
                   when_standby: true
+                name: ' '
                 volume_stateless: true
                 volume_step: '1'
                 hide:
                   icon: true
-                  name: true
                   power: true
                   progress: true
                   volume_level: false
@@ -532,18 +531,9 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: gauge
-                entity: sensor.livingroom_thermostat_current_temperature
+              - type: thermostat
+                entity: climate.livingroom_thermostat
                 name: ' '
-                max: 40
-                needle: false
-                segments:
-                  - from: 0
-                    color: var(--info-color)
-                  - from: 18
-                    color: var(--success-color)
-                  - from: 25
-                    color: var(--warning-color)
                 card_mod:
                   style: |
                     ha-card {
@@ -577,11 +567,11 @@ views:
                   when_idle: true
                   when_paused: true
                   when_standby: true
+                name: ' '
                 volume_stateless: true
                 volume_step: '1'
                 hide:
                   icon: true
-                  name: true
                   power: true
                   progress: true
                   volume_level: false
@@ -667,7 +657,7 @@ views:
                 ha-card {
                   background: rgba(211, 188, 0, 0.5);
                 }
-          - square: false
+          - square: true
             columns: 2
             type: grid
             cards:
@@ -714,6 +704,7 @@ views:
                   when_idle: true
                   when_paused: true
                   when_standby: true
+                name: ' '
                 volume_stateless: true
                 volume_step: '1'
                 speaker_group:
@@ -722,7 +713,6 @@ views:
                   group_mgmt_entity: media_player.sonos_bathroom
                 hide:
                   icon: true
-                  name: true
                   power: true
                   progress: true
                   volume_level: false
@@ -799,17 +789,9 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: gauge
-                entity: sensor.bathroom_pushbutton_temperature
+              - type: thermostat
+                entity: climate.bathroom_thermostat
                 name: ' '
-                max: 40
-                segments:
-                  - from: 0
-                    color: var(--info-color)
-                  - from: 18
-                    color: var(--success-color)
-                  - from: 25
-                    color: var(--warning-color)
                 card_mod:
                   style: |
                     ha-card {
@@ -842,11 +824,11 @@ views:
                   when_idle: true
                   when_paused: true
                   when_standby: true
+                name: ' '
                 volume_stateless: true
                 volume_step: '1'
                 hide:
                   icon: true
-                  name: true
                   power: true
                   progress: true
                   volume_level: false
@@ -939,17 +921,9 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: gauge
-                entity: sensor.office_pushbutton_temperature
+              - type: thermostat
+                entity: climate.office_thermostat
                 name: ' '
-                max: 40
-                segments:
-                  - from: 0
-                    color: var(--info-color)
-                  - from: 18
-                    color: var(--success-color)
-                  - from: 25
-                    color: var(--warning-color)
                 card_mod:
                   style: |
                     ha-card {
@@ -982,11 +956,11 @@ views:
                   when_idle: true
                   when_paused: true
                   when_standby: true
+                name: ' '
                 volume_stateless: true
                 volume_step: '1'
                 hide:
                   icon: true
-                  name: true
                   power: true
                   progress: true
                   volume_level: false
@@ -1111,17 +1085,9 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: gauge
-                entity: sensor.bedroom_thermostat_current_temperature
+              - type: thermostat
+                entity: climate.bedroom_thermostat
                 name: ' '
-                max: 40
-                segments:
-                  - from: 0
-                    color: var(--info-color)
-                  - from: 18
-                    color: var(--success-color)
-                  - from: 25
-                    color: var(--warning-color)
                 card_mod:
                   style: |
                     ha-card {
@@ -1142,6 +1108,15 @@ views:
                     ha-card {
                       background: rgba(255, 0, 255, 0.1);
                     }
+      - type: glance
+        entities:
+          - entity: sensor.storeroom_switch_temperature
+            name: Abstellraum
+          - entity: sensor.heatingroom_pump_temperature
+            name: Heizraum
+          - entity: sensor.basement_washer_temperature
+            name: Keller
+            icon: mdi:thermometer
   - theme: Backend-selected
     title: Camera
     path: camera
