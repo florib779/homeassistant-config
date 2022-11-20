@@ -107,7 +107,7 @@ views:
               - entity: binary_sensor.makita_akku_charging
               - entity: binary_sensor.office_thermostat_battery_low
               - entity: binary_sensor.office_thermostat_window_open
-              - entity: sensor.fritz_box_7490_link_download_throughput
+              - entity: sensor.fritz_box_7490_max_connection_download_throughput
                 state_filter:
                   - value: 100000
                     operator: <
@@ -122,7 +122,7 @@ views:
                   - value: Offen
               - entity: sensor.livingroom_pc_on
             state_filter:
-              - 'On'
+              - 'on'
             card:
               type: glance
               show_name: false
