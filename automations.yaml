@@ -33,13 +33,10 @@
       - cover.livingroom_shutter_small
   mode: single
 - id: '1641237270223'
-  alias: Livingroom Shutter up
+  alias: Livingroom Shutter up (workdays)
   description: Open the shutter in the living room when the TV is on, after sunrise
-    or at the appropriate time.
+    at workdays.
   trigger:
-  - platform: time
-    at: 08:00:00
-    enabled: false
   - platform: sun
     event: sunrise
     offset: '+1'
@@ -48,6 +45,9 @@
     entity_id: sensor.livingroom_tv_power_consumption
     below: 20
     enabled: true
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
   action:
   - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
     domain: cover
@@ -85,14 +85,17 @@
       input: /config/packages/gitpush/gitpush.sh
   mode: single
 - id: '1652179746791'
-  alias: Office Shutter up
+  alias: Office Shutter up (workdays)
   description: Open the shutter in the office on weekdays after sunrise or at an appropriate
     time.
   trigger:
   - platform: sun
     event: sunrise
     offset: '+1'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
   action:
   - device_id: 39df41eba2aa553cb9c0ee9ef0e713e5
     domain: cover
@@ -101,7 +104,7 @@
     position: 100
   mode: single
 - id: '1652424507352'
-  alias: All Stop/Off @ 01:00 at workdays
+  alias: All Stop/Off @ 01:00 (workdays)
   description: ''
   trigger:
   - platform: time
@@ -305,7 +308,7 @@
     position: 100
   mode: single
 - id: '1656021860713'
-  alias: Bedroom Shutter Down at 23:00 at workdays
+  alias: Bedroom Shutter Down at 23:00 (workdays)
   description: ''
   trigger:
   - platform: time
@@ -448,7 +451,7 @@
     position: 100
   mode: single
 - id: '1659015695693'
-  alias: All Stop/Off @ 02:00 at weekends
+  alias: All Stop/Off @ 02:00 (weekend)
   description: ''
   trigger:
   - platform: time
@@ -485,7 +488,7 @@
       - switch.livingroom_fan
   mode: single
 - id: '1660664658456'
-  alias: Heatingroom Pump on at workdays
+  alias: Heatingroom Pump on (workdays)
   description: ''
   trigger:
   - platform: time
@@ -531,6 +534,47 @@
   - device_id: cc7215817ef8193b2df878dad98cb347
     domain: cover
     entity_id: cover.bedroom_shutter
+    type: set_position
+    position: 100
+  mode: single
+- id: '1669050675528'
+  alias: Livingroom Shutter up (weekend)
+  description: Open the shutter in the living room when the TV is on, at a appropriate
+    time at weekends.
+  trigger:
+  - platform: time
+    at: 08:00:00
+    enabled: true
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.livingroom_tv_power_consumption
+    below: 20
+    enabled: true
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'off'
+  action:
+  - device_id: e8a0c9ad01d33eee439d3e9cbf6bbbf5
+    domain: cover
+    entity_id: cover.livingroom_shutter_small
+    type: set_position
+    position: 100
+  mode: single
+- id: '1669051183968'
+  alias: Office Shutter up (weekends)
+  description: Open the shutter in the office when at a appropriate time at weekends.
+  trigger:
+  - platform: time
+    at: 08:00:00
+    enabled: true
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'off'
+  action:
+  - device_id: 45493951566974c8f1c11c836ba797b8
+    domain: cover
+    entity_id: cover.office_shutter
     type: set_position
     position: 100
   mode: single

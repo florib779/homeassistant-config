@@ -107,3 +107,4 @@ My Home Assistant config files including products of:
 ## Links
 
 * https://gitlab.com/The3DmaN/ha-connect - HA Connect is a simple web app for connecting to the web interface of an Home Assistant server. It is designed for Linux mobile but may also run on other platforms.
+* https://github.com/grapefruit89/FritzBoxBlacklist
