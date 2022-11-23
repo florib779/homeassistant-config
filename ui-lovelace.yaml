@@ -440,7 +440,7 @@ views:
               - entity: switch.kitchen_cookerhood
                 state_color: true
                 type: custom:secondaryinfo-entity-row
-                secondary_info: '[[ sensor.kitchen_cookerhood_power_consumption ]] W'
+                secondary_info: '[[ sensor.kitchen_cookerhood_stages ]]'
               - entity: switch.kitchen_pc
                 state_color: true
                 type: custom:secondaryinfo-entity-row
@@ -488,6 +488,7 @@ views:
               - entity: sensor.livingroom_pc_on
             state_filter:
               - 'on'
+              - 'On'
             card:
               type: glance
               show_name: false
@@ -555,7 +556,7 @@ views:
             type: grid
             cards:
               - type: gauge
-                entity: sensor.sm_g960f_battery_level
+                entity: sensor.sm_t220_battery_level
                 severity:
                   green: 50
                   yellow: 10
@@ -563,18 +564,18 @@ views:
                 needle: false
                 name: Akku
               - type: gauge
-                entity: sensor.sm_g960f_internal_storage
+                entity: sensor.sm_t220_internal_storage
                 severity:
-                  green: 30
-                  yellow: 10
+                  green: 10
+                  yellow: 5
                   red: 0
                 needle: false
                 name: Intern
               - type: gauge
                 entity: sensor.sm_t220_external_storage
                 severity:
-                  green: 30
-                  yellow: 10
+                  green: 10
+                  yellow: 5
                   red: 0
                 needle: false
                 name: Extern
@@ -1567,6 +1568,8 @@ views:
 
           * [ ] Deebot
 
+          * [x] Deckenfluter
+
           * [x] Ventilator an/aus
 
           * [x] Subwoofer an/aus
@@ -1575,7 +1578,7 @@ views:
 
           * [x] Wohnzimmer TV an/aus
 
-          * [ ] Wohnzimmer TV Licht
+          * [x] Wohnzimmer TV Licht
 
 
           ## Allgemein

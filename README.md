@@ -104,6 +104,10 @@ My Home Assistant config files including products of:
   - [x] All devices on/off.
   - [x] Vacuum on/off.
 
+## Ideas
+
+* Switch central heating with a Fritz!DECT socket depending on the season temperature or leave it off completely when the window is open.
+
 ## Links
 
 * https://gitlab.com/The3DmaN/ha-connect - HA Connect is a simple web app for connecting to the web interface of an Home Assistant server. It is designed for Linux mobile but may also run on other platforms.

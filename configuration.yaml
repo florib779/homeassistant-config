@@ -67,14 +67,6 @@ template:
           {% else %}
             Off
           {% endif %}
-      - name: "Kitchen Cookerhood on"
-        unique_id: "kitchen_cookerhood_on"
-        state: >
-          {% if states.sensor.kitchen_cookerhood_power_consumption.state | float > 1 %}
-            On
-          {% else %}
-            Off
-          {% endif %}
       - name: "Kitchen Dishwasher on"
         unique_id: "kitchen_dishwasher_on"
         state: >
@@ -96,6 +88,7 @@ template:
         unique_id: "electricity_price"
         # 2022-06-07
         state: "0.309"
+        #state: "0.409" # From 01.01.2023
         unit_of_measurement: "€/kWh"
       - name: "Fritzbox Callmonitor Phonebook"
         unique_id: "fritzbox_callmonitor_phonebook"
@@ -131,15 +124,50 @@ template:
           {% else %}
             Off
           {% endif %}
+
+      - name: "Kitchen Cookerhood Stages"
+        unique_id: "kitchen_cookerhood_stages"
+        # Between level 7 and 9, the difference in power consumption is so small that a purposeful gradation is not possible.
+        state: >
+          {% if states.sensor.kitchen_cookerhood_power_consumption.state | float > 20 %}
+            Stufe 7+
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 11 %}
+            Stufe 6
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 8.9 %}
+            Stufe 5
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 7 %}
+            Stufe 4
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 5.7 %}
+            Stufe 3
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 5 %}
+            Stufe 2
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 4 %}
+            Stufe 1
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 1 %}
+            Licht
+          {% elif states.sensor.kitchen_cookerhood_power_consumption.state | float > 0 %}
+            Standby
+          {% else %}
+            Off
+          {% endif %}
+
       - name: "Livingroom Fan Stages"
         unique_id: "livingroom_fan_stages"
         state: >
-          {% if states.sensor.livingroom_fan_power_consumption.state | float > 37 %}
+          {% if states.sensor.livingroom_fan_power_consumption.state | float > 53 %}
+            Stufe 3 + Licht
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 50 %}
+            Stufe 2 + Licht
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 42 %}
+            Stufe 1 + Licht
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 37 %}
             Stufe 3
           {% elif states.sensor.livingroom_fan_power_consumption.state | float > 33 %}
             Stufe 2
-          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 1 %}
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 18 %}
             Stufe 1
+          {% elif states.sensor.livingroom_fan_power_consumption.state | float > 1 %}
+            Licht
           {% else %}
             Off
           {% endif %}
