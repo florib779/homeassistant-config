@@ -18,42 +18,22 @@ views:
   - title: Home
     path: home
     icon: mdi:home
-    badges: []
+    badges:
+      - entity: weather.openweathermap
+        name: Wetter
+      - entity: sensor.openweathermap_temperature
+        name: Außen
+      - entity: sensor.storeroom_switch_temperature
+        name: Abstellraum
+      - entity: sensor.heatingroom_pump_temperature
+        name: Heizraum
+      - entity: sensor.basement_washer_temperature
+        name: Keller
+      - entity: sensor.corridor_rock_power_consumption
+        name: Server
     cards:
       - type: vertical-stack
         cards:
-          - square: false
-            columns: 3
-            type: grid
-            cards:
-              - show_name: false
-                show_icon: true
-                show_state: true
-                type: glance
-                entities:
-                  - entity: weather.openweathermap
-              - type: gauge
-                entity: sensor.openweathermap_temperature
-                name: ' '
-                max: 40
-                segments:
-                  - from: 0
-                    color: var(--info-color)
-                  - from: 18
-                    color: var(--success-color)
-                  - from: 25
-                    color: var(--warning-color)
-              - type: gauge
-                entity: sensor.openweathermap_humidity
-                name: ' '
-                max: 100
-                segments:
-                  - from: 60
-                    color: var(--info-color)
-                  - from: 40
-                    color: var(--success-color)
-                  - from: 0
-                    color: var(--warning-color)
           - type: markdown
             content: |-
               Jetzt: **{{ states('sensor.lastfm') }}**
@@ -474,7 +454,7 @@ views:
               - entity: binary_sensor.office_thermostat_window_open
               - entity: sensor.fritz_box_7490_max_connection_download_throughput
                 state_filter:
-                  - value: 100000
+                  - value: 95000
                     operator: <
               - entity: sensor.hacs
                 state_filter:
@@ -493,12 +473,6 @@ views:
               type: glance
               show_name: false
               show_state: false
-          - hours_to_show: 24
-            graph: line
-            type: sensor
-            entity: sensor.corridor_rock_power_consumption
-            detail: 2
-            name: Server
           - type: conditional
             conditions:
               - entity: sensor.fritzbox_callmonitor
@@ -691,6 +665,17 @@ views:
           - type: entities
             entities:
               - type: custom:mini-media-player
+                entity: media_player.sonos_livingroom
+                group: true
+                name: Playbase
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  controls: true
+                  power: true
+                  source: true
+                  volume_level: false
+              - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
                 group: true
                 volume_stateless: true
@@ -703,7 +688,7 @@ views:
                   name: true
                   power: true
                   progress: true
-                  volume_level: false
+                  volume: true
               - type: buttons
                 entities:
                   - entity: switch.sonos_livingroom_loudness
@@ -811,25 +796,100 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: thermostat
-                entity: climate.livingroom_thermostat
-                name: ' '
+              - type: picture-elements
+                image: /local/img/fritz_dect_440.png
+                elements:
+                  - type: state-label
+                    entity: sensor.livingroom_pushbutton_battery
+                    style:
+                      top: 34%
+                      left: 64%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: sensor.livingroom_pushbutton_temperature
+                    style:
+                      top: 45%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: state-label
+                    entity: sensor.livingroom_pushbutton_humidity
+                    style:
+                      top: 62%
+                      left: 50%
+                      color: black
+                      font-size: 1em
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.livingroom_floodlight
+                    style:
+                      top: 20%
+                      left: 20%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.livingroom_floodlight
+                    style:
+                      top: 20%
+                      left: 80%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: cover.livingroom_shutter_small
+                    style:
+                      top: 80%
+                      left: 20%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: cover.livingroom_shutter_small
+                    style:
+                      top: 80%
+                      left: 80%
                 card_mod:
                   style: |
                     ha-card {
                       background: rgba(176, 138, 138, 0.5);
                     }
-              - type: gauge
-                entity: sensor.livingroom_pushbutton_humidity
-                segments:
-                  - from: 0
-                    color: var(--warning-color)
-                  - from: 40
-                    color: var(--success-color)
-                  - from: 61
-                    color: var(--info-color)
-                needle: false
-                name: ' '
+              - type: picture-elements
+                image: /local/img/comet_dect.png
+                elements:
+                  - type: state-label
+                    entity: climate.livingroom_thermostat
+                    attribute: battery_level
+                    suffix: '%'
+                    style:
+                      top: 29%
+                      left: 62%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: climate.livingroom_thermostat
+                    attribute: current_temperature
+                    suffix: °
+                    style:
+                      top: 38%
+                      left: 50%
+                      color: black
+                      font-size: 1.6em
+                  - type: state-label
+                    entity: climate.livingroom_thermostat
+                    style:
+                      top: 48%
+                      left: 50%
+                      color: black
+                      font-size: .8em
+                  - type: state-label
+                    entity: climate.livingroom_thermostat
+                    attribute: temperature
+                    suffix: °
+                    style:
+                      top: 73%
+                      left: 50%
+                      color: black
+                      font-size: .6em
                 card_mod:
                   style: |
                     ha-card {
@@ -877,7 +937,6 @@ views:
                 entities:
                   - entity: light.kitchen_light_group
                   - entity: switch.kitchen_cookerhood
-                  - entity: automation.kitchen_cookerhood
                   - entity: switch.kitchen_pc
                   - entity: camera.kitchen
             state_color: true
@@ -890,32 +949,59 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: gauge
-                entity: sensor.kitchen_pushbutton_temperature
-                name: ' '
-                max: 40
-                segments:
-                  - from: 0
-                    color: var(--info-color)
-                  - from: 18
-                    color: var(--success-color)
-                  - from: 25
-                    color: var(--warning-color)
-                card_mod:
-                  style: |
-                    ha-card {
-                      background: rgba(211, 188, 0, 0.5);
-                    }
-              - type: gauge
-                entity: sensor.kitchen_pushbutton_humidity
-                segments:
-                  - from: 0
-                    color: var(--warning-color)
-                  - from: 40
-                    color: var(--success-color)
-                  - from: 61
-                    color: var(--info-color)
-                name: ' '
+              - type: picture-elements
+                image: /local/img/fritz_dect_440.png
+                elements:
+                  - type: state-label
+                    entity: sensor.kitchen_pushbutton_battery
+                    style:
+                      top: 34%
+                      left: 64%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: sensor.kitchen_pushbutton_temperature
+                    style:
+                      top: 45%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: state-label
+                    entity: sensor.kitchen_pushbutton_humidity
+                    suffix: ' '
+                    style:
+                      top: 62%
+                      left: 50%
+                      color: black
+                      font-size: 1em
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.kitchen_mood_light
+                    style:
+                      top: 20%
+                      left: 20%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.kitchen_light
+                    style:
+                      top: 20%
+                      left: 80%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: switch.kitchen_pc
+                    style:
+                      top: 80%
+                      left: 20%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: switch.kitchen_cookerhood
+                    style:
+                      top: 80%
+                      left: 80%
                 card_mod:
                   style: |
                     ha-card {
@@ -967,24 +1053,93 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: thermostat
-                entity: climate.bathroom_thermostat
-                name: ' '
+              - type: picture-elements
+                image: /local/img/fritz_dect_440.png
+                elements:
+                  - type: state-label
+                    entity: sensor.bathroom_pushbutton_battery
+                    style:
+                      top: 34%
+                      left: 64%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: sensor.bathroom_pushbutton_temperature
+                    style:
+                      top: 45%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: state-label
+                    entity: sensor.bathroom_pushbutton_humidity
+                    style:
+                      top: 62%
+                      left: 50%
+                      color: black
+                      font-size: 1em
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.kitchen_light_group
+                    style:
+                      top: 20%
+                      left: 20%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.bedroom_light
+                    style:
+                      top: 20%
+                      left: 80%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.livingroom_floodlight
+                    style:
+                      top: 80%
+                      left: 20%
                 card_mod:
                   style: |
                     ha-card {
                       background: rgba(0, 151, 255, 0.5);
                     }
-              - type: gauge
-                entity: sensor.bathroom_pushbutton_humidity
-                segments:
-                  - from: 0
-                    color: var(--warning-color)
-                  - from: 40
-                    color: var(--success-color)
-                  - from: 61
-                    color: var(--info-color)
-                name: ' '
+              - type: picture-elements
+                image: /local/img/fritz_dect_300.png
+                elements:
+                  - type: state-label
+                    entity: climate.bathroom_thermostat
+                    attribute: battery_level
+                    suffix: '%'
+                    style:
+                      top: 28%
+                      left: 62%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: climate.bathroom_thermostat
+                    attribute: current_temperature
+                    suffix: °
+                    style:
+                      top: 37%
+                      left: 51%
+                      color: black
+                      font-size: 1.6em
+                  - type: state-label
+                    entity: climate.bathroom_thermostat
+                    style:
+                      top: 47%
+                      left: 51%
+                      color: black
+                      font-size: .8em
+                  - type: state-label
+                    entity: climate.bathroom_thermostat
+                    attribute: temperature
+                    suffix: °
+                    style:
+                      top: 71%
+                      left: 51%
+                      color: black
+                      font-size: .6em
                 card_mod:
                   style: |
                     ha-card {
@@ -1048,24 +1203,72 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: thermostat
-                entity: climate.office_thermostat
-                name: ' '
+              - type: picture-elements
+                image: /local/img/fritz_dect_440.png
+                elements:
+                  - type: state-label
+                    entity: sensor.office_pushbutton_battery
+                    style:
+                      top: 34%
+                      left: 64%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: sensor.office_pushbutton_temperature
+                    style:
+                      top: 45%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: state-label
+                    entity: sensor.office_pushbutton_humidity
+                    style:
+                      top: 62%
+                      left: 50%
+                      color: black
+                      font-size: 1em
                 card_mod:
                   style: |
                     ha-card {
                       background: rgba(255, 255, 255, 0.3);
                     }
-              - type: gauge
-                entity: sensor.office_pushbutton_humidity
-                segments:
-                  - from: 0
-                    color: var(--warning-color)
-                  - from: 40
-                    color: var(--success-color)
-                  - from: 61
-                    color: var(--info-color)
-                name: ' '
+              - type: picture-elements
+                image: /local/img/comet_dect.png
+                elements:
+                  - type: state-label
+                    entity: climate.office_thermostat
+                    attribute: battery_level
+                    suffix: '%'
+                    style:
+                      top: 29%
+                      left: 62%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: climate.office_thermostat
+                    attribute: current_temperature
+                    suffix: °
+                    style:
+                      top: 38%
+                      left: 50%
+                      color: black
+                      font-size: 1.6em
+                  - type: state-label
+                    entity: climate.office_thermostat
+                    style:
+                      top: 48%
+                      left: 50%
+                      color: black
+                      font-size: .8em
+                  - type: state-label
+                    entity: climate.office_thermostat
+                    attribute: temperature
+                    suffix: °
+                    style:
+                      top: 73%
+                      left: 50%
+                      color: black
+                      font-size: .6em
                 card_mod:
                   style: |
                     ha-card {
@@ -1161,88 +1364,83 @@ views:
             columns: 2
             type: grid
             cards:
-              - type: thermostat
-                entity: climate.bedroom_thermostat
-                name: ' '
+              - type: picture-elements
+                image: /local/img/fritz_dect_440.png
+                elements:
+                  - type: state-label
+                    entity: sensor.bedroom_pushbutton_battery
+                    style:
+                      top: 34%
+                      left: 64%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: sensor.bedroom_pushbutton_temperature
+                    style:
+                      top: 45%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: state-label
+                    entity: sensor.bedroom_pushbutton_humidity
+                    style:
+                      top: 62%
+                      left: 50%
+                      color: black
+                      font-size: 1em
                 card_mod:
                   style: |
                     ha-card {
                       background: rgba(255, 0, 255, 0.1);
                     }
-              - type: gauge
-                entity: sensor.bedroom_pushbutton_humidity
-                segments:
-                  - from: 0
-                    color: var(--warning-color)
-                  - from: 40
-                    color: var(--success-color)
-                  - from: 61
-                    color: var(--info-color)
-                name: ' '
+              - type: picture-elements
+                image: /local/img/comet_dect.png
+                elements:
+                  - type: state-label
+                    entity: climate.bedroom_thermostat
+                    attribute: battery_level
+                    suffix: '%'
+                    style:
+                      top: 29%
+                      left: 62%
+                      color: black
+                      font-size: .6em
+                  - type: state-label
+                    entity: climate.bedroom_thermostat
+                    attribute: current_temperature
+                    suffix: °
+                    style:
+                      top: 38%
+                      left: 50%
+                      color: black
+                      font-size: 1.6em
+                  - type: state-label
+                    entity: climate.bedroom_thermostat
+                    style:
+                      top: 48%
+                      left: 50%
+                      color: black
+                      font-size: .8em
+                  - type: state-label
+                    entity: climate.bedroom_thermostat
+                    attribute: temperature
+                    suffix: °
+                    style:
+                      top: 73%
+                      left: 50%
+                      color: black
+                      font-size: .6em
                 card_mod:
                   style: |
                     ha-card {
                       background: rgba(255, 0, 255, 0.1);
                     }
-      - square: false
-        columns: 3
-        type: grid
-        cards:
-          - type: gauge
-            entity: sensor.storeroom_switch_temperature
-            name: Abstellraum
-            max: 40
-            segments:
-              - from: 0
-                color: var(--info-color)
-              - from: 18
-                color: var(--success-color)
-              - from: 25
-                color: var(--warning-color)
-          - type: gauge
-            entity: sensor.heatingroom_pump_temperature
-            name: Heizraum
-            max: 40
-            segments:
-              - from: 0
-                color: var(--info-color)
-              - from: 18
-                color: var(--success-color)
-              - from: 25
-                color: var(--warning-color)
-          - type: gauge
-            entity: sensor.basement_washer_temperature
-            name: Keller
-            max: 40
-            segments:
-              - from: 0
-                color: var(--info-color)
-              - from: 18
-                color: var(--success-color)
-              - from: 25
-                color: var(--warning-color)
   - theme: Backend-selected
     title: Camera
     path: camera
     icon: mdi:cctv
     badges: []
     cards:
-      - type: conditional
-        conditions:
-          - entity: sensor.sonos_livingroom_audio_input_format
-            state_not: No input
-        card:
-          type: custom:mini-media-player
-          entity: media_player.sonos_livingroom
-          volume_stateless: true
-          volume_step: 1
-          hide:
-            controls: true
-            icon: true
-            name: true
-            power: true
-            source: true
-            volume_level: false
       - type: conditional
         conditions:
           - entity: cover.office_shutter

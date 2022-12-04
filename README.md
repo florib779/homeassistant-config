@@ -107,6 +107,7 @@ My Home Assistant config files including products of:
 ## Ideas
 
 * Switch central heating with a Fritz!DECT socket depending on the season temperature or leave it off completely when the window is open.
+* https://github.com/bramstroker/homeassistant-powercalc
 
 ## Links
 

@@ -15,18 +15,16 @@
     position: 0
   mode: single
 - id: '1641237098329'
-  alias: All Shutter down on sunset (Test)
-  description: Close all shutters at sunset, but not before 5pm.
+  alias: All Shutter down on sunset
+  description: 'Close all shutters after sunset.
+
+
+    https://community.home-assistant.io/t/need-help-shutters-opening-dependant-on-sun-rise-but-not-before-0600/225269/19'
   trigger:
   - platform: sun
     event: sunset
-    offset: '-1'
-  condition:
-  - condition: time
-    after: '17:00:00'
-  - condition: sun
-    before: sunset
-    before_offset: '-1'
+    offset: 00:30:00
+  condition: []
   action:
   - service: cover.set_cover_position
     data:
@@ -145,26 +143,6 @@
       - switch.kitchen_pc
       - switch.kitchen_cookerhood
       - switch.livingroom_fan
-  mode: single
-- id: '1652647649459'
-  alias: Kitchen Cookerhood stop
-  description: Automatically turns off the cooker hood after a certain time.
-  trigger:
-  - platform: device
-    type: turned_on
-    device_id: 0d509434e5813a91e01bf0330ab90f17
-    entity_id: switch.kitchen_cookerhood
-    domain: switch
-    for:
-      hours: 0
-      minutes: 10
-      seconds: 0
-  condition: []
-  action:
-  - type: turn_off
-    device_id: 0d509434e5813a91e01bf0330ab90f17
-    entity_id: switch.kitchen_cookerhood
-    domain: switch
   mode: single
 - id: '1652978544840'
   alias: 'HASS: Away'
@@ -486,7 +464,7 @@
     domain: switch
   mode: single
 - id: '1664445539990'
-  alias: Bedroom Shutter up
+  alias: Bedroom Shutter up (workdays)
   description: Open the shutter in the bedroom on workdays at the appropriate time.
   trigger:
   - platform: sun
@@ -543,6 +521,23 @@
   - device_id: 45493951566974c8f1c11c836ba797b8
     domain: cover
     entity_id: cover.office_shutter
+    type: set_position
+    position: 100
+  mode: single
+- id: '1670141905775'
+  alias: Bedroom Shutter up (weekend)
+  description: Open the shutter in the bedroom on weekends at the appropriate time.
+  trigger:
+  - platform: time
+    at: 09:00:00
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'off'
+  action:
+  - device_id: cc7215817ef8193b2df878dad98cb347
+    domain: cover
+    entity_id: cover.bedroom_shutter
     type: set_position
     position: 100
   mode: single
