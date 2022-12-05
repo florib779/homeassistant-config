@@ -31,6 +31,9 @@ views:
         name: Keller
       - entity: sensor.corridor_rock_power_consumption
         name: Server
+      - entity: camera.office
+      - entity: camera.bedroom
+      - entity: camera.kitchen
     cards:
       - type: vertical-stack
         cards:
@@ -665,17 +668,6 @@ views:
           - type: entities
             entities:
               - type: custom:mini-media-player
-                entity: media_player.sonos_livingroom
-                group: true
-                name: Playbase
-                volume_stateless: true
-                volume_step: 1
-                hide:
-                  controls: true
-                  power: true
-                  source: true
-                  volume_level: false
-              - type: custom:mini-media-player
                 entity: media_player.roon_livingroom
                 group: true
                 volume_stateless: true
@@ -689,6 +681,17 @@ views:
                   power: true
                   progress: true
                   volume: true
+              - type: custom:mini-media-player
+                entity: media_player.sonos_livingroom
+                group: true
+                name: Playbase
+                volume_stateless: true
+                volume_step: 1
+                hide:
+                  controls: true
+                  power: true
+                  source: true
+                  volume_level: false
               - type: buttons
                 entities:
                   - entity: switch.sonos_livingroom_loudness
@@ -774,18 +777,9 @@ views:
                 entities:
                   - entity: switch.livingroom_tv_power
                   - entity: light.livingroom_tv_light
-                  - entity: light.livingroom_floodlight
                   - entity: switch.livingroom_fan
                   - entity: light.balcony_light
                   - entity: vacuum.livingroom_deebot
-              - entity: cover.livingroom_shutter_small
-                name: ' '
-                secondary_info: position
-                tap_action:
-                  action: call-service
-                  service: script.livingroom_shutter_favorite
-                hold_action:
-                  action: more-info
             state_color: true
             card_mod:
               style: |
@@ -826,28 +820,37 @@ views:
                     entity: light.livingroom_floodlight
                     style:
                       top: 20%
-                      left: 20%
-                  - type: state-icon
+                      left: 50%
+                  - type: icon
+                    icon: mdi:arrow-up-bold-box-outline
                     tap_action:
-                      action: toggle
-                    entity: light.livingroom_floodlight
-                    style:
-                      top: 20%
-                      left: 80%
-                  - type: state-icon
-                    tap_action:
-                      action: toggle
-                    entity: cover.livingroom_shutter_small
+                      action: call-service
+                      service: cover.open_cover
+                      data:
+                        entity_id: cover.livingroom_shutter_small
                     style:
                       top: 80%
                       left: 20%
-                  - type: state-icon
-                    tap_action:
-                      action: toggle
+                      color: grey
+                  - type: state-label
                     entity: cover.livingroom_shutter_small
+                    attribute: current_position
+                    style:
+                      top: 80%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: icon
+                    icon: mdi:arrow-down-bold-box-outline
+                    tap_action:
+                      action: call-service
+                      service: cover.close_cover
+                      data:
+                        entity_id: cover.livingroom_shutter_small
                     style:
                       top: 80%
                       left: 80%
+                      color: grey
                 card_mod:
                   style: |
                     ha-card {
@@ -932,13 +935,6 @@ views:
                 row:
                   entity: number.sonos_kitchen_treble
                   name: Treble
-              - type: divider
-              - type: buttons
-                entities:
-                  - entity: light.kitchen_light_group
-                  - entity: switch.kitchen_cookerhood
-                  - entity: switch.kitchen_pc
-                  - entity: camera.kitchen
             state_color: true
             card_mod:
               style: |
@@ -1181,18 +1177,6 @@ views:
                     state: playing
                 row:
                   entity: number.sonos_office_treble
-              - type: divider
-              - type: buttons
-                entities:
-                  - entity: camera.office
-              - entity: cover.office_shutter
-                name: ' '
-                secondary_info: position
-                tap_action:
-                  action: call-service
-                  service: script.office_shutter_favorite
-                hold_action:
-                  action: more-info
             state_color: true
             card_mod:
               style: |
@@ -1227,6 +1211,50 @@ views:
                       left: 50%
                       color: black
                       font-size: 1em
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.kitchen_mood_light
+                    style:
+                      top: 20%
+                      left: 20%
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: switch.kitchen_cookerhood
+                    style:
+                      top: 20%
+                      left: 80%
+                  - type: icon
+                    icon: mdi:arrow-up-bold-box-outline
+                    tap_action:
+                      action: call-service
+                      service: cover.open_cover
+                      data:
+                        entity_id: cover.office_shutter
+                    style:
+                      top: 80%
+                      left: 20%
+                      color: grey
+                  - type: state-label
+                    entity: cover.office_shutter
+                    attribute: current_position
+                    style:
+                      top: 80%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: icon
+                    icon: mdi:arrow-down-bold-box-outline
+                    tap_action:
+                      action: call-service
+                      service: cover.close_cover
+                      data:
+                        entity_id: cover.office_shutter
+                    style:
+                      top: 80%
+                      left: 80%
+                      color: grey
                 card_mod:
                   style: |
                     ha-card {
@@ -1341,19 +1369,6 @@ views:
                 row:
                   entity: number.sonos_bedroom_treble
                   name: Treble
-              - type: divider
-              - type: buttons
-                entities:
-                  - entity: light.bedroom_light
-                  - entity: camera.bedroom
-              - entity: cover.bedroom_shutter
-                name: ' '
-                secondary_info: position
-                tap_action:
-                  action: call-service
-                  service: script.bedroom_shutter_favorite
-                hold_action:
-                  action: more-info
             state_color: true
             card_mod:
               style: |
@@ -1388,6 +1403,43 @@ views:
                       left: 50%
                       color: black
                       font-size: 1em
+                  - type: state-icon
+                    tap_action:
+                      action: toggle
+                    entity: light.bedroom_light
+                    style:
+                      top: 20%
+                      left: 50%
+                  - type: icon
+                    icon: mdi:arrow-up-bold-box-outline
+                    tap_action:
+                      action: call-service
+                      service: cover.open_cover
+                      data:
+                        entity_id: cover.bedroom_shutter
+                    style:
+                      top: 80%
+                      left: 20%
+                      color: grey
+                  - type: state-label
+                    entity: cover.bedroom_shutter
+                    attribute: current_position
+                    style:
+                      top: 80%
+                      left: 50%
+                      color: black
+                      font-size: 1.4em
+                  - type: icon
+                    icon: mdi:arrow-down-bold-box-outline
+                    tap_action:
+                      action: call-service
+                      service: cover.close_cover
+                      data:
+                        entity_id: cover.bedroom_shutter
+                    style:
+                      top: 80%
+                      left: 80%
+                      color: grey
                 card_mod:
                   style: |
                     ha-card {

@@ -16,14 +16,10 @@
   mode: single
 - id: '1641237098329'
   alias: All Shutter down on sunset
-  description: 'Close all shutters after sunset.
-
-
-    https://community.home-assistant.io/t/need-help-shutters-opening-dependant-on-sun-rise-but-not-before-0600/225269/19'
+  description: Close all shutters after sunset.
   trigger:
   - platform: sun
     event: sunset
-    offset: 00:30:00
   condition: []
   action:
   - service: cover.set_cover_position
