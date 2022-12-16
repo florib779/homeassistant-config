@@ -18,22 +18,6 @@ views:
   - title: Home
     path: home
     icon: mdi:home
-    badges:
-      - entity: weather.openweathermap
-        name: Wetter
-      - entity: sensor.openweathermap_temperature
-        name: Außen
-      - entity: sensor.storeroom_switch_temperature
-        name: Abstellraum
-      - entity: sensor.heatingroom_pump_temperature
-        name: Heizraum
-      - entity: sensor.basement_washer_temperature
-        name: Keller
-      - entity: sensor.corridor_rock_power_consumption
-        name: Server
-      - entity: camera.office
-      - entity: camera.bedroom
-      - entity: camera.kitchen
     cards:
       - type: vertical-stack
         cards:
@@ -485,6 +469,14 @@ views:
               entities:
                 - sensor.fritzbox_callmonitor
               hours_to_show: 72
+          - show_name: false
+            show_icon: true
+            show_state: true
+            type: glance
+            entities:
+              - entity: weather.openweathermap
+              - entity: sensor.openweathermap_temperature
+              - entity: sensor.corridor_rock_power_consumption
           - square: false
             columns: 3
             type: grid
@@ -648,10 +640,6 @@ views:
           - type: custom:mini-media-player
             entity: media_player.roon_headphones
             group: true
-            idle_view:
-              when_idle: true
-              when_paused: true
-              when_standby: true
             hide:
               name: true
               power: true
@@ -799,21 +787,21 @@ views:
                       top: 34%
                       left: 64%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: sensor.livingroom_pushbutton_temperature
                     style:
                       top: 45%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: state-label
                     entity: sensor.livingroom_pushbutton_humidity
                     style:
                       top: 62%
                       left: 50%
                       color: black
-                      font-size: 1em
+                      font-size: .8em
                   - type: state-icon
                     tap_action:
                       action: toggle
@@ -835,11 +823,19 @@ views:
                   - type: state-label
                     entity: cover.livingroom_shutter_small
                     attribute: current_position
+                    tap_action:
+                      action: call-service
+                      service: cover.set_cover_position
+                      data:
+                        position: 32
+                      target:
+                        entity_id:
+                          - cover.livingroom_shutter_small
                     style:
                       top: 80%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: icon
                     icon: mdi:arrow-down-bold-box-outline
                     tap_action:
@@ -867,7 +863,7 @@ views:
                       top: 29%
                       left: 62%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: climate.livingroom_thermostat
                     attribute: current_temperature
@@ -876,7 +872,7 @@ views:
                       top: 38%
                       left: 50%
                       color: black
-                      font-size: 1.6em
+                      font-size: 1.2em
                   - type: state-label
                     entity: climate.livingroom_thermostat
                     style:
@@ -907,10 +903,6 @@ views:
                 group: true
                 volume_stateless: true
                 volume_step: '1'
-                idle_view:
-                  when_idle: true
-                  when_paused: true
-                  when_standby: true
                 hide:
                   name: true
                   power: true
@@ -954,22 +946,21 @@ views:
                       top: 34%
                       left: 64%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: sensor.kitchen_pushbutton_temperature
                     style:
                       top: 45%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: state-label
                     entity: sensor.kitchen_pushbutton_humidity
-                    suffix: ' '
                     style:
                       top: 62%
                       left: 50%
                       color: black
-                      font-size: 1em
+                      font-size: .8em
                   - type: state-icon
                     tap_action:
                       action: toggle
@@ -1003,6 +994,35 @@ views:
                     ha-card {
                       background: rgba(211, 188, 0, 0.5);
                     }
+              - type: picture-elements
+                elements:
+                  - type: state-icon
+                    entity: vacuum.livingroom_deebot
+                    tap_action:
+                      action: toggle
+                    style:
+                      top: 15%
+                      left: 50%
+                      '--paper-item-icon-color': transparent
+                  - type: state-label
+                    entity: vacuum.livingroom_deebot
+                    attribute: battery_level
+                    suffix: ' %'
+                    style:
+                      top: 50%
+                      left: 50%
+                  - type: state-label
+                    entity: vacuum.livingroom_deebot
+                    attribute: status
+                    style:
+                      top: 60%
+                      left: 50%
+                image: /local/img/ecovacs_deebot_slim_2.png
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: rgba(211, 188, 0, 0.5);
+                    }
       - type: vertical-stack
         cards:
           - type: entities
@@ -1012,10 +1032,6 @@ views:
                 group: true
                 volume_stateless: true
                 volume_step: '1'
-                idle_view:
-                  when_idle: true
-                  when_paused: true
-                  when_standby: true
                 hide:
                   name: true
                   power: true
@@ -1058,21 +1074,21 @@ views:
                       top: 34%
                       left: 64%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: sensor.bathroom_pushbutton_temperature
                     style:
                       top: 45%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: state-label
                     entity: sensor.bathroom_pushbutton_humidity
                     style:
                       top: 62%
                       left: 50%
                       color: black
-                      font-size: 1em
+                      font-size: .8em
                   - type: state-icon
                     tap_action:
                       action: toggle
@@ -1110,7 +1126,7 @@ views:
                       top: 28%
                       left: 62%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: climate.bathroom_thermostat
                     attribute: current_temperature
@@ -1119,7 +1135,7 @@ views:
                       top: 37%
                       left: 51%
                       color: black
-                      font-size: 1.6em
+                      font-size: 1.2em
                   - type: state-label
                     entity: climate.bathroom_thermostat
                     style:
@@ -1150,10 +1166,6 @@ views:
                 group: true
                 volume_stateless: true
                 volume_step: '1'
-                idle_view:
-                  when_idle: true
-                  when_paused: true
-                  when_standby: true
                 hide:
                   name: true
                   power: true
@@ -1196,21 +1208,21 @@ views:
                       top: 34%
                       left: 64%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: sensor.office_pushbutton_temperature
                     style:
                       top: 45%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: state-label
                     entity: sensor.office_pushbutton_humidity
                     style:
                       top: 62%
                       left: 50%
                       color: black
-                      font-size: 1em
+                      font-size: .8em
                   - type: state-icon
                     tap_action:
                       action: toggle
@@ -1239,11 +1251,19 @@ views:
                   - type: state-label
                     entity: cover.office_shutter
                     attribute: current_position
+                    tap_action:
+                      action: call-service
+                      service: cover.set_cover_position
+                      data:
+                        position: 30
+                      target:
+                        entity_id:
+                          - cover.office_shutter
                     style:
                       top: 80%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: icon
                     icon: mdi:arrow-down-bold-box-outline
                     tap_action:
@@ -1271,7 +1291,7 @@ views:
                       top: 29%
                       left: 62%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: climate.office_thermostat
                     attribute: current_temperature
@@ -1280,7 +1300,7 @@ views:
                       top: 38%
                       left: 50%
                       color: black
-                      font-size: 1.6em
+                      font-size: 1.2em
                   - type: state-label
                     entity: climate.office_thermostat
                     style:
@@ -1311,10 +1331,6 @@ views:
                 group: true
                 volume_stateless: true
                 volume_step: '1'
-                idle_view:
-                  when_idle: true
-                  when_paused: true
-                  when_standby: true
                 hide:
                   name: true
                   power: true
@@ -1388,21 +1404,21 @@ views:
                       top: 34%
                       left: 64%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: sensor.bedroom_pushbutton_temperature
                     style:
                       top: 45%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: state-label
                     entity: sensor.bedroom_pushbutton_humidity
                     style:
                       top: 62%
                       left: 50%
                       color: black
-                      font-size: 1em
+                      font-size: .8em
                   - type: state-icon
                     tap_action:
                       action: toggle
@@ -1424,11 +1440,19 @@ views:
                   - type: state-label
                     entity: cover.bedroom_shutter
                     attribute: current_position
+                    tap_action:
+                      action: call-service
+                      service: cover.set_cover_position
+                      data:
+                        position: 30
+                      target:
+                        entity_id:
+                          - cover.bedroom_shutter
                     style:
                       top: 80%
                       left: 50%
                       color: black
-                      font-size: 1.4em
+                      font-size: 1.2em
                   - type: icon
                     icon: mdi:arrow-down-bold-box-outline
                     tap_action:
@@ -1456,7 +1480,7 @@ views:
                       top: 29%
                       left: 62%
                       color: black
-                      font-size: .6em
+                      font-size: .5em
                   - type: state-label
                     entity: climate.bedroom_thermostat
                     attribute: current_temperature
@@ -1465,7 +1489,7 @@ views:
                       top: 38%
                       left: 50%
                       color: black
-                      font-size: 1.6em
+                      font-size: 1.2em
                   - type: state-label
                     entity: climate.bedroom_thermostat
                     style:
@@ -1868,3 +1892,16 @@ views:
           ## Links
 
           * https://alexa.amazon.de
+  - theme: Backend-selected
+    title: Changelog
+    path: changelog
+    type: panel
+    badges: []
+    cards:
+      - type: markdown
+        content: |-
+          ## 08.11.2022
+          * ```apt install tuned```
+          * ```sudo mkdir /usr/lib/x86_64-linux-gnu/udisks2```
+          * ```sudo mkdir /usr/lib/x86_64-linux-gnu/udisks2/modules```
+        title: Changelog

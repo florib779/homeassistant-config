@@ -20,6 +20,7 @@
   trigger:
   - platform: sun
     event: sunset
+    offset: +0:30
   condition: []
   action:
   - service: cover.set_cover_position
